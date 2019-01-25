@@ -1,8 +1,20 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import './index.css'
-import App from './App'
+import './index.scss'
 import * as serviceWorker from './serviceWorker'
+import { ApolloProvider } from 'react-apollo'
+import ApolloClient from 'apollo-boost'
+import RootContainer from './containers/RootContainer'
+
+const client = new ApolloClient({
+  uri: 'http://127.0.0.1:4000/graphql',
+})
+
+const App = () => (
+  <ApolloProvider client={client}>
+    <RootContainer />
+  </ApolloProvider>
+)
 
 ReactDOM.render(<App />, document.getElementById('root'))
 
