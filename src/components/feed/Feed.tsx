@@ -2,10 +2,8 @@ import React, { Component } from 'react'
 import './Feed.scss'
 import ItemList from '../itemList/ItemList'
 
-export class Feed extends Component {
-  render() {
-    return <ItemList />
-  }
-}
+// const Feed = (): Component => {
+//   return <ItemList />
+// }
 
-export default Feed
+// export default Feed

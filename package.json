@@ -32,7 +32,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "schema": "apollo service:download ./src/schema.json",
-    "generate": "apollo codegen:generate --localSchemaFile ./src/schema.json --target typescript"
+    "generate": "apollo client:codegen --localSchemaFile ./src/schema.json --target typescript"
   },
   "eslintConfig": {
     "extends": "react-app"

@@ -30,11 +30,6 @@ interface IVariables {
 
 type TChildProps = ChildProps<IProps, IData, IVariables>
 
-@graphql<IProps, IData, IVariables, TChildProps>(FEED_QUERY, {
-  options: {
-    fetchPolicy: 'cache-and-network',
-  },
-})
 class FeedPage extends Component<TChildProps> {
   render(): ReactNode {
     const { loading, feed, error } = this.props.data as IData
@@ -58,4 +53,8 @@ class FeedPage extends Component<TChildProps> {
   }
 }
 
-export default FeedPage
+export default graphql<IProps, IData, IVariables, TChildProps>(FEED_QUERY, {
+  options: {
+    fetchPolicy: 'cache-and-network',
+  },
+})(FeedPage)
