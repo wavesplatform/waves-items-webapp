@@ -1,4 +1,4 @@
-import React, { Component, ReactNode, Fragment } from 'react'
+import React, { Component, ReactNode } from 'react'
 import { Switch } from 'react-router'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import routes from '../routes'
