@@ -149,6 +149,10 @@ typings/
 # DynamoDB Local files
 .dynamodb/
 
+# Builds
+build
+dist
+
 ### VisualStudioCode ###
 .vscode/*
 !.vscode/settings.json

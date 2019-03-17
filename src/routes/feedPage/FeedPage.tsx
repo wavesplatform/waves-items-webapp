@@ -3,20 +3,9 @@ import { graphql, ChildProps } from 'react-apollo'
 import { gql, ApolloError } from 'apollo-boost'
 import './FeedPage.scss'
 import { FeedQuery } from './__generated__/FeedQuery'
+import { config } from '../../global/config'
 
-const FEED_QUERY = gql`
-  query FeedQuery {
-    feed {
-      id
-      name
-      game {
-        name
-      }
-    }
-  }
-`
-
-interface IProps {}
+interface IProps { }
 
 interface IData extends FeedQuery {
   loading: boolean
@@ -30,7 +19,18 @@ interface IVariables {
 
 type TChildProps = ChildProps<IProps, IData, IVariables>
 
-class FeedPage extends Component<TChildProps> {
+@graphql(gql`
+  query FeedQuery {
+    feed {
+      id
+      name
+      game {
+        name
+      }
+    }
+  }
+`, config.gqlOptions)
+export class FeedPage extends Component<TChildProps> {
   render(): ReactNode {
     const { loading, feed, error } = this.props.data as IData
     if (loading) return <div>Loading</div>
@@ -53,8 +53,3 @@ class FeedPage extends Component<TChildProps> {
   }
 }
 
-export default graphql<IProps, IData, IVariables, TChildProps>(FEED_QUERY, {
-  options: {
-    fetchPolicy: 'cache-and-network',
-  },
-})(FeedPage)
