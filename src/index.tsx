@@ -7,7 +7,7 @@ import ApolloClient from 'apollo-boost'
 import RootContainer from './containers/RootContainer'
 
 const client = new ApolloClient({
-  uri: 'http://127.0.0.1:4000/graphql',
+  uri: process.env.REACT_APP_GRAPHQL_ENDPOINT,
 })
 
 const App = () => (

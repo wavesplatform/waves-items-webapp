@@ -1,4 +1,4 @@
-import FeedPage from './feedPage/FeedPage'
+import { FeedPage } from './feedPage/FeedPage'
 
 const routes = [
   {
