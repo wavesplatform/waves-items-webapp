@@ -3,7 +3,9 @@
   "extends": ["tslint-react", "tslint-config-prettier"],
   "jsRules": {},
   "linterOptions": {
-    "exclude": ["node_modules/**"]
+    "exclude": [
+      "__generated__/**"
+    ]
   },
   "rules": {
     "jsx-wrap-multiline": false,
