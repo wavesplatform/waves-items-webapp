@@ -21,7 +21,7 @@ type TChildProps = ChildProps<IProps, IData, IVariables>
 
 @graphql(gql`
   query FeedQuery {
-    feed {
+    items {
       id
       name
       game {
@@ -32,11 +32,12 @@ type TChildProps = ChildProps<IProps, IData, IVariables>
 `, config.gqlOptions)
 export class FeedPage extends Component<TChildProps> {
   render(): ReactNode {
-    const { loading, feed, error } = this.props.data as IData
+    const data = this.props.data as IData
+    const { loading, error } = data
     if (loading) return <div>Loading</div>
     if (error) return <h1>ERROR</h1>
 
-    const items = feed.map(item => (
+    const items = data.items.map(item => (
       <p key={item.id}>
         <>
           {item.id}: {item.name}
@@ -47,7 +48,7 @@ export class FeedPage extends Component<TChildProps> {
     return (
       <Fragment>
         <h1>Feed</h1>
-        {feed && items}
+        {items && items}
       </Fragment>
     )
   }
