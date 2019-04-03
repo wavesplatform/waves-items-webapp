@@ -13,8 +13,19 @@
     "resolveJsonModule": true,
     "noEmit": true,
     "jsx": "preserve",
-    "lib": ["dom", "es2018", "esnext.asynciterable"]
+    "lib": [
+      "dom",
+      "es2018",
+      "esnext.asynciterable"
+    ],
+    "isolatedModules": true
   },
-  "include": ["src"],
-  "exclude": ["node_modules", "build", "**/*.spec.ts"]
+  "include": [
+    "src"
+  ],
+  "exclude": [
+    "node_modules",
+    "build",
+    "**/*.spec.ts"
+  ]
 }

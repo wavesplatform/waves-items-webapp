@@ -1,6 +1,23 @@
 import { ApolloError } from 'apollo-boost'
+import { LONG } from '@waves/types'
 
-export interface DefaultResult {
+export interface IDefaultResult {
   loading: boolean
   error?: ApolloError
+}
+
+export interface IWavesAsset {
+  assetId?: string
+  timestamp?: string | number
+  quantity?: LONG
+  reissuable?: boolean
+  misc?: any
+  rawParams?: any
+}
+
+export interface IItem extends IWavesAsset {
+  id: string
+  name: string
+  imageUrl: string
+  createdAt?: string
 }

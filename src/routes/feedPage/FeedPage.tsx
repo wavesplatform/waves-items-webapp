@@ -1,15 +1,14 @@
 import React, { Component, Fragment, ReactNode } from 'react'
 import { graphql, ChildProps } from 'react-apollo'
 import { gql, ApolloError } from 'apollo-boost'
-import './FeedPage.scss'
 import { FeedQuery } from './__generated__/FeedQuery'
-import { config } from '../../global/config'
+import Feed from '../../components/feed/Feed'
+import { IDefaultResult } from '../../types'
 
-interface IProps { }
+interface IProps {
+}
 
-interface IData extends FeedQuery {
-  loading: boolean
-  error: ApolloError
+interface IData extends FeedQuery, IDefaultResult {
 }
 
 interface IVariables {
@@ -23,13 +22,24 @@ type TChildProps = ChildProps<IProps, IData, IVariables>
   query FeedQuery {
     items {
       id
+      assetId
       name
+      quantity
+      reissuable
+      timestamp
+      imageUrl
       game {
+        id
         name
+        address
       }
     }
   }
-`, config.gqlOptions)
+`, {
+  options: {
+    fetchPolicy: 'cache-and-network',
+  },
+})
 export class FeedPage extends Component<TChildProps> {
   render(): ReactNode {
     const data = this.props.data as IData
@@ -37,18 +47,10 @@ export class FeedPage extends Component<TChildProps> {
     if (loading) return <div>Loading</div>
     if (error) return <h1>ERROR</h1>
 
-    const items = data.items.map(item => (
-      <p key={item.id}>
-        <>
-          {item.id}: {item.name}
-        </>
-      </p>
-    ))
-
     return (
       <Fragment>
         <h1>Feed</h1>
-        {items && items}
+        <Feed items={data.items || []}/>
       </Fragment>
     )
   }

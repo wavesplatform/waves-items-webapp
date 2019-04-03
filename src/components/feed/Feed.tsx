@@ -1,9 +1,15 @@
-import React, { Component } from 'react'
-import './Feed.scss'
+import React, { Component, ReactNode } from 'react'
 import ItemList from '../itemList/ItemList'
+import { IItem } from '../../types'
 
-// const Feed = (): Component => {
-//   return <ItemList />
-// }
+interface IProps {
+  items: IItem[]
+}
 
-// export default Feed
+export class Feed extends Component<IProps> {
+  render(): ReactNode {
+    return <ItemList items={this.props.items}/>
+  }
+}
+
+export default Feed
