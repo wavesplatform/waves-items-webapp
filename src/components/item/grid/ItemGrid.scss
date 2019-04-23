@@ -1,0 +1,40 @@
+@import "styles/core";
+
+.ItemGrid {
+  display: grid;
+
+  grid-gap: $spacer;
+  grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+
+  //@each $colspan in (2, 3, 4, 5) {
+  //  &--colspan-#{$colspan} {
+  //    --num-columns: #{$colspan};
+  //  }
+  //
+  //  @include media-breakpoint-down(lg) {
+  //    &--colspan-#{$colspan} {
+  //      --num-columns: #{max($colspan - 1, 2)};
+  //    }
+  //  }
+  //
+  //  @include media-breakpoint-down(md) {
+  //    &--colspan-#{$colspan} {
+  //      --num-columns: #{max($colspan - 2, 1)};
+  //    }
+  //  }
+  //}
+
+  > * {
+    min-width: 0;
+  }
+
+  &-item {
+    text-decoration: none;
+    color: inherit;
+
+    @include hover-focus() {
+      text-decoration: none;
+      color: inherit;
+    }
+  }
+}

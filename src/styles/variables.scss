@@ -1,0 +1,65 @@
+// Header
+
+$header-bg: $gray-100;
+$header-sizes: (
+  basic: (
+    padding: spacer(0) 0
+  )
+);
+
+$header-link-color: $body-color;
+$header-link-hover-bg: $gray-200;
+
+
+// Card
+
+$card-bg: $gray-100;
+$card-border: 0;
+$card-padding: $spacer;
+
+
+// Sidebar
+
+$sidebar-width: 16rem;
+$sidebar-bg: $gray-100;
+$sidebar-border: 0;
+
+
+// User
+
+$avatar-bg: $gray-200;
+$avatar-sizes: (
+  basic: (
+    max-width: 1.5rem,
+    max-height: 1.5rem
+  ),
+  sm: (
+    max-width: 1.25rem,
+    max-height: 1.25rem
+  ),
+  lg: (
+    max-width: 2rem,
+    max-height: 2rem
+  ),
+  xl: (
+    max-width: 4rem,
+    max-height: 4rem
+  )
+);
+
+
+// Game Item
+
+$game-item-sizes: (
+  basic: (
+    image: (
+      margin-right: spacer(3)
+    )
+  ),
+  sm: (
+    font-size: $font-size-sm,
+    image: (
+      margin-right: spacer(2)
+    )
+  )
+);

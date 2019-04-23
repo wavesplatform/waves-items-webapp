@@ -6,8 +6,17 @@ export interface IDefaultResult {
   error?: ApolloError
 }
 
+export interface IUser {
+  id: string
+  name: string
+  address: string
+}
+
+export interface IGame extends IUser {
+}
+
 export interface IWavesAsset {
-  assetId?: string
+  assetId: string
   timestamp?: string | number
   quantity?: LONG
   reissuable?: boolean
@@ -20,4 +29,5 @@ export interface IItem extends IWavesAsset {
   name: string
   imageUrl: string
   createdAt?: string
+  game: IGame
 }

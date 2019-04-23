@@ -1,0 +1,16 @@
+@import "styles/core";
+
+.GameItem {
+  position: relative;
+
+  @include basic-modifiers($game-item-sizes, '--size-');
+
+  &-body {
+    display: flex;
+    align-items: center;
+  }
+
+  &-title {
+    flex: 1;
+  }
+}

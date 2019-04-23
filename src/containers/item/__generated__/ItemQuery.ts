@@ -3,18 +3,18 @@
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL query operation: FeedQuery
+// GraphQL query operation: ItemQuery
 // ====================================================
 
-export interface FeedQuery_items_game {
+export interface ItemQuery_item_game {
   __typename: "User";
   id: string;
   name: string;
   address: string;
 }
 
-export interface FeedQuery_items {
-  __typename: "IItem";
+export interface ItemQuery_item {
+  __typename: "Item";
   id: string;
   assetId: string;
   name: string;
@@ -22,9 +22,13 @@ export interface FeedQuery_items {
   reissuable: boolean;
   timestamp: any;
   imageUrl: string;
-  game: FeedQuery_items_game;
+  game: ItemQuery_item_game;
 }
 
-export interface FeedQuery {
-  items: FeedQuery_items[];
+export interface ItemQuery {
+  item: ItemQuery_item | null;
+}
+
+export interface ItemQueryVariables {
+  assetId: string;
 }

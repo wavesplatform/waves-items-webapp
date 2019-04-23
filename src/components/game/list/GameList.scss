@@ -1,0 +1,27 @@
+@import "styles/core";
+
+.GameList {
+
+  &-item {
+    margin-bottom: -$border-width;
+    border-top: $border-width solid $gray-200;
+    border-bottom: $border-width solid $gray-200;
+    color: inherit;
+    text-decoration: none;
+
+    &:first-child {
+      border-top: none;
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    @include hover-focus() {
+      z-index: 1;
+      text-decoration: none;
+      background-color: $gray-200;
+      color: inherit;
+    }
+  }
+}
