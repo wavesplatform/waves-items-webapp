@@ -1,4 +1,4 @@
-import React, { Component, PureComponent, ReactNode, useContext } from 'react'
+import React, { Component, ReactNode } from 'react'
 import { IDefaultResult, IItem } from '../../types'
 import { gql } from 'apollo-boost'
 import { ChildProps, graphql } from 'react-apollo'
@@ -18,10 +18,11 @@ interface IVariables {
 
 type TChildProps = ChildProps<IProps, IData, IVariables>
 
-export class ItemContainer extends PureComponent<TChildProps> {
+export class ItemContainer extends Component<TChildProps> {
   render(): ReactNode {
     const data = this.props.data as IData
     const { loading, error } = data
+
     if (loading) return <div>Loading</div>
     if (error) return <h1>ERROR</h1>
 

@@ -53,7 +53,7 @@ export class ItemsContainer extends Component<TChildProps> {
       <div className={classes}>
         <div className={`${displayName}-content`}>
           <h1>Feed</h1>
-          <ItemGrid items={data.items || []} colspan={assetId ? 2 : 4} selectItem={this.selectAssetId}/>
+          <ItemGrid items={data.items || []} colspan={4} selectItem={this.selectAssetId}/>
         </div>
         <div className={`${displayName}-item`}>
           {assetId && <ItemContainer assetId={assetId}/>}

@@ -1,32 +1,32 @@
 import React, { Component, ReactNode } from 'react'
 import { Container, Section } from '@crutch/components'
-import ItemsContainer from '../../containers/items/ItemsContainer'
 import Sidebar from '../../components/sidebar/Sidebar'
 import GamesContainer from '../../containers/games/GamesContainer'
 import cn from 'classnames'
-import './ItemsScreen.scss'
+import './ItemScreen.scss'
 import { RouteComponentProps } from 'react-router'
 import { ChildProps } from 'react-apollo'
+import ItemContainer from '../../containers/item/ItemContainer'
 
-const displayName = 'ItemsScreen'
+const displayName = 'ItemScreen'
 
 interface MatchParams {
-  address?: string
+  assetId?: string
 }
 
 interface IProps extends RouteComponentProps<MatchParams> {
 }
 
 interface IVariables {
-  address?: string
+  assetId?: string
 }
 
 type TChildProps = ChildProps<IProps, {}, IVariables>
 
-class ItemsScreen extends Component<TChildProps> {
+class ItemScreen extends Component<TChildProps> {
   render(): ReactNode {
     const { match } = this.props
-    const { address } = match.params
+    const { assetId } = match.params
 
     const classes = cn(
       displayName
@@ -40,7 +40,7 @@ class ItemsScreen extends Component<TChildProps> {
               <GamesContainer/>
             </Sidebar>
             <div className={`${displayName}-content`}>
-              <ItemsContainer address={address}/>
+              {assetId && <ItemContainer assetId={assetId}/>}
             </div>
           </div>
         </Container>
@@ -49,5 +49,5 @@ class ItemsScreen extends Component<TChildProps> {
   }
 }
 
-export default ItemsScreen
+export default ItemScreen
 
