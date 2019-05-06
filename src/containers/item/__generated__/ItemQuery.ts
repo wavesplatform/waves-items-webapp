@@ -6,14 +6,14 @@
 // GraphQL query operation: ItemQuery
 // ====================================================
 
-export interface ItemQuery_item_game {
+export interface ItemQuery_item_item_game {
   __typename: "User";
   id: string;
-  name: string;
+  name: string | null;
   address: string;
 }
 
-export interface ItemQuery_item {
+export interface ItemQuery_item_item {
   __typename: "Item";
   id: string;
   assetId: string;
@@ -22,7 +22,33 @@ export interface ItemQuery_item {
   reissuable: boolean;
   timestamp: any;
   imageUrl: string;
-  game: ItemQuery_item_game;
+  game: ItemQuery_item_item_game;
+}
+
+export interface ItemQuery_item_pair {
+  __typename: "AmountPricePair";
+  amountAsset: string;
+  priceAsset: string;
+}
+
+export interface ItemQuery_item_bids {
+  __typename: "AmountPrice";
+  amount: number;
+  price: number;
+}
+
+export interface ItemQuery_item_asks {
+  __typename: "AmountPrice";
+  amount: number;
+  price: number;
+}
+
+export interface ItemQuery_item {
+  __typename: "ItemWithOrders";
+  item: ItemQuery_item_item;
+  pair: ItemQuery_item_pair;
+  bids: ItemQuery_item_bids[] | null;
+  asks: ItemQuery_item_asks[] | null;
 }
 
 export interface ItemQuery {

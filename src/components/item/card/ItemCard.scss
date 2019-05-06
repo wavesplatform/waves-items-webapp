@@ -14,7 +14,7 @@ $image-size: 100%;
   border: $card-border;
 
   @include hover-focus {
-    background-color: $gray-200;
+    background-color: $gray-800;
   }
 
   &-top,

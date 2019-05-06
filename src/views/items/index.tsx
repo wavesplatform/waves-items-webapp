@@ -2,13 +2,14 @@ import React, { Component, ReactNode } from 'react'
 import { IDefaultResult } from '../../types'
 import { ChildProps, graphql } from 'react-apollo'
 import ItemGrid from '../../components/item/grid/ItemGrid'
-import { ItemsQuery } from './__generated__/ItemsQuery'
 import cn from 'classnames'
-import ItemContainer from '../item/ItemContainer'
 import './ItemsContainer.scss'
 import gql from 'graphql-tag'
-
-const displayName = 'Items'
+import { ItemsSection } from './style'
+import { ViewContent, ViewGrid, ViewSide } from '../../components/layout'
+import GamesContainer from '../ItemsScreen'
+import Sidebar from '../../components/sidebar/Sidebar'
+import { ItemContainer } from '../../containers/item/ItemContainer'
 
 interface IProps {
   address?: string
@@ -24,7 +25,7 @@ interface IVariables {
 
 type TChildProps = ChildProps<IProps, IData, IVariables>
 
-export class ItemsContainer extends Component<TChildProps> {
+class ItemsContainer extends Component<TChildProps> {
   state = {
     selectedAssetId: null,
   }
@@ -41,24 +42,30 @@ export class ItemsContainer extends Component<TChildProps> {
     const { loading, error } = data
     const assetId = this.state.selectedAssetId
 
-    const classes = cn(
-      displayName,
-      { [`${displayName}--item`]: assetId }
-    )
-
-    if (loading) return <div>Loading</div>
-    if (error) return <h1>ERROR</h1>
+    if (loading) {
+      return <div>Loading...</div>
+    }
 
     return (
-      <div className={classes}>
-        <div className={`${displayName}-content`}>
-          <h1>Feed</h1>
-          <ItemGrid items={data.items || []} colspan={4} selectItem={this.selectAssetId}/>
-        </div>
-        <div className={`${displayName}-item`}>
-          {assetId && <ItemContainer assetId={assetId}/>}
-        </div>
-      </div>
+      <ItemsSection>
+        <ViewGrid>
+          <ViewSide>
+            <Sidebar>
+              <GamesContainer/>
+            </Sidebar>
+          </ViewSide>
+          <ViewContent>
+            <div className={'content'}>
+              <h1>Feed</h1>
+              <ItemGrid items={data.items || []} colspan={4} selectItem={this.selectAssetId}/>
+            </div>
+            <div className={'item'}>
+              {assetId && <ItemContainer assetId={assetId}/>}
+            </div>
+          </ViewContent>
+        </ViewGrid>
+
+      </ItemsSection>
 
     )
   }

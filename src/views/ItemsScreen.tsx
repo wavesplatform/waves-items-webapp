@@ -1,32 +1,31 @@
 import React, { Component, ReactNode } from 'react'
-import { Container, Section } from '@crutch/components'
-import Sidebar from '../../components/sidebar/Sidebar'
-import GamesContainer from '../../containers/games/GamesContainer'
+import ItemsContainer from '../containers/items/ItemsContainer'
+import Sidebar from '../components/sidebar/Sidebar'
+import GamesContainer from '../containers/games/GamesContainer'
 import cn from 'classnames'
-import './ItemScreen.scss'
 import { RouteComponentProps } from 'react-router'
 import { ChildProps } from 'react-apollo'
-import ItemContainer from '../../containers/item/ItemContainer'
+import { Container, Section, ViewGrid } from '../components/layout'
 
-const displayName = 'ItemScreen'
+const displayName = 'ItemsScreen'
 
 interface MatchParams {
-  assetId?: string
+  address?: string
 }
 
 interface IProps extends RouteComponentProps<MatchParams> {
 }
 
 interface IVariables {
-  assetId?: string
+  address?: string
 }
 
 type TChildProps = ChildProps<IProps, {}, IVariables>
 
-class ItemScreen extends Component<TChildProps> {
+class ItemsScreen extends Component<TChildProps> {
   render(): ReactNode {
     const { match } = this.props
-    const { assetId } = match.params
+    const { address } = match.params
 
     const classes = cn(
       displayName
@@ -35,19 +34,19 @@ class ItemScreen extends Component<TChildProps> {
     return (
       <Section className={classes}>
         <Container>
-          <div className={`${displayName}-body`}>
+          <ViewGrid>
             <Sidebar className={`${displayName}-side`}>
               <GamesContainer/>
             </Sidebar>
             <div className={`${displayName}-content`}>
-              {assetId && <ItemContainer assetId={assetId}/>}
+              <ItemsContainer address={address}/>
             </div>
-          </div>
+          </ViewGrid>
         </Container>
       </Section>
     )
   }
 }
 
-export default ItemScreen
+export default ItemsScreen
 

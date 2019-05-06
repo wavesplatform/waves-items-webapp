@@ -1,6 +1,9 @@
 {
   "defaultSeverity": "error",
-  "extends": ["tslint-react", "tslint-config-prettier"],
+  "extends": [
+    "tslint-react",
+    "tslint-config-prettier"
+  ],
   "jsRules": {},
   "linterOptions": {
     "exclude": [
@@ -8,9 +11,16 @@
     ]
   },
   "rules": {
+    "jsx-no-lambda": false,
     "jsx-wrap-multiline": false,
-    "max-line-length": [true, 120],
-    "semicolon": [true, "never"],
+    "max-line-length": [
+      true,
+      120
+    ],
+    "semicolon": [
+      true,
+      "never"
+    ],
     "trailing-comma": [
       true,
       {
@@ -23,7 +33,12 @@
         "esSpecCompliant": true
       }
     ],
-    "quotemark": [true, "single", "avoid-escape", "avoid-template"]
+    "quotemark": [
+      true,
+      "single",
+      "avoid-escape",
+      "avoid-template"
+    ]
   },
   "rulesDirectory": []
 }

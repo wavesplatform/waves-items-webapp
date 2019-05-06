@@ -1,8 +1,7 @@
 import React, { Component, ReactNode } from 'react'
-import { Container, Section } from '@crutch/components'
 import cn from 'classnames'
-import './HomeScreen.scss'
 import { RouteComponentProps } from 'react-router'
+import { Container, Section } from '../components/layout'
 
 const displayName = 'HomeScreen'
 

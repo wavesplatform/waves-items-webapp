@@ -1,9 +1,9 @@
 import React, { Component, ReactNode } from 'react'
 import { IDefaultResult } from '../../types'
-import { gql } from 'apollo-boost'
 import { ChildProps, graphql } from 'react-apollo'
 import GameList from '../../components/game/list/GameList'
 import { GamesQuery } from './__generated__/GamesQuery'
+import gql from 'graphql-tag'
 
 interface IProps {
 }

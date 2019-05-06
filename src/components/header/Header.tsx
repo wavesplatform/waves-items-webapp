@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { Navbar, Container, Nav, NavItem, NavLink } from '@crutch/components'
 import cn from 'classnames'
 import './Header.scss'
+import UserNav from '../user/nav/UserNav'
 
 const displayName = 'Header'
 
@@ -22,7 +23,7 @@ export class Header extends PureComponent<IHeaderProps> {
             <Link to={'/'} className={`${displayName}-logo`}>
               Waves Vault
             </Link>
-            <Nav className={`${displayName}-nav`}>
+            <Nav className={`${displayName}-nav`} size={'lg'}>
               <NavItem>
                 <NavLink as={Link} to={'/games'}>Games</NavLink>
               </NavItem>
@@ -35,7 +36,7 @@ export class Header extends PureComponent<IHeaderProps> {
             </Nav>
             <Nav className={`${displayName}-profile`}>
               <NavItem>
-                <NavLink as={Link} to={'/'}>Player #12</NavLink>
+                <UserNav/>
               </NavItem>
             </Nav>
           </Navbar>

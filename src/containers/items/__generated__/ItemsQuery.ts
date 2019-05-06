@@ -9,7 +9,7 @@
 export interface ItemsQuery_items_game {
   __typename: "User";
   id: string;
-  name: string;
+  name: string | null;
   address: string;
 }
 

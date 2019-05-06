@@ -35,7 +35,7 @@ export class UserImage extends Component<IProps> {
     )
   }
 
-  private _initAvatar(): void {
+  _initAvatar(): void {
     const img = new Image()
     img.src = Identity.create(this.props.address, { size: 96 })
     this.imageUri = img.src

@@ -1,6 +1,6 @@
 // Header
 
-$header-bg: $gray-100;
+$header-bg: $gray-900;
 $header-sizes: (
   basic: (
     padding: spacer(0) 0
@@ -8,12 +8,12 @@ $header-sizes: (
 );
 
 $header-link-color: $body-color;
-$header-link-hover-bg: $gray-200;
+$header-link-hover-bg: $gray-900;
 
 
 // Card
 
-$card-bg: $gray-100;
+$card-bg: $gray-900;
 $card-border: 0;
 $card-padding: $spacer;
 
@@ -21,13 +21,13 @@ $card-padding: $spacer;
 // Sidebar
 
 $sidebar-width: 16rem;
-$sidebar-bg: $gray-100;
+$sidebar-bg: $gray-900;
 $sidebar-border: 0;
 
 
 // User
 
-$avatar-bg: $gray-200;
+$avatar-bg: $gray-800;
 $avatar-sizes: (
   basic: (
     max-width: 1.5rem,
@@ -62,4 +62,15 @@ $game-item-sizes: (
       margin-right: spacer(2)
     )
   )
+);
+
+$nav-sizes: map-merge(
+    (
+      lg: (
+        link: (
+          padding: spacer(4) spacer(2)
+        )
+      )
+    ),
+    $nav-sizes
 );

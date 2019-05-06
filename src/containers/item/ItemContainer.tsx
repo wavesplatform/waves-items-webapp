@@ -1,9 +1,9 @@
 import React, { Component, ReactNode } from 'react'
 import { IDefaultResult, IItem } from '../../types'
-import { gql } from 'apollo-boost'
 import { ChildProps, graphql } from 'react-apollo'
-import { ItemQuery } from './__generated__/ItemQuery'
+import { ItemQuery, ItemQuery_item } from './__generated__/ItemQuery'
 import ItemDetail from '../../components/item/detail/ItemDetail'
+import gql from 'graphql-tag'
 
 interface IProps {
   assetId: string
@@ -26,25 +26,47 @@ export class ItemContainer extends Component<TChildProps> {
     if (loading) return <div>Loading</div>
     if (error) return <h1>ERROR</h1>
 
-    const item = data.item as IItem
-    return <ItemDetail item={item}/>
+    const itemWithOrder = data.item as ItemQuery_item
+    const item = itemWithOrder.item as IItem
+    const bids = itemWithOrder.bids && itemWithOrder.bids.map(({ amount, price }) => ({ amount, price }))
+    const asks = itemWithOrder.asks && itemWithOrder.asks.map(({ amount, price }) => ({ amount, price }))
+
+    return <ItemDetail
+      item={item}
+      asks={asks || []}
+      bids={bids || []}
+    />
   }
 }
 
 const ITEM_QUERY = gql`
   query ItemQuery($assetId: String!) {
     item(assetId: $assetId) {
-      id
-      assetId
-      name
-      quantity
-      reissuable
-      timestamp
-      imageUrl
-      game {
+      item {
         id
+        assetId
         name
-        address
+        quantity
+        reissuable
+        timestamp
+        imageUrl
+        game {
+          id
+          name
+          address
+        }
+      }
+      pair {
+        amountAsset
+        priceAsset
+      }
+      bids {
+        amount
+        price
+      }
+      asks {
+        amount
+        price
       }
     }
   }
