@@ -4,6 +4,7 @@ import cn from 'classnames'
 import './GameList.scss'
 import { Link } from 'react-router-dom'
 import GameItem from '../item/GameItem'
+import { ListGroup, ListGroupItem } from '@crutch/components'
 
 const displayName = 'GameList'
 

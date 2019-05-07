@@ -9,7 +9,7 @@ export class ProtectedRoute extends Route<IProps> {
   render(): ReactNode {
     if (!this.props.isSignedIn) {
       return <Redirect to={{
-        pathname: '/login',
+        pathname: '/signin',
         state: { from: this.props.location },
       }}/>
     }

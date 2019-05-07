@@ -31,7 +31,11 @@ export class ItemCard extends Component<IProps> {
           <div className={`${displayName}-overview`}>
             <div className={`${displayName}-image`}>
               <img
-                src='https://cryptoassault.io/static/unit_0-a16426962578f015561724adb5353968.png'
+                src={
+                  item.imageUrl === '#'
+                    ? 'https://cryptoassault.io/static/unit_0-a16426962578f015561724adb5353968.png'
+                    : item.imageUrl
+                }
                 alt={`Item #${item.id}`}/>
             </div>
           </div>

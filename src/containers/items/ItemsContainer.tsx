@@ -66,7 +66,7 @@ export class ItemsContainer extends Component<TChildProps> {
 
 const ITEMS_QUERY = gql`
   query ItemsQuery {
-    items {
+    items(orderBy: timestamp_DESC) {
       id
       assetId
       name

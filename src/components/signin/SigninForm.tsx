@@ -1,4 +1,4 @@
-import React, { Component, FormEvent, FormEventHandler, ReactNode } from 'react'
+import React, { Component, FormEvent, ReactNode } from 'react'
 import { Mutation, MutationFn } from 'react-apollo'
 import gql from 'graphql-tag'
 import { Signin, SigninVariables } from './__generated__/Signin'
@@ -6,6 +6,7 @@ import { config } from '../../config/config'
 import { keeperService } from '../../services/keeper/KeeperService'
 import { AuthContext } from '../../contexts/auth/AuthContext'
 import { KeeperConsumer } from '../../contexts/keeper/KeeperContext'
+import { Button } from '@crutch/components'
 
 class SigninMutation extends Mutation<Signin, SigninVariables> {
 }
@@ -64,7 +65,7 @@ export class SigninForm extends Component<{}> {
                   onSubmit={ev => this.handleSubmit(ev, signin)}
                 >
                   {account && account.address}
-                  <button type='submit'>Sign In</button>
+                  <Button type='submit' size={'lg'}>Sign In</Button>
                 </form>
               )
             }}

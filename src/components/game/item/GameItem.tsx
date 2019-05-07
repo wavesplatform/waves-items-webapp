@@ -27,7 +27,7 @@ export class GameItem extends Component<IProps> {
             <UserImage address={game.address} size={size}/>
           </div>
           <div className={`${displayName}-title`}>
-            {game.name}
+            {game.name || game.address}
           </div>
         </div>
       </div>

@@ -8,7 +8,7 @@ export interface IDefaultResult {
 
 export interface IUser {
   id?: string
-  name?: string
+  name?: string | null
   address: string
   publicKey?: string
 }

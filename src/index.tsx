@@ -11,8 +11,6 @@ import { HttpLink } from 'apollo-link-http'
 import { InMemoryCache } from 'apollo-cache-inmemory'
 import { setContext } from 'apollo-link-context'
 import { authService } from './services/auth/AuthService'
-import { ThemeProvider } from 'styled-components'
-import theme from './styles/theme'
 import Routes from './routes'
 
 const authLink = setContext((_, { headers }) => {
@@ -44,18 +42,15 @@ cache.writeData({
 class App extends Component {
   render(): ReactNode {
     return (
-      <ThemeProvider theme={theme}>
-        <ApolloProvider client={client}>
-          <KeeperProvider>
-            <Router>
-              <AuthProvider>
-                <Routes/>
-              </AuthProvider>
-            </Router>
-          </KeeperProvider>
-        </ApolloProvider>
-      </ThemeProvider>
-
+      <ApolloProvider client={client}>
+        <KeeperProvider>
+          <Router>
+            <AuthProvider>
+              <Routes/>
+            </AuthProvider>
+          </Router>
+        </KeeperProvider>
+      </ApolloProvider>
     )
   }
 }

@@ -6,6 +6,7 @@ import GameItem from '../../game/item/GameItem'
 import { IWavesNetworkCode, keeperService } from '../../../services/keeper/KeeperService'
 import { KeeperContext } from '../../../contexts/keeper/KeeperContext'
 import { config } from '../../../config/config'
+import { Button } from '@crutch/components'
 
 const displayName = 'ItemDetail'
 
@@ -43,15 +44,19 @@ export class ItemDetail extends Component<IProps> {
             </li>
           </ul>
           <div className={`${displayName}-actions`}>
-            <button type='button' onClick={this._buy}>Buy</button>
-            <button type='button' onClick={this._sell}>Sell</button>
+            <Button onClick={this._buy} size={'lg'} color={'dark'}>Buy</Button>
+            <Button onClick={this._sell} size={'lg'}>Sell</Button>
           </div>
         </div>
         <div className={`${displayName}-right`}>
           <div className={`${displayName}-overview`}>
             <div className={`${displayName}-image`}>
               <img
-                src='https://cryptoassault.io/static/unit_0-a16426962578f015561724adb5353968.png'
+                src={
+                  item.imageUrl === '#'
+                    ? 'https://cryptoassault.io/static/unit_0-a16426962578f015561724adb5353968.png'
+                    : item.imageUrl
+                }
                 alt={`Item #${item.id}`}/>
             </div>
           </div>

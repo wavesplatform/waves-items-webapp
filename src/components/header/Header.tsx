@@ -21,7 +21,7 @@ export class Header extends PureComponent<IHeaderProps> {
         <Container>
           <Navbar size={'basic'}>
             <Link to={'/'} className={`${displayName}-logo`}>
-              Waves Vault
+              Waves Items Vault
             </Link>
             <Nav className={`${displayName}-nav`} size={'lg'}>
               <NavItem>

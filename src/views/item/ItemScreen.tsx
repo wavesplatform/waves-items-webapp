@@ -1,11 +1,12 @@
 import React, { Component, ReactNode } from 'react'
-import Sidebar from '../components/sidebar/Sidebar'
-import GamesContainer from '../containers/games/GamesContainer'
+import Sidebar from '../../components/sidebar/Sidebar'
+import GamesContainer from '../../containers/games/GamesContainer'
 import cn from 'classnames'
 import { RouteComponentProps } from 'react-router'
 import { ChildProps } from 'react-apollo'
-import ItemContainer from '../containers/item/ItemContainer'
-import { Container, Section, ViewGrid } from '../components/layout'
+import ItemContainer from '../../containers/item/ItemContainer'
+import { Container, Section } from '@crutch/components'
+import './ItemScreen.scss'
 
 const displayName = 'ItemScreen'
 
@@ -34,14 +35,15 @@ class ItemScreen extends Component<TChildProps> {
     return (
       <Section className={classes}>
         <Container>
-          <ViewGrid>
+          <div className={`${displayName}-body`}>
             <Sidebar className={`${displayName}-side`}>
               <GamesContainer/>
             </Sidebar>
             <div className={`${displayName}-content`}>
               {assetId && <ItemContainer assetId={assetId}/>}
             </div>
-          </ViewGrid>
+          </div>
+          >
         </Container>
       </Section>
     )
