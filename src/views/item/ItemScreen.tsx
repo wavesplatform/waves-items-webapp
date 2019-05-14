@@ -43,7 +43,6 @@ class ItemScreen extends Component<TChildProps> {
               {assetId && <ItemContainer assetId={assetId}/>}
             </div>
           </div>
-          >
         </Container>
       </Section>
     )
