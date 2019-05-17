@@ -1,5 +1,5 @@
+import { Box } from 'rebass'
 import styled from 'styled-components'
-import { Section } from '../../components/layout'
 
-export const ItemsSection = styled(Section)`
+export const ItemsContainer = styled(Box)`
 `

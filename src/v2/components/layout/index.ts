@@ -1,11 +1,9 @@
 import styled from 'styled-components'
 import { Box } from 'rebass'
+import { themeGet } from 'styled-system'
 
 export const Grid = styled(Box)`
   display: grid;
-`
-
-export const Section = styled(Box)`
 `
 
 export const Container = styled(Box)`
@@ -14,13 +12,17 @@ export const Container = styled(Box)`
   margin-left: auto;
 `
 
+export const ViewWrapper = styled(Box)`
+`
+
 export const ViewGrid = styled(Grid)`
   grid-template-columns: 16rem 1fr;
   grid-row-gap: 0;
-  grid-column-gap: 1rem;
+  grid-column-gap: ${themeGet('space.md')}px;
 `
 
 export const ViewSide = styled(Box)`
+  background: ${themeGet('colors.grays.8')};
 `
 
 export const ViewContent = styled(Box)`

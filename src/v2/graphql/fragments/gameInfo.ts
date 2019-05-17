@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 
 export default gql`
-  fragment userInfo on User {
+  fragment gameInfo on User {
     id
     address
     name

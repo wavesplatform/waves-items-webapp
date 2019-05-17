@@ -2,9 +2,10 @@ const fontSizes: any = [
   12, 14, 16, 20, 24, 32,
 ]
 
-fontSizes.sm = fontSizes[0]
-fontSizes.md = fontSizes[1]
-fontSizes.lg = fontSizes[2]
+fontSizes.xs = fontSizes[0]
+fontSizes.sm = fontSizes[1]
+fontSizes.md = fontSizes[2]
+fontSizes.lg = fontSizes[3]
 fontSizes.base = fontSizes.md
 
 const fontWeights: any = [
@@ -35,17 +36,47 @@ const colors: any = {
   orange: '#fd7e14',
 }
 
-colors.bodyBg = colors.black
-colors.bodyColor = colors.grays[0]
 colors.primary = colors.blue
+colors.body = {
+  bg: colors.black,
+  color: colors.grays[0],
+  border: colors.grays[7],
+}
+colors.card = {
+  bg: colors.grays[8],
+}
 
 const space: any = [
   0, 4, 8, 16, 32, 64, 128,
 ]
 
-space.sm = space[1]
-space.md = space[2]
-space.lg = space[3]
+space.xs = space[1]
+space.sm = space[2]
+space.md = space[3]
+space.lg = space[4]
+space.xl = space[5]
+space.base = space.sm
+
+const avatars: any = {
+  xs: {
+    width: 16,
+    height: 16,
+  },
+  sm: {
+    width: 24,
+    height: 24,
+  },
+  md: {
+    width: 32,
+    height: 32,
+  },
+  lg: {
+    width: 64,
+    height: 64,
+  },
+}
+
+avatars.base = avatars.sm
 
 const fonts = {
   sans: '-apple-system, "Segoe UI", system-ui, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif',
@@ -59,4 +90,5 @@ export default {
   colors,
   space,
   fonts,
+  avatars,
 }

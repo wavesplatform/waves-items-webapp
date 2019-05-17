@@ -2,6 +2,7 @@ import { Box, Flex } from 'rebass'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import { space, SpaceProps, themeGet } from 'styled-system'
+import { InheritLink } from '../globals'
 
 export const Navbar = styled(Flex)`
   position: relative;
@@ -23,13 +24,11 @@ export const NavItem = styled(Box)`
 
 export const NavLink = styled(Link)<SpaceProps>`
   display: block;
-  text-decoration: none;
-  color: inherit;
+  ${InheritLink};
   
   &:hover,
   &:focus {
-    text-decoration: none;
-    color: inherit;
+    ${InheritLink};
     background: ${themeGet('colors.grays.7')};
   }
   
@@ -37,11 +36,11 @@ export const NavLink = styled(Link)<SpaceProps>`
 `
 
 NavLink.defaultProps = {
-  p: 'lg',
+  p: 'md',
 }
 
 export const Logo = styled(NavLink)`
-  margin-right: ${themeGet('space.md')};
+  margin-right: ${themeGet('space.md')}px;
   font-weight: ${themeGet('fontWeights.normal')};
 `
 
