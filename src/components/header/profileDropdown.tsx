@@ -14,7 +14,7 @@ interface DropdownContainerProps extends BoxProps {
 const DropdownContainer = styled(Box)<DropdownContainerProps>`
   position: absolute;
   z-index: 99;
-  width: 168px;
+  width: 192px;
   right: 0;
   
   display: ${props => (props.isShown ? 'block' : 'none')};
