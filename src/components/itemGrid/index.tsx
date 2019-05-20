@@ -1,16 +1,15 @@
 import React from 'react'
-import { IItem } from '../../types'
+import { IItem, WithBalance } from '../../types'
 import { ItemCard } from '../itemCard'
 import { ItemGridContainer, ItemGridLink } from './style'
 
 interface IItemGridProps {
-  items: IItem[]
-  colspan?: number
+  items: WithBalance<IItem>[]
   selectItem?: (assetId: string) => void
 }
 
 export const ItemGrid = (props: IItemGridProps) => {
-  const { colspan, selectItem } = props
+  const { selectItem } = props
 
   const items = props.items.map(item => (
     <ItemGridLink

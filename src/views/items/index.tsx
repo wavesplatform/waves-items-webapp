@@ -45,7 +45,7 @@ class Items extends Component<TChildProps> {
     return (
       <ItemsContainer>
         <ItemsSide constrain={!!assetId}>
-          <ItemGrid items={data.items || []} colspan={4} selectItem={this.selectAssetId}/>
+          <ItemGrid items={data.items || []} selectItem={this.selectAssetId}/>
         </ItemsSide>
         <ItemSide isActive={!!assetId}>
           {assetId && <Item assetId={assetId}/>}

@@ -1,11 +1,11 @@
 import React from 'react'
-import { IItem } from '../../types'
+import { IItem, WithBalance } from '../../types'
 import { UserHeading } from '../user/userHeading'
-import { ImageWrapper, ItemCardContainer, Overview, Title } from './style'
+import { Balance, ImageWrapper, ItemCardContainer, Overview, Title } from './style'
 import { Box, Flex, Image } from 'rebass'
 
 interface ItemCardProps {
-  item: IItem
+  item: WithBalance<IItem>
 }
 
 export const ItemCard = (props: ItemCardProps) => {
@@ -20,7 +20,16 @@ export const ItemCard = (props: ItemCardProps) => {
           {item.name}
         </Title>
         <Box ml={3}>
-          {item.quantity}
+          {item.balance ? <>
+            <Balance
+              color={'primary'}
+            >
+              {item.balance}
+            </Balance> / {item.quantity}
+          </> : <>
+            {item.quantity}
+          </>
+          }
         </Box>
       </Flex>
       <Box>

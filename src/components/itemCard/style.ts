@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Box, Card } from 'rebass'
+import { Box, Card, Text } from 'rebass'
 import { themeGet } from 'styled-system'
 import { H3, truncate } from '../globals'
 
@@ -21,6 +21,10 @@ export const ItemCardContainer = styled(Card)`
 export const Title = styled(H3)`
   ${truncate};
   margin: 0;
+`
+
+export const Balance = styled(Text)`
+  display: inline;
 `
 
 export const Overview = styled(Box)`

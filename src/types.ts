@@ -54,3 +54,7 @@ export interface IItem extends IWavesAsset {
   createdAt?: string
   game: IGame
 }
+
+export type WithBalance<P> = P & {
+  balance?: number
+}

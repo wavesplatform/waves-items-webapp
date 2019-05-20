@@ -12,6 +12,7 @@ export const GlobalStyle = createGlobalStyle`
   html {
     font-family: sans-serif;
     line-height: 1.15;
+    height: 100%;
   }
   
   body {
@@ -22,7 +23,12 @@ export const GlobalStyle = createGlobalStyle`
     line-height: ${themeGet('lineHeights.base')};
     color: ${themeGet('colors.default')};
     text-align: left;
-    background-color: ${themeGet('bg.default')};;
+    background-color: ${themeGet('bg.default')};
+    height: 100%;
+  }
+  
+  #root {
+    height: 100%;
   }
   
   [tabindex="-1"]:focus:not(:focus-visible) {
