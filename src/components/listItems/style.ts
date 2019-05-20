@@ -43,5 +43,5 @@ export const ListItemContainer = styled(Box)<ListItemContainerProps>`
 `
 
 ListItemContainer.defaultProps = {
-  p: 'md',
+  p: 'lg',
 }

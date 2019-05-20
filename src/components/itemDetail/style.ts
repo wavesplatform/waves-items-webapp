@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Box, Flex, Heading, Text } from 'rebass'
+import { Box, Flex, Text } from 'rebass'
 import { H2, H3, truncate } from '../globals'
 import { themeGet } from 'styled-system'
 
@@ -13,7 +13,7 @@ export const LeftSide = styled(Box)`
 
 export const RightSide = styled(Box)`
   flex-basis: 50%;
-  margin-left: ${themeGet('space.md')}px;
+  margin-left: ${themeGet('space.lg')}px;
 `
 
 export const Title = styled(H2)`
@@ -28,7 +28,7 @@ Params.defaultProps = {
 }
 
 export const Param = styled(Flex)`
-  padding: ${themeGet('space.md')}px 0;
+  padding: ${themeGet('space.lg')}px 0;
   border-top: 1px solid ${themeGet('colors.grays.7')};
   border-bottom: 1px solid ${themeGet('colors.grays.7')};
   display: flex;

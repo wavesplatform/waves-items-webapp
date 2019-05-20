@@ -81,8 +81,6 @@ class Header extends Component<IProps> {
   }
 
   _onProfileDropdownToggle = () => {
-    console.log('toggle')
-
     this.setState({
       profileDropdownIsShown: !this.state.profileDropdownIsShown,
     })
