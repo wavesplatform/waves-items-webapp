@@ -11,16 +11,16 @@ export const Container = styled(Box)`
   margin-right: auto;
   margin-left: auto;
 `
-Container.defaultProps = { pl: 'md', pr: 'md' }
+Container.defaultProps = { pl: 'lg', pr: 'lg' }
 
 export const ViewWrapper = styled(Box)`
 `
-ViewWrapper.defaultProps = { pt: 'md', pb: 'md' }
+ViewWrapper.defaultProps = { pt: 'lg', pb: 'lg' }
 
 export const ViewGrid = styled(Grid)`
   grid-template-columns: 16rem 1fr;
   grid-row-gap: 0;
-  grid-column-gap: ${themeGet('space.md')}px;
+  grid-column-gap: ${themeGet('space.lg')}px;
 `
 
 export const ViewSide = styled(Box)`

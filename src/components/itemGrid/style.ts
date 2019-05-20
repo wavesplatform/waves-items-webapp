@@ -5,7 +5,7 @@ import { themeGet } from 'styled-system'
 import { inheritLink } from '../globals'
 
 export const ItemGridContainer = styled(Grid)`
-  grid-gap: ${themeGet('space.md')}px;
+  grid-gap: ${themeGet('space.lg')}px;
   grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
 `
 

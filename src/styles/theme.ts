@@ -20,7 +20,7 @@ const colors: any = {
   white: '#fff',
   grays: [
     '#e6e7e8',
-    '#cdced1',
+    '#d5d6d9',
     '#b4b6ba',
     '#9b9ea3',
     '#696d75',
@@ -42,10 +42,12 @@ colors.primary = colors.blue
 const bg = {
   default: colors.black,
   card: colors.grays[8],
+  dropdown: colors.white,
+  dropdownHover: colors.grays[0],
 }
 
 const space: any = [
-  0, 4, 8, 16, 32, 64, 128,
+  0, 4, 8, 12, 16, 32, 64,
 ]
 
 space.xs = space[1]
@@ -53,7 +55,7 @@ space.sm = space[2]
 space.md = space[3]
 space.lg = space[4]
 space.xl = space[5]
-space.base = space.sm
+space.base = space.md
 
 const avatars: any = {
   xs: {

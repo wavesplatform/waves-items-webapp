@@ -9,18 +9,18 @@ import styled from 'styled-components'
 const Identity = require('identity-img')
 Identity.config({ rows: 8, cells: 8 })
 
-interface UserAvatarProps {
-  user: IUser
-  size?: string
-}
-
 const UserAvatarContainer = styled(Box)`
   border-radius: 50%;
   overflow: hidden;
   background: ${themeGet('colors.grays.7')};
 `
 
-class UserAvatar extends Component<UserAvatarProps> {
+interface IProps {
+  user: IUser
+  size?: string
+}
+
+class UserAvatar extends Component<IProps> {
   imageUri: string
 
   componentWillMount(): void {

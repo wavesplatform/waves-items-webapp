@@ -37,14 +37,14 @@ class ItemDetail extends Component<IProps> {
         <LeftSide>
           <Title
             flex={'1'}
-            mb={'md'}
+            mb={'lg'}
           >
             {item.name}
           </Title>
-          <Box mb={'md'}>
+          <Box mb={'lg'}>
             <UserHeading user={item.game} size={'sm'}/>
           </Box>
-          <Params mb={'md'}>
+          <Params mb={'lg'}>
             <Param>
               <ParamTitle>Quantity</ParamTitle>
               <ParamValue>{item.quantity}</ParamValue>

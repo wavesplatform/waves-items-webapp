@@ -13,7 +13,7 @@ export const ItemCard = (props: ItemCardProps) => {
 
   return (
     <ItemCardContainer>
-      <Flex p={'md'}>
+      <Flex p={'lg'}>
         <Title
           flex={'1'}
         >
@@ -36,7 +36,7 @@ export const ItemCard = (props: ItemCardProps) => {
           </ImageWrapper>
         </Overview>
       </Box>
-      <Box p={'md'}>
+      <Box p={'lg'}>
         <Flex>
           <UserHeading user={item.game} size={'sm'}/>
         </Flex>

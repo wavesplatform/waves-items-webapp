@@ -15,7 +15,7 @@ export const ItemsSide = styled(Box)<ItemsSideProps>`
   ${props =>
   props.constrain && css`
     width: 50%;
-    padding-right: calc(${themeGet('space.md')}px / 2);
+    padding-right: calc(${themeGet('space.lg')}px / 2);
   `}
 `
 
@@ -31,5 +31,5 @@ export const ItemSide = styled(Box)<ItemSideProps>`
   top: 0;
   height: 100%;
   opacity: ${props => (props.isActive ? 1 : 0)};
-  padding-left: calc(${themeGet('space.md')}px / 2); 
+  padding-left: calc(${themeGet('space.lg')}px / 2); 
 `
