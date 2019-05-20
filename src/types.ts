@@ -1,5 +1,11 @@
 import { LONG } from '@waves/types'
 import { ApolloError } from 'apollo-client'
+import { ReactNode } from 'react'
+import {
+  ItemQuery_item_asks,
+  ItemQuery_item_bids,
+  ItemQuery_item_pair
+} from './graphql/queries/__generated__/ItemQuery'
 
 export interface IDefaultResult {
   loading: boolean
@@ -24,6 +30,12 @@ export type AmountPricePair = {
 export type AmountPrice = {
   amount: number
   price: number
+}
+
+export type WithOrders<P> = P & {
+  pair?: AmountPricePair;
+  bids?: AmountPrice[];
+  asks?: AmountPrice[];
 }
 
 export interface IWavesAsset {

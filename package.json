@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@types/classnames": "^2.2.7",
     "@types/graphql": "^14.0.3",
     "@types/jest": "23.3.10",
     "@types/node": "10.12.15",
@@ -21,7 +20,6 @@
     "apollo-link-error": "^1.1.10",
     "apollo-link-http": "^1.5.14",
     "apollo-link-state": "^0.4.2",
-    "classnames": "^2.2.6",
     "graphql": "^14.0.2",
     "graphql-tag": "^2.10.1",
     "identity-img": "^1.0.0",

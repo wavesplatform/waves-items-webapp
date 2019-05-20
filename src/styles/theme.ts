@@ -36,14 +36,12 @@ const colors: any = {
   orange: '#fd7e14',
 }
 
+colors.default = colors.grays[0]
 colors.primary = colors.blue
-colors.body = {
-  bg: colors.black,
-  color: colors.grays[0],
-  border: colors.grays[7],
-}
-colors.card = {
-  bg: colors.grays[8],
+
+const bg = {
+  default: colors.black,
+  card: colors.grays[8],
 }
 
 const space: any = [
@@ -83,11 +81,18 @@ const fonts = {
   mono: 'SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace',
 }
 
+const lineHeights: any = [
+  1, 1.15, 1.25, 1.5, 2,
+]
+
+lineHeights.base = lineHeights[2]
+
 export default {
   breakpoints: ['40em', '52em', '64em'],
   fontSizes,
   fontWeights,
   colors,
+  bg,
   space,
   fonts,
   avatars,
