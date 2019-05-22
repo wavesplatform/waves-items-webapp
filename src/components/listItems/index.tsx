@@ -18,10 +18,10 @@ GameListItem.defaultProps = {
   as: 'li',
 }
 
-interface ListItemProps extends BaseProps {
+interface IListItemProps extends BaseProps {
 }
 
-export const ListItem = (props: PropsWithChildren<ListItemProps> & ComponentProps<ElementType>) => {
+export const ListItem = (props: PropsWithChildren<IListItemProps> & ComponentProps<ElementType>) => {
   const { children, ...attrs } = props
   return (
     <ListItemContainer {...attrs}>

@@ -11,6 +11,7 @@ export const ItemCardContainer = styled(Card)`
   word-wrap: break-word;
   background: ${themeGet('bg.card')};
   background-clip: border-box;
+  border-radius: ${themeGet('radii.lg')}px;
   
   &:hover,
   &:focus {

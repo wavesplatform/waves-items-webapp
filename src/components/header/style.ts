@@ -5,8 +5,19 @@ import { space, SpaceProps, themeGet } from 'styled-system'
 import { inheritLink } from '../globals'
 import { Container } from '../layout'
 
+export const NavbarWrapper = styled(Box)`
+  height: 52px;
+`
+
 export const Navbar = styled(Flex)`
-  background: ${themeGet('colors.grays.8')};
+  height: 52px;
+  background: ${themeGet('bg.default')};
+  border-bottom: 1px solid ${themeGet('colors.grays.7')};
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 3;
 `
 
 export const NavbarContainer = styled(Container)`
@@ -16,6 +27,7 @@ position: relative;
   align-items: stretch;
   justify-content: space-between;
 `
+NavbarContainer.defaultProps = { px: 'lg' }
 
 export const Nav = styled(Flex)`
   flex-wrap: wrap;
@@ -31,12 +43,13 @@ NavItem.defaultProps = { as: 'li' }
 
 export const NavLink = styled(Link)<SpaceProps>`
   display: block;
+  height: 100%;
   ${inheritLink};
   
   &:hover,
   &:focus {
     ${inheritLink};
-    background: ${themeGet('colors.grays.7')};
+    background: ${themeGet('colors.grays.8')};
   }
   
   ${space}
@@ -67,19 +80,21 @@ export const ProfileToggle = styled(Box)<ProfileToggleProps>`
   padding-bottom: 0;
   height: 100%;
   cursor: pointer;
+  border-left: 1px solid ${themeGet('colors.grays.7')};
+  border-right: 1px solid ${themeGet('colors.grays.7')}; 
+  justify-content: flex-end;
   
   ${inheritLink};
   
+  &:hover,
+  &:focus {
+    ${inheritLink};
+    background-color: ${themeGet('colors.grays.8')};
+  }
+  
   ${props =>
-  props.isActive ? css`
-    color: ${themeGet('bg.default')};
-    background-color: ${themeGet('bg.dropdown')};
-  ` : css`
-    &:hover,
-    &:focus {
-      ${inheritLink};
-      background-color: ${themeGet('colors.grays.7')};
-    }
+  props.isActive && css`
+    width: 192px;
   `}
 `
 ProfileToggle.defaultProps = { p: 'md' }

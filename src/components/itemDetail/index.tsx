@@ -12,17 +12,30 @@ import {
   RightSide,
   Title,
 } from './style'
-import { Box, Button, Flex, Image, Text } from 'rebass'
+import { Box, Flex, Image } from 'rebass'
 import { KeeperContext } from '../../contexts/keeper'
 import keeperHelper, { IWavesNetworkCode } from '../../helpers/keeper'
 import { config } from '../../config/config'
+import { Button } from '../buttons'
+import SellModal from '../modals/sellModal'
+import BuyModal from '../modals/buyModal'
 
 interface IProps {
   item: WithOrders<IItem>
 }
 
+interface IState {
+  buyModalShow?: boolean,
+  sellModalShow?: boolean,
+}
+
 class ItemDetail extends Component<IProps> {
   static contextType = KeeperContext
+
+  state = {
+    buyModalShow: false,
+    sellModalShow: false,
+  }
 
   render(): ReactNode {
     const { item } = this.props
@@ -52,15 +65,33 @@ class ItemDetail extends Component<IProps> {
           </Params>
           <Flex justifyContent={'space-between'}>
             <Button
-              onClick={this._buy}
+              onClick={() => {
+                this._setShowBuyModal(true)
+              }}
+              variant='primary'
+              width={1 / 2}
             >
               Buy
             </Button>
             <Button
-              onClick={this._sell}
+              width={1 / 2}
+              ml={2}
+              onClick={() => {
+                this._setShowSellModal(true)
+              }}
             >
               Sell
             </Button>
+            <BuyModal item={item}
+                      keeperContext={this.context}
+                      show={this.state.buyModalShow}
+                      setShow={this._setShowBuyModal}
+            />
+            <SellModal item={item}
+                       keeperContext={this.context}
+                       show={this.state.sellModalShow}
+                       setShow={this._setShowSellModal}
+            />
           </Flex>
         </LeftSide>
         <RightSide>
@@ -107,67 +138,15 @@ class ItemDetail extends Component<IProps> {
     </tr>
   )
 
-  _buy = async () => {
-    const { item } = this.props
-
-    if (!keeperHelper.keeper) {
-      return
-    }
-
-    const { network } = this.context
-    const chain = network && config.chains[network.code as IWavesNetworkCode]
-
-    const order = await keeperHelper.keeper.signAndPublishOrder({
-      type: 1002,
-      data: {
-        matcherPublicKey: chain.matcher,
-        orderType: 'buy',
-        amount: {
-          tokens: '1',
-          assetId: item.assetId,
-        },
-        price: {
-          tokens: '0.0000001',
-          assetId: config.wavesId,
-        },
-        matcherFee: {
-          tokens: '0.003',
-          assetId: config.wavesId,
-        },
-        expiration: Date.now() + 10000000,
-      },
+  _setShowBuyModal = (value: boolean) => {
+    this.setState({
+      buyModalShow: value,
     })
   }
 
-  _sell = async () => {
-    const { item } = this.props
-
-    if (!keeperHelper.keeper) {
-      return
-    }
-
-    const { network } = this.context
-    const chain = network && config.chains[network.code as IWavesNetworkCode]
-
-    const order = await keeperHelper.keeper.signAndPublishOrder({
-      type: 1002,
-      data: {
-        matcherPublicKey: chain.matcher,
-        orderType: 'sell',
-        amount: {
-          tokens: '1',
-          assetId: item.assetId,
-        },
-        price: {
-          tokens: '0.0000001',
-          assetId: config.wavesId,
-        },
-        matcherFee: {
-          tokens: '0.003',
-          assetId: config.wavesId,
-        },
-        expiration: Date.now() + 10000000,
-      },
+  _setShowSellModal = (value: boolean) => {
+    this.setState({
+      sellModalShow: value,
     })
   }
 }

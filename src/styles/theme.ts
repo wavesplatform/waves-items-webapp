@@ -25,29 +25,41 @@ const colors: any = {
     '#9b9ea3',
     '#696d75',
     '#50555e',
-    '#373d47',
+    '#343a47',
     '#1e2430',
-    '#0e1420',
+    '#111725',
   ],
   black: '#050c19',
-  blue: '#07c',
+  blue: '#2254F5',
   green: '#28a745',
   red: '#dc3545',
   orange: '#fd7e14',
 }
 
 colors.default = colors.grays[0]
+colors.placeholder = colors.grays[4]
+colors.element = colors.grays[7]
 colors.primary = colors.blue
 
 const bg = {
   default: colors.black,
+  input: colors.black,
   card: colors.grays[8],
-  dropdown: colors.white,
-  dropdownHover: colors.grays[0],
+  dropdown: colors.black,
+  dropdownHover: colors.grays[8],
 }
 
+const border = {
+  input: colors.grays[7],
+  inputHover: colors.grays[6],
+  modal: colors.grays[7],
+}
+
+colors.bg = bg
+colors.border = border
+
 const space: any = [
-  0, 4, 8, 12, 16, 32, 64,
+  0, 4, 8, 12, 16, 24, 32, 64,
 ]
 
 space.xs = space[1]
@@ -55,6 +67,7 @@ space.sm = space[2]
 space.md = space[3]
 space.lg = space[4]
 space.xl = space[5]
+space.xxl = space[7]
 space.base = space.md
 
 const avatars: any = {
@@ -89,6 +102,22 @@ const lineHeights: any = [
 
 lineHeights.base = lineHeights[2]
 
+const radii: any = [
+  0, 4, 6, 8, 16,
+]
+
+radii.sm = radii[1]
+radii.md = radii[2]
+radii.lg = radii[3]
+radii.xl = radii[3]
+radii.base = radii.md
+
+const buttons = {
+  primary: {
+    backgroundColor: colors.primary,
+  },
+}
+
 export default {
   breakpoints: ['40em', '52em', '64em'],
   fontSizes,
@@ -97,5 +126,7 @@ export default {
   bg,
   space,
   fonts,
+  radii,
+  buttons,
   avatars,
 }

@@ -16,7 +16,7 @@ const HoverFocus = () => css`
   &:focus {
     z-index: 1;
     text-decoration: none;
-    background-color: ${themeGet('colors.grays.7')};
+    background-color: ${themeGet('colors.grays.8')};
     color: inherit;
   }
 `

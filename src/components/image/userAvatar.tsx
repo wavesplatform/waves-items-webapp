@@ -1,5 +1,4 @@
-import { Component, ReactNode } from 'react'
-import React from 'react'
+import React, { Component, ReactNode } from 'react'
 import { Box } from 'rebass'
 import { IUser } from '../../types'
 import { themeGet } from 'styled-system'

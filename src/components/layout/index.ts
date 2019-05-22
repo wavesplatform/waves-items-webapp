@@ -11,21 +11,22 @@ export const Container = styled(Box)`
   margin-right: auto;
   margin-left: auto;
 `
-Container.defaultProps = { pl: 'lg', pr: 'lg' }
+Container.defaultProps = { px: 'lg' }
 
 export const ViewWrapper = styled(Box)`
 `
-ViewWrapper.defaultProps = { pt: 'lg', pb: 'lg' }
+ViewWrapper.defaultProps = { py: 'lg' }
 
 export const ViewGrid = styled(Grid)`
   grid-template-columns: 16rem 1fr;
-  grid-row-gap: 0;
-  grid-column-gap: ${themeGet('space.lg')}px;
+  grid-gap: 0;
 `
 
 export const ViewSide = styled(Box)`
-  background: ${themeGet('colors.grays.8')};
+  border-right: 1px solid ${themeGet('colors.grays.7')};
+  overflow: hidden;
 `
 
 export const ViewContent = styled(Box)`
 `
+ViewContent.defaultProps = { p: 'lg' }

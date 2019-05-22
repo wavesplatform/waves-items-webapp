@@ -4,11 +4,11 @@ import { UserHeading } from '../user/userHeading'
 import { Balance, ImageWrapper, ItemCardContainer, Overview, Title } from './style'
 import { Box, Flex, Image } from 'rebass'
 
-interface ItemCardProps {
+interface IItemCardProps {
   item: WithBalance<IItem>
 }
 
-export const ItemCard = (props: ItemCardProps) => {
+export const ItemCard = (props: IItemCardProps) => {
   const { item } = props
 
   return (
@@ -32,7 +32,7 @@ export const ItemCard = (props: ItemCardProps) => {
           }
         </Box>
       </Flex>
-      <Box>
+      <Box px={'lg'}>
         <Overview>
           <ImageWrapper>
             <Image

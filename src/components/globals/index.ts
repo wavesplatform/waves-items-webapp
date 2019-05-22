@@ -2,6 +2,24 @@ import styled, { css } from 'styled-components'
 import { Heading } from 'rebass'
 import { themeGet } from 'styled-system'
 
+export const hexa = (hex: string, alpha: string | number) => {
+  const r = parseInt(hex.slice(1, 3), 16)
+  const g = parseInt(hex.slice(3, 5), 16)
+  const b = parseInt(hex.slice(5, 7), 16)
+
+  if (alpha >= 0) {
+    return `rgba(${r}, ${g}, ${b}, ${alpha})`
+  } else {
+    return `rgb(${r}, ${g}, ${b})`
+  }
+}
+
+export const shadow = {
+  low: '0 2px 8px',
+  mid: '0 4px 12px',
+  high: '0 8px 16px',
+}
+
 export const truncate = css`
   text-overflow: ellipsis;
   overflow: hidden;
@@ -52,3 +70,6 @@ export const H6 = styled(Heading)`
   text-transform: uppercase;
 `
 H6.defaultProps = { as: 'h6' }
+
+export const Form = styled.form`
+`

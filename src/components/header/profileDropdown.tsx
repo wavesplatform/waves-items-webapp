@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import { Box, BoxProps, Flex, FlexProps } from 'rebass'
 import { Link } from 'react-router-dom'
 import { space, themeGet } from 'styled-system'
-import { inheritLink } from '../globals'
+import { hexa, inheritLink, shadow } from '../globals'
 import { AuthConsumer, IAuthContext } from '../../contexts/auth'
 
 interface DropdownContainerProps extends BoxProps {
@@ -19,25 +19,26 @@ const DropdownContainer = styled(Box)<DropdownContainerProps>`
   
   display: ${props => (props.isShown ? 'block' : 'none')};
 `
+DropdownContainer.defaultProps = { py: 0 }
 
 const DropdownList = styled(Flex)`
   flex-direction: column;
   justify-content: center;
   list-style: none;
   background: ${themeGet('bg.dropdown')};
-  padding: 0;
+  border: 1px solid ${themeGet('colors.grays.7')};
+  border-top: 0;
+  overflow: hidden;
   margin: 0;
-  color: ${themeGet('bg.default')};
+  box-shadow: ${shadow.mid} ${props => (hexa(themeGet('bg.default')(props), 0.5))};
 `
-DropdownList.defaultProps = { as: 'ul' }
+DropdownList.defaultProps = {
+  as: 'ul',
+  p: 0,
+}
 
 const DropdownItem = styled(Box)`
-  color: ${themeGet('bg.default')};
-  border-bottom: 1px solid ${themeGet('bg.dropdownHover')};
-  
-  &:last-child {
-    border-bottom: none;
-  }
+  border-top: 1px solid ${themeGet('colors.grays.7')};
 `
 DropdownItem.defaultProps = { as: 'li' }
 
@@ -62,8 +63,6 @@ interface IProps {
 }
 
 class ProfileDropdown extends Component<IProps> {
-
-
   componentWillMount(): void {
     document.addEventListener('click', this._onClickOutside)
   }
@@ -79,7 +78,7 @@ class ProfileDropdown extends Component<IProps> {
       <AuthConsumer>
         {({ signOut }: IAuthContext) => (
           <DropdownContainer isShown={isShown}>
-            <DropdownList fontSize={'sm'}>
+            <DropdownList>
               <DropdownItem>
                 <DropdownLink as={Link} to={'/profile'}>My Profile</DropdownLink>
               </DropdownItem>

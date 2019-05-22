@@ -7,18 +7,16 @@ import { H1 } from '../../components/globals'
 class Browse extends Component {
   render(): ReactNode {
     return (
-      <ViewWrapper>
-        <Container>
-          <ViewGrid>
-            <ViewSide>
-              <GameNav/>
-            </ViewSide>
-            <ViewContent>
-              <H1>Feed</H1>
-              <Items/>
-            </ViewContent>
-          </ViewGrid>
-        </Container>
+      <ViewWrapper py={0}>
+        <ViewGrid>
+          <ViewSide>
+            <GameNav/>
+          </ViewSide>
+          <ViewContent>
+            <H1>Feed</H1>
+            <Items/>
+          </ViewContent>
+        </ViewGrid>
       </ViewWrapper>
     )
   }

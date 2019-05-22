@@ -24,7 +24,6 @@ interface ItemSideProps extends BoxProps {
 }
 
 export const ItemSide = styled(Box)<ItemSideProps>`
-  background: ${themeGet('bg.default')};
   position: absolute;
   right: ${props => (props.isActive ? 0 : '-50%')};;
   width: 50%;
