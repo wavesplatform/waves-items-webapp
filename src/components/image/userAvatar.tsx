@@ -23,7 +23,13 @@ class UserAvatar extends Component<IProps> {
   imageUri: string
 
   componentWillMount(): void {
-    this._initAvatar()
+    const { user } = this.props
+
+    if (user.image) {
+      this.imageUri = user.image.icon
+    } else {
+      this._generateAvatar()
+    }
   }
 
   render(): ReactNode {
@@ -35,14 +41,14 @@ class UserAvatar extends Component<IProps> {
         <Avatar
           variant={size || 'sm'}
           src={this.imageUri}
-          alt={`Avatar ${user.address}`}
+          alt={`Image ${user.address}`}
         />
         }
       </UserAvatarContainer>
     )
   }
 
-  _initAvatar(): void {
+  _generateAvatar(): void {
     const { user } = this.props
     if (!user.address) {
       return

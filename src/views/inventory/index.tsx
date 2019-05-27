@@ -1,11 +1,11 @@
 import React, { Component, ReactNode } from 'react'
 import { IDefaultResult, IItem } from '../../types'
 import { ChildProps, graphql } from 'react-apollo'
-import ItemGrid from '../../components/itemGrid'
 import { InventoryContainer } from './style'
 import { H2 } from '../../components/globals'
 import { getBalanceQuery } from '../../graphql/queries/getBalance'
 import { BalanceQuery } from '../../graphql/queries/__generated__/BalanceQuery'
+import InventoryGrid from '../../components/inventoryGrid'
 
 interface IProps {
   address: string
@@ -33,7 +33,7 @@ class Inventory extends Component<TChildProps> {
     return (
       <InventoryContainer>
         <H2>Inventory</H2>
-        <ItemGrid items={data.balance.map(item => (item as IItem)) || []}/>
+        <InventoryGrid items={data.balance.map(item => (item as IItem)) || []}/>
       </InventoryContainer>
     )
   }

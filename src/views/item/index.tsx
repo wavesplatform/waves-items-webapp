@@ -1,47 +1,37 @@
 import React, { Component, ReactNode } from 'react'
-import { IDefaultResult, IItem } from '../../types'
-import { ChildProps, graphql } from 'react-apollo'
-import { getItemByAssetIdQuery } from '../../graphql/queries/getItem'
-import { ItemQuery } from '../../graphql/queries/__generated__/ItemQuery'
-import ItemDetail from '../../components/itemDetail'
+import { ViewContent, ViewGrid, ViewSide, ViewWrapper } from '../../components/layout'
+import GameNav from '../gameNav'
+import { RouteComponentProps } from 'react-router'
+import { Item } from '../items'
+import { ItemViewContainer } from './style'
 
-interface IProps {
+interface ItemParams {
   assetId: string
 }
 
-interface IData extends ItemQuery, IDefaultResult {
+interface IProps extends RouteComponentProps<ItemParams> {
 }
 
-interface IVariables {
-  assetId: string
-}
-
-type TChildProps = ChildProps<IProps, IData, IVariables>
-
-class Item extends Component<TChildProps> {
+class ItemView extends Component<IProps> {
   render(): ReactNode {
-    const data = this.props.data as IData
-    const { loading, error } = data
+    const { match } = this.props
+    const { assetId } = match.params
 
-    if (loading) {
-      return <div>Loading...</div>
-    }
-
-    const item = data.item as IItem
-
-    return <ItemDetail
-      item={item}
-    />
+    return (
+      <ViewWrapper py={0}>
+        <ViewGrid>
+          <ViewSide>
+            <GameNav/>
+          </ViewSide>
+          <ViewContent>
+            <ItemViewContainer>
+              <Item assetId={assetId} isPage={true}/>
+            </ItemViewContainer>
+          </ViewContent>
+        </ViewGrid>
+      </ViewWrapper>
+    )
   }
 }
 
-const withItem = graphql<IProps, IData, IVariables>(getItemByAssetIdQuery, {
-  options: props => ({
-    fetchPolicy: 'cache-and-network',
-    variables: {
-      assetId: props.assetId,
-    },
-  }),
-})
-
-export default withItem(Item)
+export default ItemView

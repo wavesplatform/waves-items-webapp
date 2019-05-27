@@ -1,11 +1,24 @@
 import React, { Component, ReactNode } from 'react'
-import { Container, ViewContent, ViewGrid, ViewSide, ViewWrapper } from '../../components/layout'
+import { ViewContent, ViewGrid, ViewSide, ViewWrapper } from '../../components/layout'
 import GameNav from '../gameNav'
-import Items from '../items'
 import { H1 } from '../../components/globals'
+import { RouteComponentProps } from 'react-router'
+import GameOverview from '../gameOverview'
+import { Box } from 'rebass'
+import { Items } from '../items'
 
-class Browse extends Component {
+interface BrowseParams {
+  address?: string
+}
+
+interface IProps extends RouteComponentProps<BrowseParams> {
+}
+
+class Browse extends Component<IProps> {
   render(): ReactNode {
+    const { match } = this.props
+    const { address } = match.params
+
     return (
       <ViewWrapper py={0}>
         <ViewGrid>
@@ -13,8 +26,8 @@ class Browse extends Component {
             <GameNav/>
           </ViewSide>
           <ViewContent>
-            <H1>Feed</H1>
-            <Items/>
+            {address ? <Box mb={'lg'}><GameOverview address={address}/></Box> : <H1>Feed</H1>}
+            <Items address={address}/>
           </ViewContent>
         </ViewGrid>
       </ViewWrapper>

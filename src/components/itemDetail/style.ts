@@ -1,22 +1,31 @@
-import styled from 'styled-components'
-import { Box, Flex, Text } from 'rebass'
-import { H2, H3, truncate } from '../globals'
+import styled, { css } from 'styled-components'
+import { Box, BoxProps, Flex, FlexProps, Text } from 'rebass'
+import { H1, H3, truncate } from '../globals'
 import { themeGet } from 'styled-system'
 
-export const ItemDetailContainer = styled(Flex)`
+export type WithIsPage<P> = P & {
+  isPage?: boolean
+}
+
+export const ItemDetailContainer = styled(Flex)<WithIsPage<FlexProps>>`
   position: relative;
+  flex-direction: ${props => (props.isPage ? 'row-reverse' : 'row')};
 `
 
 export const LeftSide = styled(Box)`
   flex: 1;
 `
 
-export const RightSide = styled(Box)`
+export const RightSide = styled(Box)<WithIsPage<BoxProps>>`
   flex-basis: 50%;
-  margin-left: ${themeGet('space.lg')}px;
+  ${props => props.isPage ? css`
+    margin-right: ${themeGet('space.lg')}px;
+  ` : css`
+    margin-left: ${themeGet('space.lg')}px;
+  `};
 `
 
-export const Title = styled(H2)`
+export const Title = styled(H1)`
   ${truncate};
 `
 

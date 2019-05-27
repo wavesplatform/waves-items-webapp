@@ -1,18 +1,22 @@
 import { LONG } from '@waves/types'
 import { ApolloError } from 'apollo-client'
-import { ReactNode } from 'react'
-import {
-  ItemQuery_item_asks,
-  ItemQuery_item_bids,
-  ItemQuery_item_pair
-} from './graphql/queries/__generated__/ItemQuery'
 
 export interface IDefaultResult {
   loading: boolean
   error?: ApolloError
 }
 
-export interface IUser {
+export type UserImage = {
+  icon: string
+  page?: string
+  promo?: string
+}
+
+export type WithImage<P> = P & {
+  image?: UserImage
+}
+
+export interface IUser extends WithImage<{}> {
   id?: string
   name?: string | null
   address: string

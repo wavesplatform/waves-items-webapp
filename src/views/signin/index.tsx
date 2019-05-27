@@ -1,14 +1,15 @@
 import React, { Component, ReactNode } from 'react'
-import { Container, ViewWrapper } from '../../components/layout'
+import { ViewWrapper } from '../../components/layout'
 import { H1 } from '../../components/globals'
 import { Redirect, RouteComponentProps } from 'react-router'
 import { AuthContext } from '../../contexts/auth'
 import SigninForm from '../../components/signinForm'
+import { SigninContainer } from './style'
 
 interface IProps extends RouteComponentProps {
 }
 
-class Signin extends Component<IProps> {
+class SigninView extends Component<IProps> {
   static contextType = AuthContext
 
   state = {
@@ -30,13 +31,13 @@ class Signin extends Component<IProps> {
 
     return (
       <ViewWrapper>
-        <Container>
+        <SigninContainer>
           <H1>Sign In</H1>
           <SigninForm/>
-        </Container>
+        </SigninContainer>
       </ViewWrapper>
     )
   }
 }
 
-export default Signin
+export default SigninView

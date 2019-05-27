@@ -4,16 +4,20 @@ import { UserHeading } from '../user/userHeading'
 import { Balance, ImageWrapper, ItemCardContainer, Overview, Title } from './style'
 import { Box, Flex, Image } from 'rebass'
 
+export type ItemCardStyle = 'base' | 'short'
+
 interface IItemCardProps {
   item: WithBalance<IItem>
+  style?: ItemCardStyle
 }
 
 export const ItemCard = (props: IItemCardProps) => {
-  const { item } = props
+  const { item, style } = props
+  const isShort = style === 'short'
 
   return (
     <ItemCardContainer>
-      <Flex p={'lg'}>
+      {!isShort && <Flex px={'lg'} pt={'lg'}>
         <Title
           flex={'1'}
         >
@@ -22,7 +26,7 @@ export const ItemCard = (props: IItemCardProps) => {
         <Box ml={3}>
           {item.balance ? <>
             <Balance
-              color={'primary'}
+              color={'grays.4'}
             >
               {item.balance}
             </Balance> / {item.quantity}
@@ -31,8 +35,8 @@ export const ItemCard = (props: IItemCardProps) => {
           </>
           }
         </Box>
-      </Flex>
-      <Box px={'lg'}>
+      </Flex>}
+      <Box p={'lg'}>
         <Overview>
           <ImageWrapper>
             <Image
@@ -45,10 +49,13 @@ export const ItemCard = (props: IItemCardProps) => {
           </ImageWrapper>
         </Overview>
       </Box>
-      <Box p={'lg'}>
-        <Flex>
+      <Box px={'lg'} pb={'lg'}>
+        {!isShort && <Flex>
           <UserHeading user={item.game} size={'sm'}/>
-        </Flex>
+        </Flex>}
+        {isShort && item.balance && <Box>
+          <Balance color={'grays.4'}>{item.balance}</Balance> / {item.quantity}
+        </Box>}
       </Box>
     </ItemCardContainer>
   )

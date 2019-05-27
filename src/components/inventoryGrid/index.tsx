@@ -1,18 +1,18 @@
 import React from 'react'
 import { IItem, WithBalance } from '../../types'
 import { ItemCard } from '../itemCard'
-import { ItemGridContainer, ItemGridLink } from './style'
+import { InventoryGridContainer, InventoryGridLink } from './style'
 
-interface IItemGridProps {
-  items: IItem[]
+interface IInventoryGridProps {
+  items: WithBalance<IItem>[]
   selectItem?: (assetId: string) => void
 }
 
-export const ItemGrid = (props: IItemGridProps) => {
+export const InventoryGrid = (props: IInventoryGridProps) => {
   const { selectItem } = props
 
   const items = props.items.map(item => (
-    <ItemGridLink
+    <InventoryGridLink
       onClick={ev => {
         if (selectItem) {
           ev.stopPropagation()
@@ -23,15 +23,15 @@ export const ItemGrid = (props: IItemGridProps) => {
       to={`/item/${item.assetId}`}
       key={item.id}
     >
-      <ItemCard item={item}/>
-    </ItemGridLink>
+      <ItemCard item={item} style={'short'}/>
+    </InventoryGridLink>
   ))
 
   return (
-    <ItemGridContainer>
+    <InventoryGridContainer>
       {items}
-    </ItemGridContainer>
+    </InventoryGridContainer>
   )
 }
 
-export default ItemGrid
+export default InventoryGrid

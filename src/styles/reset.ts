@@ -12,7 +12,7 @@ export const GlobalStyle = createGlobalStyle`
   
   html {
     font-family: sans-serif;
-    line-height: 1.15;
+    line-height: ${themeGet('lineHeights.base')};
     height: 100%;
   }
   

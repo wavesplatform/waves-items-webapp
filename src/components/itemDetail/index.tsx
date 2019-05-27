@@ -8,20 +8,20 @@ import {
   Overview,
   Param,
   Params,
-  ParamTitle, ParamValue,
+  ParamTitle,
+  ParamValue,
   RightSide,
   Title,
 } from './style'
 import { Box, Flex, Image } from 'rebass'
 import { KeeperContext } from '../../contexts/keeper'
-import keeperHelper, { IWavesNetworkCode } from '../../helpers/keeper'
-import { config } from '../../config/config'
 import { Button } from '../buttons'
 import SellModal from '../modals/sellModal'
 import BuyModal from '../modals/buyModal'
 
 interface IProps {
   item: WithOrders<IItem>
+  isPage?: boolean
 }
 
 interface IState {
@@ -38,7 +38,7 @@ class ItemDetail extends Component<IProps> {
   }
 
   render(): ReactNode {
-    const { item } = this.props
+    const { item, isPage } = this.props
     const asks = item.asks || []
     const bids = item.bids || []
 
@@ -46,11 +46,12 @@ class ItemDetail extends Component<IProps> {
     const bidsList = asks.map(this._priceRow)
 
     return (
-      <ItemDetailContainer>
+      <ItemDetailContainer isPage={isPage}>
         <LeftSide>
           <Title
             flex={'1'}
             mb={'lg'}
+            as={isPage ? 'h1' : 'h2'}
           >
             {item.name}
           </Title>
@@ -94,7 +95,7 @@ class ItemDetail extends Component<IProps> {
             />
           </Flex>
         </LeftSide>
-        <RightSide>
+        <RightSide isPage={isPage}>
           <Overview>
             <ImageWrapper>
               <Image

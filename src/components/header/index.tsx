@@ -44,9 +44,6 @@ class Header extends Component<IProps> {
                 {/*Menu*/}
                 <Nav>
                   <NavItem>
-                    <NavLink to={'/games'}>Games</NavLink>
-                  </NavItem>
-                  <NavItem>
                     <NavLink to={'/items'}>Items</NavLink>
                   </NavItem>
                   <NavItem>

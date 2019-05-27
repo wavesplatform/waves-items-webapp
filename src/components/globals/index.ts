@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components'
-import { Heading } from 'rebass'
+import { Heading, Text } from 'rebass'
 import { themeGet } from 'styled-system'
 
 export const hexa = (hex: string, alpha: string | number) => {
@@ -73,3 +73,8 @@ H6.defaultProps = { as: 'h6' }
 
 export const Form = styled.form`
 `
+
+export const Small = styled(Text)`
+  font-size: ${themeGet('fontSizes.sm')}px;
+`
+Small.defaultProps = { as: 'span' }

@@ -11,4 +11,5 @@ export interface gameInfo {
   id: string;
   address: string;
   name: string | null;
+  image: any | null;
 }

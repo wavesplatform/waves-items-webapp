@@ -1,5 +1,6 @@
 import React, { ChangeEvent, PropsWithChildren } from 'react'
 import { StyledLabel, StyledTextInput } from './style'
+import { Box } from 'rebass'
 
 interface TextInputProps {
   defaultValue?: string,
@@ -14,7 +15,7 @@ interface TextInputProps {
 export const TextInput = (props: PropsWithChildren<TextInputProps>) => {
   return (
     <StyledLabel {...props}>
-      {props.children}
+      <Box>{props.children}</Box>
       <StyledTextInput
         id={props.id}
         defaultValue={props.defaultValue}

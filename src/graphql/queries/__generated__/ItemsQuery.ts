@@ -2,6 +2,8 @@
 /* eslint-disable */
 // This file was automatically generated and should not be edited.
 
+import { ItemFilter } from "./../../../../__generated__/globalTypes";
+
 // ====================================================
 // GraphQL query operation: ItemsQuery
 // ====================================================
@@ -27,4 +29,8 @@ export interface ItemsQuery_items {
 
 export interface ItemsQuery {
   items: ItemsQuery_items[];
+}
+
+export interface ItemsQueryVariables {
+  filter?: ItemFilter | null;
 }

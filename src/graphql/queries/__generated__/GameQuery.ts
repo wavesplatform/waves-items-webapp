@@ -3,10 +3,10 @@
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL query operation: GamesQuery
+// GraphQL query operation: GameQuery
 // ====================================================
 
-export interface GamesQuery_users {
+export interface GameQuery_user {
   __typename: "User";
   id: string;
   address: string;
@@ -14,6 +14,10 @@ export interface GamesQuery_users {
   image: any | null;
 }
 
-export interface GamesQuery {
-  users: GamesQuery_users[];
+export interface GameQuery {
+  user: GameQuery_user | null;
+}
+
+export interface GameQueryVariables {
+  address: string;
 }
