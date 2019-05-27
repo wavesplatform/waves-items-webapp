@@ -94,7 +94,7 @@ export const ProfileToggle = styled(Box)<ProfileToggleProps>`
   
   ${props =>
   props.isActive && css`
-    width: 192px;
+    min-width: 192px;
   `}
 `
 ProfileToggle.defaultProps = { p: 'md' }

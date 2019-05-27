@@ -65,6 +65,7 @@ class AuthProviderBase extends Component<WithApolloClient<IProps>> {
         return
       }
 
+      // If address has been changed
       this._setUser({
         address,
         publicKey,

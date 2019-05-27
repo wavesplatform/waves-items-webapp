@@ -11,4 +11,5 @@ export interface userInfo {
   id: string;
   address: string;
   name: string | null;
+  email: string | null;
 }

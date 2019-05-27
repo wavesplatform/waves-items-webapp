@@ -14,17 +14,14 @@ class SigninMutation extends Mutation<Signin, SigninVariables> {
 }
 
 interface ISigninState {
-  name: string,
-  email: string,
+  name?: string,
+  email?: string,
 }
 
 class SigninForm extends Component<{}> {
   static contextType = AuthContext
 
-  state: ISigninState = {
-    name: '',
-    email: '',
-  }
+  state: ISigninState = {}
 
   render(): ReactNode {
     return (
@@ -33,6 +30,9 @@ class SigninForm extends Component<{}> {
           <SigninMutation
             mutation={signinMutation}
             onCompleted={this._handleCompleted}
+            onError={err => {
+              console.log(err)
+            }}
           >
             {(signin, { loading, error }) => {
               return (
@@ -87,12 +87,17 @@ class SigninForm extends Component<{}> {
       data: config.authData,
     })
     const { address, publicKey, signature } = auth
+    const { name, email } = this.state
 
     await signin({
       variables: {
-        address,
-        publicKey,
-        sign: signature,
+        input: {
+          address,
+          publicKey,
+          sign: signature,
+          name,
+          email,
+        },
       },
     })
   }

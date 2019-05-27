@@ -10,6 +10,14 @@ export interface ItemFilter {
   gameAddress?: string | null;
 }
 
+export interface SigninUser {
+  address: string;
+  publicKey: string;
+  sign: string;
+  name?: string | null;
+  email?: string | null;
+}
+
 //==============================================================
 // END Enums and Input Objects
 //==============================================================
