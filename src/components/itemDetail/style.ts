@@ -62,22 +62,16 @@ export const ParamValue = styled(Text)`
 `
 
 export const Overview = styled(Box)`
-  height: 100%;
   position: relative;
+  padding: ${themeGet('space.lg')}px;
 `
 
 export const ImageWrapper = styled(Box)`
-  height: 100%;
   position: relative;
-  padding-top: 100%;
-
   transition: transform .1s ease-out;
 
   img {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) rotateZ(2deg);
+    transform: rotateZ(2deg);
     max-width: 100%;
     max-height: 100%;
     height: auto;
