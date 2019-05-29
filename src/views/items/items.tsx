@@ -1,5 +1,5 @@
 import React, { Component, ReactNode } from 'react'
-import { IDefaultResult } from '../../types'
+import { IDefaultResult, IItem } from '../../types'
 import { ChildProps, graphql } from 'react-apollo'
 import { getItemsQuery } from '../../graphql/queries/getItems'
 import { ItemsQuery } from '../../graphql/queries/__generated__/ItemsQuery'
@@ -48,11 +48,12 @@ class Items extends Component<TChildProps> {
     if (loading) {
       return <div>Loading...</div>
     }
+    const items = data.items as IItem[]
 
     return (
       <ItemsContainer>
         <ItemsSide constrain={!!assetId}>
-          <ItemGrid items={data.items || []} selectItem={this.selectAssetId}/>
+          <ItemGrid items={items || []} selectItem={this.selectAssetId}/>
         </ItemsSide>
         <ItemSide isActive={!!assetId}>
           {assetId && <Item assetId={assetId}/>}

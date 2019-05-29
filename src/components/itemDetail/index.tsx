@@ -96,7 +96,7 @@ class ItemDetail extends Component<IProps> {
           </Flex>
         </LeftSide>
         <RightSide isPage={isPage}>
-          <Overview>
+          <Overview my={'base'}>
             <ImageWrapper>
               <Image
                 src={

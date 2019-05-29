@@ -7,14 +7,12 @@
 // ====================================================
 
 export interface BalanceQuery_balance_game {
-  __typename: "User";
   id: string;
   name: string | null;
   address: string;
 }
 
 export interface BalanceQuery_balance {
-  __typename: "Item";
   id: string;
   assetId: string;
   name: string;

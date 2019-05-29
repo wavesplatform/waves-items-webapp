@@ -7,32 +7,27 @@
 // ====================================================
 
 export interface ItemQuery_item_game {
-  __typename: "User";
   id: string;
   name: string | null;
   address: string;
 }
 
 export interface ItemQuery_item_pair {
-  __typename: "AmountPricePair";
   amountAsset: string;
   priceAsset: string;
 }
 
 export interface ItemQuery_item_bids {
-  __typename: "AmountPrice";
   amount: number;
   price: number;
 }
 
 export interface ItemQuery_item_asks {
-  __typename: "AmountPrice";
   amount: number;
   price: number;
 }
 
 export interface ItemQuery_item {
-  __typename: "Item";
   id: string;
   assetId: string;
   name: string;

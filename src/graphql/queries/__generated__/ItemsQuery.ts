@@ -9,14 +9,12 @@ import { ItemFilter } from "./../../../../__generated__/globalTypes";
 // ====================================================
 
 export interface ItemsQuery_items_game {
-  __typename: "User";
   id: string;
   name: string | null;
   address: string;
 }
 
 export interface ItemsQuery_items {
-  __typename: "Item";
   id: string;
   assetId: string;
   name: string;

@@ -38,7 +38,7 @@ export const BannerImage = styled(Image)`
   width: 100%;
   object-fit: cover;
   display: block;
-  opacity: .7;
+  opacity: .5;
 `
 
 export const BannerContent = styled(Flex)`

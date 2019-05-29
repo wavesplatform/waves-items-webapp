@@ -29,7 +29,7 @@ const DropdownList = styled(Flex)`
   border: 1px solid ${themeGet('colors.grays.7')};
   border-top: 0;
   overflow: hidden;
-  margin: -1px 0 0;
+  margin: 0;
   box-shadow: ${shadow.mid} ${props => (hexa(themeGet('bg.default')(props), 0.5))};
 `
 DropdownList.defaultProps = {

@@ -14,17 +14,36 @@ import { KeeperProvider } from './contexts/keeper'
 import { AuthProvider } from './contexts/auth'
 import Routes from './routes'
 import { GlobalStyle } from './styles/reset'
+import { ApolloLink, from, NextLink, Operation } from 'apollo-link'
 
-const authLink = setContext((_, { headers }) => {
-  const user = authHelper.getUser()
-  const token = user && authHelper.getToken(user.address)
+// const authLink = setContext((_, { headers }) => {
+//   const user = authHelper.getUser()
+//   const token = user && authHelper.getToken(user.address)
+//   console.log(token)
+//
+//   return {
+//     headers: {
+//       ...headers,
+//       authorization: token ? `Bearer ${token}` : '',
+//     },
+//   }
+// })
 
-  return {
-    headers: {
-      ...headers,
-      authorization: token ? `Bearer ${token}` : '',
-    },
-  }
+const authMiddleware = new ApolloLink((operation, forward) => {
+  operation.setContext(({ headers = {} }) => {
+    const user = authHelper.getUser()
+    const token = user && authHelper.getToken(user.address)
+
+    return {
+      headers: {
+        ...headers,
+        authorization: token ? `Bearer ${token}` : '',
+      },
+    }
+  })
+
+  //@ts-ignore
+  return forward(operation)
 })
 
 const httpLink = new HttpLink({
@@ -33,9 +52,10 @@ const httpLink = new HttpLink({
 
 const cache = new InMemoryCache()
 const client = new ApolloClient({
-  link: authLink.concat(httpLink),
+  link: from([authMiddleware, httpLink]),
   cache,
 })
+
 
 cache.writeData({
   data: {},

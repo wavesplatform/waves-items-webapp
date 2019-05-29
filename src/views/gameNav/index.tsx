@@ -1,6 +1,6 @@
 import React, { Component, ReactNode } from 'react'
 import { ChildProps, graphql } from 'react-apollo'
-import { IDefaultResult } from '../../types'
+import { IDefaultResult, IGame } from '../../types'
 import { getGamesQuery } from '../../graphql/queries/getGames'
 import { GameList } from './components/gameList'
 import { GamesQuery } from '../../graphql/queries/__generated__/GamesQuery'
@@ -27,7 +27,8 @@ export class GameNav extends Component<TChildProps> {
       return <div>Loading...</div>
     }
 
-    return <GameList games={data.users || []}/>
+    const games = data.users as IGame[]
+    return <GameList games={games || []}/>
   }
 }
 

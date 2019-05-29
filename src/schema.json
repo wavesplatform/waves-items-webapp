@@ -1942,6 +1942,43 @@
     ],
     "directives": [
       {
+        "name": "isAuthenticated",
+        "description": "",
+        "locations": [
+          "QUERY",
+          "MUTATION",
+          "FIELD",
+          "FIELD_DEFINITION"
+        ],
+        "args": []
+      },
+      {
+        "name": "hasRole",
+        "description": "",
+        "locations": [
+          "QUERY",
+          "MUTATION",
+          "FIELD",
+          "FIELD_DEFINITION"
+        ],
+        "args": [
+          {
+            "name": "roles",
+            "description": "",
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "ENUM",
+                "name": "UserRole",
+                "ofType": null
+              }
+            },
+            "defaultValue": null
+          }
+        ]
+      },
+      {
         "name": "cacheControl",
         "description": "",
         "locations": [

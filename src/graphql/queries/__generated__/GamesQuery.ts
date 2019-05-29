@@ -7,7 +7,6 @@
 // ====================================================
 
 export interface GamesQuery_users {
-  __typename: "User";
   id: string;
   address: string;
   name: string | null;

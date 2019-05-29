@@ -42,7 +42,8 @@ export const NavItem = styled(Box)`
 NavItem.defaultProps = { as: 'li' }
 
 export const NavLink = styled(Link)<SpaceProps>`
-  display: block;
+  display: flex;
+  align-items: center;
   height: 100%;
   ${inheritLink};
   
@@ -54,7 +55,7 @@ export const NavLink = styled(Link)<SpaceProps>`
   
   ${space}
 `
-NavLink.defaultProps = { p: 'lg' }
+NavLink.defaultProps = { px: 'lg' }
 
 export const Logo = styled(NavLink)`
   margin-right: ${themeGet('space.lg')}px;

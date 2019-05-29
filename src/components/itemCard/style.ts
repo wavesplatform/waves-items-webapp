@@ -44,8 +44,9 @@ export const ImageWrapper = styled(Box)`
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%) rotateZ(2deg);
     max-width: 100%;
+    max-height: 100%;
     height: auto;
     display: block;
   }

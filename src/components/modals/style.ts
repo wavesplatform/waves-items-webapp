@@ -39,7 +39,7 @@ export const modalStyles = (maxWidth: number = 360) => {
 
 export const ModalBody = styled(Card)`
   border-radius: ${themeGet('radii.lg')}px;
-  position: relative;  
+  position: relative;
 `
 ModalBody.defaultProps = {
   bg: 'grays.8',

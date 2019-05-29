@@ -29,11 +29,13 @@ class Inventory extends Component<TChildProps> {
     if (loading) {
       return <div>Loading...</div>
     }
+    
+    const items = (data.balance || []) as IItem[]
 
     return (
       <InventoryContainer>
         <H2>Inventory</H2>
-        <InventoryGrid items={data.balance.map(item => (item as IItem)) || []}/>
+        <InventoryGrid items={items.map(item => (item as IItem)) || []}/>
       </InventoryContainer>
     )
   }
