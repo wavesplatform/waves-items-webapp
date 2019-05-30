@@ -7,8 +7,9 @@
 // ====================================================
 
 export interface userInfo {
+  __typename: "User";
   id: string;
   address: string;
   name: string | null;
-  email: string | null;
+  image: any | null;
 }

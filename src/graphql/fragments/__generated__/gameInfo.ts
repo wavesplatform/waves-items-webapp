@@ -7,6 +7,7 @@
 // ====================================================
 
 export interface gameInfo {
+  __typename: "User";
   id: string;
   address: string;
   name: string | null;

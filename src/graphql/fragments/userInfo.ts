@@ -5,6 +5,6 @@ export default gql`
     id
     address
     name
-    email
-  }  
+    image
+  }
 `

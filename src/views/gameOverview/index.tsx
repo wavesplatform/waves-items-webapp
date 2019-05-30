@@ -17,6 +17,7 @@ import { Box, Text } from 'rebass'
 import { H1 } from '../../components/globals'
 import { UserAvatar } from '../../components/image'
 import { Button } from '../../components/buttons'
+import { Redirect } from 'react-router'
 
 interface IProps {
   address: string
@@ -41,6 +42,11 @@ export class GameOverview extends Component<TChildProps> {
     }
 
     const game = data.user as IGame
+    
+    if (!game) {
+      return <Redirect to={'/'}/>
+    }
+
     const imagePageUri = game.image && game.image.page
 
     return (

@@ -9,13 +9,15 @@ import { SigninUser } from "./../../../../__generated__/globalTypes";
 // ====================================================
 
 export interface Signin_signin_user {
+  __typename: "User";
   id: string;
   address: string;
   name: string | null;
-  email: string | null;
+  image: any | null;
 }
 
 export interface Signin_signin {
+  __typename: "AuthPayload";
   token: string;
   user: Signin_signin_user;
 }

@@ -1,4 +1,5 @@
 import gql from 'graphql-tag'
+import gameInfoFragment from './gameInfo'
 
 export default gql`
   fragment itemInfo on Item {
@@ -10,9 +11,8 @@ export default gql`
     timestamp
     imageUrl
     game {
-      id
-      name
-      address
+      ...gameInfo
     }
-  }  
+  }
+  ${gameInfoFragment}
 `

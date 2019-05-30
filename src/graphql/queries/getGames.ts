@@ -3,7 +3,7 @@ import gameInfoFragment from '../fragments/gameInfo'
 
 export const getGamesQuery = gql`
   query GamesQuery {
-    users {
+    games {
       ...gameInfo
     }
   }

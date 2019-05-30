@@ -3,15 +3,15 @@ import { IDefaultResult, IItem } from '../../types'
 import { ChildProps, graphql } from 'react-apollo'
 import { InventoryContainer } from './style'
 import { H2 } from '../../components/globals'
-import { getBalanceQuery } from '../../graphql/queries/getBalance'
-import { BalanceQuery } from '../../graphql/queries/__generated__/BalanceQuery'
+import { getUserItemsQuery } from '../../graphql/queries/getUserItems'
 import InventoryGrid from '../../components/inventoryGrid'
+import { UserItemsQuery } from '../../graphql/queries/__generated__/UserItemsQuery'
 
 interface IProps {
   address: string
 }
 
-interface IData extends BalanceQuery, IDefaultResult {
+interface IData extends UserItemsQuery, IDefaultResult {
 }
 
 interface IVariables {
@@ -29,8 +29,8 @@ class Inventory extends Component<TChildProps> {
     if (loading) {
       return <div>Loading...</div>
     }
-    
-    const items = (data.balance || []) as IItem[]
+
+    const items = (data.userItems || []) as IItem[]
 
     return (
       <InventoryContainer>
@@ -41,7 +41,7 @@ class Inventory extends Component<TChildProps> {
   }
 }
 
-const withBalance = graphql<IProps, IData, IVariables>(getBalanceQuery, {
+const withUserItems = graphql<IProps, IData, IVariables>(getUserItemsQuery, {
   options: props => ({
     fetchPolicy: 'cache-and-network',
     variables: {
@@ -50,4 +50,4 @@ const withBalance = graphql<IProps, IData, IVariables>(getBalanceQuery, {
   }),
 })
 
-export default withBalance(Inventory)
+export default withUserItems(Inventory)

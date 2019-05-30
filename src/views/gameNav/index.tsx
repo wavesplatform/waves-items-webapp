@@ -27,7 +27,7 @@ export class GameNav extends Component<TChildProps> {
       return <div>Loading...</div>
     }
 
-    const games = data.users as IGame[]
+    const games = data.games as IGame[]
     return <GameList games={games || []}/>
   }
 }

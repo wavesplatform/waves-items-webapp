@@ -1,9 +1,9 @@
 import gql from 'graphql-tag'
 import itemInfoFragment from '../fragments/itemInfo'
 
-export const getBalanceQuery = gql`
-  query BalanceQuery($address: String!) {
-    balance(address: $address, orderBy: timestamp_DESC) {
+export const getUserItemsQuery = gql`
+  query UserItemsQuery($address: String!) {
+    userItems(address: $address, orderBy: timestamp_DESC) {
       ...itemInfo
       balance
     }

@@ -73,7 +73,8 @@ export const ImageWrapper = styled(Box)`
   img {
     transform: rotateZ(2deg);
     max-width: 100%;
-    max-height: 100%;
+    max-height: 360px;
+    margin: 0 auto;
     height: auto;
     display: block;
   }

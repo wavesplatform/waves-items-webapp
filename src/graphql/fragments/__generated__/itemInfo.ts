@@ -7,12 +7,15 @@
 // ====================================================
 
 export interface itemInfo_game {
+  __typename: "User";
   id: string;
-  name: string | null;
   address: string;
+  name: string | null;
+  image: any | null;
 }
 
 export interface itemInfo {
+  __typename: "Item";
   id: string;
   assetId: string;
   name: string;

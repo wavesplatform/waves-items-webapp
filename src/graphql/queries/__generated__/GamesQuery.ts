@@ -6,7 +6,8 @@
 // GraphQL query operation: GamesQuery
 // ====================================================
 
-export interface GamesQuery_users {
+export interface GamesQuery_games {
+  __typename: "User";
   id: string;
   address: string;
   name: string | null;
@@ -14,5 +15,5 @@ export interface GamesQuery_users {
 }
 
 export interface GamesQuery {
-  users: GamesQuery_users[];
+  games: GamesQuery_games[];
 }
