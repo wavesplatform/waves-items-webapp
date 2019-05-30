@@ -99,11 +99,7 @@ class ItemDetail extends Component<IProps> {
           <Overview>
             <ImageWrapper>
               <Image
-                src={
-                  item.imageUrl === '#'
-                    ? 'https://cryptoassault.io/static/unit_0-a16426962578f015561724adb5353968.png'
-                    : item.imageUrl
-                }
+                src={item.imageUrl ? item.imageUrl : '/image.svg'}
                 alt={`Item #${item.id}`}/>
             </ImageWrapper>
           </Overview>

@@ -1,6 +1,10 @@
 export const config = {
+  graphqlEndpoint: process.env.REACT_APP_GRAPHQL_ENDPOINT,
+  networkCode: process.env.NETWORK_CODE || 'T',
   authData: 'waves-items',
+  
   wavesId: null,
+
   chains: {
     // Mainnet
     'W': {

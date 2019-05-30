@@ -9,10 +9,13 @@ import Header from './components/header'
 import Profile from './views/profile'
 import HomeView from './views/home'
 import ItemView from './views/item'
+import Footer from './components/footer'
 
 export const Body = styled(Box)`
+  position: relative;
   overflow-x: hidden;
-  height: 100%;
+  min-height: 100%;
+  padding-bottom: 6rem;
 `
 
 class Routes extends Component {
@@ -30,6 +33,7 @@ class Routes extends Component {
         {/*User*/}
         <Route key='route-profile' path='/profile' component={Profile}/>
       </Switch>
+      <Route component={Footer}/>
       </Body>
     )
   }

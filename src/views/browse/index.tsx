@@ -27,7 +27,9 @@ class Browse extends Component<IProps> {
           </ViewSide>
           <ViewContent>
             {address ? <Box mb={'lg'}><GameOverview address={address}/></Box> : <H1>Feed</H1>}
-            <Items address={address}/>
+            <Box mb={'lg'}>
+              <Items address={address}/>
+            </Box>
           </ViewContent>
         </ViewGrid>
       </ViewWrapper>

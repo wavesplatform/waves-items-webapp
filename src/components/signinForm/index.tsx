@@ -2,13 +2,14 @@ import React, { ChangeEvent, Component, FormEvent, ReactNode } from 'react'
 import { Mutation, MutationFn } from 'react-apollo'
 import { AuthContext } from '../../contexts/auth'
 import keeperHelper from '../../helpers/keeper'
-import { KeeperConsumer } from '../../contexts/keeper'
+import { IKeeperContext, withKeeperContext } from '../../contexts/keeper'
 import { signinMutation } from '../../graphql/mutations/signIn'
 import { Signin, SigninVariables } from '../../graphql/mutations/__generated__/Signin'
 import { config } from '../../config/config'
 import { Button } from '../buttons'
 import { TextInput } from '../inputs'
 import { Form, Small } from '../globals'
+import { Toast } from '../toasts'
 
 class SigninMutation extends Mutation<Signin, SigninVariables> {
 }
@@ -18,43 +19,69 @@ interface ISigninState {
   email?: string,
 }
 
-class SigninForm extends Component<{}> {
+class SigninForm extends Component<{} & IKeeperContext> {
   static contextType = AuthContext
 
   state: ISigninState = {}
 
   render(): ReactNode {
+    const { initialized, account, network } = this.props
+
+    if (!initialized) {
+      return (
+        <>
+          <Toast mb={'base'}>
+            You must install Keeper to access the vault.<br/>
+            This will also act as your login to the game (no extra password needed).
+          </Toast>
+          <Button
+            as={'a'}
+            variant='primary'
+            href='https://chrome.google.com/webstore/detail/waves-keeper/lpilbniiabackdjcionkobglmddfbcjo'
+            target='_blank'
+          >Install Keeper</Button>
+        </>
+      )
+    }
+
+    if (network && network.code !== config.networkCode) {
+      return (
+        <>
+          <Toast mb={'base'}>
+            Incorrect Waves network.<br/>
+            Please select another network.
+          </Toast>
+        </>
+      )
+    }
+
     return (
-      <KeeperConsumer>
-        {({ account, network }) => (
-          <SigninMutation
-            mutation={signinMutation}
-            onCompleted={this._handleCompleted}
-            onError={err => {
-              console.log(err)
-            }}
-          >
-            {(signin, { loading, error }) => {
-              return (
-                <Form
-                  onSubmit={ev => this._handleSubmit(ev, signin)}
-                >
-                  {account && <TextInput value={account.address} disabled={true}>Account Address</TextInput>}
-                  <TextInput value={this.state.name}
-                             placeholder={'Your username'}
-                             onChange={this._changeName}
-                  >Name <Small color={'placeholder'}>(optional)</Small></TextInput>
-                  <TextInput value={this.state.email}
-                             placeholder={'Your email'}
-                             onChange={this._changeEmail}
-                  >Email <Small color={'placeholder'}>(optional)</Small></TextInput>
-                  <Button type='submit' variant='primary' mt={'base'}>Sign In</Button>
-                </Form>
-              )
-            }}
-          </SigninMutation>
-        )}
-      </KeeperConsumer>
+      <SigninMutation
+        mutation={signinMutation}
+        onCompleted={this._handleCompleted}
+        onError={err => {
+          console.log(err)
+        }}
+      >
+        {(signin, { loading, error }) => {
+          return (
+            <Form
+              onSubmit={ev => this._handleSubmit(ev, signin)}
+            >
+              {account && <TextInput value={account.address} disabled={true}>Account Address</TextInput>}
+              <TextInput value={this.state.name}
+                         placeholder={'Your username'}
+                         onChange={this._changeName}
+              >Name <Small color={'placeholder'}>(optional)</Small></TextInput>
+              <TextInput value={this.state.email}
+                         placeholder={'Your email'}
+                         onChange={this._changeEmail}
+              >Email <Small color={'placeholder'}>(optional)</Small></TextInput>
+              <Button type='submit' variant='primary' mt={'base'}>Sign In</Button>
+            </Form>
+          )
+        }}
+      </SigninMutation>
     )
   }
 
@@ -109,4 +136,4 @@ class SigninForm extends Component<{}> {
   }
 }
 
-export default SigninForm
+export default withKeeperContext(SigninForm)

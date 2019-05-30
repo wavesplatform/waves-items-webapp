@@ -5,7 +5,6 @@ import {
   retryWhen,
   take
 } from 'rxjs/operators'
-import { IUser } from '../types'
 
 declare const WavesKeeper: IWavesKeeperOptions
 
@@ -13,7 +12,7 @@ export type IWavesNetworkCode = 'W' | 'T'
 
 export interface IPublicState {
   initialized: boolean
-  locked: boolean
+  locked?: boolean
   account?: {
     address: string
     balance: { available: number, leasedOut: number }

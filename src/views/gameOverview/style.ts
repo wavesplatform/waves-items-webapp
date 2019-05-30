@@ -24,8 +24,18 @@ export const BannerImageWrapper = styled(Box)`
   left: 0;
   right: 0;
   overflow: hidden;
-  background: #000;
   border-radius: ${themeGet('radii.lg')}px;
+  
+  &:before {
+    position: absolute;
+    content: '';
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+    background-image: linear-gradient(to top,rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.2) 100%);
+  }
 `
 
 export const BannerImage = styled(Image)`
@@ -38,7 +48,7 @@ export const BannerImage = styled(Image)`
   width: 100%;
   object-fit: cover;
   display: block;
-  opacity: .5;
+  //opacity: .5;
 `
 
 export const BannerContent = styled(Flex)`

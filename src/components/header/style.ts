@@ -1,4 +1,4 @@
-import { Box, BoxProps, Flex } from 'rebass'
+import { Box, BoxProps, Flex, Heading, Image } from 'rebass'
 import styled, { css } from 'styled-components'
 import { Link } from 'react-router-dom'
 import { space, SpaceProps, themeGet } from 'styled-system'
@@ -21,7 +21,7 @@ export const Navbar = styled(Flex)`
 `
 
 export const NavbarContainer = styled(Container)`
-position: relative;
+  position: relative;
   display: flex;
   flex-wrap: wrap;
   align-items: stretch;
@@ -57,10 +57,26 @@ export const NavLink = styled(Link)<SpaceProps>`
 `
 NavLink.defaultProps = { px: 'lg' }
 
-export const Logo = styled(NavLink)`
+export const Logo = styled(Link)`
+  display: flex;
+  align-items: center;
+  height: 100%;
   margin-right: ${themeGet('space.lg')}px;
+  
+  ${inheritLink};
+`
+
+export const LogoImage = styled(Image)`
+  width: 80px;
+`
+
+export const LogoTitle = styled(Heading)`
   font-weight: ${themeGet('fontWeights.normal')};
 `
+LogoTitle.defaultProps = {
+  fontSize: 'base',
+  ml: 'sm',
+}
 
 export const NavProfile = styled(NavItem)`
 `

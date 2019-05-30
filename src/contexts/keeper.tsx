@@ -1,4 +1,4 @@
-import React, { Component, createContext } from 'react'
+import React, { Component, ComponentType, createContext, PureComponent, ReactNode } from 'react'
 import { withApollo, WithApolloClient } from 'react-apollo'
 import { IPublicState } from '../helpers/keeper'
 import keeperHelper from '../helpers/keeper'
@@ -20,10 +20,10 @@ class KeeperProviderBase extends Component<WithApolloClient<IProps>> {
   constructor(props: WithApolloClient<IProps>) {
     super(props)
 
-    const publicState = keeperHelper.getPublicState()
-    this.state = {
-      ...publicState,
-    }
+    // const publicState = keeperHelper.getPublicState()
+    // this.state = {
+    //   ...publicState,
+    // }
   }
 
   async componentDidMount() {
@@ -34,6 +34,17 @@ class KeeperProviderBase extends Component<WithApolloClient<IProps>> {
       if (!keeper) {
         return
       }
+
+      // console.log(keeper)
+      const publicState = await keeper.publicState()
+      const { initialized, account, network, locked } = publicState
+
+      this._setPublicState({
+        initialized: true,
+        account,
+        network,
+        locked,
+      })
 
       keeper.on('update', (state: IPublicState) => {
         const { initialized, account, network, locked } = state
@@ -71,7 +82,7 @@ class KeeperProviderBase extends Component<WithApolloClient<IProps>> {
   }
 
   _setPublicState = (publicState: IPublicState) => {
-    keeperHelper.setPublicState(publicState)
+    // keeperHelper.setPublicState(publicState)
     this.setState({
       ...publicState,
     })
@@ -81,4 +92,19 @@ class KeeperProviderBase extends Component<WithApolloClient<IProps>> {
 const KeeperProvider = withApollo<IProps>(KeeperProviderBase)
 const KeeperConsumer = KeeperContext.Consumer
 
-export { KeeperProvider, KeeperConsumer }
+const withKeeperContext = <P extends {}>(Component: ComponentType<P>) =>
+  class WithKeeperContext extends PureComponent<P & IKeeperContext> {
+    render(): ReactNode {
+      return (
+        <KeeperConsumer>
+          {context => <Component {...this.props} {...context}/>}
+        </KeeperConsumer>
+      )
+    }
+  }
+
+export {
+  KeeperProvider,
+  KeeperConsumer,
+  withKeeperContext,
+}

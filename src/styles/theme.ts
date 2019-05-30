@@ -91,13 +91,20 @@ const avatars: any = {
 
 avatars.base = avatars.sm
 
+const toasts = {
+  base: {},
+  info: {
+    backgroundColor: colors.blue,
+  },
+}
+
 const fonts = {
   sans: '-apple-system, "Segoe UI", system-ui, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif',
   mono: 'SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace',
 }
 
 const lineHeights: any = [
-  1, 1.15, 1.25, 1.5, 2,
+  1, 1.25, 1.5, 2,
 ]
 
 lineHeights.base = lineHeights[2]
@@ -130,4 +137,5 @@ export default {
   radii,
   buttons,
   avatars,
+  toasts,
 }

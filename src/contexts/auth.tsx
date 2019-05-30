@@ -1,4 +1,4 @@
-import React, { Component, createContext, ReactNode } from 'react'
+import React, { Component, ComponentType, createContext, PureComponent, ReactNode } from 'react'
 import { withApollo, WithApolloClient } from 'react-apollo'
 import { IUser } from '../types'
 import { KeeperContext } from './keeper'
@@ -98,7 +98,19 @@ class AuthProviderBase extends Component<WithApolloClient<IProps>> {
 const AuthProvider = withApollo<IProps>(AuthProviderBase)
 const AuthConsumer = AuthContext.Consumer
 
+const withAuthContext = <P extends {}>(Component: ComponentType<P>) =>
+  class WithAuthContext extends PureComponent<P & IAuthContext> {
+    render(): ReactNode {
+      return (
+        <AuthConsumer>
+          {context => <Component {...this.props} {...context}/>}
+        </AuthConsumer>
+      )
+    }
+  }
+
 export {
   AuthProvider,
-  AuthConsumer
+  AuthConsumer,
+  withAuthContext,
 }

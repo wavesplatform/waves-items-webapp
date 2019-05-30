@@ -10,7 +10,7 @@ import {
   ProfileToggle,
   ProfileDrop,
   NavbarContainer,
-  NavbarWrapper
+  NavbarWrapper, LogoImage, LogoTitle
 } from './style'
 import { UserAvatar } from '../image'
 import { Box } from 'rebass'
@@ -39,7 +39,8 @@ class Header extends Component<IProps> {
               <NavbarContainer>
                 {/*Logo*/}
                 <Logo to={'/'}>
-                  Waves Vault
+                  <LogoImage src={'/logo.svg'}/>
+                  <LogoTitle>Item Vault</LogoTitle>
                 </Logo>
                 {/*Menu*/}
                 <Nav>
