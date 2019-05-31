@@ -4,7 +4,7 @@ import { modalStyles } from '../style'
 import { Button } from '../../buttons'
 import { Box, Flex } from 'rebass'
 import { Form } from '../../globals'
-import { TextInput } from '../../inputs'
+import { TextInput, TextInputWithUnit } from '../../inputs'
 import keeperHelper, { IWavesNetworkCode } from '../../../helpers/keeper'
 import { config } from '../../../config/config'
 import { IModalProps } from '../index'
@@ -17,19 +17,28 @@ Modal.setAppElement('#root')
 interface IProps extends IModalProps {
   item: IItem
   keeperContext: IKeeperContext
+  defaultPrice?: string,
 }
 
 interface IState {
-  amount: number
-  price: number
+  amount: string
+  price: string
   period: number
 }
 
 class BuyModal extends Component<IProps> {
   state: IState = {
-    amount: 1,
-    price: 0.00000001,
+    amount: '1',
+    price: '0.001',
     period: 10000000,
+  }
+
+  constructor(props: IProps) {
+    super(props)
+
+    const { defaultPrice } = props
+
+    this.state.price = defaultPrice || this.state.price
   }
 
   render(): ReactNode {
@@ -52,11 +61,15 @@ class BuyModal extends Component<IProps> {
         >
           <Form onSubmit={ev => this._handleSubmit(ev)}>
             <Flex mt={-3}>
-              <Box width={1 / 2}>
-                <TextInput value={this.state.amount} onChange={this._changeAmount}>Amount</TextInput>
+              <Box width={1 / 3}>
+                <TextInput value={this.state.amount}
+                           onChange={this._changeAmount}
+                >Amount</TextInput>
               </Box>
-              <Box width={1 / 2} ml={'base'}>
-                <TextInput value={this.state.price} onChange={this._changePrice}>Price</TextInput>
+              <Box width={2 / 3} ml={'base'}>
+                <TextInputWithUnit value={this.state.price}
+                                   onChange={this._changePrice}
+                >Price</TextInputWithUnit>
               </Box>
             </Flex>
             <Flex mt={'base'} justifyContent={'flex-end'}>

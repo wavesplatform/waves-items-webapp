@@ -1,5 +1,5 @@
 import React, { ChangeEvent, PropsWithChildren } from 'react'
-import { StyledLabel, StyledTextInput } from './style'
+import { InputUnit, StyledInputWrapper, StyledLabel, StyledTextInput } from './style'
 import { Box } from 'rebass'
 
 interface TextInputProps {
@@ -25,6 +25,37 @@ export const TextInput = (props: PropsWithChildren<TextInputProps>) => {
         autoFocus={props.autoFocus}
         disabled={props.disabled}
       />
+    </StyledLabel>
+  )
+}
+
+interface TextInputWithUnitProps extends TextInputProps {
+  unit?: string
+}
+
+export const TextInputWithUnit = (props: PropsWithChildren<TextInputWithUnitProps>) => {
+  return (
+    <StyledLabel {...props}>
+      <Box>{props.children}</Box>
+      <StyledInputWrapper
+        disabled={props.disabled}
+      >
+        <StyledTextInput
+          id={props.id}
+          defaultValue={props.defaultValue}
+          value={props.value}
+          placeholder={props.placeholder}
+          onChange={props.onChange}
+          autoFocus={props.autoFocus}
+          disabled={props.disabled}
+          bg={'transparent'}
+          borderWidth={0}
+          borderRadius={0}
+          mt={0}
+          flex={'1'}
+        />
+        <InputUnit>{props.unit ? props.unit : 'Waves'}</InputUnit>
+      </StyledInputWrapper>
     </StyledLabel>
   )
 }

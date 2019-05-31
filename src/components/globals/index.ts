@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
-import { Heading, Text } from 'rebass'
-import { themeGet } from 'styled-system'
+import { BoxProps, Heading, Text, TextProps } from 'rebass'
+import { borders, BordersProps, color, space, themeGet, width } from 'styled-system'
 
 export const hexa = (hex: string, alpha: string | number) => {
   const r = parseInt(hex.slice(1, 3), 16)
@@ -78,3 +78,64 @@ export const Small = styled(Text)`
   font-size: ${themeGet('fontSizes.sm')}px;
 `
 Small.defaultProps = { as: 'span' }
+
+export const Table = styled.table<BoxProps>`
+  border-spacing: 0;
+  border-collapse: collapse;
+  width: inherit;
+  
+  ${space}
+  ${width}
+`
+
+export const TableHeader = styled.thead<BoxProps & BordersProps>`
+  ${color}
+  ${borders}
+`
+TableHeader.defaultProps = {
+  color: 'grays.4',
+  borderBottom: '1px solid',
+  borderColor: 'grays.7',
+}
+
+export const TableBody = styled.tbody`
+`
+
+export const TableRow = styled.tr`
+  height: 100%;
+  
+  &:nth-child(2n) {
+    background: ${themeGet('colors.grays.8')};
+  }
+`
+
+export const TableCell = styled.td<BoxProps>`
+  margin: 0;
+  padding: 0;
+  font-weight: inherit;
+  text-align: inherit;
+  height: 100%;
+  vertical-align: middle;
+  
+  ${space}
+  ${width}
+`
+TableCell.defaultProps = {
+  px: 'sm',
+  py: 'sm',
+}
+
+export const WavesCy = styled(Text)<TextProps & BordersProps>`
+  text-transform: uppercase;
+  
+  &:before {
+    content: 'Waves';
+  }
+  
+  ${borders}
+`
+WavesCy.defaultProps = {
+  as: 'span',
+  fontSize: 'xs',
+  color: 'placeholder',
+}

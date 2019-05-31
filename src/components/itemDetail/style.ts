@@ -63,7 +63,7 @@ export const ParamValue = styled(Text)`
 
 export const Overview = styled(Box)`
   position: relative;
-  padding: ${themeGet('space.lg')}px;
+  padding: ${themeGet('space.base')}px 0;
 `
 
 export const ImageWrapper = styled(Box)`
@@ -71,7 +71,6 @@ export const ImageWrapper = styled(Box)`
   transition: transform .1s ease-out;
 
   img {
-    transform: rotateZ(2deg);
     max-width: 100%;
     max-height: 360px;
     margin: 0 auto;

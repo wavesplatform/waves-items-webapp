@@ -28,13 +28,10 @@ StyledLabel.defaultProps = {
   color: 'default',
 }
 
-interface StyledTextInputProps extends BoxProps, BorderRadiusProps, BordersProps {
+interface StyledInputProps extends BoxProps, BorderRadiusProps, BordersProps {
 }
 
-export const StyledTextInput = styled(Box).attrs({
-  type: 'text',
-})<StyledTextInputProps>`
-  flex: 1 0 auto;
+export const StyledInput = styled(Box)<StyledInputProps>`
   width: 100%;
   box-shadow: none;
   opacity: ${props => (props.disabled ? .5 : 1)};
@@ -61,8 +58,7 @@ export const StyledTextInput = styled(Box).attrs({
   ${backgroundPosition};
   ${opacity};
 `
-StyledTextInput.defaultProps = {
-  as: 'input',
+StyledInput.defaultProps = {
   color: 'default',
   borderRadius: 'base',
   px: 3,
@@ -71,5 +67,38 @@ StyledTextInput.defaultProps = {
   borderStyle: 'solid',
   borderWidth: '2px',
   borderColor: 'border.input',
+  flex: '1 0 auto',
+}
+
+export const StyledTextInput = styled(StyledInput).attrs({
+  type: 'text',
+})`
+
+`
+StyledTextInput.defaultProps = {
+  ...StyledTextInput.defaultProps,
+  as: 'input',
   mt: 'sm',
+}
+
+export const StyledInputWrapper = styled(StyledInput)`
+  display: flex;
+`
+StyledInputWrapper.defaultProps = {
+  ...StyledInputWrapper.defaultProps,
+  as: 'div',
+  px: 0,
+  py: 0,
+  mt: 'sm',
+}
+
+export const InputUnit = styled(Flex)`
+  align-items: center;
+  border-left: 1px solid ${themeGet('colors.border.input')};
+  text-transform: uppercase;
+`
+InputUnit.defaultProps = {
+  px: 'base',
+  fontSize: 'sm',
+  color: 'placeholder',
 }
