@@ -36,7 +36,7 @@ class KeeperProviderBase extends Component<WithApolloClient<IProps>, IKeeperCont
     try {
       const keeper = await keeperHelper.init()
 
-      if (!keeper) 
+      if (!keeper)
         return
 
       this.setState({ installed: true })
@@ -59,9 +59,9 @@ class KeeperProviderBase extends Component<WithApolloClient<IProps>, IKeeperCont
       this.setState({ state: publicState, hasAccounts: true })
 
     } catch (err) {
-      if (err.code === 14) 
+      if (err.code === 14)
         this.setState({ hasAccounts: false })
-      
+
       console.warn(err)
     }
   }
