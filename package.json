@@ -13,6 +13,7 @@
     "@types/react-sticky": "^6.0.3",
     "@types/rebass": "^3.0.4",
     "@types/styled-components": "^4.1.15",
+    "@waves/bignumber": "0.0.1-a6",
     "@waves/types": "0.0.2",
     "apollo-cache-inmemory": "^1.5.1",
     "apollo-client": "^2.5.1",

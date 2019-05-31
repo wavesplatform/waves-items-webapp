@@ -10,7 +10,7 @@ import {
   ProfileToggle,
   ProfileDrop,
   NavbarContainer,
-  NavbarWrapper, LogoImage, LogoTitle
+  NavbarWrapper, LogoImage, LogoTitle, UserName
 } from './style'
 import { UserAvatar } from '../image'
 import { Box } from 'rebass'
@@ -60,7 +60,7 @@ class Header extends Component<IProps> {
                           onClick={this._onProfileDropdownToggle}
                           isActive={this.state.profileDropdownIsShown}
                         >
-                          {user.name || user.address}
+                          <UserName>{user.name || user.address}</UserName>
                           <Box ml={'md'}>
                             <UserAvatar user={user} size={'sm'}/>
                           </Box>

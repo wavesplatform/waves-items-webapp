@@ -20,15 +20,15 @@ interface IProps extends IModalProps {
 }
 
 interface IState {
-  amount: number
-  price: number
+  amount: string
+  price: string
   period: number
 }
 
 class SellModal extends Component<IProps> {
   state: IState = {
-    amount: 1,
-    price: 0.00000001,
+    amount: '1',
+    price: '0.001',
     period: 10000000,
   }
 
@@ -52,10 +52,10 @@ class SellModal extends Component<IProps> {
         >
           <Form onSubmit={ev => this._handleSubmit(ev)}>
             <Flex mt={-3}>
-              <Box width={1 / 2}>
+              <Box width={1 / 3}>
                 <TextInput value={this.state.amount} onChange={this._changeAmount}>Amount</TextInput>
               </Box>
-              <Box width={1 / 2} ml={'base'}>
+              <Box width={2 / 3} ml={'base'}>
                 <TextInput value={this.state.price} onChange={this._changePrice}>Price</TextInput>
               </Box>
             </Flex>

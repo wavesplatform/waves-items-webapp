@@ -18,6 +18,7 @@ import { KeeperContext } from '../../contexts/keeper'
 import { Button } from '../buttons'
 import SellModal from '../modals/sellModal'
 import BuyModal from '../modals/buyModal'
+import { toWaves } from '../../helpers/order'
 
 interface IProps {
   item: WithOrders<IItem>
@@ -128,12 +129,15 @@ class ItemDetail extends Component<IProps> {
     )
   }
 
-  _priceRow = ({ amount, price }: AmountPrice, index: number) => (
-    <tr key={index}>
-      <td>{amount}</td>
-      <td>{price}</td>
-    </tr>
-  )
+  _priceRow = ({ amount, price }: AmountPrice, index: number) => {
+    // console.log(toWaves(price))
+    return (
+      <tr key={index}>
+        <td>{amount}</td>
+        <td>{price}</td>
+      </tr>
+    )
+  }
 
   _setShowBuyModal = (value: boolean) => {
     this.setState({

@@ -33,8 +33,8 @@ export type AmountPricePair = {
 }
 
 export type AmountPrice = {
-  amount: number
-  price: number
+  amount: string
+  price: string
 }
 
 export type WithOrders<P> = P & {

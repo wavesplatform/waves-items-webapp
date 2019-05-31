@@ -1,8 +1,8 @@
-import { Box, BoxProps, Flex, Heading, Image } from 'rebass'
+import { Box, BoxProps, Flex, Heading, Image, Text } from 'rebass'
 import styled, { css } from 'styled-components'
 import { Link } from 'react-router-dom'
 import { space, SpaceProps, themeGet } from 'styled-system'
-import { inheritLink } from '../globals'
+import { inheritLink, truncate } from '../globals'
 import { Container } from '../layout'
 
 export const NavbarWrapper = styled(Box)`
@@ -79,6 +79,11 @@ LogoTitle.defaultProps = {
 }
 
 export const NavProfile = styled(NavItem)`
+`
+
+export const UserName = styled(Text)`
+  ${truncate};
+  max-width: 180px;
 `
 
 export const ProfileDrop = styled(Box)`
