@@ -13,7 +13,7 @@ import {
   NavbarWrapper, LogoImage, LogoTitle, UserName
 } from './style'
 import { UserAvatar } from '../image'
-import { Box } from 'rebass'
+import { Box, Text } from 'rebass'
 import ProfileDropdown from './profileDropdown'
 
 interface IProps {
@@ -40,7 +40,9 @@ class Header extends Component<IProps> {
                 {/*Logo*/}
                 <Logo to={'/'}>
                   <LogoImage src={'/logo.svg'}/>
-                  <LogoTitle>Item Vault</LogoTitle>
+                  <LogoTitle>
+                    Item Vault <Text as={'span'} color={'placeholder'} fontSize={'xs'}>Beta</Text>
+                  </LogoTitle>
                 </Logo>
                 {/*Menu*/}
                 <Nav>
