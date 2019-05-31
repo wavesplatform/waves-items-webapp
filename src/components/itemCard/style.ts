@@ -12,6 +12,7 @@ export const ItemCardContainer = styled(Card)`
   background: ${themeGet('bg.card')};
   background-clip: border-box;
   border-radius: ${themeGet('radii.lg')}px;
+  transition: background-color .2s ease-out;
   
   &:hover,
   &:focus {
@@ -39,6 +40,10 @@ export const ImageWrapper = styled(Box)`
   padding-top: 80%;
 
   transition: transform .1s ease-out;
+  
+  ${ItemCardContainer}:hover & {
+    transform: scale(1.05);
+  }
 
   img {
     position: absolute;

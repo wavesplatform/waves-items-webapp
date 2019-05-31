@@ -37,7 +37,7 @@ Params.defaultProps = {
 }
 
 export const Param = styled(Flex)`
-  padding: ${themeGet('space.lg')}px 0;
+  padding: ${themeGet('space.md')}px 0;
   border-top: 1px solid ${themeGet('colors.grays.7')};
   border-bottom: 1px solid ${themeGet('colors.grays.7')};
   display: flex;

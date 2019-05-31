@@ -125,6 +125,10 @@ const buttons = {
   },
 }
 
+const header = {
+  height: 52,
+}
+
 export default {
   breakpoints: ['40em', '52em', '64em'],
   fontSizes,
@@ -138,4 +142,5 @@ export default {
   buttons,
   avatars,
   toasts,
+  header,
 }

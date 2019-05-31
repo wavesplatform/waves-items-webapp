@@ -6,11 +6,11 @@ import { inheritLink } from '../globals'
 import { Container } from '../layout'
 
 export const NavbarWrapper = styled(Box)`
-  height: 52px;
+  height: ${themeGet('header.height')}px;
 `
 
 export const Navbar = styled(Flex)`
-  height: 52px;
+  height: ${themeGet('header.height')}px;
   background: ${themeGet('bg.default')};
   border-bottom: 1px solid ${themeGet('colors.grays.7')};
   position: fixed;

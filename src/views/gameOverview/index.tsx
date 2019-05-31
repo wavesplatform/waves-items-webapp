@@ -42,7 +42,7 @@ export class GameOverview extends Component<TChildProps> {
     }
 
     const game = data.user as IGame
-    
+
     if (!game) {
       return <Redirect to={'/'}/>
     }
@@ -58,7 +58,7 @@ export class GameOverview extends Component<TChildProps> {
               <UserAvatar user={game} size={'lg'}/>
             </Icon>
             <Box>
-              <H1>{game.name || game.address}</H1>
+              <H1 mb={'sm'}>{game.name || game.address}</H1>
               <Description>
                 As the first full-scale trading card game on mobile, Shadow Era has had a long history of innovation.
               </Description>
