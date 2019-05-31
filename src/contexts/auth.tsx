@@ -103,7 +103,7 @@ const withAuthContext = <P extends {}>(Component: ComponentType<P>) =>
     render(): ReactNode {
       return (
         <AuthConsumer>
-          {context => <Component {...this.props} {...context}/>}
+          {context => <Component {...this.props} {...context} />}
         </AuthConsumer>
       )
     }
