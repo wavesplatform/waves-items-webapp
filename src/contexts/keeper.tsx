@@ -9,13 +9,18 @@ interface IProps {
 interface IKeeperState extends Partial<IPublicState> {
 }
 
-export interface IKeeperContext extends IKeeperState {
+export interface IKeeperContext {
+  installed: boolean
+  hasAccounts: boolean
+  state: IKeeperState
 }
 
-export const KeeperContext = createContext<IKeeperContext>({})
+const defaultKeeperContext: IKeeperContext = { installed: false, hasAccounts: false, state: {} }
 
-class KeeperProviderBase extends Component<WithApolloClient<IProps>> {
-  state: IKeeperState = {}
+export const KeeperContext = createContext<IKeeperContext>(defaultKeeperContext)
+
+class KeeperProviderBase extends Component<WithApolloClient<IProps>, IKeeperContext> {
+  state: IKeeperContext = defaultKeeperContext
 
   constructor(props: WithApolloClient<IProps>) {
     super(props)
@@ -27,66 +32,52 @@ class KeeperProviderBase extends Component<WithApolloClient<IProps>> {
   }
 
   async componentDidMount() {
-    const { client } = this.props
+
     try {
       const keeper = await keeperHelper.init()
 
-      if (!keeper) {
+      if (!keeper) 
         return
-      }
 
-      // console.log(keeper)
-      const publicState = await keeper.publicState()
-      const { initialized, account, network, locked } = publicState
-
-      this._setPublicState({
-        initialized: true,
-        account,
-        network,
-        locked,
-      })
+      this.setState({ installed: true })
 
       keeper.on('update', (state: IPublicState) => {
-        const { initialized, account, network, locked } = state
+
+        const { account } = state
 
         // TODO: temp check changes
-        if (account && this.state.account && account.address === this.state.account.address) {
+        if (account && this.state.state && this.state.state.account &&
+          account.address === this.state.state.account.address) {
           return
         }
 
-        this._setPublicState({
-          initialized,
-          account,
-          network,
-          locked,
-        })
+        this.setState({ state, hasAccounts: account != undefined })
       })
 
+      const publicState = await keeper.publicState()
+
+      this.setState({ state: publicState, hasAccounts: true })
+
     } catch (err) {
+      if (err.code === 14) 
+        this.setState({ hasAccounts: false })
+      
       console.warn(err)
     }
   }
-
   render() {
     console.log('KeeperProvider render()')
     return (
       <KeeperContext.Provider value={{
-        account: this.state.account,
-        network: this.state.network,
-        locked: this.state.locked,
-        initialized: this.state.initialized,
+        state: this.state.state,
+        hasAccounts: this.state.hasAccounts,
+        installed: this.state.installed,
       }}>
         {this.props.children}
       </KeeperContext.Provider>
     )
   }
 
-  _setPublicState = (publicState: IPublicState) => {
-    // keeperHelper.setPublicState(publicState)
-    this.setState({
-      ...publicState,
-    })
-  }
 }
 
 const KeeperProvider = withApollo<IProps>(KeeperProviderBase)
@@ -97,7 +88,7 @@ const withKeeperContext = <P extends {}>(Component: ComponentType<P>) =>
     render(): ReactNode {
       return (
         <KeeperConsumer>
-          {context => <Component {...this.props} {...context}/>}
+          {context => <Component {...this.props} {...context} />}
         </KeeperConsumer>
       )
     }
