@@ -108,7 +108,7 @@ class BuyModal extends Component<IProps> {
 
   _confirm = async () => {
     const { item, keeperContext } = this.props
-    const { network } = keeperContext
+    const { state: { network } } = keeperContext
 
     if (!keeperHelper.keeper || !network) {
       return
