@@ -14,9 +14,12 @@ import { IKeeperContext } from '../../../contexts/keeper'
 const Modal = require('react-modal')
 Modal.setAppElement('#root')
 
+export type OrderType = 'buy' | 'sell'
+
 interface IProps extends IModalProps {
   item: IItem
   keeperContext: IKeeperContext
+  type: OrderType,
   defaultPrice?: string,
 }
 
@@ -26,7 +29,7 @@ interface IState {
   period: number
 }
 
-class BuyModal extends Component<IProps> {
+class OrderModal extends Component<IProps> {
   state: IState = {
     amount: '1',
     price: '0.001',
@@ -42,7 +45,7 @@ class BuyModal extends Component<IProps> {
   }
 
   render(): ReactNode {
-    const { show, setShow } = this.props
+    const { show, setShow, type } = this.props
     const styles = modalStyles(420)
 
     return (
@@ -54,7 +57,7 @@ class BuyModal extends Component<IProps> {
         style={styles}
       >
         <ModalContainer
-          title={'Buy Item'}
+          title={type === 'buy' ? 'Buy Item' : 'Sell Item'}
           onClose={() => {
             setShow(false)
           }}
@@ -107,7 +110,7 @@ class BuyModal extends Component<IProps> {
   }
 
   _confirm = async () => {
-    const { item, keeperContext } = this.props
+    const { item, keeperContext, type } = this.props
     const { state: { network } } = keeperContext
 
     if (!keeperHelper.keeper || !network) {
@@ -119,7 +122,7 @@ class BuyModal extends Component<IProps> {
       type: 1002,
       data: {
         matcherPublicKey: chain.matcher,
-        orderType: 'buy',
+        orderType: type,
         amount: {
           tokens: this.state.amount,
           assetId: item.assetId,
@@ -138,4 +141,4 @@ class BuyModal extends Component<IProps> {
   }
 }
 
-export default BuyModal
+export default OrderModal

@@ -16,11 +16,10 @@ import {
 import { Box, Flex, Image } from 'rebass'
 import { KeeperContext } from '../../contexts/keeper'
 import { Button } from '../buttons'
-import SellModal from '../modals/sellModal'
-import BuyModal from '../modals/buyModal'
 import { toWaves } from '../../helpers/order'
 import { Table, TableBody, TableCell, TableHeader, TableRow, WavesCy } from '../globals'
 import { BigNumber } from '@waves/bignumber'
+import OrderModal from '../modals/orderModal'
 
 interface IProps {
   item: WithOrders<IItem>
@@ -94,17 +93,21 @@ class ItemDetail extends Component<IProps> {
             >
               Sell
             </Button>
-            <BuyModal item={item}
-                      defaultPrice={buyPriceStr}
-                      keeperContext={this.context}
-                      show={this.state.buyModalShow}
-                      setShow={this._setShowBuyModal}
+            <OrderModal
+              item={item}
+              type={'buy'}
+              defaultPrice={buyPriceStr}
+              keeperContext={this.context}
+              show={this.state.buyModalShow}
+              setShow={this._setShowBuyModal}
             />
-            <SellModal item={item}
-                       defaultPrice={sellPriceStr}
-                       keeperContext={this.context}
-                       show={this.state.sellModalShow}
-                       setShow={this._setShowSellModal}
+            <OrderModal
+              item={item}
+              type={'sell'}
+              defaultPrice={sellPriceStr}
+              keeperContext={this.context}
+              show={this.state.sellModalShow}
+              setShow={this._setShowSellModal}
             />
           </Flex>
           <Box mt={'base'}>
