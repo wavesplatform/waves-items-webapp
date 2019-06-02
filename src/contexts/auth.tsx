@@ -98,12 +98,12 @@ class AuthProviderBase extends Component<WithApolloClient<IProps>> {
 const AuthProvider = withApollo<IProps>(AuthProviderBase)
 const AuthConsumer = AuthContext.Consumer
 
-const withAuthContext = <P extends {}>(Component: ComponentType<P>) =>
-  class WithAuthContext extends PureComponent<P & IAuthContext> {
+const withAuthContext = <P extends {}>(WrappedComponent: ComponentType<P & IAuthContext>) =>
+  class WithAuthContext extends PureComponent<P> {
     render(): ReactNode {
       return (
         <AuthConsumer>
-          {context => <Component {...this.props} {...context} />}
+          {(context: IAuthContext) => <WrappedComponent {...this.props} {...context} />}
         </AuthConsumer>
       )
     }

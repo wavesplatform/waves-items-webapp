@@ -19,7 +19,10 @@ interface ISigninState {
   email?: string,
 }
 
-class SigninForm extends Component<{} & IKeeperContext> {
+interface IProps {
+}
+
+class SigninForm extends Component<IProps & IKeeperContext> {
   static contextType = AuthContext
 
   state: ISigninState = {}
@@ -32,7 +35,7 @@ class SigninForm extends Component<{} & IKeeperContext> {
       return (
         <>
           <Toast mb={'base'}>
-            You must install Keeper to access the vault.<br />
+            You must install Keeper to access the vault.<br/>
             This will also act as your login to the game (no extra password needed).
           </Toast>
           <Button
@@ -46,14 +49,14 @@ class SigninForm extends Component<{} & IKeeperContext> {
     } else if (!hasAccounts) {
       return <Toast mb={'base'}>
         Please add your account to Keeper to access the vault.
-    </Toast>
+      </Toast>
     }
 
     if (network && network.code !== config.networkCode) {
       return (
         <>
           <Toast mb={'base'}>
-            Incorrect Waves network.<br />
+            Incorrect Waves network.<br/>
             Please select another network.
           </Toast>
         </>
@@ -75,12 +78,12 @@ class SigninForm extends Component<{} & IKeeperContext> {
             >
               {account && <TextInput value={account.address} disabled={true}>Account Address</TextInput>}
               <TextInput value={this.state.name}
-                placeholder={'Your username'}
-                onChange={this._changeName}
+                         placeholder={'Your username'}
+                         onChange={this._changeName}
               >Name <Small color={'placeholder'}>(optional)</Small></TextInput>
               <TextInput value={this.state.email}
-                placeholder={'Your email'}
-                onChange={this._changeEmail}
+                         placeholder={'Your email'}
+                         onChange={this._changeEmail}
               >Email <Small color={'placeholder'}>(optional)</Small></TextInput>
               <Button type='submit' variant='primary' mt={'base'}>Sign In</Button>
             </Form>
@@ -141,4 +144,4 @@ class SigninForm extends Component<{} & IKeeperContext> {
   }
 }
 
-export default withKeeperContext(SigninForm)
+export default withKeeperContext<IProps>(SigninForm)

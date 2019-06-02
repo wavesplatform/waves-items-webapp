@@ -36,8 +36,9 @@ class KeeperProviderBase extends Component<WithApolloClient<IProps>, IKeeperCont
     try {
       const keeper = await keeperHelper.init()
 
-      if (!keeper)
+      if (!keeper) {
         return
+      }
 
       this.setState({ installed: true })
 
@@ -59,12 +60,15 @@ class KeeperProviderBase extends Component<WithApolloClient<IProps>, IKeeperCont
       this.setState({ state: publicState, hasAccounts: true })
 
     } catch (err) {
-      if (err.code === 14)
+      // TODO: need replace to const
+      if (err.code === 14) {
         this.setState({ hasAccounts: false })
+      }
 
       console.warn(err)
     }
   }
+
   render() {
     console.log('KeeperProvider render()')
     return (
@@ -83,12 +87,12 @@ class KeeperProviderBase extends Component<WithApolloClient<IProps>, IKeeperCont
 const KeeperProvider = withApollo<IProps>(KeeperProviderBase)
 const KeeperConsumer = KeeperContext.Consumer
 
-const withKeeperContext = <P extends {}>(Component: ComponentType<P>) =>
-  class WithKeeperContext extends PureComponent<P & IKeeperContext> {
+const withKeeperContext = <P extends {}>(WrappedComponent: ComponentType<P & IKeeperContext>) =>
+  class WithKeeperContext extends PureComponent<P> {
     render(): ReactNode {
       return (
         <KeeperConsumer>
-          {context => <Component {...this.props} {...context} />}
+          {(context: IKeeperContext) => <WrappedComponent {...this.props} {...context} />}
         </KeeperConsumer>
       )
     }
