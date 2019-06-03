@@ -13,7 +13,7 @@ import {
   RightSide,
   Title,
 } from './style'
-import { Box, Flex, Image } from 'rebass'
+import { Box, Flex, Heading, Image } from 'rebass'
 import { KeeperContext } from '../../contexts/keeper'
 import { Button } from '../buttons'
 import { toWaves } from '../../helpers/order'
@@ -54,9 +54,6 @@ class ItemDetail extends Component<IProps> {
     const maxBidPrice = this._getProfitPrice(bids, ProfitPriceType.Max)
     const buyPriceStr = minAskPrice && toWaves(minAskPrice).toFixed()
     const sellPriceStr = maxBidPrice && toWaves(maxBidPrice).toFixed()
-
-    const asksList = asks.map(this._priceRow)
-    const bidsList = bids.map(this._priceRow)
 
     return (
       <ItemDetailContainer isPage={isPage}>
@@ -112,24 +109,8 @@ class ItemDetail extends Component<IProps> {
             />
           </Flex>
           <Box mt={'base'}>
-            {asks.length > 0 && <Table width={1}>
-              <TableHeader>
-                <TableRow>
-                  <TableCell width={1 / 3}>Amount</TableCell>
-                  <TableCell width={2 / 3}>Price</TableCell>
-                </TableRow>
-              </TableHeader>
-              <TableBody>{asksList}</TableBody>
-            </Table>}
-            {bids.length > 0 && <Table width={1}>
-              <TableHeader>
-                <TableRow>
-                  <TableCell width={1 / 3}>Amount</TableCell>
-                  <TableCell width={2 / 3}>Price</TableCell>
-                </TableRow>
-              </TableHeader>
-              <TableBody>{bidsList}</TableBody>
-            </Table>}
+            {asks.length > 0 && this._ordersTable(asks)}
+            {bids.length > 0 && this._ordersTable(bids)}
           </Box>
         </LeftSide>
         <RightSide isPage={isPage}>
@@ -145,11 +126,26 @@ class ItemDetail extends Component<IProps> {
     )
   }
 
+  _ordersTable = (orders: AmountPrice[]) => {
+    const list = orders.map(this._priceRow)
+    return (
+      <Table width={1}>
+        <TableHeader>
+          <TableRow>
+            <TableCell width={1 / 3} paddingLeft={0}>Amount</TableCell>
+            <TableCell width={2 / 3} paddingLeft={0}>Price</TableCell>
+          </TableRow>
+        </TableHeader>
+        <TableBody>{list}</TableBody>
+      </Table>
+    )
+  }
+
   _priceRow = ({ amount, price }: AmountPrice, index: number) => {
     return (
       <TableRow key={index}>
-        <TableCell>{amount}</TableCell>
-        <TableCell>{toWaves(price).toFixed()} <WavesCy/></TableCell>
+        <TableCell paddingLeft={0}>{amount}</TableCell>
+        <TableCell paddingLeft={0}>{toWaves(price).toFixed()} <WavesCy/></TableCell>
       </TableRow>
     )
   }
