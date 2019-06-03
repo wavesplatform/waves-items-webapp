@@ -44,6 +44,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "now-build": "react-scripts build",
     "analyze": "source-map-explorer build/static/js/main.*",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
