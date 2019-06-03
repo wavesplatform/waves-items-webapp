@@ -1,5 +1,5 @@
 import React, { Component, ReactNode } from 'react'
-import { IDefaultResult, IGame } from '../../types'
+import { IDefaultResult, IGame, IItem } from '../../types'
 import { ChildProps, graphql } from 'react-apollo'
 import { GamesQuery } from '../../graphql/queries/__generated__/GamesQuery'
 import { getGamesQuery } from '../../graphql/queries/getGames'
@@ -26,7 +26,8 @@ class GamesSlider extends Component<TChildProps> {
       return <div>Loading...</div>
     }
 
-    const games = (data.games as IGame[]).map(game => (
+    const games = data.games as IGame[]
+    const renderGames = (games || []).map(game => (
       <GameLink
         to={`/items/${game.address}`}
         key={game.id}
@@ -37,7 +38,7 @@ class GamesSlider extends Component<TChildProps> {
 
     return (
       <GamesSliderContainer>
-        {games}
+        {renderGames}
       </GamesSliderContainer>
     )
   }

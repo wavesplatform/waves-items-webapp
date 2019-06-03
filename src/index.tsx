@@ -50,6 +50,7 @@ cache.writeData({
 
 class App extends Component {
   render(): ReactNode {
+    console.info(`GraphQL endpoint: ${config.graphqlEndpoint}`)
     return (
       <ThemeProvider theme={theme}>
         <Fragment>

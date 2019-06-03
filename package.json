@@ -31,7 +31,7 @@
     "react-dom": "^16.8.6",
     "react-modal": "^3.8.1",
     "react-router-dom": "^4.3.1",
-    "react-scripts": "^2.1.8",
+    "react-scripts": "^3.0.1",
     "react-sticky": "^6.0.3",
     "rebass": "^3.1.0",
     "rxjs": "^6.5.1",
