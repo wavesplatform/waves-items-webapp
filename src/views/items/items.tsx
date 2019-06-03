@@ -60,10 +60,23 @@ class Items extends Component<TChildProps> {
           <ItemGrid items={items || []} selectItem={this.selectAssetId}/>
         </ItemsSide>
         <ItemSide isActive={!!assetId}>
-          {assetId && <Sticky topOffset={-stickyOffset}>
-            {({ style, isSticky, distanceFromTop }) => (
-              <Box style={{ ...style, top: stickyOffset }}><Item assetId={assetId}/></Box>
-            )}
+          {assetId && <Sticky topOffset={-stickyOffset} bottomOffset={0}>
+            {({ style, isSticky, distanceFromTop, distanceFromBottom }) => {
+              return (
+                <Box style={distanceFromBottom > stickyOffset ? {
+                  ...style,
+                  top: stickyOffset,
+                } : (isSticky && {
+                  ...style,
+                  position: 'absolute',
+                  top: 'auto',
+                  left: 'auto',
+                  bottom: 0,
+                }) || {}}>
+                  <Item assetId={assetId}/>
+                </Box>
+              )
+            }}
           </Sticky>}
         </ItemSide>
       </ItemsContainer>

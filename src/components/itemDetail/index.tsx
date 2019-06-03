@@ -144,8 +144,8 @@ class ItemDetail extends Component<IProps> {
   _priceRow = ({ amount, price }: AmountPrice, index: number) => {
     return (
       <TableRow key={index}>
-        <TableCell paddingLeft={0}>{amount}</TableCell>
-        <TableCell paddingLeft={0}>{toWaves(price).toFixed()} <WavesCy/></TableCell>
+        <TableCell>{amount}</TableCell>
+        <TableCell>{toWaves(price).toFixed()} <WavesCy/></TableCell>
       </TableRow>
     )
   }
