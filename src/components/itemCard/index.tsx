@@ -3,6 +3,7 @@ import { IItem, WithBalance } from '../../types'
 import { UserHeading } from '../user/userHeading'
 import { Balance, ImageWrapper, ItemCardContainer, Overview, Title } from './style'
 import { Box, Flex, Image } from 'rebass'
+import defaultImage from '../globals/image.svg'
 
 export type ItemCardStyle = 'base' | 'short'
 
@@ -40,7 +41,7 @@ export const ItemCard = (props: IItemCardProps) => {
         <Overview>
           <ImageWrapper>
             <Image
-              src={item.imageUrl ? item.imageUrl : '/image.svg'}
+              src={item.imageUrl ? item.imageUrl : defaultImage}
               alt={`Item #${item.id}`}/>
           </ImageWrapper>
         </Overview>

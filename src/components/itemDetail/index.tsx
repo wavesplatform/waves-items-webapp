@@ -20,6 +20,7 @@ import { toWaves } from '../../helpers/order'
 import { Table, TableBody, TableCell, TableHeader, TableRow, WavesCy } from '../globals'
 import { BigNumber } from '@waves/bignumber'
 import OrderModal from '../modals/orderModal'
+import defaultImage from '../globals/image.svg'
 
 interface IProps {
   item: WithOrders<IItem>
@@ -135,7 +136,7 @@ class ItemDetail extends Component<IProps> {
           <Overview>
             <ImageWrapper>
               <Image
-                src={item.imageUrl ? item.imageUrl : '/image.svg'}
+                src={item.imageUrl ? item.imageUrl : defaultImage}
                 alt={`Item #${item.id}`}/>
             </ImageWrapper>
           </Overview>
