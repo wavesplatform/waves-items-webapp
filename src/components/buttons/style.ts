@@ -18,3 +18,15 @@ StyledButton.defaultProps = {
   bg: 'element',
   border: '2px solid transparent',
 }
+
+export const StyledIconButton = styled(StyledButton)`
+  width: 40px;
+  height: 40px;
+`
+StyledIconButton.defaultProps = {
+  ...StyledIconButton.defaultProps,
+  px: 0,
+  py: 0,
+  borderRadius: '50%',
+  fontSize: 'lg',
+}

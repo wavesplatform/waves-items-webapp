@@ -31,6 +31,10 @@
       "dest": "/favicon.ico"
     },
     {
+      "src": "/icons.svg",
+      "dest": "/icons.svg"
+    },
+    {
       "src": "/asset-manifest.json",
       "dest": "/asset-manifest.json"
     },

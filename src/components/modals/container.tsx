@@ -12,9 +12,9 @@ export const ModalContainer = (props: IModalContainerProps) => {
   const { onClose, children, title, ignoreHeader } = props
   return (
     <ModalBody>
+      <CloseButton onClick={onClose}/>
       <Header ignoreHeader={ignoreHeader}>
         <Title>{title}</Title>
-        {/*<CloseButton onClick={onClose}/>*/}
       </Header>
       <Content>
         {children}

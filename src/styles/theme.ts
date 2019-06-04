@@ -91,6 +91,8 @@ const avatars: any = {
 
 avatars.base = avatars.sm
 
+const icons: any = {}
+
 const toasts = {
   base: {},
   info: {
@@ -141,6 +143,7 @@ export default {
   radii,
   buttons,
   avatars,
+  icons,
   toasts,
   header,
 }

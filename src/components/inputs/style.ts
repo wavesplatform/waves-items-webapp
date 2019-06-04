@@ -17,7 +17,8 @@ export const StyledLabel = styled(Flex)`
   
   ${props => !props.disabled && css`
     &:hover > input,
-    &:hover > textarea {
+    &:hover > textarea,
+    &:hover > ${StyledInputWrapper} {
       border-color: ${themeGet('colors.border.inputHover')};
     }
   `}

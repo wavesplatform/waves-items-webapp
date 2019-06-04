@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { Box, Card, Flex, FlexProps, Heading } from 'rebass'
-import { Button } from '../buttons'
+import { IconButton } from '../buttons'
 import { themeGet } from 'styled-system'
 
 export const modalStyles = (maxWidth: number = 360) => {
@@ -25,6 +25,7 @@ export const modalStyles = (maxWidth: number = 360) => {
       borderRadius: 0,
       position: 'relative',
       border: 0,
+      overflow: 'visible',
       padding: 0,
       zIndex: 999,
       width: '100%',
@@ -59,7 +60,12 @@ export const Title = styled(Heading)`
 `
 Title.defaultProps = { fontSize: 'lg' }
 
-export const CloseButton = styled(Button)`
+export const CloseButton = styled(IconButton).attrs({
+  glyph: 'close',
+})`
+  position: absolute;
+  top: 0;
+  right: -52px;
 `
 
 export const Content = styled(Box)`

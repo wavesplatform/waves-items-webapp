@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { space, SpaceProps, themeGet } from 'styled-system'
 import { inheritLink, truncate } from '../globals'
 import { Container } from '../layout'
+import { Icon } from '../icon'
 
 export const NavbarWrapper = styled(Box)`
   height: ${themeGet('header.height')}px;
@@ -97,6 +98,7 @@ interface ProfileToggleProps extends BoxProps {
 
 export const ProfileToggle = styled(Box)<ProfileToggleProps>`
   display: flex;
+  position: relative;
   align-items: center;
   padding-top: 0;
   padding-bottom: 0;
@@ -120,4 +122,7 @@ export const ProfileToggle = styled(Box)<ProfileToggleProps>`
   `}
 `
 ProfileToggle.defaultProps = { p: 'md' }
+
+export const ToggleIcon = styled(Icon)`
+`
 
