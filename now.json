@@ -3,11 +3,11 @@
   "name": "waves-items-webapp",
   "build": {
     "env": {
-      "REACT_APP_GRAPHQL_ENDPOINT": "https://waves-items.vecheslav.now.sh/graphql"
+      "REACT_APP_GRAPHQL_ENDPOINT": "https://games-api.wavesplatform.com/graphql"
     }
   },
   "env": {
-    "REACT_APP_GRAPHQL_ENDPOINT": "https://waves-items.vecheslav.now.sh/graphql"
+    "REACT_APP_GRAPHQL_ENDPOINT": "https://games-api.wavesplatform.com/graphql"
   },
   "builds": [
     {

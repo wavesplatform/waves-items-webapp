@@ -1,10 +1,10 @@
 import { Component, ComponentProps, ElementType, ReactNode } from 'react'
 import React from 'react'
 import styled from 'styled-components'
-import { Box, BoxProps, Flex, FlexProps } from 'rebass'
+import { Box, BoxProps, Flex } from 'rebass'
 import { Link } from 'react-router-dom'
-import { space, themeGet } from 'styled-system'
-import { hexa, inheritLink, shadow } from '../globals'
+import { borders, BordersProps, space, themeGet } from 'styled-system'
+import { hexa, inheritLink, shadow, WavesCy } from '../globals'
 import { AuthConsumer, IAuthContext } from '../../contexts/auth'
 
 interface DropdownContainerProps extends BoxProps {
@@ -34,15 +34,19 @@ const DropdownList = styled(Flex)`
 `
 DropdownList.defaultProps = {
   as: 'ul',
-  p: 0,
+  pt: 0,
+  pb: 'base',
+  px: 0,
 }
 
-const DropdownItem = styled(Box)`
-  border-top: 1px solid ${themeGet('colors.grays.7')};
+const DropdownItem = styled(Box)<BoxProps & BordersProps>`
+  // border-top: 1px solid ${themeGet('colors.grays.7')};
+  ${borders};
 `
-DropdownItem.defaultProps = { as: 'li' }
+DropdownItem.defaultProps = { as: 'li', borderColor: 'grays.7' }
 
-const DropdownLink = styled(Flex)<FlexProps & ComponentProps<ElementType>>`
+const DropdownLink = styled(Box)<BoxProps & ComponentProps<ElementType>>`
+  display: block;
   cursor: pointer;
   ${inheritLink};
   ${space};
@@ -54,7 +58,13 @@ const DropdownLink = styled(Flex)<FlexProps & ComponentProps<ElementType>>`
     background-color: ${themeGet('bg.dropdownHover')};
   }
 `
-DropdownLink.defaultProps = { p: 'lg' }
+DropdownLink.defaultProps = { py: 'base', px: 'lg' }
+
+const Balance = styled(Box)`
+  display: block;
+  cursor: default;
+`
+Balance.defaultProps = { py: 'base', px: 'lg' }
 
 interface IProps {
   isShown?: boolean
@@ -79,8 +89,11 @@ class ProfileDropdown extends Component<IProps> {
         {({ signOut }: IAuthContext) => (
           <DropdownContainer isShown={isShown}>
             <DropdownList>
+              <DropdownItem borderBottom={'1px solid'}>
+                <Balance>Balance: 23 <WavesCy/></Balance>
+              </DropdownItem>
               <DropdownItem>
-                <DropdownLink as={Link} to={'/profile'}>My Profile</DropdownLink>
+                <DropdownLink as={Link} to={'/profile'}>Profile</DropdownLink>
               </DropdownItem>
               <DropdownItem>
                 <DropdownLink onClick={signOut}>Logout</DropdownLink>
