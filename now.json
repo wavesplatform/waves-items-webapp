@@ -1,13 +1,12 @@
 {
   "version": 2,
   "name": "waves-items-webapp",
+  "alias": "games.wavesplatform.com",
   "build": {
     "env": {
+      "REACT_APP_NETWORK_CODE": "M",
       "REACT_APP_GRAPHQL_ENDPOINT": "https://games-api.wavesplatform.com/graphql"
     }
-  },
-  "env": {
-    "REACT_APP_GRAPHQL_ENDPOINT": "https://games-api.wavesplatform.com/graphql"
   },
   "builds": [
     {
