@@ -1,6 +1,7 @@
 import { Box, BoxProps } from 'rebass'
 import styled, { css } from 'styled-components'
 import { themeGet } from 'styled-system'
+import { Button } from '../../components/buttons'
 
 export const ItemsContainer = styled(Box)`
   display: block;
@@ -32,3 +33,13 @@ export const ItemSide = styled(Box)<ItemSideProps>`
   opacity: ${props => (props.isActive ? 1 : 0)};
   padding-left: calc(${themeGet('space.lg')}px / 2); 
 `
+
+export const LoadMoreButton = styled(Button)`
+  width: 100%;
+  display: block;
+`
+LoadMoreButton.defaultProps = {
+  ...LoadMoreButton.defaultProps,
+  py: 'base',
+  mx: 'auto',
+}

@@ -22,14 +22,14 @@ export interface ItemQuery_item_pair {
 
 export interface ItemQuery_item_bids {
   __typename: "AmountPrice";
-  amount: number;
-  price: number;
+  amount: string;
+  price: string;
 }
 
 export interface ItemQuery_item_asks {
   __typename: "AmountPrice";
-  amount: number;
-  price: number;
+  amount: string;
+  price: string;
 }
 
 export interface ItemQuery_item {

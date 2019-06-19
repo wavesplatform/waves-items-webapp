@@ -18,7 +18,7 @@ export type WithImage<P> = P & {
 
 export interface IUser extends WithImage<{}> {
   id?: string
-  name?: string
+  name?: string | null
   email?: string
   address: string
   publicKey?: string

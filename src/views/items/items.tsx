@@ -1,30 +1,22 @@
 import React, { Component, ReactNode } from 'react'
-import { IDefaultResult, IItem } from '../../types'
 import { ChildProps, graphql } from 'react-apollo'
-import { getItemsQuery } from '../../graphql/queries/getItems'
-import { ItemsQuery } from '../../graphql/queries/__generated__/ItemsQuery'
 import ItemGrid from '../../components/itemGrid'
-import { ItemsContainer, ItemSide, ItemsSide } from './style'
-import { ItemFilter } from '../../../__generated__/globalTypes'
+import { ItemsContainer, ItemSide, ItemsSide, LoadMoreButton } from './style'
 import { Item } from './index'
-import { StickyContainer, Sticky } from 'react-sticky'
+import { Sticky, StickyContainer } from 'react-sticky'
 import { Box } from 'rebass'
 import theme from '../../styles/theme'
+import { getMoreItemsQuery } from '../../graphql/queries/getItems'
+import { MoreItemsQuery, MoreItemsQueryVariables } from '../../graphql/queries/__generated__/MoreItemsQuery'
 
 interface IProps {
   address?: string
 }
 
-interface IData extends ItemsQuery, IDefaultResult {
-}
+type TData = MoreItemsQuery
+type TVariables = MoreItemsQueryVariables
 
-interface IVariables {
-  filter?: ItemFilter
-  // offset: number
-  // limit: number
-}
-
-type TChildProps = ChildProps<IProps, IData, IVariables>
+type TChildProps = ChildProps<IProps, TData, TVariables>
 
 class Items extends Component<TChildProps> {
   state = {
@@ -44,20 +36,24 @@ class Items extends Component<TChildProps> {
   }
 
   render(): ReactNode {
-    const data = this.props.data as IData
-    const { loading, error } = data
+    const { loading, error, items: connection } = this.props.data!
     const assetId = this.state.selectedAssetId
 
-    if (loading) {
+    if (!connection) {
       return <div>Loading...</div>
     }
-    const items = data.items as IItem[]
+
+    const { pageInfo, edges } = connection
+    const items = (edges || []).map(edge => edge.node)
     const stickyOffset = theme.header.height + theme.space.lg
 
     return (
       <ItemsContainer as={StickyContainer}>
         <ItemsSide constrain={!!assetId}>
-          <ItemGrid items={items || []} selectItem={this.selectAssetId}/>
+          <ItemGrid items={items} selectItem={this.selectAssetId}/>
+          {pageInfo.hasNextPage && <LoadMoreButton mt={'lg'} onClick={this._loadMore} disabled={loading}>
+            {loading ? 'Loading...' : 'Load more'}
+          </LoadMoreButton>}
         </ItemsSide>
         <ItemSide isActive={!!assetId}>
           {assetId && <Sticky topOffset={-stickyOffset} bottomOffset={0}>
@@ -82,15 +78,52 @@ class Items extends Component<TChildProps> {
       </ItemsContainer>
     )
   }
+
+  _loadMore = () => {
+    const { fetchMore, variables, items: connection } = this.props.data!
+    const { pageInfo } = connection!
+
+    fetchMore({
+      variables: {
+        ...variables,
+        after: pageInfo.endCursor,
+      },
+      updateQuery: (prev, { fetchMoreResult }) => {
+        if (!fetchMoreResult || !fetchMoreResult.items) {
+          return prev
+        }
+
+        const prevItems = prev.items!
+        const newEdges = fetchMoreResult.items.edges!
+        const pageInfo = fetchMoreResult.items.pageInfo
+
+        return newEdges.length ? {
+          ...prev,
+          items: {
+            ...prevItems,
+            pageInfo: {
+              ...prevItems.pageInfo,
+              ...pageInfo,
+            },
+            edges: [
+              ...prevItems.edges!,
+              ...newEdges!,
+            ],
+          },
+        } : prev
+      },
+    })
+  }
 }
 
-const withItems = graphql<IProps, IData, IVariables>(getItemsQuery, {
+const withItems = graphql<IProps, TData, TVariables>(getMoreItemsQuery, {
   options: props => ({
     fetchPolicy: 'cache-and-network',
     variables: {
       filter: {
         gameAddress: props.address,
       },
+      first: 20,
     },
   }),
 })
