@@ -12,6 +12,7 @@ export interface GameQuery_user {
   address: string;
   name: string | null;
   image: any | null;
+  totalItems: number | null;
 }
 
 export interface GameQuery {

@@ -785,6 +785,18 @@
             "deprecationReason": null
           },
           {
+            "name": "totalItems",
+            "description": "",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "image",
             "description": "",
             "args": [],
