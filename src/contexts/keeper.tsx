@@ -12,10 +12,10 @@ interface IKeeperState extends Partial<IPublicState> {
 export interface IKeeperContext {
   installed: boolean
   hasAccounts: boolean
-  state: IKeeperState
+  publicState: IKeeperState
 }
 
-const defaultKeeperContext: IKeeperContext = { installed: false, hasAccounts: false, state: {} }
+const defaultKeeperContext: IKeeperContext = { installed: false, hasAccounts: false, publicState: {} }
 
 export const KeeperContext = createContext<IKeeperContext>(defaultKeeperContext)
 
@@ -26,7 +26,7 @@ class KeeperProviderBase extends Component<WithApolloClient<IProps>, IKeeperCont
     super(props)
 
     // const publicState = keeperHelper.getPublicState()
-    // this.state = {
+    // this.publicState = {
     //   ...publicState,
     // }
   }
@@ -42,22 +42,26 @@ class KeeperProviderBase extends Component<WithApolloClient<IProps>, IKeeperCont
 
       this.setState({ installed: true })
 
-      keeper.on('update', (state: IPublicState) => {
+      keeper.on('update', (publicState: IPublicState) => {
 
-        const { account } = state
+        const { account } = publicState
 
         // TODO: temp check changes
-        if (account && this.state.state && this.state.state.account &&
-          account.address === this.state.state.account.address) {
-          return
+        if (account && this.state.publicState && this.state.publicState.account) {
+          if (
+            account.address === this.state.publicState.account.address &&
+            account.balance === this.state.publicState.account.balance
+          ) {
+            return
+          }
         }
 
-        this.setState({ state, hasAccounts: account != undefined })
+        this.setState({ publicState, hasAccounts: account != undefined })
       })
 
       const publicState = await keeper.publicState()
 
-      this.setState({ state: publicState, hasAccounts: true })
+      this.setState({ publicState, hasAccounts: true })
 
     } catch (err) {
       // TODO: need replace to const
@@ -73,7 +77,7 @@ class KeeperProviderBase extends Component<WithApolloClient<IProps>, IKeeperCont
     console.log('KeeperProvider render()')
     return (
       <KeeperContext.Provider value={{
-        state: this.state.state,
+        publicState: this.state.publicState,
         hasAccounts: this.state.hasAccounts,
         installed: this.state.installed,
       }}>

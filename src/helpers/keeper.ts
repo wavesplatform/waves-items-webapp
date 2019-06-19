@@ -15,7 +15,7 @@ export interface IPublicState {
   locked?: boolean
   account?: {
     address: string
-    balance: { available: number, leasedOut: number }
+    balance: { available: string, leasedOut: string }
     name: string
     networkCode: string
     publicKey: string

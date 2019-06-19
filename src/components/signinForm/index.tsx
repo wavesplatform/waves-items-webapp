@@ -28,8 +28,8 @@ class SigninForm extends Component<IProps & IKeeperContext> {
   state: ISigninState = {}
 
   render(): ReactNode {
-    const { installed, hasAccounts, state } = this.props
-    const { account, network } = state
+    const { installed, hasAccounts, publicState } = this.props
+    const { account, network } = publicState
 
     if (!installed) {
       return (

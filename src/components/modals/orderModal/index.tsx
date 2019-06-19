@@ -111,7 +111,7 @@ class OrderModal extends Component<IProps> {
 
   _confirm = async () => {
     const { item, keeperContext, type } = this.props
-    const { state: { network } } = keeperContext
+    const { publicState: { network } } = keeperContext
 
     if (!keeperHelper.keeper || !network) {
       return

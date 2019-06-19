@@ -53,7 +53,7 @@ class AuthProviderBase extends Component<WithApolloClient<IProps>> {
 
   componentDidUpdate(prevProps: Readonly<WithApolloClient<IProps>>, prevState: Readonly<{}>, snapshot?: any): void {
     // Account from keeper
-    const { state: { account, network } } = this.context
+    const { publicState: { account, network } } = this.context
     if (account) {
       const { address, publicKey } = account
 
