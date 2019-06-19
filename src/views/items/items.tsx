@@ -47,8 +47,13 @@ class Items extends Component<TChildProps> {
     const items = (edges || []).map(edge => edge.node)
     const stickyOffset = theme.header.height + theme.space.lg
 
+    if (assetId) {
+      // TODO: hook to force update sticky
+      window.dispatchEvent(new Event('scroll'))
+    }
+
     return (
-      <ItemsContainer as={StickyContainer}>
+      <ItemsContainer>
         <ItemsSide constrain={!!assetId}>
           <ItemGrid items={items} selectItem={this.selectAssetId}/>
           {pageInfo.hasNextPage && <LoadMoreButton mt={'lg'} onClick={this._loadMore} disabled={loading}>
@@ -56,24 +61,26 @@ class Items extends Component<TChildProps> {
           </LoadMoreButton>}
         </ItemsSide>
         <ItemSide isActive={!!assetId}>
-          {assetId && <Sticky topOffset={-stickyOffset} bottomOffset={0}>
-            {({ style, isSticky, distanceFromTop, distanceFromBottom }) => {
-              return (
-                <Box style={distanceFromBottom > stickyOffset ? {
-                  ...style,
-                  top: stickyOffset,
-                } : (isSticky && {
-                  ...style,
-                  position: 'absolute',
-                  top: 'auto',
-                  left: 'auto',
-                  bottom: 0,
-                }) || {}}>
-                  <Item assetId={assetId}/>
-                </Box>
-              )
-            }}
-          </Sticky>}
+          <StickyContainer style={{ height: '100%' }}>
+            {assetId && <Sticky topOffset={-stickyOffset} bottomOffset={0}>
+              {({ style, isSticky, distanceFromTop, distanceFromBottom }) => {
+                return (
+                  <Box style={distanceFromBottom > stickyOffset ? {
+                    ...style,
+                    top: stickyOffset,
+                  } : (isSticky && {
+                    ...style,
+                    position: 'absolute',
+                    top: 'auto',
+                    left: 'auto',
+                    bottom: 0,
+                  }) || {}}>
+                    <Item assetId={assetId}/>
+                  </Box>
+                )
+              }}
+            </Sticky>}
+          </StickyContainer>
         </ItemSide>
       </ItemsContainer>
     )
