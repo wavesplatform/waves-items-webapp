@@ -13,9 +13,16 @@ export interface IKeeperContext {
   installed: boolean
   hasAccounts: boolean
   publicState: IKeeperState
+  checkPublicState: () => void
 }
 
-const defaultKeeperContext: IKeeperContext = { installed: false, hasAccounts: false, publicState: {} }
+const defaultKeeperContext: IKeeperContext = {
+  installed: false,
+  hasAccounts: false,
+  publicState: {},
+  checkPublicState: () => {
+  },
+}
 
 export const KeeperContext = createContext<IKeeperContext>(defaultKeeperContext)
 
@@ -29,6 +36,22 @@ class KeeperProviderBase extends Component<WithApolloClient<IProps>, IKeeperCont
     // this.publicState = {
     //   ...publicState,
     // }
+  }
+
+  checkPublicState = async () => {
+    const { account } = this.state.publicState
+    const keeper = keeperHelper.keeper
+
+    if (!account && keeper) {
+      try {
+        const publicState = await keeper.publicState()
+        this.setState({ publicState, hasAccounts: true })
+      } catch (err) {
+        if (err.code === 14) {
+          this.setState({ hasAccounts: false })
+        }
+      }
+    }
   }
 
   async componentDidMount() {
@@ -59,10 +82,9 @@ class KeeperProviderBase extends Component<WithApolloClient<IProps>, IKeeperCont
         this.setState({ publicState, hasAccounts: account != undefined })
       })
 
-      const publicState = await keeper.publicState()
-
-      this.setState({ publicState, hasAccounts: true })
-
+      // const publicState = await keeper.publicState()
+      //
+      // this.setState({ publicState, hasAccounts: true })
     } catch (err) {
       // TODO: need replace to const
       if (err.code === 14) {
@@ -78,6 +100,7 @@ class KeeperProviderBase extends Component<WithApolloClient<IProps>, IKeeperCont
     return (
       <KeeperContext.Provider value={{
         publicState: this.state.publicState,
+        checkPublicState: this.checkPublicState,
         hasAccounts: this.state.hasAccounts,
         installed: this.state.installed,
       }}>
