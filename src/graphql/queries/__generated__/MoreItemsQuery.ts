@@ -14,6 +14,7 @@ export interface MoreItemsQuery_items_edges_node_game {
   address: string;
   name: string | null;
   image: any | null;
+  totalItems: number | null;
 }
 
 export interface MoreItemsQuery_items_edges_node {

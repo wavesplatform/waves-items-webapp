@@ -25,6 +25,7 @@ export interface IUser extends WithImage<{}> {
 }
 
 export interface IGame extends IUser {
+  totalItems?: number | null
 }
 
 export type AmountPricePair = {

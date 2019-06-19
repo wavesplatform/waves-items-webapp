@@ -5,7 +5,6 @@ export const getGameQuery = gql`
   query GameQuery($address: String!) {
     user(address: $address) {
       ...gameInfo
-      totalItems
     }
   }
   ${gameInfoFragment}

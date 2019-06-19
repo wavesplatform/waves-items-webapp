@@ -12,6 +12,7 @@ export interface GamesQuery_games {
   address: string;
   name: string | null;
   image: any | null;
+  totalItems: number | null;
 }
 
 export interface GamesQuery {
