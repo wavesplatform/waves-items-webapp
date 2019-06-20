@@ -5,7 +5,7 @@ import { themeGet } from 'styled-system'
 export const Overview = styled(Box)`
   position: relative;
   padding: ${themeGet('space.base')}px 0;
-  margin-top: -70px;
+  margin-top: -100px;
 `
 
 export const ImageWrapper = styled(Box)`
@@ -14,7 +14,7 @@ export const ImageWrapper = styled(Box)`
 
   img {
     max-width: 100%;
-    max-height: 160px;
+    max-height: 210px;
     margin: 0 auto;
     height: auto;
     display: block;

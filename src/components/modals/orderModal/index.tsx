@@ -4,7 +4,7 @@ import { modalStyles } from '../style'
 import { Button } from '../../buttons'
 import { Box, Flex, Image, Text } from 'rebass'
 import { Form } from '../../globals'
-import { TextInput, TextInputWithUnit } from '../../inputs'
+import { NumberInput, TextInput, TextInputWithUnit } from '../../inputs'
 import keeperHelper, { IWavesNetworkCode } from '../../../helpers/keeper'
 import { config } from '../../../config/config'
 import { IModalProps } from '../index'
@@ -28,14 +28,16 @@ interface IProps extends IModalProps {
 interface IState {
   amount: string
   price: string
-  period: number
+  period: string
 }
+
+const defaultPeriod = '86400'
 
 class OrderModal extends Component<IProps> {
   state: IState = {
     amount: '1',
     price: '0.001',
-    period: 86400,
+    period: defaultPeriod,
   }
 
   constructor(props: IProps) {
@@ -60,6 +62,7 @@ class OrderModal extends Component<IProps> {
       >
         <ModalContainer
           title={type === 'buy' ? 'Buy Item' : 'Sell Item'}
+          ignoreHeader={true}
           onClose={() => {
             setShow(false)
           }}
@@ -86,12 +89,12 @@ class OrderModal extends Component<IProps> {
             </Flex>
             <Flex justifyContent={'space-between'} alignItems={'flex-end'}>
               <Box width={1 / 2}>
-                <TextInput value={this.state.period}
-                           onChange={this._changePeriod}
-                >Period (in seconds)</TextInput>
+                <NumberInput value={this.state.period}
+                             onChange={this._changePeriod}
+                >Period (in seconds)</NumberInput>
               </Box>
               <Flex width={1 / 2} ml={'base'} justifyContent={'flex-end'}>
-                <Button type='submit' variant={'primary'}>Confirm</Button>
+                <Button type='submit' variant={'primary'} width={1}>{type === 'buy' ? 'Buy' : 'Sell'}</Button>
               </Flex>
             </Flex>
           </Form>
@@ -159,7 +162,7 @@ class OrderModal extends Component<IProps> {
           tokens: '0.003',
           assetId: config.wavesId,
         },
-        expiration: Date.now() + this.state.period,
+        expiration: Date.now() + parseInt(this.state.period || defaultPeriod, 10),
       },
     })
   }

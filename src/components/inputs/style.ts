@@ -82,6 +82,11 @@ StyledTextInput.defaultProps = {
   mt: 'sm',
 }
 
+export const StyledNumberInput = styled(StyledTextInput).attrs({
+  type: 'number',
+})`
+`
+
 export const StyledInputWrapper = styled(StyledInput)`
   display: flex;
 `
