@@ -10,6 +10,7 @@ import { Button } from '../buttons'
 import { TextInput } from '../inputs'
 import { Form, Small } from '../globals'
 import { Toast } from '../toasts'
+import { isFirefox } from '../../helpers/browser'
 
 class SigninMutation extends Mutation<Signin, SigninVariables> {
 }
@@ -43,7 +44,11 @@ class SigninForm extends Component<IProps & IKeeperContext> {
           <Button
             as={'a'}
             variant='primary'
-            href='https://chrome.google.com/webstore/detail/waves-keeper/lpilbniiabackdjcionkobglmddfbcjo'
+            href={
+              isFirefox() ?
+                'https://addons.mozilla.org/ru/firefox/addon/waves-keeper/' :
+                'https://chrome.google.com/webstore/detail/waves-keeper/lpilbniiabackdjcionkobglmddfbcjo'
+            }
             target='_blank'
           >Install Keeper</Button>
         </>
