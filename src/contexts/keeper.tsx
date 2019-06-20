@@ -45,6 +45,7 @@ class KeeperProviderBase extends Component<WithApolloClient<IProps>, IKeeperCont
     if (!account && keeper) {
       try {
         const publicState = await keeper.publicState()
+        keeperHelper.setPublicState(publicState)
         this.setState({ publicState, hasAccounts: true })
       } catch (err) {
         if (err.code === 14) {
@@ -79,12 +80,12 @@ class KeeperProviderBase extends Component<WithApolloClient<IProps>, IKeeperCont
           }
         }
 
-        this.setState({ publicState, hasAccounts: account != undefined })
+        keeperHelper.setPublicState(publicState)
+        this.setState({ publicState, hasAccounts: !!account })
       })
 
-      // const publicState = await keeper.publicState()
-      //
-      // this.setState({ publicState, hasAccounts: true })
+      const publicState = keeperHelper.getPublicState()
+      publicState && this.setState({ publicState, hasAccounts: !!publicState.account })
     } catch (err) {
       // TODO: need replace to const
       if (err.code === 14) {
