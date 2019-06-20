@@ -4,6 +4,7 @@ import { GamesQuery } from '../../graphql/queries/__generated__/GamesQuery'
 import { getGamesQuery } from '../../graphql/queries/getGames'
 import { GameLink, GamesSliderContainer } from './style'
 import { GameCard } from '../../components/gameCard'
+import { Loading } from '../../components/loading'
 
 interface IProps {
 }
@@ -18,7 +19,7 @@ class GamesSlider extends Component<TChildProps> {
     const { games, loading, error } = this.props.data!
 
     if (loading) {
-      return <div>Loading...</div>
+      return <Loading/>
     }
 
     const renderGames = (games || []).map(game => (

@@ -4,6 +4,7 @@ import { ChildProps, graphql } from 'react-apollo'
 import { getItemByAssetIdQuery } from '../../graphql/queries/getItem'
 import { ItemQuery } from '../../graphql/queries/__generated__/ItemQuery'
 import ItemDetail from '../../components/itemDetail'
+import { Loading } from '../../components/loading'
 
 interface IProps {
   assetId: string
@@ -26,7 +27,7 @@ class Item extends Component<TChildProps> {
     const { loading, error } = data
 
     if (loading) {
-      return <div>Loading...</div>
+      return <Loading/>
     }
 
     const item = data.item as IItem

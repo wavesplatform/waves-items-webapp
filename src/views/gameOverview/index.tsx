@@ -17,6 +17,7 @@ import { H1 } from '../../components/globals'
 import { UserAvatar } from '../../components/image'
 import { Button } from '../../components/buttons'
 import { Redirect } from 'react-router'
+import { Loading } from '../../components/loading'
 
 interface IProps {
   address: string
@@ -32,7 +33,7 @@ export class GameOverview extends Component<TChildProps> {
     const { user: game, loading, error } = this.props.data!
 
     if (loading) {
-      return <GameOverviewContainer>Loading...</GameOverviewContainer>
+      return <GameOverviewContainer><Loading/></GameOverviewContainer>
     }
 
     if (!game) {

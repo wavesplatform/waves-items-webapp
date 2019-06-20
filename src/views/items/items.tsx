@@ -8,6 +8,7 @@ import { Box } from 'rebass'
 import theme from '../../styles/theme'
 import { getMoreItemsQuery } from '../../graphql/queries/getItems'
 import { MoreItemsQuery, MoreItemsQueryVariables } from '../../graphql/queries/__generated__/MoreItemsQuery'
+import { Loading } from '../../components/loading'
 
 interface IProps {
   address?: string
@@ -40,7 +41,7 @@ class Items extends Component<TChildProps> {
     const assetId = this.state.selectedAssetId
 
     if (!connection) {
-      return <div>Loading...</div>
+      return <Loading/>
     }
 
     const { pageInfo, edges } = connection
