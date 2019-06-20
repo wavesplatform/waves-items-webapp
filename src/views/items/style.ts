@@ -34,12 +34,7 @@ export const ItemSide = styled(Box)<ItemSideProps>`
   padding-left: calc(${themeGet('space.lg')}px / 2); 
 `
 
-export const LoadMoreButton = styled(Button)`
+export const LoadMoreButton = styled(Button).attrs({ size: 'lg' })`
   width: 100%;
   display: block;
 `
-LoadMoreButton.defaultProps = {
-  ...LoadMoreButton.defaultProps,
-  py: 'base',
-  mx: 'auto',
-}

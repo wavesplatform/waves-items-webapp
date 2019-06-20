@@ -1,23 +1,21 @@
 import React from 'react'
-import { ButtonProps } from 'rebass'
-import { StyledButton, StyledIconButton } from './style'
+import { StyledButton, StyledButtonProps, StyledIconButton } from './style'
 import { Icon } from '../icon'
 
-interface IButtonProps extends ButtonProps {
-}
+type TButtonProps = StyledButtonProps
 
-export const Button = (props: IButtonProps) => (
+export const Button = (props: TButtonProps) => (
   // @ts-ignore
   <StyledButton {...props}>
     {props.children}
   </StyledButton>
 )
 
-interface IIconButtonProps extends IButtonProps {
+type TIconButtonProps = TButtonProps & {
   glyph: string
 }
 
-export const IconButton = (props: IIconButtonProps) => (
+export const IconButton = (props: TIconButtonProps) => (
   // @ts-ignore
   <StyledIconButton {...props}>
     <Icon glyph={props.glyph}/>

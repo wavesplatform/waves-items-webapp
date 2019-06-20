@@ -125,6 +125,19 @@ const buttons = {
   primary: {
     backgroundColor: colors.primary,
   },
+  light: {
+    backgroundColor: colors.default,
+    color: bg.default,
+  },
+}
+
+const buttonSizes = {
+  lg: {
+    paddingTop: space.md,
+    paddingBottom: space.md,
+    paddingLeft: space.lg,
+    paddingRight: space.lg,
+  },
 }
 
 const header = {
@@ -142,6 +155,7 @@ export default {
   fonts,
   radii,
   buttons,
+  buttonSizes,
   avatars,
   icons,
   toasts,

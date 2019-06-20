@@ -1,13 +1,25 @@
 import styled from 'styled-components'
 import { Button, ButtonProps } from 'rebass'
+import { variant } from 'styled-system'
 
-export const StyledButton = styled(Button)<ButtonProps>`
+const buttonSizeStyle = variant({
+  key: 'buttonSizes',
+  prop: 'size',
+})
+
+export interface StyledButtonProps extends Pick<ButtonProps, Exclude<keyof ButtonProps, 'size'>> {
+  size?: string
+}
+
+export const StyledButton = styled(Button)<StyledButtonProps>`
   cursor: pointer;
   
   &:hover,
   &:focus {
     opacity: .9;
   }
+  
+  ${buttonSizeStyle}
 `
 StyledButton.defaultProps = {
   ...StyledButton.defaultProps,

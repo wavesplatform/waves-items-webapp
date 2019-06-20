@@ -2,7 +2,7 @@ import React, { ChangeEvent, Component, FormEvent, ReactNode } from 'react'
 import { ModalContainer } from '../container'
 import { modalStyles } from '../style'
 import { Button } from '../../buttons'
-import { Box, Flex } from 'rebass'
+import { Box, Flex, Image, Text } from 'rebass'
 import { Form } from '../../globals'
 import { TextInput, TextInputWithUnit } from '../../inputs'
 import keeperHelper, { IWavesNetworkCode } from '../../../helpers/keeper'
@@ -10,6 +10,8 @@ import { config } from '../../../config/config'
 import { IModalProps } from '../index'
 import { IItem } from '../../../types'
 import { IKeeperContext } from '../../../contexts/keeper'
+import defaultImage from '../../globals/image.svg'
+import { ImageWrapper, Overview } from './style'
 
 const Modal = require('react-modal')
 Modal.setAppElement('#root')
@@ -33,7 +35,7 @@ class OrderModal extends Component<IProps> {
   state: IState = {
     amount: '1',
     price: '0.001',
-    period: 10000000,
+    period: 86400,
   }
 
   constructor(props: IProps) {
@@ -45,7 +47,7 @@ class OrderModal extends Component<IProps> {
   }
 
   render(): ReactNode {
-    const { show, setShow, type } = this.props
+    const { show, setShow, type, item } = this.props
     const styles = modalStyles(420)
 
     return (
@@ -62,8 +64,15 @@ class OrderModal extends Component<IProps> {
             setShow(false)
           }}
         >
+          <Overview>
+            <ImageWrapper>
+              <Image
+                src={item.imageUrl ? item.imageUrl : defaultImage}
+                alt={`Item #${item.id}`}/>
+            </ImageWrapper>
+          </Overview>
           <Form onSubmit={ev => this._handleSubmit(ev)}>
-            <Flex mt={-3}>
+            <Flex>
               <Box width={1 / 3}>
                 <TextInput value={this.state.amount}
                            onChange={this._changeAmount}
@@ -75,8 +84,15 @@ class OrderModal extends Component<IProps> {
                 >Price</TextInputWithUnit>
               </Box>
             </Flex>
-            <Flex mt={'base'} justifyContent={'flex-end'}>
-              <Button type='submit' variant='primary'>Confirm</Button>
+            <Flex justifyContent={'space-between'} alignItems={'flex-end'}>
+              <Box width={1 / 2}>
+                <TextInput value={this.state.period}
+                           onChange={this._changePeriod}
+                >Period (in seconds)</TextInput>
+              </Box>
+              <Flex width={1 / 2} ml={'base'} justifyContent={'flex-end'}>
+                <Button type='submit' variant={'primary'}>Confirm</Button>
+              </Flex>
             </Flex>
           </Form>
         </ModalContainer>
@@ -97,6 +113,14 @@ class OrderModal extends Component<IProps> {
 
     this.setState({
       price,
+    })
+  }
+
+  _changePeriod = (ev: ChangeEvent<HTMLInputElement>) => {
+    const period = ev.target.value
+
+    this.setState({
+      period,
     })
   }
 

@@ -87,7 +87,7 @@ class SigninForm extends Component<IProps & IKeeperContext> {
                          placeholder={'Your email'}
                          onChange={this._changeEmail}
               >Email <Small color={'placeholder'}>(optional)</Small></TextInput>
-              <Button type='submit' variant='primary' mt={'base'}>Sign In</Button>
+              <Button type='submit' variant='primary' size={'lg'} width={1} mt={'lg'}>Sign In</Button>
             </Form>
           )
         }}
