@@ -1,5 +1,12 @@
 import React, { ChangeEvent, PropsWithChildren } from 'react'
-import { InputUnit, StyledInputWrapper, StyledLabel, StyledNumberInput, StyledTextInput } from './style'
+import {
+  InputUnit,
+  StyledInputWrapper,
+  StyledLabel,
+  StyledNumberInput,
+  StyledSearchInput,
+  StyledTextInput
+} from './style'
 import { Box } from 'rebass'
 
 interface TextInputProps {
@@ -15,7 +22,7 @@ interface TextInputProps {
 export const TextInput = (props: PropsWithChildren<TextInputProps>) => {
   return (
     <StyledLabel {...props}>
-      <Box>{props.children}</Box>
+      {props.children && <Box>{props.children}</Box>}
       <StyledTextInput
         id={props.id}
         defaultValue={props.defaultValue}
@@ -75,6 +82,32 @@ export const NumberInput = (props: PropsWithChildren<NumberInputProps>) => {
     <StyledLabel {...props}>
       <Box>{props.children}</Box>
       <StyledNumberInput
+        id={props.id}
+        defaultValue={props.defaultValue}
+        value={props.value}
+        placeholder={props.placeholder}
+        onChange={props.onChange}
+        autoFocus={props.autoFocus}
+        disabled={props.disabled}
+      />
+    </StyledLabel>
+  )
+}
+
+interface SearchInputProps {
+  defaultValue?: string,
+  value?: any,
+  placeholder?: string,
+  onChange?: (ev: ChangeEvent<HTMLInputElement>) => void,
+  autoFocus?: boolean,
+  disabled?: boolean,
+  id?: string,
+}
+
+export const SearchInput = (props: PropsWithChildren<SearchInputProps>) => {
+  return (
+    <StyledLabel {...props} mt={0}>
+      <StyledSearchInput
         id={props.id}
         defaultValue={props.defaultValue}
         value={props.value}

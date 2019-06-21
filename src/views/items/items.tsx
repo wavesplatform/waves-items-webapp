@@ -1,7 +1,7 @@
 import React, { Component, ReactNode } from 'react'
 import { ChildProps, graphql } from 'react-apollo'
 import ItemGrid from '../../components/itemGrid'
-import { ItemsContainer, ItemSide, ItemsSide, LoadMoreButton } from './style'
+import { FiltersContainer, ItemsContainer, ItemSide, ItemsSide, LoadMoreButton } from './style'
 import { Item } from './index'
 import { Sticky, StickyContainer } from 'react-sticky'
 import { Box } from 'rebass'
@@ -9,6 +9,7 @@ import theme from '../../styles/theme'
 import { getMoreItemsQuery } from '../../graphql/queries/getItems'
 import { MoreItemsQuery, MoreItemsQueryVariables } from '../../graphql/queries/__generated__/MoreItemsQuery'
 import { Loading } from '../../components/loading'
+import { SearchInput } from '../../components/inputs'
 
 interface IProps {
   address?: string
@@ -54,36 +55,41 @@ class Items extends Component<TChildProps> {
     }
 
     return (
-      <ItemsContainer>
-        <ItemsSide constrain={!!assetId}>
-          <ItemGrid items={items} selectItem={this.selectAssetId}/>
-          {pageInfo.hasNextPage && <LoadMoreButton mt={'lg'} onClick={this._loadMore} disabled={loading}>
-            {loading ? 'Loading...' : 'Load more'}
-          </LoadMoreButton>}
-        </ItemsSide>
-        <ItemSide isActive={!!assetId}>
-          <StickyContainer style={{ height: '100%' }}>
-            {assetId && <Sticky topOffset={-stickyOffset} bottomOffset={0}>
-              {({ style, isSticky, distanceFromTop, distanceFromBottom }) => {
-                return (
-                  <Box style={distanceFromBottom > stickyOffset ? {
-                    ...style,
-                    top: stickyOffset,
-                  } : (isSticky && {
-                    ...style,
-                    position: 'absolute',
-                    top: 'auto',
-                    left: 'auto',
-                    bottom: 0,
-                  }) || {}}>
-                    <Item assetId={assetId}/>
-                  </Box>
-                )
-              }}
-            </Sticky>}
-          </StickyContainer>
-        </ItemSide>
-      </ItemsContainer>
+      <>
+        {/*<FiltersContainer mb={'lg'}>*/}
+        {/*<SearchInput placeholder={'Search all items...'}/>*/}
+        {/*</FiltersContainer>*/}
+        <ItemsContainer>
+          <ItemsSide constrain={!!assetId}>
+            <ItemGrid items={items} selectItem={this.selectAssetId}/>
+            {pageInfo.hasNextPage && <LoadMoreButton mt={'lg'} onClick={this._loadMore} disabled={loading}>
+              {loading ? 'Loading...' : 'Load more'}
+            </LoadMoreButton>}
+          </ItemsSide>
+          <ItemSide isActive={!!assetId}>
+            <StickyContainer style={{ height: '100%' }}>
+              {assetId && <Sticky topOffset={-stickyOffset} bottomOffset={0}>
+                {({ style, isSticky, distanceFromTop, distanceFromBottom }) => {
+                  return (
+                    <Box style={distanceFromBottom > stickyOffset ? {
+                      ...style,
+                      top: stickyOffset,
+                    } : (isSticky && {
+                      ...style,
+                      position: 'absolute',
+                      top: 'auto',
+                      left: 'auto',
+                      bottom: 0,
+                    }) || {}}>
+                      <Item assetId={assetId}/>
+                    </Box>
+                  )
+                }}
+              </Sticky>}
+            </StickyContainer>
+          </ItemSide>
+        </ItemsContainer>
+      </>
     )
   }
 

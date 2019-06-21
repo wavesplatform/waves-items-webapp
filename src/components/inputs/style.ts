@@ -108,3 +108,10 @@ InputUnit.defaultProps = {
   fontSize: 'sm',
   color: 'placeholder',
 }
+
+export const StyledSearchInput = styled(StyledTextInput)`
+`
+StyledSearchInput.defaultProps = {
+  ...StyledSearchInput.defaultProps,
+  mt: 0,
+}
