@@ -16,7 +16,7 @@ export const StyledLabel = styled(Flex)`
   position: relative;
   
   ${props => !props.disabled && css`
-    &:hover > input,
+    &:hover > ${StyledTextInput},
     &:hover > textarea,
     &:hover > ${StyledInputWrapper} {
       border-color: ${themeGet('colors.border.inputHover')};
@@ -109,9 +109,18 @@ InputUnit.defaultProps = {
   color: 'placeholder',
 }
 
-export const StyledSearchInput = styled(StyledTextInput)`
+export const StyledSearchInput = styled(StyledInput).attrs({
+  type: 'text',
+})`
+  &:focus {
+    background-color: ${themeGet('colors.bg.input')};
+    border-color: ${themeGet('colors.border.inputHover')};
+  }
 `
 StyledSearchInput.defaultProps = {
   ...StyledSearchInput.defaultProps,
+  as: 'input',
   mt: 0,
+  bg: 'bg.card',
+  borderColor: 'transparent',
 }

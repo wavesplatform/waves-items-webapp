@@ -56,9 +56,9 @@ class Items extends Component<TChildProps> {
 
     return (
       <>
-        {/*<FiltersContainer mb={'lg'}>*/}
-        {/*<SearchInput placeholder={'Search all items...'}/>*/}
-        {/*</FiltersContainer>*/}
+        <FiltersContainer mb={'lg'}>
+          <SearchInput placeholder={'Search all items...'}/>
+        </FiltersContainer>
         <ItemsContainer>
           <ItemsSide constrain={!!assetId}>
             <ItemGrid items={items} selectItem={this.selectAssetId}/>
