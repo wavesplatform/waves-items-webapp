@@ -29,6 +29,7 @@ class Routes extends Component {
 
         {/*Pages*/}
         <Route key='route-about' path='/about' component={PagesView}/>
+        <Route key='route-develop' path='/develop' component={PagesView}/>
 
         {/*Items*/}
         <Route key='route-items' path='/items/:address([0-9a-fA-f]{35})' component={Browse}/>

@@ -53,6 +53,9 @@ class Header extends Component<IProps> {
                   <NavItem>
                     <NavLink to={'/about'}>About</NavLink>
                   </NavItem>
+                  <NavItem>
+                    <NavLink to={'/develop'}>Develop</NavLink>
+                  </NavItem>
                 </Nav>
                 {/*Profile*/}
                 <Nav>
