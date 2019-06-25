@@ -4,7 +4,7 @@ import {
   StyledInputWrapper,
   StyledLabel,
   StyledNumberInput,
-  StyledSearchInput,
+  StyledFlatTextInput,
   StyledTextInput
 } from './style'
 import { Box } from 'rebass'
@@ -94,7 +94,7 @@ export const NumberInput = (props: PropsWithChildren<NumberInputProps>) => {
   )
 }
 
-interface SearchInputProps {
+interface FlatTextInputProps {
   defaultValue?: string,
   value?: any,
   placeholder?: string,
@@ -104,18 +104,16 @@ interface SearchInputProps {
   id?: string,
 }
 
-export const SearchInput = (props: PropsWithChildren<SearchInputProps>) => {
+export const FlatTextInput = (props: FlatTextInputProps) => {
   return (
-    <StyledLabel {...props} mt={0}>
-      <StyledSearchInput
-        id={props.id}
-        defaultValue={props.defaultValue}
-        value={props.value}
-        placeholder={props.placeholder}
-        onChange={props.onChange}
-        autoFocus={props.autoFocus}
-        disabled={props.disabled}
-      />
-    </StyledLabel>
+    <StyledFlatTextInput
+      id={props.id}
+      defaultValue={props.defaultValue}
+      value={props.value}
+      placeholder={props.placeholder}
+      onChange={props.onChange}
+      autoFocus={props.autoFocus}
+      disabled={props.disabled}
+    />
   )
 }

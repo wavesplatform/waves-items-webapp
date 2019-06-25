@@ -3,9 +3,6 @@ import styled, { css } from 'styled-components'
 import { themeGet } from 'styled-system'
 import { Button } from '../../components/buttons'
 
-export const FiltersContainer = styled(Box)`
-`
-
 export const ItemsContainer = styled(Box)`
   display: block;
   position: relative;

@@ -109,7 +109,7 @@ InputUnit.defaultProps = {
   color: 'placeholder',
 }
 
-export const StyledSearchInput = styled(StyledInput).attrs({
+export const StyledFlatTextInput = styled(StyledInput).attrs({
   type: 'text',
 })`
   &:focus {
@@ -117,8 +117,8 @@ export const StyledSearchInput = styled(StyledInput).attrs({
     border-color: ${themeGet('colors.border.inputHover')};
   }
 `
-StyledSearchInput.defaultProps = {
-  ...StyledSearchInput.defaultProps,
+StyledFlatTextInput.defaultProps = {
+  ...StyledFlatTextInput.defaultProps,
   as: 'input',
   mt: 0,
   bg: 'bg.card',
