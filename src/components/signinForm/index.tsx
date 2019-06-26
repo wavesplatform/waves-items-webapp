@@ -10,6 +10,7 @@ import { Button } from '../buttons'
 import { TextInput } from '../inputs'
 import { Form, Small } from '../globals'
 import { Toast } from '../toasts'
+import { isFirefox } from '../../helpers/browser'
 
 class SigninMutation extends Mutation<Signin, SigninVariables> {
 }
@@ -28,8 +29,10 @@ class SigninForm extends Component<IProps & IKeeperContext> {
   state: ISigninState = {}
 
   render(): ReactNode {
-    const { installed, hasAccounts, state } = this.props
-    const { account, network } = state
+    const { installed, hasAccounts, publicState, checkPublicState } = this.props
+    checkPublicState()
+
+    const { account, network } = publicState
 
     if (!installed) {
       return (
@@ -41,7 +44,11 @@ class SigninForm extends Component<IProps & IKeeperContext> {
           <Button
             as={'a'}
             variant='primary'
-            href='https://chrome.google.com/webstore/detail/waves-keeper/lpilbniiabackdjcionkobglmddfbcjo'
+            href={
+              isFirefox() ?
+                'https://addons.mozilla.org/ru/firefox/addon/waves-keeper/' :
+                'https://chrome.google.com/webstore/detail/waves-keeper/lpilbniiabackdjcionkobglmddfbcjo'
+            }
             target='_blank'
           >Install Keeper</Button>
         </>
@@ -85,7 +92,7 @@ class SigninForm extends Component<IProps & IKeeperContext> {
                          placeholder={'Your email'}
                          onChange={this._changeEmail}
               >Email <Small color={'placeholder'}>(optional)</Small></TextInput>
-              <Button type='submit' variant='primary' mt={'base'}>Sign In</Button>
+              <Button type='submit' variant='primary' size={'lg'} width={1} mt={'lg'}>Sign In</Button>
             </Form>
           )
         }}

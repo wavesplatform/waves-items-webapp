@@ -1,32 +1,27 @@
 import React, { Component, ReactNode } from 'react'
-import { IDefaultResult, IGame, IItem } from '../../types'
 import { ChildProps, graphql } from 'react-apollo'
 import { GamesQuery } from '../../graphql/queries/__generated__/GamesQuery'
 import { getGamesQuery } from '../../graphql/queries/getGames'
 import { GameLink, GamesSliderContainer } from './style'
 import { GameCard } from '../../components/gameCard'
+import { Loading } from '../../components/loading'
 
 interface IProps {
 }
 
-interface IData extends GamesQuery, IDefaultResult {
-}
+type TData = GamesQuery
+type TVariables = {}
 
-interface IVariables {
-}
-
-type TChildProps = ChildProps<IProps, IData, IVariables>
+type TChildProps = ChildProps<IProps, TData, TVariables>
 
 class GamesSlider extends Component<TChildProps> {
   render(): ReactNode {
-    const data = this.props.data as IData
-    const { loading, error } = data
+    const { games, loading, error } = this.props.data!
 
     if (loading) {
-      return <div>Loading...</div>
+      return <Loading/>
     }
 
-    const games = data.games as IGame[]
     const renderGames = (games || []).map(game => (
       <GameLink
         to={`/items/${game.address}`}
@@ -44,7 +39,7 @@ class GamesSlider extends Component<TChildProps> {
   }
 }
 
-const withGames = graphql<IProps, IData, IVariables>(getGamesQuery, {
+const withGames = graphql<IProps, TData, TVariables>(getGamesQuery, {
   options: {
     fetchPolicy: 'cache-and-network',
   },

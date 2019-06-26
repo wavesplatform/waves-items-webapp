@@ -1,8 +1,7 @@
 import React, { Component, ReactNode } from 'react'
 import { ChildProps, graphql } from 'react-apollo'
-import { IDefaultResult, IGame } from '../../types'
 import { getGameQuery } from '../../graphql/queries/getGame'
-import { GameQuery } from '../../graphql/queries/__generated__/GameQuery'
+import { GameQuery, GameQueryVariables } from '../../graphql/queries/__generated__/GameQuery'
 import {
   Banner,
   BannerContent,
@@ -18,30 +17,24 @@ import { H1 } from '../../components/globals'
 import { UserAvatar } from '../../components/image'
 import { Button } from '../../components/buttons'
 import { Redirect } from 'react-router'
+import { Loading } from '../../components/loading'
 
 interface IProps {
   address: string
 }
 
-interface IData extends GameQuery, IDefaultResult {
-}
+type TData = GameQuery
+type TVariables = GameQueryVariables
 
-interface IVariables {
-  address: string
-}
-
-type TChildProps = ChildProps<IProps, IData, IVariables>
+type TChildProps = ChildProps<IProps, TData, TVariables>
 
 export class GameOverview extends Component<TChildProps> {
   render(): ReactNode {
-    const data = this.props.data as IData
-    const { loading, error } = data
+    const { user: game, loading, error } = this.props.data!
 
     if (loading) {
-      return <GameOverviewContainer>Loading...</GameOverviewContainer>
+      return <GameOverviewContainer><Loading/></GameOverviewContainer>
     }
-
-    const game = data.user as IGame
 
     if (!game) {
       return <Redirect to={'/'}/>
@@ -66,7 +59,7 @@ export class GameOverview extends Component<TChildProps> {
           </BannerContent>
         </Banner>
         <Info>
-          <Text mb={'base'}>67 items</Text>
+          <Text mb={'base'}>{game.totalItems} items</Text>
           <Button>Start Play</Button>
         </Info>
       </GameOverviewContainer>
@@ -74,7 +67,7 @@ export class GameOverview extends Component<TChildProps> {
   }
 }
 
-const withGame = graphql<IProps, IData, IVariables>(getGameQuery, {
+const withGame = graphql<IProps, TData, TVariables>(getGameQuery, {
   options: props => ({
     fetchPolicy: 'cache-and-network',
     variables: {

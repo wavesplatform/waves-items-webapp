@@ -14,6 +14,7 @@ export const ItemDetailContainer = styled(Flex)<WithIsPage<FlexProps>>`
 
 export const LeftSide = styled(Box)`
   flex: 1;
+  min-width: 0;
 `
 
 export const RightSide = styled(Box)<WithIsPage<BoxProps>>`
@@ -26,7 +27,6 @@ export const RightSide = styled(Box)<WithIsPage<BoxProps>>`
 `
 
 export const Title = styled(H1)`
-  ${truncate};
 `
 
 export const Params = styled(Box)`

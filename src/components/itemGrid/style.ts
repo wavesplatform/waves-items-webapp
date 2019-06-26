@@ -6,7 +6,7 @@ import { inheritLink } from '../globals'
 
 export const ItemGridContainer = styled(Grid)`
   grid-gap: ${themeGet('space.lg')}px;
-  grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
 `
 
 export const ItemGridLink = styled(Link)`

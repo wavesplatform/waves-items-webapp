@@ -5,6 +5,7 @@ import { Redirect, RouteComponentProps } from 'react-router'
 import { AuthContext } from '../../contexts/auth'
 import SigninForm from '../../components/signinForm'
 import { SigninContainer } from './style'
+import { Box } from 'rebass'
 
 interface IProps extends RouteComponentProps {
 }
@@ -33,7 +34,9 @@ class SigninView extends Component<IProps> {
       <ViewWrapper>
         <SigninContainer>
           <H1>Sign In</H1>
-          <SigninForm/>
+          <Box mb={'lg'}>
+            <SigninForm/>
+          </Box>
         </SigninContainer>
       </ViewWrapper>
     )

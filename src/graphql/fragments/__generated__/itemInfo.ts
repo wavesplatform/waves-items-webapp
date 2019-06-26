@@ -12,6 +12,7 @@ export interface itemInfo_game {
   address: string;
   name: string | null;
   image: any | null;
+  totalItems: number | null;
 }
 
 export interface itemInfo {

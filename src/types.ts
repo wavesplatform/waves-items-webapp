@@ -18,13 +18,14 @@ export type WithImage<P> = P & {
 
 export interface IUser extends WithImage<{}> {
   id?: string
-  name?: string
+  name?: string | null
   email?: string
   address: string
   publicKey?: string
 }
 
 export interface IGame extends IUser {
+  totalItems?: number | null
 }
 
 export type AmountPricePair = {

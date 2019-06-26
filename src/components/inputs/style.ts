@@ -16,7 +16,7 @@ export const StyledLabel = styled(Flex)`
   position: relative;
   
   ${props => !props.disabled && css`
-    &:hover > input,
+    &:hover > ${StyledTextInput},
     &:hover > textarea,
     &:hover > ${StyledInputWrapper} {
       border-color: ${themeGet('colors.border.inputHover')};
@@ -82,6 +82,11 @@ StyledTextInput.defaultProps = {
   mt: 'sm',
 }
 
+export const StyledNumberInput = styled(StyledTextInput).attrs({
+  type: 'number',
+})`
+`
+
 export const StyledInputWrapper = styled(StyledInput)`
   display: flex;
 `
@@ -102,4 +107,20 @@ InputUnit.defaultProps = {
   px: 'base',
   fontSize: 'sm',
   color: 'placeholder',
+}
+
+export const StyledFlatTextInput = styled(StyledInput).attrs({
+  type: 'text',
+})`
+  &:focus {
+    background-color: ${themeGet('colors.bg.input')};
+    border-color: ${themeGet('colors.border.inputHover')};
+  }
+`
+StyledFlatTextInput.defaultProps = {
+  ...StyledFlatTextInput.defaultProps,
+  as: 'input',
+  mt: 0,
+  bg: 'bg.card',
+  borderColor: 'transparent',
 }

@@ -2,14 +2,16 @@ import React, { ChangeEvent, Component, FormEvent, ReactNode } from 'react'
 import { ModalContainer } from '../container'
 import { modalStyles } from '../style'
 import { Button } from '../../buttons'
-import { Box, Flex } from 'rebass'
+import { Box, Flex, Image, Text } from 'rebass'
 import { Form } from '../../globals'
-import { TextInput, TextInputWithUnit } from '../../inputs'
+import { NumberInput, TextInput, TextInputWithUnit } from '../../inputs'
 import keeperHelper, { IWavesNetworkCode } from '../../../helpers/keeper'
 import { config } from '../../../config/config'
 import { IModalProps } from '../index'
 import { IItem } from '../../../types'
 import { IKeeperContext } from '../../../contexts/keeper'
+import defaultImage from '../../globals/image.svg'
+import { ImageWrapper, Overview } from './style'
 
 const Modal = require('react-modal')
 Modal.setAppElement('#root')
@@ -26,14 +28,16 @@ interface IProps extends IModalProps {
 interface IState {
   amount: string
   price: string
-  period: number
+  period: string
 }
+
+const defaultPeriod = '86400'
 
 class OrderModal extends Component<IProps> {
   state: IState = {
     amount: '1',
     price: '0.001',
-    period: 10000000,
+    period: defaultPeriod,
   }
 
   constructor(props: IProps) {
@@ -45,7 +49,7 @@ class OrderModal extends Component<IProps> {
   }
 
   render(): ReactNode {
-    const { show, setShow, type } = this.props
+    const { show, setShow, type, item } = this.props
     const styles = modalStyles(420)
 
     return (
@@ -58,12 +62,20 @@ class OrderModal extends Component<IProps> {
       >
         <ModalContainer
           title={type === 'buy' ? 'Buy Item' : 'Sell Item'}
+          ignoreHeader={true}
           onClose={() => {
             setShow(false)
           }}
         >
+          <Overview>
+            <ImageWrapper>
+              <Image
+                src={item.imageUrl ? item.imageUrl : defaultImage}
+                alt={`Item #${item.id}`}/>
+            </ImageWrapper>
+          </Overview>
           <Form onSubmit={ev => this._handleSubmit(ev)}>
-            <Flex mt={-3}>
+            <Flex>
               <Box width={1 / 3}>
                 <TextInput value={this.state.amount}
                            onChange={this._changeAmount}
@@ -75,8 +87,15 @@ class OrderModal extends Component<IProps> {
                 >Price</TextInputWithUnit>
               </Box>
             </Flex>
-            <Flex mt={'base'} justifyContent={'flex-end'}>
-              <Button type='submit' variant='primary'>Confirm</Button>
+            <Flex justifyContent={'space-between'} alignItems={'flex-end'}>
+              <Box width={1 / 2}>
+                <NumberInput value={this.state.period}
+                             onChange={this._changePeriod}
+                >Period (in seconds)</NumberInput>
+              </Box>
+              <Flex width={1 / 2} ml={'base'} justifyContent={'flex-end'}>
+                <Button type='submit' variant={'primary'} width={1}>{type === 'buy' ? 'Buy' : 'Sell'}</Button>
+              </Flex>
             </Flex>
           </Form>
         </ModalContainer>
@@ -100,6 +119,14 @@ class OrderModal extends Component<IProps> {
     })
   }
 
+  _changePeriod = (ev: ChangeEvent<HTMLInputElement>) => {
+    const period = ev.target.value
+
+    this.setState({
+      period,
+    })
+  }
+
   _handleSubmit = async (ev: FormEvent) => {
     ev.preventDefault()
     const { show, setShow } = this.props
@@ -111,7 +138,7 @@ class OrderModal extends Component<IProps> {
 
   _confirm = async () => {
     const { item, keeperContext, type } = this.props
-    const { state: { network } } = keeperContext
+    const { publicState: { network } } = keeperContext
 
     if (!keeperHelper.keeper || !network) {
       return
@@ -135,7 +162,7 @@ class OrderModal extends Component<IProps> {
           tokens: '0.003',
           assetId: config.wavesId,
         },
-        expiration: Date.now() + this.state.period,
+        expiration: Date.now() + parseInt(this.state.period || defaultPeriod, 10),
       },
     })
   }

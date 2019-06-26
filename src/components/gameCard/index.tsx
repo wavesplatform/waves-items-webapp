@@ -30,7 +30,7 @@ export const GameCard = (props: IGameCardProps) => {
           >
             {game.name}
           </Title>
-          <Text color={'grays.4'}>67 items</Text>
+          <Text color={'grays.4'}>{game.totalItems} items</Text>
         </Flex>
       </Inner>
     </GameCardContainer>

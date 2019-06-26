@@ -6,6 +6,7 @@ import { H2 } from '../../components/globals'
 import { getUserItemsQuery } from '../../graphql/queries/getUserItems'
 import InventoryGrid from '../../components/inventoryGrid'
 import { UserItemsQuery } from '../../graphql/queries/__generated__/UserItemsQuery'
+import { Loading } from '../../components/loading'
 
 interface IProps {
   address: string
@@ -27,7 +28,7 @@ class Inventory extends Component<TChildProps> {
     const { loading, error } = data
 
     if (loading) {
-      return <div>Loading...</div>
+      return <Loading/>
     }
 
     const items = (data.userItems || []) as IItem[]

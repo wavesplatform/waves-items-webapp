@@ -14,14 +14,14 @@ export interface ordersInfo_pair {
 
 export interface ordersInfo_bids {
   __typename: "AmountPrice";
-  amount: number;
-  price: number;
+  amount: string;
+  price: string;
 }
 
 export interface ordersInfo_asks {
   __typename: "AmountPrice";
-  amount: number;
-  price: number;
+  amount: string;
+  price: string;
 }
 
 export interface ordersInfo {

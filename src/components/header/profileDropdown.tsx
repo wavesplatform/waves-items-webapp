@@ -1,11 +1,12 @@
-import { Component, ComponentProps, ElementType, ReactNode } from 'react'
-import React from 'react'
+import React, { Component, ComponentProps, ElementType, ReactNode } from 'react'
 import styled from 'styled-components'
 import { Box, BoxProps, Flex } from 'rebass'
 import { Link } from 'react-router-dom'
 import { borders, BordersProps, space, themeGet } from 'styled-system'
 import { hexa, inheritLink, shadow, WavesCy } from '../globals'
 import { AuthConsumer, IAuthContext } from '../../contexts/auth'
+import { IKeeperContext, withKeeperContext } from '../../contexts/keeper'
+import { toWavesFromKeeper } from '../../helpers/order'
 
 interface DropdownContainerProps extends BoxProps {
   isShown?: boolean
@@ -72,7 +73,7 @@ interface IProps {
   onClickOutside?: () => void
 }
 
-class ProfileDropdown extends Component<IProps> {
+class ProfileDropdown extends Component<IProps & IKeeperContext> {
   componentWillMount(): void {
     document.addEventListener('click', this._onClickOutside)
   }
@@ -82,16 +83,17 @@ class ProfileDropdown extends Component<IProps> {
   }
 
   render(): ReactNode {
-    const { isShown } = this.props
+    const { isShown, publicState } = this.props
+    const { account } = publicState
 
     return (
       <AuthConsumer>
         {({ signOut }: IAuthContext) => (
           <DropdownContainer isShown={isShown}>
             <DropdownList>
-              <DropdownItem borderBottom={'1px solid'}>
-                <Balance>Balance: 23 <WavesCy/></Balance>
-              </DropdownItem>
+              {account && <DropdownItem borderBottom={'1px solid'}>
+                <Balance>{toWavesFromKeeper(account.balance.available).toFixed(3)} <WavesCy/></Balance>
+              </DropdownItem>}
               <DropdownItem>
                 <DropdownLink as={Link} to={'/profile'}>Profile</DropdownLink>
               </DropdownItem>
@@ -114,4 +116,4 @@ class ProfileDropdown extends Component<IProps> {
   }
 }
 
-export default ProfileDropdown
+export default withKeeperContext<IProps>(ProfileDropdown)

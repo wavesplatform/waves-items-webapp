@@ -59,7 +59,6 @@ class ItemDetail extends Component<IProps> {
       <ItemDetailContainer isPage={isPage}>
         <LeftSide>
           <Title
-            flex={'1'}
             mb={'lg'}
             as={isPage ? 'h1' : 'h2'}
           >

@@ -4,6 +4,7 @@ import { IDefaultResult, IGame } from '../../types'
 import { getGamesQuery } from '../../graphql/queries/getGames'
 import { GameList } from './components/gameList'
 import { GamesQuery } from '../../graphql/queries/__generated__/GamesQuery'
+import { Loading } from '../../components/loading'
 
 interface IProps {
 }
@@ -24,7 +25,7 @@ export class GameNav extends Component<TChildProps> {
     const { loading, error } = data
 
     if (loading) {
-      return <div>Loading...</div>
+      return <Loading/>
     }
 
     const games = data.games as IGame[]

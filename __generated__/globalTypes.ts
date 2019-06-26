@@ -8,6 +8,7 @@
 
 export interface ItemFilter {
   gameAddress?: string | null;
+  searchString?: string | null;
 }
 
 export interface SigninUser {
