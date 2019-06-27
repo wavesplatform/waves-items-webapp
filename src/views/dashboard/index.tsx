@@ -1,10 +1,12 @@
 import React, { Component, ReactNode } from 'react'
-import { Container, ViewWrapper } from '../../components/layout'
-import { H1 } from '../../components/globals'
+import { ViewContainer, ViewWrapper } from '../../components/layout'
+import { TabItem, TabLink, Tabs, TabsContainer } from '../../components/globals'
 import { RouteComponentProps } from 'react-router'
 import { Box } from 'rebass'
 import { IAuthContext, withAuthContext } from '../../contexts/auth'
 import Items from './components/items'
+import { GameOverview } from './style'
+import { Link } from 'react-router-dom'
 
 interface DashboardParams {
 }
@@ -25,12 +27,26 @@ class Dashboard extends Component<TProps & IAuthContext> {
 
     return (
       <ViewWrapper>
-        <Container>
-          <H1>Dashboard</H1>
+        <GameOverview>
+          <ViewContainer>
+            {user && user.name}
+          </ViewContainer>
+        </GameOverview>
+        <Tabs>
+          <TabsContainer height={'52px'} maxWidth={'1280px'}>
+            <TabItem>
+              <TabLink px={'xl'} to={'/'}>Items</TabLink>
+            </TabItem>
+            <TabItem>
+              <TabLink px={'xl'} to={'/'}>Create Item</TabLink>
+            </TabItem>
+          </TabsContainer>
+        </Tabs>
+        <ViewContainer>
           {user && <Box mb={'lg'}>
             <Items address={user.address} searchString={this.state.searchString}/>
           </Box>}
-        </Container>
+        </ViewContainer>
       </ViewWrapper>
     )
   }

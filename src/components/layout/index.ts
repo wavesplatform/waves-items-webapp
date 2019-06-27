@@ -27,6 +27,10 @@ export const ViewSide = styled(Box)`
   overflow: hidden;
 `
 
+export const ViewContainer = styled(Container)`
+  max-width: 1280px;
+`
+
 export const ViewContent = styled(Box)`
 `
 ViewContent.defaultProps = { p: 'lg' }

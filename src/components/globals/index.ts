@@ -1,6 +1,19 @@
 import styled, { css } from 'styled-components'
-import { BoxProps, Heading, Text, TextProps } from 'rebass'
-import { borders, BordersProps, color, space, themeGet, width } from 'styled-system'
+import { Box, BoxProps, Heading, Text, TextProps } from 'rebass'
+import {
+  borders,
+  BordersProps,
+  color,
+  height,
+  HeightProps,
+  maxWidth,
+  MaxWidthProps,
+  space, SpaceProps,
+  themeGet,
+  width
+} from 'styled-system'
+import { Container } from '../layout'
+import { Link } from 'react-router-dom'
 
 export const hexa = (hex: string, alpha: string | number) => {
   const r = parseInt(hex.slice(1, 3), 16)
@@ -119,6 +132,45 @@ TableCell.defaultProps = {
   px: 'sm',
   py: 'sm',
 }
+
+export const Tabs = styled(Box)`
+  border-bottom: 1px solid ${themeGet('colors.grays.7')};
+`
+
+export const TabsContainer = styled(Container)<BoxProps & MaxWidthProps & HeightProps>`
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  flex-wrap: wrap;
+  margin-bottom: 0;
+  list-style: none;
+  
+  ${maxWidth}
+  ${height}
+`
+TabsContainer.defaultProps = {
+  ...TabsContainer.defaultProps,
+  as: 'ul',
+}
+
+export const TabItem = styled(Box)`
+  cursor: pointer;
+`
+TabItem.defaultProps = { as: 'li' }
+
+export const TabLink = styled(Link)<SpaceProps>`
+  display: flex;
+  height: 100%;
+  align-items: center;
+  
+  &:hover,
+  &:focus {
+    background: ${themeGet('colors.grays.8')};
+  }
+  
+  ${space}
+`
+TabLink.defaultProps = { px: 'lg' }
 
 export const WavesCy = styled(Text)<TextProps & BordersProps>`
   text-transform: uppercase;

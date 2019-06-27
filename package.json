@@ -33,7 +33,7 @@
     "react-router-dom": "^4.3.1",
     "react-scripts": "^3.0.1",
     "react-sticky": "^6.0.3",
-    "rebass": "^3.1.0",
+    "rebass": "^3.1.1",
     "rxjs": "^6.5.1",
     "styled-components": "^4.2.0",
     "tslint": "^5.12.0",
