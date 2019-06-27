@@ -25,7 +25,7 @@ export interface ordersInfo_asks {
 }
 
 export interface ordersInfo {
-  __typename: "Item";
+  __typename: "ItemView";
   pair: ordersInfo_pair | null;
   bids: ordersInfo_bids[] | null;
   asks: ordersInfo_asks[] | null;

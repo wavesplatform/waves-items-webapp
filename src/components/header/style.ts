@@ -2,7 +2,7 @@ import { Box, BoxProps, Flex, Heading, Image, Text } from 'rebass'
 import styled, { css } from 'styled-components'
 import { Link } from 'react-router-dom'
 import { space, SpaceProps, themeGet } from 'styled-system'
-import { inheritLink, truncate } from '../globals'
+import { truncate } from '../globals'
 import { Container } from '../layout'
 import { Icon } from '../icon'
 
@@ -46,11 +46,9 @@ export const NavLink = styled(Link)<SpaceProps>`
   display: flex;
   align-items: center;
   height: 100%;
-  ${inheritLink};
   
   &:hover,
   &:focus {
-    ${inheritLink};
     background: ${themeGet('colors.grays.8')};
   }
   
@@ -63,8 +61,6 @@ export const Logo = styled(Link)`
   align-items: center;
   height: 100%;
   margin-right: ${themeGet('space.lg')}px;
-  
-  ${inheritLink};
 `
 
 export const LogoImage = styled(Image)`
@@ -108,11 +104,8 @@ export const ProfileToggle = styled(Box)<ProfileToggleProps>`
   border-right: 1px solid ${themeGet('colors.grays.7')}; 
   justify-content: flex-end;
   
-  ${inheritLink};
-  
   &:hover,
   &:focus {
-    ${inheritLink};
     background-color: ${themeGet('colors.grays.8')};
   }
   

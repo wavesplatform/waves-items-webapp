@@ -2,7 +2,6 @@ import { Grid } from '../layout'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import { themeGet } from 'styled-system'
-import { inheritLink } from '../globals'
 
 export const ItemGridContainer = styled(Grid)`
   grid-gap: ${themeGet('space.lg')}px;
@@ -10,10 +9,4 @@ export const ItemGridContainer = styled(Grid)`
 `
 
 export const ItemGridLink = styled(Link)`
-  ${inheritLink};
-  
-  &:hover,
-  &:focus {
-    ${inheritLink};
-  }
 `

@@ -16,7 +16,7 @@ export interface itemInfo_game {
 }
 
 export interface itemInfo {
-  __typename: "Item";
+  __typename: "ItemView";
   id: string;
   assetId: string;
   name: string;

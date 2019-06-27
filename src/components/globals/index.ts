@@ -27,11 +27,6 @@ export const truncate = css`
   min-width: 0;
 `
 
-export const inheritLink = css`
-  text-decoration: none;
-  color: inherit;
-`
-
 export const fontStack = css`
   font-family: ${themeGet('fonts.sans')};
 `

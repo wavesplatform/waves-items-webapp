@@ -2,17 +2,16 @@ import React, { Component, ReactNode } from 'react'
 import { ViewContent, ViewGrid, ViewSide, ViewWrapper } from '../../components/layout'
 import GameNav from '../gameNav'
 import { RouteComponentProps } from 'react-router'
-import { Item } from '../items'
 import { ItemViewContainer } from './style'
+import Item from './components/item'
 
 interface ItemParams {
   assetId: string
 }
 
-interface IProps extends RouteComponentProps<ItemParams> {
-}
+type TProps = RouteComponentProps<ItemParams> & {}
 
-class ItemView extends Component<IProps> {
+class ItemView extends Component<TProps> {
   render(): ReactNode {
     const { match } = this.props
     const { assetId } = match.params
@@ -25,7 +24,7 @@ class ItemView extends Component<IProps> {
           </ViewSide>
           <ViewContent>
             <ItemViewContainer>
-              <Item assetId={assetId} isPage={true}/>
+              <Item assetId={assetId}/>
             </ItemViewContainer>
           </ViewContent>
         </ViewGrid>
@@ -35,3 +34,4 @@ class ItemView extends Component<IProps> {
 }
 
 export default ItemView
+

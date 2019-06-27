@@ -1,16 +1,16 @@
 import React, { Component, ReactNode } from 'react'
 import { ChildProps, graphql } from 'react-apollo'
-import ItemGrid from '../../components/itemGrid'
-import { ItemsContainer, ItemSide, ItemsSide, LoadMoreButton } from './style'
-import { Item } from './index'
+import ItemGrid from '../../../components/itemGrid'
 import { Sticky, StickyContainer } from 'react-sticky'
 import { Box } from 'rebass'
-import theme from '../../styles/theme'
-import { getMoreItemsQuery } from '../../graphql/queries/getItems'
-import { MoreItemsQuery, MoreItemsQueryVariables } from '../../graphql/queries/__generated__/MoreItemsQuery'
-import { Loading } from '../../components/loading'
+import theme from '../../../styles/theme'
+import { getMoreItemsQuery } from '../../../graphql/queries/getItems'
+import { MoreItemsQuery, MoreItemsQueryVariables } from '../../../graphql/queries/__generated__/MoreItemsQuery'
+import { Loading } from '../../../components/loading'
+import { ItemsContainer, ItemSide, ItemsSide, LoadMoreButton } from '../style'
+import Item from './item'
 
-interface IProps {
+type TProps = {
   address?: string
   searchString?: string
 }
@@ -18,7 +18,7 @@ interface IProps {
 type TData = MoreItemsQuery
 type TVariables = MoreItemsQueryVariables
 
-type TChildProps = ChildProps<IProps, TData, TVariables>
+type TChildProps = ChildProps<TProps, TData, TVariables>
 
 class Items extends Component<TChildProps> {
   state = {
@@ -47,6 +47,7 @@ class Items extends Component<TChildProps> {
 
     const { pageInfo, edges } = connection
     const items = (edges || []).map(edge => edge.node)
+
     const stickyOffset = theme.header.height + theme.space.lg
 
     if (assetId) {
@@ -125,7 +126,7 @@ class Items extends Component<TChildProps> {
   }
 }
 
-const withItems = graphql<IProps, TData, TVariables>(getMoreItemsQuery, {
+const withItems = graphql<TProps, TData, TVariables>(getMoreItemsQuery, {
   options: props => ({
     fetchPolicy: 'cache-and-network',
     variables: {

@@ -40,6 +40,8 @@ colors.default = colors.grays[0]
 colors.placeholder = colors.grays[4]
 colors.element = colors.grays[7]
 colors.primary = colors.blue
+colors.link = colors.grays[3]
+colors.linkHover = colors.grays[1]
 
 const bg = {
   default: colors.black,

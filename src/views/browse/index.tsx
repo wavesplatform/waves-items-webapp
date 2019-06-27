@@ -5,9 +5,9 @@ import { H1 } from '../../components/globals'
 import { RouteComponentProps } from 'react-router'
 import GameOverview from '../gameOverview'
 import { Box } from 'rebass'
-import { Items } from '../items'
 import { FiltersContainer } from './style'
 import Search from './components/search'
+import Items from './components/items'
 
 interface BrowseParams {
   address?: string

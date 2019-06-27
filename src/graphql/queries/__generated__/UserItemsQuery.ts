@@ -16,7 +16,7 @@ export interface UserItemsQuery_userItems_game {
 }
 
 export interface UserItemsQuery_userItems {
-  __typename: "Item";
+  __typename: "ItemView";
   id: string;
   assetId: string;
   name: string;

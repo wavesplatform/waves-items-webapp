@@ -32,6 +32,14 @@ export const GlobalStyle = createGlobalStyle`
     height: 100%;
   }
   
+  a {
+    color: currentColor;
+    text-decoration: none;
+  }
+  a:hover {
+    cursor: pointer;
+  }
+  
   [tabindex="-1"]:focus:not(:focus-visible) {
     outline: 0 !important;
   }

@@ -34,7 +34,7 @@ export interface ItemQuery_item_asks {
 }
 
 export interface ItemQuery_item {
-  __typename: "Item";
+  __typename: "ItemView";
   id: string;
   assetId: string;
   name: string;

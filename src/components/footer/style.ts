@@ -2,7 +2,6 @@ import { Flex, Image } from 'rebass'
 import styled from 'styled-components'
 import { themeGet } from 'styled-system'
 import { Link } from 'react-router-dom'
-import { inheritLink } from '../globals'
 
 export const FooterContainer = styled(Flex)`
   height: 6rem;
@@ -22,8 +21,6 @@ export const Logo = styled(Link)`
   align-items: center;
   height: 100%;
   margin-left: ${themeGet('space.lg')}px;
-  
-  ${inheritLink};
 `
 
 export const LogoImage = styled(Image)`

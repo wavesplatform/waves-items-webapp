@@ -2,7 +2,7 @@
 /* eslint-disable */
 // This file was automatically generated and should not be edited.
 
-import { ItemFilter } from "./../../../../__generated__/globalTypes";
+import { ItemFilter } from "./../../../../__generated__/globalTypes"
 
 // ====================================================
 // GraphQL query operation: ItemsQuery
@@ -17,7 +17,7 @@ export interface ItemsQuery_items_game {
 }
 
 export interface ItemsQuery_items {
-  __typename: "Item";
+  __typename: "ItemView";
   id: string;
   assetId: string;
   name: string;

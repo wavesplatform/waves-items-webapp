@@ -12,6 +12,9 @@ export type UserImage = {
   promo?: string
 }
 
+
+export type UserRole = 'USER' | 'GAME' | 'MANAGER'
+
 export type WithImage<P> = P & {
   image?: UserImage
 }
@@ -22,6 +25,7 @@ export interface IUser extends WithImage<{}> {
   email?: string
   address: string
   publicKey?: string
+  role?: UserRole
 }
 
 export interface IGame extends IUser {

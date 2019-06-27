@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { Box, BoxProps, Flex } from 'rebass'
 import { Link } from 'react-router-dom'
 import { borders, BordersProps, space, themeGet } from 'styled-system'
-import { hexa, inheritLink, shadow, WavesCy } from '../globals'
+import { hexa, shadow, WavesCy } from '../globals'
 import { AuthConsumer, IAuthContext } from '../../contexts/auth'
 import { IKeeperContext, withKeeperContext } from '../../contexts/keeper'
 import { toWavesFromKeeper } from '../../helpers/order'
@@ -49,13 +49,10 @@ DropdownItem.defaultProps = { as: 'li', borderColor: 'grays.7' }
 const DropdownLink = styled(Box)<BoxProps & ComponentProps<ElementType>>`
   display: block;
   cursor: pointer;
-  ${inheritLink};
   ${space};
   
   &:hover,
   &:focus {
-    ${inheritLink};
-    
     background-color: ${themeGet('bg.dropdownHover')};
   }
 `
@@ -88,11 +85,14 @@ class ProfileDropdown extends Component<IProps & IKeeperContext> {
 
     return (
       <AuthConsumer>
-        {({ signOut }: IAuthContext) => (
+        {({ user, signOut }: IAuthContext) => (
           <DropdownContainer isShown={isShown}>
             <DropdownList>
               {account && <DropdownItem borderBottom={'1px solid'}>
                 <Balance>{toWavesFromKeeper(account.balance.available).toFixed(3)} <WavesCy/></Balance>
+              </DropdownItem>}
+              {(user && user.role === 'GAME') && <DropdownItem>
+                <DropdownLink as={Link} to={'/dashboard'}>Dashboard</DropdownLink>
               </DropdownItem>}
               <DropdownItem>
                 <DropdownLink as={Link} to={'/profile'}>Profile</DropdownLink>
