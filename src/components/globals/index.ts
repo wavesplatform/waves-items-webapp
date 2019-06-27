@@ -75,21 +75,7 @@ export const Paragraph = styled(Text)`
 `
 Paragraph.defaultProps = { as: 'p', color: 'grays.2' }
 
-export const CodeBlock = styled(Text)<TextProps & BordersProps>`
-  ${borders}
-`
-CodeBlock.defaultProps = {
-  ...CodeBlock.defaultProps,
-  as: 'pre',
-  p: 'lg',
-  bg: 'bg.code',
-  fontFamily: 'mono',
-  fontSize: 'base',
-  color: 'default',
-  borderRadius: 'sm',
-}
-
-export const Code = styled(CodeBlock)`
+export const Code = styled(Text)<TextProps & BordersProps>`
   display: inline-block;
   
   ${borders}
@@ -97,13 +83,22 @@ export const Code = styled(CodeBlock)`
 Code.defaultProps = {
   ...Code.defaultProps,
   as: 'code',
-  px: 'sm',
-  py: 'xs',
+  p: 'xs',
   bg: 'bg.code',
   fontFamily: 'mono',
   fontSize: 'sm',
   color: 'default',
   borderRadius: 'sm',
+}
+
+export const CodeBlock = styled(Code)`
+  display: block;
+`
+CodeBlock.defaultProps = {
+  ...CodeBlock.defaultProps,
+  as: 'pre',
+  p: 'lg',
+  fontSize: 'base',
 }
 
 export const Form = styled.form`
