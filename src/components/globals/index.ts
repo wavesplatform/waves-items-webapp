@@ -79,6 +79,36 @@ export const H6 = styled(Heading)`
 `
 H6.defaultProps = { as: 'h6' }
 
+export const Paragraph = styled(Text)`
+`
+Paragraph.defaultProps = { as: 'p', color: 'grays.2' }
+
+export const Code = styled(Text)<TextProps & BordersProps>`
+  display: inline-block;
+  
+  ${borders}
+`
+Code.defaultProps = {
+  ...Code.defaultProps,
+  as: 'code',
+  p: 'xs',
+  bg: 'bg.code',
+  fontFamily: 'mono',
+  fontSize: 'sm',
+  color: 'default',
+  borderRadius: 'sm',
+}
+
+export const CodeBlock = styled(Code)`
+  display: block;
+`
+CodeBlock.defaultProps = {
+  ...CodeBlock.defaultProps,
+  as: 'pre',
+  p: 'lg',
+  fontSize: 'base',
+}
+
 export const Form = styled.form`
 `
 

@@ -47,6 +47,7 @@ const bg = {
   default: colors.black,
   input: colors.black,
   card: colors.grays[8],
+  code: colors.grays[8],
   dropdown: colors.black,
   dropdownHover: colors.grays[8],
 }
