@@ -11,9 +11,7 @@ class PagesView extends Component<IProps> {
   render(): ReactNode {
     return (
       <ViewWrapper>
-        <Container>
-          {this._renderPage()}
-        </Container>
+        {this._renderPage()}
       </ViewWrapper>
     )
   }
