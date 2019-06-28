@@ -15,18 +15,17 @@ import { isFirefox } from '../../helpers/browser'
 class SigninMutation extends Mutation<Signin, SigninVariables> {
 }
 
-interface ISigninState {
-  name?: string,
-  email?: string,
+type TState = {
+  name?: string
+  email?: string
 }
 
-interface IProps {
-}
+type TProps = {}
 
-class SigninForm extends Component<IProps & IKeeperContext> {
+class SigninForm extends Component<TProps & IKeeperContext> {
   static contextType = AuthContext
 
-  state: ISigninState = {}
+  state: TState = {}
 
   render(): ReactNode {
     const { installed, hasAccounts, publicState, checkPublicState } = this.props
@@ -151,4 +150,4 @@ class SigninForm extends Component<IProps & IKeeperContext> {
   }
 }
 
-export default withKeeperContext<IProps>(SigninForm)
+export default withKeeperContext<TProps>(SigninForm)

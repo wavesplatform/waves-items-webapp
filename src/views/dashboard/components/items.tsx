@@ -3,8 +3,8 @@ import { ChildProps, graphql } from 'react-apollo'
 import { getMoreItemsQuery } from '../../../graphql/queries/getItems'
 import { MoreItemsQuery, MoreItemsQueryVariables } from '../../../graphql/queries/__generated__/MoreItemsQuery'
 import { Loading } from '../../../components/loading'
-import { ItemsContainer, LoadMoreButton } from '../style'
 import ItemTable from '../../../components/itemTable'
+import { LoadMoreButton } from '../style'
 
 type TProps = {
   address?: string
@@ -30,12 +30,12 @@ class Items extends Component<TChildProps> {
     const items = (edges || []).map(edge => edge.node)
 
     return (
-      <ItemsContainer>
+      <>
         <ItemTable items={items}/>
         {pageInfo.hasNextPage && <LoadMoreButton mt={'lg'} onClick={this._loadMore} disabled={loading}>
           {loading ? 'Loading...' : 'Load more'}
         </LoadMoreButton>}
-      </ItemsContainer>
+      </>
     )
   }
 

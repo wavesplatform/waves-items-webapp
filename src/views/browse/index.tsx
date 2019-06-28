@@ -17,10 +17,9 @@ type TState = {
   searchString?: string
 }
 
-interface IProps extends RouteComponentProps<BrowseParams> {
-}
+type TProps = RouteComponentProps<BrowseParams>
 
-class Browse extends Component<IProps> {
+class Browse extends Component<TProps> {
   state: TState = {
     searchString: '',
   }

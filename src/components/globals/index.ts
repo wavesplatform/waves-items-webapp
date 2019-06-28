@@ -167,19 +167,19 @@ export const Tabs = styled(Box)`
   border-bottom: 1px solid ${themeGet('colors.grays.7')};
 `
 
-export const TabsContainer = styled(Container)<BoxProps & MaxWidthProps & HeightProps>`
+export const TabsList = styled(Box)<BoxProps & HeightProps>`
   position: relative;
   display: flex;
   align-items: stretch;
   flex-wrap: wrap;
   margin-bottom: 0;
   list-style: none;
+  padding: 0;
   
-  ${maxWidth}
   ${height}
 `
-TabsContainer.defaultProps = {
-  ...TabsContainer.defaultProps,
+TabsList.defaultProps = {
+  ...TabsList.defaultProps,
   as: 'ul',
 }
 
