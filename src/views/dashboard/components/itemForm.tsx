@@ -3,20 +3,18 @@ import { IItem } from '../../../types'
 import { Form } from '../../../components/globals'
 import { Box, Flex } from 'rebass'
 import { TextInput } from '../../../components/inputs'
+import { Button } from '../../../components/buttons'
+import MiscEditor, { MiscItem } from './miscEditor'
 
 type TProps = {
   item?: IItem
-}
-
-type TMisc = {
-  [key: string]: string
 }
 
 type TState = {
   name?: string
   quantity?: string
   imageUrl?: string
-  misc?: TMisc
+  misc?: MiscItem[]
 }
 
 class ItemForm extends Component<TProps> {
@@ -31,6 +29,7 @@ class ItemForm extends Component<TProps> {
       this.state.name = item.name
       this.state.quantity = item.quantity ? item.quantity.toString() : ''
       this.state.imageUrl = item.imageUrl
+      // Check misc field. If is map then render misc editor
     }
   }
 
@@ -59,6 +58,10 @@ class ItemForm extends Component<TProps> {
                      placeholder={'Image URL in PNG format'}
           >Image URL</TextInput>
         </Box>
+        <Box mb={'lg'}>
+          <MiscEditor>Misc</MiscEditor>
+        </Box>
+        <Button type='submit' variant='primary' size={'lg'} width={1}>Save</Button>
       </Form>
     )
   }

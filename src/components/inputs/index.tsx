@@ -5,7 +5,7 @@ import {
   StyledLabel,
   StyledNumberInput,
   StyledFlatTextInput,
-  StyledTextInput
+  StyledTextInput,
 } from './style'
 import { Box } from 'rebass'
 
@@ -20,6 +20,7 @@ interface TextInputProps {
 }
 
 export const TextInput = (props: PropsWithChildren<TextInputProps>) => {
+  // TODO: need fix ref
   return (
     <StyledLabel {...props}>
       {props.children && <Box>{props.children}</Box>}
@@ -31,6 +32,7 @@ export const TextInput = (props: PropsWithChildren<TextInputProps>) => {
         onChange={props.onChange}
         autoFocus={props.autoFocus}
         disabled={props.disabled}
+        mt={props.children ? 'sm' : 0}
       />
     </StyledLabel>
   )
@@ -43,7 +45,7 @@ interface TextInputWithUnitProps extends TextInputProps {
 export const TextInputWithUnit = (props: PropsWithChildren<TextInputWithUnitProps>) => {
   return (
     <StyledLabel {...props}>
-      <Box>{props.children}</Box>
+      {props.children && <Box>{props.children}</Box>}
       <StyledInputWrapper
         disabled={props.disabled}
       >
@@ -80,7 +82,7 @@ interface NumberInputProps {
 export const NumberInput = (props: PropsWithChildren<NumberInputProps>) => {
   return (
     <StyledLabel {...props}>
-      <Box>{props.children}</Box>
+      {props.children && <Box>{props.children}</Box>}
       <StyledNumberInput
         id={props.id}
         defaultValue={props.defaultValue}

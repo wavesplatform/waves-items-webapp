@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components'
-import { Box, BoxProps, Flex } from 'rebass'
+import { Box, BoxProps, Flex, FlexProps } from 'rebass'
 import {
   backgroundImage,
   backgroundPosition,

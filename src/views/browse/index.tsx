@@ -8,6 +8,7 @@ import { Box } from 'rebass'
 import { FiltersContainer } from './style'
 import Search from './components/search'
 import Items from './components/items'
+import { Button } from '../../components/buttons'
 
 interface BrowseParams {
   address?: string

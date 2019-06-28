@@ -23,6 +23,7 @@ export const StyledButton = styled(Button)<StyledButtonProps>`
 `
 StyledButton.defaultProps = {
   ...StyledButton.defaultProps,
+  type: 'button',
   borderRadius: 'base',
   px: 3,
   py: 2,
