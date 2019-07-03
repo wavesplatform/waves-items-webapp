@@ -10,7 +10,11 @@ import {
   boxShadow, opacity, themeGet
 } from 'styled-system'
 
-export const StyledLabel = styled(Flex)`
+
+export interface StyledLabelProps extends FlexProps {
+}
+
+export const StyledLabel = styled(Flex)<StyledLabelProps>`
   flex-direction: column;
   width: 100%;
   position: relative;

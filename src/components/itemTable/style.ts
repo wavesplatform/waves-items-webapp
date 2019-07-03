@@ -20,7 +20,8 @@ export const ItemTableRow = styled(TableRow)`
   cursor: default;
   
   &:hover {
-    background: ${themeGet('colors.grays.7')};
+    //background: ${themeGet('colors.grays.8')};
+    opacity: .8;
   }
 `
 

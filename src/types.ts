@@ -68,3 +68,5 @@ export interface IItem extends IWavesAsset {
 export type WithBalance<P> = P & {
   balance?: number
 }
+
+export type MiscItem = { key: string, value: any }

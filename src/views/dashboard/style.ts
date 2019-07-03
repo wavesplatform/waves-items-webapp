@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { Box } from 'rebass'
-import { Button } from '../../components/buttons'
+import { Button, IconButton } from '../../components/buttons'
 import { themeGet } from 'styled-system'
 import { Container } from '../../components/layout'
 
@@ -19,4 +19,14 @@ export const GameOverview = styled(Box)`
 export const LoadMoreButton = styled(Button).attrs({ size: 'lg' })`
   width: 100%;
   display: block;
+`
+
+export const RemoveButton = styled(IconButton).attrs({
+  glyph: 'close',
+})`
+  display: block;
+  opacity: .5;
+  //transform: scale(.9);
+  width: 34px;
+  height: 34px;
 `

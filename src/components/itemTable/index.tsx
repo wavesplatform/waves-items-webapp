@@ -22,6 +22,7 @@ export const ItemTable = (props: IItemTableProps) => {
           <ItemTableCell>Game</ItemTableCell>
           <ItemTableCell>AssetId</ItemTableCell>
           <ItemTableCell>Timestamp</ItemTableCell>
+          <ItemTableCell/>
         </TableRow>
       </TableHeader>
       <TableBody>{list}</TableBody>

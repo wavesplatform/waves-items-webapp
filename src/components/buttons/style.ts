@@ -35,6 +35,7 @@ StyledButton.defaultProps = {
 export const StyledIconButton = styled(StyledButton)`
   width: 40px;
   height: 40px;
+  line-height: 1;
 `
 StyledIconButton.defaultProps = {
   ...StyledIconButton.defaultProps,

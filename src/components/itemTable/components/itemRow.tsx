@@ -20,12 +20,18 @@ export const ItemRow = (props: TProps) => {
       <ItemTableCell>
         <AssetIdLink
           to={`/item/${item.assetId}`}
-          key={item.id}
         >
           {item.assetId}
         </AssetIdLink>
       </ItemTableCell>
       <ItemTableCell>{item.timestamp}</ItemTableCell>
+      <ItemTableCell>
+        <AssetIdLink
+          to={`/dashboard/item/${item.assetId}`}
+        >
+          Edit
+        </AssetIdLink>
+      </ItemTableCell>
     </ItemTableRow>
   )
 }

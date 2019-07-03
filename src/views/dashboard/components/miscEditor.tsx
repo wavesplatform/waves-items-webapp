@@ -2,8 +2,8 @@ import React, { ChangeEvent, Component, PropsWithChildren, ReactNode } from 'rea
 import { Box, Flex } from 'rebass'
 import { TextInput } from '../../../components/inputs'
 import { Button } from '../../../components/buttons'
-
-export type MiscItem = { key: string, value: string }
+import { RemoveButton } from '../style'
+import { MiscItem } from '../../../types'
 
 type TProps = {
   value?: MiscItem[]
@@ -29,23 +29,38 @@ class MiscEditor extends Component<PropsWithChildren<TProps>> {
     }
   }
 
+  componentDidUpdate(
+    prevProps: Readonly<React.PropsWithChildren<TProps>>,
+    prevState: Readonly<{}>
+  ): void {
+    if (prevState !== this.state) {
+      this.props.onChange && this.props.onChange(this.state.misc)
+    }
+  }
+
   render(): ReactNode {
     const { children } = this.props
 
     const list = this.state.misc.map((miscItem, index) => (
-      <Flex key={index}>
-        <Box width={1 / 2}>
+      <Flex key={index} mt={'sm'}>
+        <Box width={2 / 5}>
           <TextInput value={miscItem.key}
                      onChange={this._changeKey(index)}
                      placeholder={'Key'}
+                     mt={0}
           />
         </Box>
-        <Box width={1 / 2} ml={'base'}>
+        <Flex width={3 / 5} ml={'base'} alignItems={'center'}>
           <TextInput value={miscItem.value}
                      onChange={this._changeValue(index)}
                      placeholder={'Value'}
+                     mt={0}
+                     flex={'1'}
           />
-        </Box>
+          <RemoveButton ml={'base'} onClick={() => {
+            this._removeRow(index)
+          }}/>
+        </Flex>
       </Flex>
     ))
 
@@ -77,6 +92,12 @@ class MiscEditor extends Component<PropsWithChildren<TProps>> {
   _addRow = () => {
     this.setState({
       misc: this.state.misc.concat([emptyMiscItem]),
+    })
+  }
+
+  _removeRow = (index: number) => {
+    this.setState({
+      misc: this.state.misc.filter((miscItem, i) => (i !== index)),
     })
   }
 }
