@@ -43,7 +43,7 @@ class Routes extends Component {
         {/*Items*/}
         <Route key='route-items' path='/items/:address([0-9a-fA-f]{35})' component={Browse}/>
         <Route key='route-items' path='/items' component={Browse}/>
-        <Route key='route-item' path='/item/:assetId([0-9a-fA-f]{44})' component={ItemView}/>
+        <Route key='route-item' path='/item/:assetId([0-9a-fA-f]{42,44})' component={ItemView}/>
 
         {/*User*/}
         <Route key='route-signin' path='/signin' component={SigninView}/>

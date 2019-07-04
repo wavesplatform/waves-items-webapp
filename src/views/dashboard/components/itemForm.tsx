@@ -5,21 +5,26 @@ import { Box, Flex } from 'rebass'
 import { TextInput } from '../../../components/inputs'
 import { Button } from '../../../components/buttons'
 import MiscEditor from './miscEditor'
-import { createItem, miscArrayToRecord, miscRecordToArray } from '../../../helpers/item'
+import { createItem, editItem, miscArrayToRecord, miscRecordToArray } from '../../../helpers/item'
+import { RouteComponentProps, withRouter } from 'react-router'
 
-type TProps = {
+type TProps = RouteComponentProps & {
   item?: IItem
 }
 
 type TState = {
-  name?: string
-  quantity?: string
-  imageUrl?: string
+  name: string
+  quantity: string
+  imageUrl: string
   misc?: MiscItem[]
 }
 
 class ItemForm extends Component<TProps> {
-  state: TState = {}
+  state: TState = {
+    name: '',
+    quantity: '',
+    imageUrl: '',
+  }
 
   constructor(props: TProps) {
     super(props)
@@ -37,6 +42,8 @@ class ItemForm extends Component<TProps> {
   }
 
   render(): ReactNode {
+    const { item } = this.props
+
     return (
       <Form
         onSubmit={ev => this._handleSubmit(ev)}
@@ -52,6 +59,7 @@ class ItemForm extends Component<TProps> {
             <TextInput value={this.state.quantity}
                        onChange={this._changeQuantity}
                        placeholder={'100'}
+                       disabled={!!item}
             >Quantity</TextInput>
           </Box>
         </Flex>
@@ -109,16 +117,30 @@ class ItemForm extends Component<TProps> {
 
     const misc = this._prepareMisc(this.state.misc)
 
-    await createItem({
-      name,
-      version: 0,
-      quantity: parseInt(quantity, 10),
-      imageUrl,
-      misc: misc || {},
-    })
+    const isEdit = !!this.props.item
+
+    try {
+      const res = isEdit ? await editItem({
+        itemId: this.props.item!.assetId,
+        name,
+        version: 1,
+        imageUrl,
+        misc: misc || {},
+      }) : await createItem({
+        name,
+        version: 1,
+        quantity: parseInt(quantity, 10),
+        imageUrl,
+        misc: misc || {},
+      })
+
+      this.props.history.push('/dashboard/items')
+    } catch (err) {
+      throw err
+    }
   }
 
-  _prepareMisc = (miscArray: MiscItem[] | null | undefined): Record<string, any> | null => {
+  _prepareMisc = (miscArray?: MiscItem[] | null): Record<string, any> | null => {
     miscArray = miscArray && miscArray.filter(miscItem => !!miscItem.key)
 
     let misc = null
@@ -130,4 +152,4 @@ class ItemForm extends Component<TProps> {
   }
 }
 
-export default ItemForm
+export default withRouter(ItemForm)

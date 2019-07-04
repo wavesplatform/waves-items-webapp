@@ -15,6 +15,7 @@
     "@types/styled-components": "^4.1.15",
     "@waves/bignumber": "0.0.1-a6",
     "@waves/types": "0.0.2",
+    "@waves/waves-games": "^1.0.32",
     "apollo-cache-inmemory": "^1.5.1",
     "apollo-client": "^2.6.3",
     "apollo-link": "^1.2.11",

@@ -1,5 +1,6 @@
 import { LONG } from '@waves/types'
 import { ApolloError } from 'apollo-client'
+import { ICreateParamsMap, IEditParamsMap } from '@waves/waves-games'
 
 export interface IDefaultResult {
   loading: boolean
@@ -70,3 +71,6 @@ export type WithBalance<P> = P & {
 }
 
 export type MiscItem = { key: string, value: any }
+export type ItemVersion = 1
+export type CreateItemParams = ICreateParamsMap[ItemVersion]
+export type EditItemParams = IEditParamsMap[ItemVersion]

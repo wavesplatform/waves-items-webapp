@@ -11,11 +11,11 @@ export const Container = styled(Box)`
   margin-right: auto;
   margin-left: auto;
 `
-Container.defaultProps = { px: 'lg' }
+Container.defaultProps = { ...Container.defaultProps, px: 'lg' }
 
 export const ViewWrapper = styled(Box)`
 `
-ViewWrapper.defaultProps = { py: 'lg' }
+ViewWrapper.defaultProps = { ...ViewWrapper.defaultProps, pt: 'lg', pb: 'lg' }
 
 export const ViewGrid = styled(Grid)`
   grid-template-columns: 16rem 1fr;

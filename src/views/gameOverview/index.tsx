@@ -7,17 +7,13 @@ import {
   BannerContent,
   BannerImage,
   BannerImageWrapper,
-  Description,
-  GameOverviewContainer,
-  Icon,
-  Info
+  GameOverviewContainer, Info,
 } from './style'
-import { Box, Text } from 'rebass'
-import { H1 } from '../../components/globals'
-import { UserAvatar } from '../../components/image'
+import { Text } from 'rebass'
 import { Button } from '../../components/buttons'
 import { Redirect } from 'react-router'
 import { Loading } from '../../components/loading'
+import { GameHeading } from '../../components/game/gameHeading'
 
 interface IProps {
   address: string
@@ -47,15 +43,7 @@ export class GameOverview extends Component<TChildProps> {
         <Banner>
           {imagePageUri && <BannerImageWrapper><BannerImage src={imagePageUri}/></BannerImageWrapper>}
           <BannerContent>
-            <Icon>
-              <UserAvatar user={game} size={'lg'}/>
-            </Icon>
-            <Box>
-              <H1 mb={'sm'}>{game.name || game.address}</H1>
-              <Description>
-                As the first full-scale trading card game on mobile, Shadow Era has had a long history of innovation.
-              </Description>
-            </Box>
+            <GameHeading game={game}/>
           </BannerContent>
         </Banner>
         <Info>

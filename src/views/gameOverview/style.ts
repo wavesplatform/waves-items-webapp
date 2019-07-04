@@ -57,14 +57,6 @@ export const BannerContent = styled(Flex)`
   align-items: center;
 `
 
-export const Icon = styled(Box)`
-`
-Icon.defaultProps = { mr: 'lg' }
-
-export const Description = styled(Text)`
-  opacity: .7;
-`
-
 export const Info = styled(Flex)`
   flex-direction: column;
   justify-content: center;
