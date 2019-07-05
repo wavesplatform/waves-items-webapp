@@ -145,6 +145,7 @@ class OrderModal extends Component<IProps> {
     }
     const chain = network && config.chains[network.code as IWavesNetworkCode]
 
+    const orderDurationMs = parseInt(this.state.period || defaultPeriod, 10) * 1000
     const order = await keeperHelper.keeper.signAndPublishOrder({
       type: 1002,
       data: {
@@ -162,7 +163,7 @@ class OrderModal extends Component<IProps> {
           tokens: '0.003',
           assetId: config.wavesId,
         },
-        expiration: Date.now() + parseInt(this.state.period || defaultPeriod, 10),
+        expiration: Date.now() + orderDurationMs,
       },
     })
   }
