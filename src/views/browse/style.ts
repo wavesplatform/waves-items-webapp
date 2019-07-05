@@ -9,6 +9,7 @@ export const FiltersContainer = styled(Box)`
 export const ItemsContainer = styled(Box)`
   display: block;
   position: relative;
+  min-height: 460px;
 `
 
 interface ItemsSideProps extends BoxProps {
