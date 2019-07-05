@@ -17,9 +17,9 @@ export const ItemTable = (props: IItemTableProps) => {
     <Table width={1}>
       <TableHeader>
         <TableRow>
-          <ItemTableCell>Name</ItemTableCell>
+          <ItemTableCell>Item</ItemTableCell>
           <ItemTableCell>Quantity</ItemTableCell>
-          <ItemTableCell>Game</ItemTableCell>
+          <ItemTableCell>Misc</ItemTableCell>
           <ItemTableCell>AssetId</ItemTableCell>
           <ItemTableCell>Timestamp</ItemTableCell>
           <ItemTableCell/>
