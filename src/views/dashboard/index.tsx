@@ -7,7 +7,7 @@ import { IAuthContext, withAuthContext } from '../../contexts/auth'
 import ItemListView from './itemList'
 import ItemView from './item'
 import { GameHeading } from '../../components/game/gameHeading'
-import { GameOverviewContainer } from './style'
+import { GameOverview } from './style'
 
 interface DashboardParams {
 }
@@ -21,9 +21,11 @@ class Dashboard extends Component<TProps & IAuthContext> {
 
     return (
       <ViewWrapper pt={0}>
-        <GameOverviewContainer>
-          <GameHeading game={game}/>
-        </GameOverviewContainer>
+        <GameOverview>
+          <ViewContainer>
+            <GameHeading game={game}/>
+          </ViewContainer>
+        </GameOverview>
         <Tabs>
           <ViewContainer>
             <TabsList height={'52px'}>

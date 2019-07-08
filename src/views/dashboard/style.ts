@@ -11,12 +11,15 @@ export const ItemContainer = styled(Container)`
   max-width: 512px;
 `
 
-export const GameOverviewContainer = styled(ViewContainer)`
+export const GameOverview = styled(Box)`
   display: flex;
-  height: 128px;
+  min-height: 128px;
   align-items: center;
   border-bottom: 1px solid ${themeGet('colors.grays.7')};
 `
+GameOverview.defaultProps = {
+  py: 'lg',
+}
 
 export const LoadMoreButton = styled(Button).attrs({ size: 'lg' })`
   width: 100%;
