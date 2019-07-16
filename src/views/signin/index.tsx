@@ -5,7 +5,7 @@ import { Redirect, RouteComponentProps } from 'react-router'
 import SigninForm from '../../components/signinForm'
 import { SigninContainer } from './style'
 import { Box } from 'rebass'
-import { withCurrentUser, WithCurrentUserProps } from '../../components/withCurrentUser/currentUser'
+import withCurrentUser, { WithCurrentUserProps } from '../../components/withCurrentUser'
 
 type TProps = RouteComponentProps
 

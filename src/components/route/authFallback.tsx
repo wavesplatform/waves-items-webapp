@@ -1,5 +1,6 @@
 import React, { ComponentType } from 'react'
-import { withCurrentUser, WithCurrentUserProps } from '../withCurrentUser/currentUser'
+import withCurrentUser, { WithCurrentUserProps } from '../withCurrentUser'
+import { UserRole } from '../../__generated__/globalTypes'
 
 type TSwitchProps = {
   Component: ComponentType<any>
@@ -16,7 +17,7 @@ const Switch = (props: WithCurrentUserProps<TSwitchProps>) => {
 
   if (
     me &&
-    (!isGame || (isGame && me.role === 'GAME'))
+    (!isGame || (isGame && me.role && [UserRole.GAME, UserRole.TEST].includes(me.role)))
   ) {
     return <Component {...rest}/>
   } else {

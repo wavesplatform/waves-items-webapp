@@ -8,7 +8,8 @@ import { IKeeperContext, withKeeperContext } from '../../contexts/keeper'
 import { toWavesFromKeeper } from '../../helpers/order'
 import { compose, withApollo, WithApolloClient } from 'react-apollo'
 import authHelper from '../../helpers/auth'
-import { withCurrentUser, WithCurrentUserProps } from '../withCurrentUser/currentUser'
+import withCurrentUser, { WithCurrentUserProps } from '../withCurrentUser'
+import { UserRole } from '../../__generated__/globalTypes'
 
 interface DropdownContainerProps extends BoxProps {
   isShown?: boolean
@@ -91,7 +92,7 @@ class ProfileDropdown extends Component<WithApolloClient<TProps> & IKeeperContex
           {account && <DropdownItem borderBottom={'1px solid'}>
             <Balance>{toWavesFromKeeper(account.balance.available).toFixed(3)} <WavesCy/></Balance>
           </DropdownItem>}
-          {(me && me.role === 'GAME') && <DropdownItem>
+          {(me && me.role && [UserRole.GAME, UserRole.TEST].includes(me.role)) && <DropdownItem>
             <DropdownLink as={Link} to={'/dashboard'}>Dashboard</DropdownLink>
           </DropdownItem>}
           <DropdownItem>

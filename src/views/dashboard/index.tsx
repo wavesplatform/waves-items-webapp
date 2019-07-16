@@ -7,7 +7,7 @@ import ItemListView from './itemList'
 import ItemView from './item'
 import { GameHeading } from '../../components/game/gameHeading'
 import { GameOverview } from './style'
-import { withCurrentUser, WithCurrentUserProps } from '../../components/withCurrentUser/currentUser'
+import withCurrentUser, { WithCurrentUserProps } from '../../components/withCurrentUser'
 
 interface DashboardParams {
 }

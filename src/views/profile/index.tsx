@@ -3,7 +3,7 @@ import { Container, Section, ViewWrapper } from '../../components/layout'
 import { H1, H2 } from '../../components/globals'
 import Inventory from '../inventory'
 import ToggleTestRole from './components/toggleTestRole'
-import { withCurrentUser, WithCurrentUserProps } from '../../components/withCurrentUser/currentUser'
+import withCurrentUser, { WithCurrentUserProps } from '../../components/withCurrentUser'
 
 class Profile extends Component<WithCurrentUserProps> {
   render(): ReactNode {

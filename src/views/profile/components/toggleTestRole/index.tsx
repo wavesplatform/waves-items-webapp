@@ -7,7 +7,7 @@ import { Paragraph } from '../../../../components/globals'
 import { RadioInput } from '../../../../components/inputs'
 import { UserRole } from '../../../../__generated__/globalTypes'
 import { Loading } from '../../../../components/loading'
-import { withCurrentUser, WithCurrentUserProps } from '../../../../components/withCurrentUser/currentUser'
+import withCurrentUser, { WithCurrentUserProps } from '../../../../components/withCurrentUser'
 
 class UpdateTestRoleMutation extends Mutation<UpdateTestRole, UpdateTestRoleVariables> {
 }

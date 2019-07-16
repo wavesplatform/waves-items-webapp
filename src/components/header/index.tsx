@@ -19,7 +19,7 @@ import { UserAvatar } from '../image'
 import { Box, Text } from 'rebass'
 import ProfileDropdown from './profileDropdown'
 import logo from '../globals/logo.svg'
-import { withCurrentUser, WithCurrentUserProps } from '../withCurrentUser/currentUser'
+import withCurrentUser, { WithCurrentUserProps } from '../withCurrentUser'
 
 type TProps = {}
 
@@ -36,8 +36,6 @@ class Header extends Component<WithCurrentUserProps<TProps>> {
 
   render(): ReactNode {
     const { me } = this.props
-
-    console.log('render, L 40', me)
 
     return (
       <NavbarWrapper>

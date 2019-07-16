@@ -1,7 +1,7 @@
 import React, { Component, ReactNode } from 'react'
 import { RouteComponentProps } from 'react-router'
 import Items from './components/items'
-import { withCurrentUser, WithCurrentUserProps } from '../../components/withCurrentUser/currentUser'
+import withCurrentUser, { WithCurrentUserProps } from '../../components/withCurrentUser'
 
 type TProps = RouteComponentProps
 

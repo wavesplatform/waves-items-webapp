@@ -14,7 +14,6 @@ import Routes from './routes'
 import { GlobalStyle } from './styles/reset'
 import { ApolloLink, from } from 'apollo-link'
 import { config } from './config/config'
-import { CurrentUserProvider } from './components/withCurrentUser/currentUser'
 
 const authMiddleware = new ApolloLink((operation, forward) => {
   operation.setContext(({ headers = {} }) => {
@@ -56,13 +55,11 @@ class App extends Component {
         <Fragment>
           <GlobalStyle/>
           <ApolloProvider client={client}>
-            {/*<CurrentUserProvider>*/}
             <KeeperProvider>
               <Router>
                 <Routes/>
               </Router>
             </KeeperProvider>
-            {/*</CurrentUserProvider>*/}
           </ApolloProvider>
         </Fragment>
       </ThemeProvider>

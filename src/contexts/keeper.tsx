@@ -3,7 +3,7 @@ import { compose, withApollo, WithApolloClient } from 'react-apollo'
 import { IPublicState } from '../helpers/keeper'
 import keeperHelper from '../helpers/keeper'
 import authHelper from '../helpers/auth'
-import { withCurrentUser, WithCurrentUserProps } from '../components/withCurrentUser/currentUser'
+import withCurrentUser, { WithCurrentUserProps } from '../components/withCurrentUser'
 
 type TProps = WithCurrentUserProps
 
