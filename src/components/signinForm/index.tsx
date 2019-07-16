@@ -1,6 +1,5 @@
 import React, { ChangeEvent, Component, FormEvent, ReactNode } from 'react'
-import { Mutation, MutationFn } from 'react-apollo'
-import { AuthContext } from '../../contexts/auth'
+import { compose, Mutation, MutationFn, withApollo, WithApolloClient } from 'react-apollo'
 import keeperHelper from '../../helpers/keeper'
 import { IKeeperContext, withKeeperContext } from '../../contexts/keeper'
 import { signinMutation } from '../../graphql/mutations/signIn'
@@ -11,6 +10,8 @@ import { TextInput } from '../inputs'
 import { Form, Small } from '../globals'
 import { Toast } from '../toasts'
 import { isFirefox } from '../../helpers/browser'
+import { RouteComponentProps, withRouter } from 'react-router'
+import authHelper from '../../helpers/auth'
 
 class SigninMutation extends Mutation<Signin, SigninVariables> {
 }
@@ -20,10 +21,9 @@ type TState = {
   email?: string
 }
 
-type TProps = {}
+type TProps = RouteComponentProps & {}
 
-class SigninForm extends Component<TProps & IKeeperContext> {
-  static contextType = AuthContext
+class SigninForm extends Component<WithApolloClient<TProps> & IKeeperContext> {
 
   state: TState = {}
 
@@ -140,14 +140,21 @@ class SigninForm extends Component<TProps & IKeeperContext> {
           email,
         },
       },
+      update: (store, { data }) => {
+        if (!data) {
+          return
+        }
+
+        const { token, user } = data.signin
+        authHelper.setToken(token)
+      },
+      refetchQueries: () => ['MeQuery'],
     })
   }
 
   _handleCompleted = async (data: Signin) => {
-    const { token, user } = data.signin
-    this.context.signIn(token, user)
-    // Redirect
+    this.props.history.push('/')
   }
 }
 
-export default withKeeperContext<TProps>(SigninForm)
+export default compose(withRouter, withKeeperContext, withApollo)(SigninForm)

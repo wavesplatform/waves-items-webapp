@@ -34,7 +34,7 @@ export interface ItemQuery_item_asks {
 }
 
 export interface ItemQuery_item {
-  __typename: "ItemView";
+  __typename: "Item";
   id: string;
   assetId: string;
   name: string;
@@ -42,6 +42,7 @@ export interface ItemQuery_item {
   reissuable: boolean;
   timestamp: any;
   imageUrl: string;
+  misc: any | null;
   game: ItemQuery_item_game;
   pair: ItemQuery_item_pair | null;
   bids: ItemQuery_item_bids[] | null;

@@ -23,7 +23,7 @@ class Item extends Component<TChildProps> {
       return <Loading/>
     }
 
-    return <ItemDetail
+    return item && <ItemDetail
       item={item as IItem}
       isPage={false}
     />

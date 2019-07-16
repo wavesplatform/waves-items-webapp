@@ -10,16 +10,16 @@ import { ThemeProvider } from 'styled-components'
 import theme from './styles/theme'
 import authHelper from './helpers/auth'
 import { KeeperProvider } from './contexts/keeper'
-import { AuthProvider } from './contexts/auth'
 import Routes from './routes'
 import { GlobalStyle } from './styles/reset'
 import { ApolloLink, from } from 'apollo-link'
 import { config } from './config/config'
+import { CurrentUserProvider } from './components/withCurrentUser/currentUser'
 
 const authMiddleware = new ApolloLink((operation, forward) => {
   operation.setContext(({ headers = {} }) => {
-    const user = authHelper.getUser()
-    const token = user && authHelper.getToken(user.address)
+    // const user = authHelper.getUser()
+    const token = authHelper.getToken()
 
     return {
       headers: {
@@ -56,13 +56,13 @@ class App extends Component {
         <Fragment>
           <GlobalStyle/>
           <ApolloProvider client={client}>
+            {/*<CurrentUserProvider>*/}
             <KeeperProvider>
               <Router>
-                <AuthProvider>
-                  <Routes/>
-                </AuthProvider>
+                <Routes/>
               </Router>
             </KeeperProvider>
+            {/*</CurrentUserProvider>*/}
           </ApolloProvider>
         </Fragment>
       </ThemeProvider>

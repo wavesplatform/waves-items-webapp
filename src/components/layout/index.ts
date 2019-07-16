@@ -13,6 +13,10 @@ export const Container = styled(Box)`
 `
 Container.defaultProps = { ...Container.defaultProps, px: 'lg' }
 
+export const Section = styled(Box)`
+`
+Section.defaultProps = { ...Section.defaultProps, mb: 'lg' }
+
 export const ViewWrapper = styled(Box)`
 `
 ViewWrapper.defaultProps = { ...ViewWrapper.defaultProps, pt: 'lg', pb: 'lg' }

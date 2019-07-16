@@ -1,24 +1,30 @@
 import React, { Component, ReactNode } from 'react'
-import { Container, ViewWrapper } from '../../components/layout'
-import { H1 } from '../../components/globals'
+import { Container, Section, ViewWrapper } from '../../components/layout'
+import { H1, H2 } from '../../components/globals'
 import Inventory from '../inventory'
-import { AuthConsumer, IAuthContext } from '../../contexts/auth'
+import ToggleTestRole from './components/toggleTestRole'
+import { withCurrentUser, WithCurrentUserProps } from '../../components/withCurrentUser/currentUser'
 
-class Profile extends Component {
+class Profile extends Component<WithCurrentUserProps> {
   render(): ReactNode {
+    const { me } = this.props
+
     return (
-      <AuthConsumer>
-        {({ user }: IAuthContext) => (
-          <ViewWrapper>
-            <Container>
-              <H1>Profile</H1>
-              {user && <Inventory address={user.address}/>}
-            </Container>
-          </ViewWrapper>
-        )}
-      </AuthConsumer>
+      <ViewWrapper>
+        <Container>
+          <H1>Profile</H1>
+          <Section>
+            <H2>Inventory</H2>
+            {me && <Inventory address={me.address}/>}
+          </Section>
+          <Section>
+            <H2>Demo Game</H2>
+            <ToggleTestRole/>
+          </Section>
+        </Container>
+      </ViewWrapper>
     )
   }
 }
 
-export default Profile
+export default withCurrentUser(Profile)

@@ -2,11 +2,12 @@
 /* eslint-disable */
 // This file was automatically generated and should not be edited.
 
-import { ItemFilter } from "./../../../../__generated__/globalTypes"
 
 // ====================================================
 // GraphQL query operation: ItemsQuery
 // ====================================================
+
+import { ItemFilter } from '../../../__generated__/globalTypes'
 
 export interface ItemsQuery_items_game {
   __typename: "User";

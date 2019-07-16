@@ -1,7 +1,7 @@
 import React, { Component, ReactNode } from 'react'
 import { RouteComponentProps } from 'react-router'
 import Items from './components/items'
-import { IAuthContext, withAuthContext } from '../../contexts/auth'
+import { withCurrentUser, WithCurrentUserProps } from '../../components/withCurrentUser/currentUser'
 
 type TProps = RouteComponentProps
 
@@ -9,13 +9,13 @@ type TState = {
   searchString?: string
 }
 
-class ItemListView extends Component<TProps & IAuthContext> {
+class ItemListView extends Component<WithCurrentUserProps<TProps>> {
   state: TState = {
     searchString: '',
   }
 
   render(): ReactNode {
-    const user = this.props.user!
+    const user = this.props.me!
 
     return (
       <Items address={user.address} searchString={this.state.searchString}/>
@@ -23,4 +23,4 @@ class ItemListView extends Component<TProps & IAuthContext> {
   }
 }
 
-export default withAuthContext<TProps>(ItemListView)
+export default withCurrentUser<TProps>(ItemListView)

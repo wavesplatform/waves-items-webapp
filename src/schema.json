@@ -192,6 +192,18 @@
             },
             "isDeprecated": false,
             "deprecationReason": null
+          },
+          {
+            "name": "me",
+            "description": "",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "User",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
           }
         ],
         "inputFields": null,
@@ -767,9 +779,37 @@
             "description": "",
             "args": [],
             "type": {
-              "kind": "ENUM",
-              "name": "UserRole",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "ENUM",
+                "name": "UserRole",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "permissions",
+            "description": "",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "ENUM",
+                    "name": "UserPermission",
+                    "ofType": null
+                  }
+                }
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -839,13 +879,36 @@
             "deprecationReason": null
           },
           {
-            "name": "GAME",
+            "name": "TEST",
             "description": "",
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
-            "name": "MANAGER",
+            "name": "GAME",
+            "description": "",
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "possibleTypes": null
+      },
+      {
+        "kind": "ENUM",
+        "name": "UserPermission",
+        "description": "",
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": [
+          {
+            "name": "USER",
+            "description": "",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "GAME",
             "description": "",
             "isDeprecated": false,
             "deprecationReason": null
@@ -989,6 +1052,37 @@
               "ofType": {
                 "kind": "OBJECT",
                 "name": "AuthPayload",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "updateTestRole",
+            "description": "",
+            "args": [
+              {
+                "name": "enable",
+                "description": "",
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "Boolean",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null
+              }
+            ],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "User",
                 "ofType": null
               }
             },
@@ -1949,18 +2043,7 @@
     ],
     "directives": [
       {
-        "name": "isAuthenticated",
-        "description": "",
-        "locations": [
-          "QUERY",
-          "MUTATION",
-          "FIELD",
-          "FIELD_DEFINITION"
-        ],
-        "args": []
-      },
-      {
-        "name": "hasRole",
+        "name": "auth",
         "description": "",
         "locations": [
           "QUERY",
@@ -1970,11 +2053,11 @@
         ],
         "args": [
           {
-            "name": "role",
+            "name": "requires",
             "description": "",
             "type": {
-              "kind": "SCALAR",
-              "name": "String",
+              "kind": "ENUM",
+              "name": "UserPermission",
               "ofType": null
             },
             "defaultValue": null

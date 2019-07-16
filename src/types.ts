@@ -1,6 +1,8 @@
 import { LONG } from '@waves/types'
 import { ApolloError } from 'apollo-client'
 import { ICreateParamsMap, IEditParamsMap } from '@waves/waves-games'
+import { userInfo } from './graphql/fragments/__generated__/userInfo'
+import { UserRole } from './__generated__/globalTypes'
 
 export interface IDefaultResult {
   loading: boolean
@@ -13,14 +15,13 @@ export type UserImage = {
   promo?: string
 }
 
+// export type UserRole = 'USER' | 'TEST' | 'GAME'
 
-export type UserRole = 'USER' | 'GAME' | 'MANAGER'
-
-export type WithImage<P> = P & {
+export type WithImage<P = {}> = P & {
   image?: UserImage
 }
 
-export interface IUser extends WithImage<{}> {
+export interface IUser extends WithImage {
   id?: string
   name?: string | null
   email?: string

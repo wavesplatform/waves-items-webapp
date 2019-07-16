@@ -6,6 +6,12 @@
 // START Enums and Input Objects
 //==============================================================
 
+export enum UserRole {
+  GAME = "GAME",
+  TEST = "TEST",
+  USER = "USER",
+}
+
 export interface ItemFilter {
   gameAddress?: string | null;
   searchString?: string | null;

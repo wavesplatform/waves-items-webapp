@@ -16,7 +16,7 @@ export interface itemInfo_game {
 }
 
 export interface itemInfo {
-  __typename: "ItemView";
+  __typename: "Item";
   id: string;
   assetId: string;
   name: string;
@@ -24,5 +24,6 @@ export interface itemInfo {
   reissuable: boolean;
   timestamp: any;
   imageUrl: string;
+  misc: any | null;
   game: itemInfo_game;
 }

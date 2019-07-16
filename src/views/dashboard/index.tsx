@@ -3,21 +3,21 @@ import { ViewContainer, ViewWrapper } from '../../components/layout'
 import { TabItem, TabLink, Tabs, TabsList } from '../../components/globals'
 import { Redirect, Route, RouteComponentProps, Switch } from 'react-router'
 import { Box } from 'rebass'
-import { IAuthContext, withAuthContext } from '../../contexts/auth'
 import ItemListView from './itemList'
 import ItemView from './item'
 import { GameHeading } from '../../components/game/gameHeading'
 import { GameOverview } from './style'
+import { withCurrentUser, WithCurrentUserProps } from '../../components/withCurrentUser/currentUser'
 
 interface DashboardParams {
 }
 
 type TProps = RouteComponentProps<DashboardParams> & {}
 
-class Dashboard extends Component<TProps & IAuthContext> {
+class Dashboard extends Component<WithCurrentUserProps<TProps>> {
 
   render(): ReactNode {
-    const game = this.props.user!
+    const game = this.props.me!
 
     return (
       <ViewWrapper pt={0}>
@@ -54,4 +54,4 @@ class Dashboard extends Component<TProps & IAuthContext> {
   }
 }
 
-export default withAuthContext<TProps>(Dashboard)
+export default withCurrentUser<TProps>(Dashboard)

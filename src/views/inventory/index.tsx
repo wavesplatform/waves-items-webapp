@@ -35,7 +35,6 @@ class Inventory extends Component<TChildProps> {
 
     return (
       <InventoryContainer>
-        <H2>Inventory</H2>
         <InventoryGrid items={items.map(item => (item as IItem)) || []}/>
       </InventoryContainer>
     )

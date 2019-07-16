@@ -5,7 +5,7 @@ import {
   StyledLabel,
   StyledNumberInput,
   StyledFlatTextInput,
-  StyledTextInput, StyledLabelProps,
+  StyledTextInput, StyledLabelProps, StyledRadioLabel, StyledRadioInput, StyledRadioLabelProps,
 } from './style'
 import { Box } from 'rebass'
 
@@ -24,7 +24,7 @@ export const TextInput = (props: PropsWithChildren<TextInputProps>) => {
   return (
     // @ts-ignore
     <StyledLabel {...props}>
-      {props.children && <Box>{props.children}</Box>}
+      {props.children && <>{props.children}</>}
       <StyledTextInput
         id={props.id}
         defaultValue={props.defaultValue}
@@ -47,7 +47,7 @@ export const TextInputWithUnit = (props: PropsWithChildren<TextInputWithUnitProp
   return (
     // @ts-ignore
     <StyledLabel {...props}>
-      {props.children && <Box>{props.children}</Box>}
+      {props.children && <>{props.children}</>}
       <StyledInputWrapper
         disabled={props.disabled}
       >
@@ -78,7 +78,7 @@ export const NumberInput = (props: PropsWithChildren<NumberInputProps>) => {
   return (
     // @ts-ignore
     <StyledLabel {...props}>
-      {props.children && <Box>{props.children}</Box>}
+      {props.children && <>{props.children}</>}
       <StyledNumberInput
         id={props.id}
         defaultValue={props.defaultValue}
@@ -113,5 +113,33 @@ export const FlatTextInput = (props: FlatTextInputProps) => {
       autoFocus={props.autoFocus}
       disabled={props.disabled}
     />
+  )
+}
+
+interface RadioInputProps extends StyledRadioLabelProps {
+  checked?: boolean,
+  value?: any,
+  onChange?: (ev: ChangeEvent<HTMLInputElement>) => void,
+  autoFocus?: boolean,
+  disabled?: boolean,
+  readOnly?: boolean,
+  id?: string,
+}
+
+export const RadioInput = (props: PropsWithChildren<RadioInputProps>) => {
+  return (
+    // @ts-ignore
+    <StyledRadioLabel {...props}>
+      <StyledRadioInput
+        id={props.id}
+        readOnly={props.readOnly}
+        checked={props.checked}
+        value={props.value}
+        onChange={props.onChange}
+        autoFocus={props.autoFocus}
+        disabled={props.disabled}
+      />
+      {props.children && <>{props.children}</>}
+    </StyledRadioLabel>
   )
 }

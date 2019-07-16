@@ -1,5 +1,5 @@
 import React, { ComponentType } from 'react'
-import { IAuthContext, withAuthContext } from '../../contexts/auth'
+import { withCurrentUser, WithCurrentUserProps } from '../withCurrentUser/currentUser'
 
 type TSwitchProps = {
   Component: ComponentType<any>
@@ -7,12 +7,16 @@ type TSwitchProps = {
   isGame: boolean
 }
 
-const Switch = (props: TSwitchProps & IAuthContext) => {
-  const { Component, FallbackComponent, isGame, user, signIn, signOut, ...rest } = props
+const Switch = (props: WithCurrentUserProps<TSwitchProps>) => {
+  const { Component, FallbackComponent, isGame, me, meIsLoading, ...rest } = props
+
+  if (meIsLoading) {
+    return <Component {...rest}/>
+  }
 
   if (
-    user &&
-    (!isGame || (isGame && user.role === 'GAME'))
+    me &&
+    (!isGame || (isGame && me.role === 'GAME'))
   ) {
     return <Component {...rest}/>
   } else {
@@ -20,7 +24,7 @@ const Switch = (props: TSwitchProps & IAuthContext) => {
   }
 }
 
-const SwitchWithAuth = withAuthContext(Switch)
+const SwitchWithAuth = withCurrentUser(Switch)
 
 const authFallback = (
   Component: ComponentType<any>,

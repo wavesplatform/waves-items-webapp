@@ -78,7 +78,6 @@ StyledInput.defaultProps = {
 export const StyledTextInput = styled(StyledInput).attrs({
   type: 'text',
 })`
-
 `
 StyledTextInput.defaultProps = {
   ...StyledTextInput.defaultProps,
@@ -127,4 +126,54 @@ StyledFlatTextInput.defaultProps = {
   mt: 0,
   bg: 'bg.card',
   borderColor: 'transparent',
+}
+
+export interface StyledRadioLabelProps extends FlexProps {
+}
+
+export const StyledRadioLabel = styled(Flex)<StyledRadioLabelProps>`
+  position: relative;
+  align-items: center;
+  cursor: pointer;
+`
+StyledRadioLabel.defaultProps = {
+  as: 'label',
+  mt: 'base',
+  color: 'default',
+}
+
+interface StyledRadioInputProps extends BoxProps, BorderRadiusProps, BordersProps {
+}
+
+export const StyledRadioInput = styled(Box).attrs({
+  type: 'radio',
+})<StyledRadioInputProps>`
+  width: 18px;
+  height: 18px;
+  box-shadow: none;
+  border-color: ${themeGet('colors.border.input')};
+  border-width: 2px;
+  border-style: solid;
+  opacity: ${props => (props.disabled ? .5 : 1)};
+  
+  &:checked {
+    border-color: ${themeGet('colors.primary')};
+    border-width: 6px;
+    background-color: ${themeGet('colors.default')};
+  }
+  
+  ${borders};
+  ${borderColor};
+  ${borderRadius};
+  ${boxShadow};
+  ${backgroundImage};
+  ${backgroundSize};
+  ${backgroundPosition};
+  ${opacity};
+`
+StyledRadioInput.defaultProps = {
+  as: 'input',
+  borderRadius: '24px',
+  bg: 'bg.input',
+  mr: 'sm',
 }

@@ -1,12 +1,14 @@
 import React, { Component, ComponentProps, ElementType, ReactNode } from 'react'
 import styled from 'styled-components'
 import { Box, BoxProps, Flex } from 'rebass'
-import { Link } from 'react-router-dom'
+import { Link, RouteComponentProps, withRouter } from 'react-router-dom'
 import { borders, BordersProps, space, themeGet } from 'styled-system'
 import { hexa, shadow, WavesCy } from '../globals'
-import { AuthConsumer, IAuthContext } from '../../contexts/auth'
 import { IKeeperContext, withKeeperContext } from '../../contexts/keeper'
 import { toWavesFromKeeper } from '../../helpers/order'
+import { compose, withApollo, WithApolloClient } from 'react-apollo'
+import authHelper from '../../helpers/auth'
+import { withCurrentUser, WithCurrentUserProps } from '../withCurrentUser/currentUser'
 
 interface DropdownContainerProps extends BoxProps {
   isShown?: boolean
@@ -64,13 +66,13 @@ const Balance = styled(Box)`
 `
 Balance.defaultProps = { py: 'base', px: 'lg' }
 
-interface IProps {
+type TProps = RouteComponentProps & WithCurrentUserProps<{
   isShown?: boolean
   target?: any
   onClickOutside?: () => void
-}
+}>
 
-class ProfileDropdown extends Component<IProps & IKeeperContext> {
+class ProfileDropdown extends Component<WithApolloClient<TProps> & IKeeperContext> {
   componentWillMount(): void {
     document.addEventListener('click', this._onClickOutside)
   }
@@ -80,30 +82,30 @@ class ProfileDropdown extends Component<IProps & IKeeperContext> {
   }
 
   render(): ReactNode {
-    const { isShown, publicState } = this.props
+    const { isShown, publicState, me, client } = this.props
     const { account } = publicState
 
     return (
-      <AuthConsumer>
-        {({ user, signOut }: IAuthContext) => (
-          <DropdownContainer isShown={isShown}>
-            <DropdownList>
-              {account && <DropdownItem borderBottom={'1px solid'}>
-                <Balance>{toWavesFromKeeper(account.balance.available).toFixed(3)} <WavesCy/></Balance>
-              </DropdownItem>}
-              {(user && user.role === 'GAME') && <DropdownItem>
-                <DropdownLink as={Link} to={'/dashboard'}>Dashboard</DropdownLink>
-              </DropdownItem>}
-              <DropdownItem>
-                <DropdownLink as={Link} to={'/profile'}>Profile</DropdownLink>
-              </DropdownItem>
-              <DropdownItem>
-                <DropdownLink onClick={signOut}>Logout</DropdownLink>
-              </DropdownItem>
-            </DropdownList>
-          </DropdownContainer>
-        )}
-      </AuthConsumer>
+      <DropdownContainer isShown={isShown}>
+        <DropdownList>
+          {account && <DropdownItem borderBottom={'1px solid'}>
+            <Balance>{toWavesFromKeeper(account.balance.available).toFixed(3)} <WavesCy/></Balance>
+          </DropdownItem>}
+          {(me && me.role === 'GAME') && <DropdownItem>
+            <DropdownLink as={Link} to={'/dashboard'}>Dashboard</DropdownLink>
+          </DropdownItem>}
+          <DropdownItem>
+            <DropdownLink as={Link} to={'/profile'}>Profile</DropdownLink>
+          </DropdownItem>
+          <DropdownItem>
+            <DropdownLink onClick={async () => {
+              authHelper.removeToken()
+              client.resetStore()
+              client.cache.reset()
+            }}>Logout</DropdownLink>
+          </DropdownItem>
+        </DropdownList>
+      </DropdownContainer>
     )
   }
 
@@ -116,4 +118,4 @@ class ProfileDropdown extends Component<IProps & IKeeperContext> {
   }
 }
 
-export default withKeeperContext<IProps>(ProfileDropdown)
+export default compose(withRouter, withKeeperContext, withApollo, withCurrentUser)(ProfileDropdown)

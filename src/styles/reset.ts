@@ -8,6 +8,8 @@ export const GlobalStyle = createGlobalStyle`
   *::after {
     box-sizing: border-box;
     outline: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
   }
   
   html {

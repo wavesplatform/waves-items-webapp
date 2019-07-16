@@ -16,7 +16,7 @@ export interface UserItemsQuery_userItems_game {
 }
 
 export interface UserItemsQuery_userItems {
-  __typename: "ItemView";
+  __typename: "Item";
   id: string;
   assetId: string;
   name: string;
@@ -24,6 +24,7 @@ export interface UserItemsQuery_userItems {
   reissuable: boolean;
   timestamp: any;
   imageUrl: string;
+  misc: any | null;
   game: UserItemsQuery_userItems_game;
   balance: number | null;
 }

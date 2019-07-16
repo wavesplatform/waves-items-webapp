@@ -1,10 +1,11 @@
 import React, { Component, ComponentType, createContext, PureComponent, ReactNode } from 'react'
-import { withApollo, WithApolloClient } from 'react-apollo'
+import { compose, withApollo, WithApolloClient } from 'react-apollo'
 import { IPublicState } from '../helpers/keeper'
 import keeperHelper from '../helpers/keeper'
+import authHelper from '../helpers/auth'
+import { withCurrentUser, WithCurrentUserProps } from '../components/withCurrentUser/currentUser'
 
-interface IProps {
-}
+type TProps = WithCurrentUserProps
 
 interface IKeeperState extends Partial<IPublicState> {
 }
@@ -26,10 +27,10 @@ const defaultKeeperContext: IKeeperContext = {
 
 export const KeeperContext = createContext<IKeeperContext>(defaultKeeperContext)
 
-class KeeperProviderBase extends Component<WithApolloClient<IProps>, IKeeperContext> {
+class KeeperProviderBase extends Component<WithApolloClient<TProps>, IKeeperContext> {
   state: IKeeperContext = defaultKeeperContext
 
-  constructor(props: WithApolloClient<IProps>) {
+  constructor(props: WithApolloClient<TProps>) {
     super(props)
 
     // const publicState = keeperHelper.getPublicState()
@@ -56,7 +57,6 @@ class KeeperProviderBase extends Component<WithApolloClient<IProps>, IKeeperCont
   }
 
   async componentDidMount() {
-
     try {
       const keeper = await keeperHelper.init()
 
@@ -67,7 +67,7 @@ class KeeperProviderBase extends Component<WithApolloClient<IProps>, IKeeperCont
       this.setState({ installed: true })
 
       keeper.on('update', (publicState: IPublicState) => {
-
+        const { me, client } = this.props
         const { account } = publicState
 
         // TODO: temp check changes
@@ -81,6 +81,12 @@ class KeeperProviderBase extends Component<WithApolloClient<IProps>, IKeeperCont
         }
 
         keeperHelper.setPublicState(publicState)
+
+        if (account && me && account.address !== me.address) {
+          authHelper.removeToken()
+          client.writeData({ data: { me: null } })
+        }
+
         this.setState({ publicState, hasAccounts: !!account })
       })
 
@@ -97,7 +103,6 @@ class KeeperProviderBase extends Component<WithApolloClient<IProps>, IKeeperCont
   }
 
   render() {
-    console.log('KeeperProvider render()')
     return (
       <KeeperContext.Provider value={{
         publicState: this.state.publicState,
@@ -112,7 +117,7 @@ class KeeperProviderBase extends Component<WithApolloClient<IProps>, IKeeperCont
 
 }
 
-const KeeperProvider = withApollo<IProps>(KeeperProviderBase)
+const KeeperProvider = compose(withApollo, withCurrentUser)(KeeperProviderBase)
 const KeeperConsumer = KeeperContext.Consumer
 
 const withKeeperContext = <P extends {}>(WrappedComponent: ComponentType<P & IKeeperContext>) =>

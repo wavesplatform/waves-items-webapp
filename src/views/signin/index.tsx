@@ -2,16 +2,14 @@ import React, { Component, ReactNode } from 'react'
 import { ViewWrapper } from '../../components/layout'
 import { H1 } from '../../components/globals'
 import { Redirect, RouteComponentProps } from 'react-router'
-import { AuthContext } from '../../contexts/auth'
 import SigninForm from '../../components/signinForm'
 import { SigninContainer } from './style'
 import { Box } from 'rebass'
+import { withCurrentUser, WithCurrentUserProps } from '../../components/withCurrentUser/currentUser'
 
-interface IProps extends RouteComponentProps {
-}
+type TProps = RouteComponentProps
 
-class SigninView extends Component<IProps> {
-  static contextType = AuthContext
+class SigninView extends Component<WithCurrentUserProps<TProps>> {
 
   state = {
     redirectUrl: '/',
@@ -26,7 +24,7 @@ class SigninView extends Component<IProps> {
   }
 
   render(): ReactNode {
-    if (this.context.user) {
+    if (this.props.me) {
       return <Redirect to={this.state.redirectUrl}/>
     }
 
@@ -43,4 +41,4 @@ class SigninView extends Component<IProps> {
   }
 }
 
-export default SigninView
+export default withCurrentUser<TProps>(SigninView)

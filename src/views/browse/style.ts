@@ -30,7 +30,7 @@ interface ItemSideProps extends BoxProps {
 
 export const ItemSide = styled(Box)<ItemSideProps>`
   position: absolute;
-  right: ${props => (props.isActive ? 0 : '-50%')};;
+  right: ${props => (props.isActive ? 0 : '-50%')};
   width: 50%;
   top: 0;
   height: 100%;

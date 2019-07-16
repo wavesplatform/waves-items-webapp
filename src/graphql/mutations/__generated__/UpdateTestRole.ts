@@ -5,14 +5,22 @@
 import { UserRole } from "./../../../__generated__/globalTypes";
 
 // ====================================================
-// GraphQL fragment: userInfo
+// GraphQL mutation operation: UpdateTestRole
 // ====================================================
 
-export interface userInfo {
+export interface UpdateTestRole_updateTestRole {
   __typename: "User";
   id: string;
   address: string;
   name: string | null;
   image: any | null;
   role: UserRole;
+}
+
+export interface UpdateTestRole {
+  updateTestRole: UpdateTestRole_updateTestRole;
+}
+
+export interface UpdateTestRoleVariables {
+  enable: boolean;
 }

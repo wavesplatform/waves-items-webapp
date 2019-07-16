@@ -1,30 +1,33 @@
 import React, { Component, createRef, ReactNode } from 'react'
-import { AuthConsumer, IAuthContext } from '../../contexts/auth'
 import {
+  Logo,
+  LogoImage,
+  LogoTitle,
   Nav,
   Navbar,
+  NavbarContainer,
+  NavbarWrapper,
   NavItem,
   NavLink,
   NavProfile,
-  Logo,
-  ProfileToggle,
   ProfileDrop,
-  NavbarContainer,
-  NavbarWrapper, LogoImage, LogoTitle, UserName, ToggleIcon
+  ProfileToggle,
+  ToggleIcon,
+  UserName
 } from './style'
 import { UserAvatar } from '../image'
 import { Box, Text } from 'rebass'
 import ProfileDropdown from './profileDropdown'
 import logo from '../globals/logo.svg'
+import { withCurrentUser, WithCurrentUserProps } from '../withCurrentUser/currentUser'
 
-interface IProps {
-}
+type TProps = {}
 
 interface IState {
   profileDropdownIsShown?: boolean
 }
 
-class Header extends Component<IProps> {
+class Header extends Component<WithCurrentUserProps<TProps>> {
   state: IState = {
     profileDropdownIsShown: false,
   }
@@ -32,64 +35,64 @@ class Header extends Component<IProps> {
   profileDropRef = createRef()
 
   render(): ReactNode {
+    const { me } = this.props
+
+    console.log('render, L 40', me)
+
     return (
-      <AuthConsumer>
-        {({ user, signOut }: IAuthContext) => (
-          <NavbarWrapper>
-            <Navbar>
-              <NavbarContainer>
-                {/*Logo*/}
-                <Logo to={'/'}>
-                  <LogoImage src={logo}/>
-                  <LogoTitle>
-                    Item Vault <Text as={'span'} color={'placeholder'} fontSize={'xs'}>Beta</Text>
-                  </LogoTitle>
-                </Logo>
-                {/*Menu*/}
-                <Nav>
-                  <NavItem>
-                    <NavLink to={'/items'}>Items</NavLink>
-                  </NavItem>
-                  {/*<NavItem>*/}
-                  {/*<NavLink to={'/about'}>About</NavLink>*/}
-                  {/*</NavItem>*/}
-                  <NavItem>
-                    <NavLink to={'/develop'}>Develop</NavLink>
-                  </NavItem>
-                </Nav>
-                {/*Profile*/}
-                <Nav>
-                  <NavProfile>
-                    {user ? (
-                      <ProfileDrop ref={this.profileDropRef}>
-                        <ProfileToggle
-                          onClick={this._onProfileDropdownToggle}
-                          isActive={this.state.profileDropdownIsShown}
-                        >
-                          <ToggleIcon glyph={this.state.profileDropdownIsShown ? 'expand_less' : 'expand_more'}/>
-                          <UserName ml={'xs'}>{user.name || user.address}</UserName>
-                          <Box ml={'md'}>
-                            <UserAvatar user={user} size={'sm'}/>
-                          </Box>
-                        </ProfileToggle>
-                        <ProfileDropdown
-                          isShown={this.state.profileDropdownIsShown}
-                          target={this.profileDropRef.current}
-                          onClickOutside={this._onProfileDropdownClickOutside}
-                        />
-                      </ProfileDrop>
-                    ) : (
-                      <NavLink to={'/signin'}>
-                        Sign In
-                      </NavLink>
-                    )}
-                  </NavProfile>
-                </Nav>
-              </NavbarContainer>
-            </Navbar>
-          </NavbarWrapper>
-        )}
-      </AuthConsumer>
+      <NavbarWrapper>
+        <Navbar>
+          <NavbarContainer>
+            {/*Logo*/}
+            <Logo to={'/'}>
+              <LogoImage src={logo}/>
+              <LogoTitle>
+                Item Vault <Text as={'span'} color={'placeholder'} fontSize={'xs'}>Beta</Text>
+              </LogoTitle>
+            </Logo>
+            {/*Menu*/}
+            <Nav>
+              <NavItem>
+                <NavLink to={'/items'}>Items</NavLink>
+              </NavItem>
+              {/*<NavItem>*/}
+              {/*<NavLink to={'/about'}>About</NavLink>*/}
+              {/*</NavItem>*/}
+              <NavItem>
+                <NavLink to={'/develop'}>Develop</NavLink>
+              </NavItem>
+            </Nav>
+            {/*Profile*/}
+            <Nav>
+              <NavProfile>
+                {me ? (
+                  <ProfileDrop ref={this.profileDropRef}>
+                    <ProfileToggle
+                      onClick={this._onProfileDropdownToggle}
+                      isActive={this.state.profileDropdownIsShown}
+                    >
+                      <ToggleIcon glyph={this.state.profileDropdownIsShown ? 'expand_less' : 'expand_more'}/>
+                      <UserName ml={'xs'}>{me.name || me.address}</UserName>
+                      <Box ml={'md'}>
+                        <UserAvatar user={me} size={'sm'}/>
+                      </Box>
+                    </ProfileToggle>
+                    <ProfileDropdown
+                      isShown={this.state.profileDropdownIsShown}
+                      target={this.profileDropRef.current}
+                      onClickOutside={this._onProfileDropdownClickOutside}
+                    />
+                  </ProfileDrop>
+                ) : (
+                  <NavLink to={'/signin'}>
+                    Sign In
+                  </NavLink>
+                )}
+              </NavProfile>
+            </Nav>
+          </NavbarContainer>
+        </Navbar>
+      </NavbarWrapper>
     )
   }
 
@@ -106,4 +109,4 @@ class Header extends Component<IProps> {
   }
 }
 
-export default Header
+export default withCurrentUser<TProps>(Header)

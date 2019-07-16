@@ -1,75 +1,49 @@
 import React, { Component, ComponentType, createContext, PureComponent, ReactNode } from 'react'
-import { withApollo, WithApolloClient } from 'react-apollo'
 import { IUser } from '../types'
 import { KeeperContext } from './keeper'
 import authHelper from '../helpers/auth'
+import { compose, withApollo, WithApolloClient } from 'react-apollo'
+import { MeQuery, MeQuery_me } from '../graphql/queries/__generated__/MeQuery'
 
-interface IProps {
+type TProps = {}
+
+export interface IAuthContext {
+  setUser: (user: IUser | null) => void
 }
 
-interface IAuthState {
-  user?: IUser
-}
-
-export interface IAuthContext extends IAuthState {
-  signIn: (token: string, user: IUser) => void
-  signOut: () => void
-}
+export type WithAuthContextProps<T = {}> = T & IAuthContext
 
 export const AuthContext = createContext<IAuthContext>({
-  signIn: (token: string, user: IUser) => {
-  },
-  signOut: () => {
+  setUser: (user: IUser | null) => {
   },
 })
 
-class AuthProviderBase extends Component<WithApolloClient<IProps>> {
+class AuthProviderBase extends Component<WithApolloClient<TProps>> {
   static contextType = KeeperContext
 
-  state: IAuthState = {}
-
-  constructor(props: WithApolloClient<IProps>) {
+  constructor(props: WithApolloClient<TProps>) {
     super(props)
-
-    const user = authHelper.getUser()
-    const token = user && authHelper.getToken(user.address)
-    if (user && token) {
-      this.state.user = user
-    }
   }
 
-  signIn = (token: string, user: IUser) => {
-    authHelper.setToken(user.address, token)
-    this._setUser(user)
-  }
-
-  signOut = () => {
-    this.state.user && authHelper.removeToken(this.state.user.address)
-    if (this.state.user) {
-      this._setUser(null)
-    }
+  setUser = (user: IUser | null) => {
+    // this._setUser(user)
+    this.props.client.writeData({ data: { me: user as MeQuery_me } })
   }
 
   componentDidMount(): void {
   }
 
-  componentDidUpdate(prevProps: Readonly<WithApolloClient<IProps>>, prevState: Readonly<{}>, snapshot?: any): void {
+  componentDidUpdate(prevProps: Readonly<TProps>, prevState: Readonly<{}>, snapshot?: any): void {
+    // When updated keeper state
+
     // Account from keeper
     const { publicState: { account, network } } = this.context
     if (account) {
       const { address, publicKey } = account
 
-      if (this.state.user && address === this.state.user.address) {
-        return
-      }
-
-      if (this.state.user) {
-        this._setUser(null)
-      }
-
-      if (!authHelper.getToken(address)) {
-        return
-      }
+      // if (!authHelper.getToken()) {
+      //   return
+      // }
 
       // If address has been changed
       // this._setUser({
@@ -80,28 +54,27 @@ class AuthProviderBase extends Component<WithApolloClient<IProps>> {
   }
 
   render(): ReactNode {
-    console.log('AuthProvider render()')
     return (
       <AuthContext.Provider value={{
-        user: this.state.user,
-        signIn: this.signIn,
-        signOut: this.signOut,
+        setUser: this.setUser,
       }}>
         {this.props.children}
       </AuthContext.Provider>
     )
   }
 
-  _setUser = (user: IUser | null) => {
-    console.log('_setUser', user)
-    authHelper.setUser(user)
-    this.setState({
-      user,
-    })
-  }
+  // _setUser = (user: IUser | null) => {
+  //   console.log('_setUser, L 107 user:', user)
+  //   // TODO: need fix types
+  //   // this.props.client.writeData<MeQuery>({ data: { me: null } })
+  //
+  //   this.setState({
+  //     user,
+  //   })
+  // }
 }
 
-const AuthProvider = withApollo<IProps>(AuthProviderBase)
+const AuthProvider = withApollo<TProps>(AuthProviderBase)
 const AuthConsumer = AuthContext.Consumer
 
 const withAuthContext = <P extends {}>(WrappedComponent: ComponentType<P & IAuthContext>) =>
