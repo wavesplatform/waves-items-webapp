@@ -1,6 +1,7 @@
 import React, { ComponentType } from 'react'
 import withCurrentUser, { WithCurrentUserProps } from '../withCurrentUser'
 import { UserRole } from '../../__generated__/globalTypes'
+import { Loading } from '../loading'
 
 type TSwitchProps = {
   Component: ComponentType<any>
@@ -12,7 +13,8 @@ const Switch = (props: WithCurrentUserProps<TSwitchProps>) => {
   const { Component, FallbackComponent, isGame, me, meIsLoading, ...rest } = props
 
   if (meIsLoading) {
-    return <Component {...rest}/>
+    return <Loading/>
+    // return <Component {...rest}/>
   }
 
   if (

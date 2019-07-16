@@ -15,10 +15,12 @@ class ItemListView extends Component<WithCurrentUserProps<TProps>> {
   }
 
   render(): ReactNode {
-    const user = this.props.me!
+    const user = this.props.me
 
     return (
-      <Items address={user.address} searchString={this.state.searchString}/>
+      <>
+        {user && <Items address={user.address} searchString={this.state.searchString}/>}
+      </>
     )
   }
 }

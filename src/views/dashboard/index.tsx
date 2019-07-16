@@ -17,13 +17,13 @@ type TProps = RouteComponentProps<DashboardParams> & {}
 class Dashboard extends Component<WithCurrentUserProps<TProps>> {
 
   render(): ReactNode {
-    const game = this.props.me!
+    const game = this.props.me
 
     return (
       <ViewWrapper pt={0}>
         <GameOverview>
           <ViewContainer>
-            <GameHeading game={game}/>
+            {game && <GameHeading game={game}/>}
           </ViewContainer>
         </GameOverview>
         <Tabs>

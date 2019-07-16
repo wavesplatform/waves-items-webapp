@@ -1,13 +1,16 @@
 import React, { ChangeEvent, PropsWithChildren } from 'react'
 import {
   InputUnit,
+  StyledFlatTextInput,
   StyledInputWrapper,
   StyledLabel,
+  StyledLabelProps,
   StyledNumberInput,
-  StyledFlatTextInput,
-  StyledTextInput, StyledLabelProps, StyledRadioLabel, StyledRadioInput, StyledRadioLabelProps,
+  StyledRadioInput,
+  StyledRadioLabel,
+  StyledRadioLabelProps,
+  StyledTextInput,
 } from './style'
-import { Box } from 'rebass'
 
 interface TextInputProps extends StyledLabelProps {
   defaultValue?: string,
