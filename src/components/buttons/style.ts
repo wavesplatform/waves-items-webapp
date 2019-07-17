@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import { Button, ButtonProps } from 'rebass'
 import { variant } from 'styled-system'
+import { LinkProps } from 'react-router-dom'
 
 const buttonSizeStyle = variant({
   key: 'buttonSizes',
@@ -11,7 +12,7 @@ export interface StyledButtonProps extends Pick<ButtonProps, Exclude<keyof Butto
   size?: string
 }
 
-export const StyledButton = styled(Button)<StyledButtonProps>`
+export const StyledButton = styled(Button)<StyledButtonProps & Partial<LinkProps>>`
   cursor: pointer;
   
   &:hover,

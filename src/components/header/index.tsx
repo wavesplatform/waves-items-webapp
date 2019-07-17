@@ -20,8 +20,9 @@ import { Box, Text } from 'rebass'
 import ProfileDropdown from './profileDropdown'
 import logo from '../globals/logo.svg'
 import withCurrentUser, { WithCurrentUserProps } from '../withCurrentUser'
+import { Route, RouteComponentProps } from 'react-router'
 
-type TProps = {}
+type TProps = RouteComponentProps
 
 interface IState {
   profileDropdownIsShown?: boolean
@@ -50,15 +51,23 @@ class Header extends Component<WithCurrentUserProps<TProps>> {
             </Logo>
             {/*Menu*/}
             <Nav>
-              <NavItem>
-                <NavLink to={'/items'}>Items</NavLink>
-              </NavItem>
+              <Route path={'/items'}>
+                {({ match }) => (
+                  <NavItem isActive={!!match}>
+                    <NavLink to={'/items'}>Items</NavLink>
+                  </NavItem>
+                )}
+              </Route>
               {/*<NavItem>*/}
               {/*<NavLink to={'/about'}>About</NavLink>*/}
               {/*</NavItem>*/}
-              <NavItem>
-                <NavLink to={'/develop'}>Develop</NavLink>
-              </NavItem>
+              <Route path={'/develop'}>
+                {({ match }) => (
+                  <NavItem isActive={!!match}>
+                    <NavLink to={'/develop'}>Develop</NavLink>
+                  </NavItem>
+                )}
+              </Route>
             </Nav>
             {/*Profile*/}
             <Nav>

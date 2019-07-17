@@ -2,12 +2,13 @@ import React, { Component, ReactNode } from 'react'
 import { ViewContainer, ViewWrapper } from '../../components/layout'
 import { TabItem, TabLink, Tabs, TabsList } from '../../components/globals'
 import { Redirect, Route, RouteComponentProps, Switch } from 'react-router'
-import { Box } from 'rebass'
+import { Box, Flex } from 'rebass'
 import ItemListView from './itemList'
 import ItemView from './item'
 import { GameHeading } from '../../components/game/gameHeading'
 import { GameOverview } from './style'
 import withCurrentUser, { WithCurrentUserProps } from '../../components/withCurrentUser'
+import { NavItem } from '../../components/header/style'
 
 interface DashboardParams {
 }
@@ -28,14 +29,24 @@ class Dashboard extends Component<WithCurrentUserProps<TProps>> {
         </GameOverview>
         <Tabs>
           <ViewContainer>
-            <TabsList height={'52px'}>
-              <TabItem>
-                <TabLink px={'xl'} to={'/dashboard/items'}>Items</TabLink>
-              </TabItem>
-              <TabItem>
-                <TabLink px={'xl'} to={'/dashboard/item'}>Create Item</TabLink>
-              </TabItem>
-            </TabsList>
+            <Flex justifyContent={'space-between'}>
+              <TabsList height={'52px'}>
+                <Route path={'/dashboard/items'}>
+                  {({ match }) => (
+                    <TabItem isActive={!!match}>
+                      <TabLink px={'xl'} to={'/dashboard/items'}>Items</TabLink>
+                    </TabItem>
+                  )}
+                </Route>
+                <Route path={'/dashboard/item'}>
+                  {({ match }) => (
+                    <TabItem isActive={!!match}>
+                      <TabLink px={'xl'} to={'/dashboard/item'}>Create Item</TabLink>
+                    </TabItem>
+                  )}
+                </Route>
+              </TabsList>
+            </Flex>
           </ViewContainer>
         </Tabs>
         <ViewContainer>

@@ -1,8 +1,9 @@
 import React from 'react'
 import { StyledButton, StyledButtonProps, StyledIconButton } from './style'
 import { Icon } from '../icon'
+import { LinkProps } from 'react-router-dom'
 
-type TButtonProps = StyledButtonProps
+type TButtonProps = StyledButtonProps & Partial<LinkProps>
 
 export const Button = (props: TButtonProps) => (
   // @ts-ignore

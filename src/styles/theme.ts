@@ -135,6 +135,13 @@ const buttons = {
 }
 
 const buttonSizes = {
+  sm: {
+    paddingTop: space.xs,
+    paddingBottom: space.xs,
+    paddingLeft: space.sm,
+    paddingRight: space.sm,
+    fontSize: fontSizes.sm,
+  },
   lg: {
     paddingTop: space.md,
     paddingBottom: space.md,

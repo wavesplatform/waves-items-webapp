@@ -1,18 +1,6 @@
 import styled, { css } from 'styled-components'
 import { Box, BoxProps, Heading, Text, TextProps } from 'rebass'
-import {
-  borders,
-  BordersProps,
-  color,
-  height,
-  HeightProps,
-  maxWidth,
-  MaxWidthProps,
-  space, SpaceProps,
-  themeGet,
-  width
-} from 'styled-system'
-import { Container } from '../layout'
+import { borders, BordersProps, color, height, HeightProps, space, SpaceProps, themeGet, width } from 'styled-system'
 import { Link } from 'react-router-dom'
 
 export const hexa = (hex: string, alpha: string | number) => {
@@ -183,8 +171,15 @@ TabsList.defaultProps = {
   as: 'ul',
 }
 
-export const TabItem = styled(Box)`
+export interface TabItemProps extends BoxProps {
+  isActive?: boolean
+}
+
+export const TabItem = styled(Box)<TabItemProps>`
   cursor: pointer;
+  ${props => props.isActive && css`
+    background: ${themeGet('colors.grays.8')};
+  `};
 `
 TabItem.defaultProps = { as: 'li' }
 

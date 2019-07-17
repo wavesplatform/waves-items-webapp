@@ -38,7 +38,14 @@ export const Nav = styled(Flex)`
 `
 Nav.defaultProps = { as: 'ul' }
 
-export const NavItem = styled(Box)`
+export interface NavItemProps extends BoxProps {
+  isActive?: boolean
+}
+
+export const NavItem = styled(Box)<NavItemProps>`
+  ${props => props.isActive && css`
+    background: ${themeGet('colors.grays.8')};
+  `};
 `
 NavItem.defaultProps = { as: 'li' }
 

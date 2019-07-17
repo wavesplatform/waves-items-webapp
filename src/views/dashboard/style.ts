@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Box } from 'rebass'
+import { Box, Flex } from 'rebass'
 import { Button, IconButton } from '../../components/buttons'
 import { themeGet } from 'styled-system'
 import { Container, ViewContainer } from '../../components/layout'
@@ -34,4 +34,8 @@ export const RemoveButton = styled(IconButton).attrs({
   //transform: scale(.9);
   width: 34px;
   height: 34px;
+`
+
+export const Actions = styled(Flex)`
+  align-items: center;
 `
