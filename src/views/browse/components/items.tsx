@@ -9,10 +9,12 @@ import { MoreItemsQuery, MoreItemsQueryVariables } from '../../../graphql/querie
 import { Loading } from '../../../components/loading'
 import { ItemsContainer, ItemSide, ItemsSide, LoadMoreButton } from '../style'
 import Item from './item'
+import { UserRole } from '../../../__generated__/globalTypes'
 
 type TProps = {
   address?: string
   searchString?: string
+  creatorRole?: UserRole
 }
 
 type TData = MoreItemsQuery
@@ -133,6 +135,7 @@ const withItems = graphql<TProps, TData, TVariables>(getMoreItemsQuery, {
       filter: {
         gameAddress: props.address,
         searchString: props.searchString,
+        creatorRole: props.creatorRole,
       },
       first: 20,
     },

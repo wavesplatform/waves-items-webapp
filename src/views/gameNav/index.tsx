@@ -2,9 +2,9 @@ import React, { Component, ReactNode } from 'react'
 import { ChildProps, graphql } from 'react-apollo'
 import { IDefaultResult, IGame } from '../../types'
 import { getGamesQuery } from '../../graphql/queries/getGames'
-import { GameList } from './components/gameList'
 import { GamesQuery } from '../../graphql/queries/__generated__/GamesQuery'
 import { Loading } from '../../components/loading'
+import GameList from './components/gameList'
 
 interface IProps {
 }

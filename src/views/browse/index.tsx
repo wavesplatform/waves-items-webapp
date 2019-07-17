@@ -8,6 +8,7 @@ import { Box } from 'rebass'
 import { FiltersContainer } from './style'
 import Search from './components/search'
 import Items from './components/items'
+import { UserRole } from '../../__generated__/globalTypes'
 
 interface BrowseParams {
   address?: string
@@ -28,6 +29,9 @@ class Browse extends Component<TProps> {
     const { match } = this.props
     const { address } = match.params
 
+    // Set GAME role for all items
+    const creatorRole = !address ? UserRole.GAME : undefined
+
     return (
       <ViewWrapper py={0}>
         <ViewGrid>
@@ -44,7 +48,7 @@ class Browse extends Component<TProps> {
               }}/>
             </FiltersContainer>
             <Box mb={'lg'}>
-              <Items address={address} searchString={this.state.searchString}/>
+              <Items address={address} searchString={this.state.searchString} creatorRole={creatorRole}/>
             </Box>
           </ViewContent>
         </ViewGrid>

@@ -4,6 +4,7 @@ import { truncate } from '../globals'
 
 export const Wrapper = styled(Flex)`
   align-items: center;
+  min-width: 0;
 `
 
 export const Title = styled(Heading)`
