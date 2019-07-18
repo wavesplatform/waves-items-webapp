@@ -17,7 +17,7 @@ export const ToastContainer = styled(Card)<ToastContainerProps>`
 `
 ToastContainer.defaultProps = {
   ...ToastContainer.defaultProps,
-  px: 3,
+  px: 4,
   py: 3,
   bg: 'element',
   borderRadius: 'base',

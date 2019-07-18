@@ -33,7 +33,7 @@ class SigninView extends Component<WithCurrentUserProps<TProps>> {
         <SigninContainer>
           <H1>Sign In</H1>
           <Box mb={'lg'}>
-            <SigninForm/>
+            <SigninForm redirectUrl={this.state.redirectUrl}/>
           </Box>
         </SigninContainer>
       </ViewWrapper>
