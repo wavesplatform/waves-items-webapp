@@ -53,9 +53,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "schema": "apollo service:download ./src/schema.json",
-    "generate": "apollo client:codegen --localSchemaFile ./src/schema.json --target typescript --globalTypesFile ./src/__generated__/globalTypes.ts",
-    "docs:dev": "vuepress dev docs",
-    "docs:build": "vuepress build docs"
+    "generate": "apollo client:codegen --localSchemaFile ./src/schema.json --target typescript --globalTypesFile ./src/__generated__/globalTypes.ts"
   },
   "eslintConfig": {
     "extends": "react-app"

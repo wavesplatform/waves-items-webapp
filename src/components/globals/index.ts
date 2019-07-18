@@ -36,32 +36,32 @@ export const monoStack = css`
   font-family: ${themeGet('fonts.mono')};
 `
 
-export const H1 = styled(Heading)`
+export const H1 = styled(Text)`
   font-size: 1.5rem;
 `
 H1.defaultProps = { as: 'h1' }
 
-export const H2 = styled(Heading)`
+export const H2 = styled(Text)`
   font-size: 1.25rem;
 `
 H2.defaultProps = { as: 'h2' }
 
-export const H3 = styled(Heading)`
+export const H3 = styled(Text)`
   font-size: 1rem;
 `
 H3.defaultProps = { as: 'h3' }
 
-export const H4 = styled(Heading)`
+export const H4 = styled(Text)`
   font-size: .875rem;
 `
 H4.defaultProps = { as: 'h4' }
 
-export const H5 = styled(Heading)`
+export const H5 = styled(Text)`
   font-size: .75rem;
 `
 H5.defaultProps = { as: 'h5' }
 
-export const H6 = styled(Heading)`
+export const H6 = styled(Text)`
   font-size: .675rem;
   text-transform: uppercase;
 `
