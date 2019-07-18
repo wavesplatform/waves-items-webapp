@@ -17,6 +17,6 @@ export const config = {
       matcher: '8QUAqtTckM5B8gvcuP7mMswat9SjKUuafJMusEoSn1Gy',
     },
   },
-  docsUrl: 'https://waves-items-docs.vecheslav.now.sh',
+  docsUrl: process.env.REACT_APP_DOCS_URL || 'http://localhost:8080/',
 }
 

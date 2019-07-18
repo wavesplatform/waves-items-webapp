@@ -5,7 +5,8 @@
   "build": {
     "env": {
       "REACT_APP_NETWORK_CODE": "W",
-      "REACT_APP_GRAPHQL_ENDPOINT": "https://games-api.wavesplatform.com/graphql"
+      "REACT_APP_GRAPHQL_ENDPOINT": "https://games-api.wavesplatform.com/graphql",
+      "REACT_APP_DOCS_URL": "https://waves-items-docs.vecheslav.now.sh"
     }
   },
   "builds": [
