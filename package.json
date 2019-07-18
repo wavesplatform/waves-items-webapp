@@ -13,9 +13,11 @@
     "@types/react-sticky": "^6.0.3",
     "@types/rebass": "^3.0.4",
     "@types/styled-components": "^4.1.15",
+    "@types/styled-system": "4.2.2",
     "@waves/bignumber": "0.0.1-a6",
     "@waves/types": "0.0.2",
     "@waves/waves-games": "^1.0.32",
+    "add": "^2.0.6",
     "apollo-cache-inmemory": "^1.5.1",
     "apollo-client": "^2.6.3",
     "apollo-link": "^1.2.11",
@@ -40,7 +42,8 @@
     "tslint": "^5.12.0",
     "tslint-config-prettier": "^1.17.0",
     "tslint-react": "^3.6.0",
-    "typescript": "3.2.2"
+    "typescript": "3.2.2",
+    "yarn": "^1.17.3"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -50,7 +53,9 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "schema": "apollo service:download ./src/schema.json",
-    "generate": "apollo client:codegen --localSchemaFile ./src/schema.json --target typescript --globalTypesFile ./src/__generated__/globalTypes.ts"
+    "generate": "apollo client:codegen --localSchemaFile ./src/schema.json --target typescript --globalTypesFile ./src/__generated__/globalTypes.ts",
+    "docs:dev": "vuepress dev docs",
+    "docs:build": "vuepress build docs"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -61,5 +66,7 @@
     "not ie <= 11",
     "not op_mini all"
   ],
-  "devDependencies": {}
+  "devDependencies": {
+    "vuepress": "^1.0.2"
+  }
 }
