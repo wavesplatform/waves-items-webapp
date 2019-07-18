@@ -2,7 +2,7 @@ import React, { ChangeEvent, Component, FormEvent, ReactNode } from 'react'
 import { ModalContainer } from '../container'
 import { modalStyles } from '../style'
 import { Button } from '../../buttons'
-import { Box, Flex, Image, Link, Text } from 'rebass'
+import { Box, Flex, Image, Link } from 'rebass'
 import { Form } from '../../globals'
 import { NumberInput, TextInput, TextInputWithUnit } from '../../inputs'
 import keeperHelper, { IWavesNetworkCode } from '../../../helpers/keeper'
@@ -15,7 +15,6 @@ import { ImageWrapper, Overview } from './style'
 import { BigNumber } from '@waves/bignumber'
 import { Toast } from '../../toasts'
 import { generateExchangeLink } from '../../../helpers/order'
-import { Redirect } from 'react-router'
 
 const Modal = require('react-modal')
 Modal.setAppElement('#root')

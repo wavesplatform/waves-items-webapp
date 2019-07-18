@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components'
-import { Box, BoxProps, Heading, Text, TextProps } from 'rebass'
+import { Box, BoxProps, Text, TextProps } from 'rebass'
 import { borders, BordersProps, color, height, HeightProps, space, SpaceProps, themeGet, width } from 'styled-system'
 import { Link } from 'react-router-dom'
 
