@@ -1,6 +1,6 @@
-import { Box, BoxProps, Flex, Heading, Image, Text } from 'rebass'
+import { Box, BoxProps, Flex, FlexProps, Heading, Image, LinkProps, Text } from 'rebass'
 import styled, { css } from 'styled-components'
-import { Link } from 'react-router-dom'
+import { Link, LinkProps as RouterLinkProps } from 'react-router-dom'
 import { space, SpaceProps, themeGet } from 'styled-system'
 import { truncate } from '../globals'
 import { Container } from '../layout'
@@ -49,10 +49,12 @@ export const NavItem = styled(Box)<NavItemProps>`
 `
 NavItem.defaultProps = { as: 'li' }
 
-export const NavLink = styled(Link)<SpaceProps>`
+type NavLinkProps = FlexProps & Partial<RouterLinkProps> & LinkProps
+export const NavLink = styled(Flex)<NavLinkProps>`
   display: flex;
   align-items: center;
   height: 100%;
+  color: ${themeGet('colors.default')};
   
   &:hover,
   &:focus {
@@ -61,7 +63,7 @@ export const NavLink = styled(Link)<SpaceProps>`
   
   ${space}
 `
-NavLink.defaultProps = { px: 'lg' }
+NavLink.defaultProps = { as: Link, px: 'lg' }
 
 export const Logo = styled(Link)`
   display: flex;

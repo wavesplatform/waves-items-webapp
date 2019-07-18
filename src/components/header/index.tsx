@@ -16,11 +16,12 @@ import {
   UserName
 } from './style'
 import { UserAvatar } from '../image'
-import { Box, Text } from 'rebass'
+import { Box, Link, Text } from 'rebass'
 import ProfileDropdown from './profileDropdown'
 import logo from '../globals/logo.svg'
 import withCurrentUser, { WithCurrentUserProps } from '../withCurrentUser'
 import { Route, RouteComponentProps } from 'react-router'
+import { config } from '../../config/config'
 
 type TProps = RouteComponentProps
 
@@ -58,16 +59,9 @@ class Header extends Component<WithCurrentUserProps<TProps>> {
                   </NavItem>
                 )}
               </Route>
-              {/*<NavItem>*/}
-              {/*<NavLink to={'/about'}>About</NavLink>*/}
-              {/*</NavItem>*/}
-              <Route path={'/develop'}>
-                {({ match }) => (
-                  <NavItem isActive={!!match}>
-                    <NavLink to={'/develop'}>Develop</NavLink>
-                  </NavItem>
-                )}
-              </Route>
+              <NavItem>
+                <NavLink as={Link} href={config.docsUrl} target='_blank'>Docs</NavLink>
+              </NavItem>
             </Nav>
             {/*Profile*/}
             <Nav>

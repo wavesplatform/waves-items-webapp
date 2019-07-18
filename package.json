@@ -66,7 +66,5 @@
     "not ie <= 11",
     "not op_mini all"
   ],
-  "devDependencies": {
-    "vuepress": "^1.0.2"
-  }
+  "devDependencies": {}
 }
