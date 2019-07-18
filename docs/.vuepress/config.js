@@ -1,18 +1,33 @@
 module.exports = {
   title: 'Items Vault Docs',
-  description: 'Just playing around',
+  description: '',
   themeConfig: {
     nav: [
-      { text: 'Home', link: '/' },
+      //      { text: 'Home', link: '/' },
     ],
     sidebar: [
       {
-        title: 'Guide',
+        title: 'Guides',
         collapsable: false,
         children: [
-          '/guide/tokenizing-a-game',
+          '/guides/tokenizing-a-game',
+        ]
+      },
+      {
+        title: 'SDK',
+        collapsable: false,
+        children: [
+          '/sdk/items-protocol',
+          '/sdk/lib',
         ]
       },
     ],
+  },
+  configureWebpack: {
+    resolve: {
+      alias: {
+        '@': '/guides'
+      }
+    }
   },
 }

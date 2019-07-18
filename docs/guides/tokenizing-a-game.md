@@ -56,7 +56,10 @@ It run a wizard which will guide to your first items through the next steps:
 
 Let's all the steps in action:
 
-[Screen_Recording_2019-06-25_at_22-bca9aa0d-b420-4953-924a-3a3854abba8a.53.17.mov](Screen_Recording_2019-06-25_at_22-bca9aa0d-b420-4953-924a-3a3854abba8a.53.17.mov)
+<video width="100%" controls>
+  <source src="/bca9aa0d-b420-4953-924a-3a3854abba8a.mov" type="video/mp4">
+  Your browser does not support the video tag.
+</video> 
 
 The command above will create items in the blockchain, which means:
 
@@ -69,16 +72,19 @@ The most important thing to note in the end is an item ID. This item ID is used 
 
 We also can create items in our JavaScript or TypeScript code:
 
-    async function howToCreateAnItem(creatorSeed) {
-    
-      const { Items, ChainId } = require('@waves/waves-games');
-      
-    
-    	const items = Items(ChainId.Testnet)
-      const request = items.create({ amount: 100, version: 1, name: 'The sword of pain', imageUrl: 'img_url', misc: {}, isLimited: true }, creatorSeed)
-      const item = await request.execute()
-    
-    }
+
+```js
+async function howToCreateAnItem(creatorSeed) {
+
+  const { Items, ChainId } = require('@waves/waves-games');
+  
+
+  const items = Items(ChainId.Testnet)
+  const request = items.create({ amount: 100, version: 1, name: 'The sword of pain', imageUrl: 'img_url', misc: {}, isLimited: true }, creatorSeed)
+  const item = await request.execute()
+
+}
+```
 
 The main difference between code and console wizard are:
 
@@ -90,85 +96,96 @@ The main difference between code and console wizard are:
 
 Items in Games SDK have an interface like below: 
 
-    Item<T = any> {
-     id: string,
-     name: string,
-     quantity: LONG,
-     gameId: string,
-     imageUrl: string,
-     reissuable: boolean,
-     timestamp?: number
-     misc: T,
-    }
+```js
+Item<T = any> {
+  id: string,
+  name: string,
+  quantity: LONG,
+  gameId: string,
+  imageUrl: string,
+  reissuable: boolean,
+  timestamp?: number
+  misc: T,
+}
+```
 
 So we have an account (usually an account of the game developer) which issues all tokens and stores some arbitrary data about items. Let's see how it works in the blockchain. At item creation time SDK makes 2 transactions - Issue transaction and Data Transaction. You can find their JSON body below: 
 
+```json
+{
+  "id": "FsysLebpZXZy356QJneiK97xkTBJR5zrdM1Wgi9tmfHh",
+  "type": 3,
+  "version": 2,
+  "senderPublicKey": "5YfkxmnWWpJeVAxG3HhjQBHYew4ovAK9zAS6ZkeiUEaS",
+  "name": "ITEM",
+  "description": "",
+  "quantity": 100,
+  "decimals": 0,
+  "reissuable": false,
+  "fee": 100000000,
+  "timestamp": 1551792188135,
+  "chainId": 84,
+  "proofs": ["4Gt1fEvmYZq5z5bSFacvtRsXhKDb1smUV6sjbRdkSa6UGGxhS5uN4GrWTWrk8NWT8Rif4wZdQR9GGWTKtbVfCUAV"],
+}
+  ```
+  ```json
+{
+  "id": "773hbAnxL3vKdh2rgagpfKqptDX5E4nFbxuswUPivMX8",
+  "type": 12,
+  "version": 1,
+  "senderPublicKey": "5YfkxmnWWpJeVAxG3HhjQBHYew4ovAK9zAS6ZkeiUEaS",
+  "fee": 100000,
+  "timestamp": 1551792188156,
+  "proofs": [
+  "5EMi8GguyqWUEe9RtcHjmk6dmpGd72ci54LHrvgKMgpajprfD3AqeVy37KDiCbzWLreVJnHKZ1mPJD6BbTfeY6Fz"
+  ],
+  "data": [
     {
-     "id": "FsysLebpZXZy356QJneiK97xkTBJR5zrdM1Wgi9tmfHh",
-     "type": 3,
-     "version": 2,
-     "senderPublicKey": "5YfkxmnWWpJeVAxG3HhjQBHYew4ovAK9zAS6ZkeiUEaS",
-     "name": "ITEM",
-     "description": "",
-     "quantity": 100,
-     "decimals": 0,
-     "reissuable": false,
-     "fee": 100000000,
-     "timestamp": 1551792188135,
-     "chainId": 84,
-     "proofs": ["4Gt1fEvmYZq5z5bSFacvtRsXhKDb1smUV6sjbRdkSa6UGGxhS5uN4GrWTWrk8NWT8Rif4wZdQR9GGWTKtbVfCUAV"],
+      "type": "string",
+      "key": "FsysLebpZXZy356QJneiK97xkTBJR5zrdM1Wgi9tmfHh",
+      "value": "{\"version\":0, 
+                \"imageUrl\":\"http://test-image.jpeg\",
+                \"name\":\"Sword of pain\",
+                \"misc\":{\"power\":10}
+              }"
     }
-
-    {
-     "id": "773hbAnxL3vKdh2rgagpfKqptDX5E4nFbxuswUPivMX8",
-     "type": 12,
-     "version": 1,
-     "senderPublicKey": "5YfkxmnWWpJeVAxG3HhjQBHYew4ovAK9zAS6ZkeiUEaS",
-     "fee": 100000,
-     "timestamp": 1551792188156,
-     "proofs": [
-     "5EMi8GguyqWUEe9RtcHjmk6dmpGd72ci54LHrvgKMgpajprfD3AqeVy37KDiCbzWLreVJnHKZ1mPJD6BbTfeY6Fz"
-     ],
-     "data": [
-       {
-         "type": "string",
-         "key": "FsysLebpZXZy356QJneiK97xkTBJR5zrdM1Wgi9tmfHh",
-         "value": "{\"version\":0, 
-                   \"imageUrl\":\"http://test-image.jpeg\",
-                   \"name\":\"Sword of pain\",
-                   \"misc\":{\"power\":10}
-                  }"
-       }
-     ]
-    }
+  ]
+}
+  ```
 
 As you may see Data transaction contains an array of key-value pairs in `data` array, the value is an escaped JSON data. You can parse that data to read item properties: 
 
-    {
-     "version": 1,
-     "imageUrl": "http://test-image.jpeg",
-     "name": "Sword of pain",
-     "misc": {
-       "power": 10
-     }
-    }
+```json
+{
+  "version": 1,
+  "imageUrl": "http://test-image.jpeg",
+  "name": "Sword of pain",
+  "misc": {
+    "power": 10
+  }
+}
+```
 
 ## Connect users accounts in the game and blockchain
 
 The best way to integrate into a game is to put the blockchain under the hood and to hide from the players all blockchain stuff because for the majority of players the blockchain is unknown tech thingy. We can ask them to create accounts in the blockchain, but it would be another barrier for them, so, let's create blockchain accounts on behalf of the users. We can do it easily using `@waves/waves-transactions` npm package. First, we have to install it:
 
-    npm i --save @waves/waves-transactions
+```
+npm i --save @waves/waves-transactions
+```
 
 Now we can create a seed phrase for each user and store it in the games' database like below (in case of MongoDB):
 
-    import {seedUtils} from '@waves/waves-transactions'
-    
-    const users = UsersCollection.get({}) // an abstract example how to get all users from the database
-    
-    users.forEach((user) => {
-    	const seedPhrase = seedUtils.generateNewSeed(15);
-      UsersCollection.update({id: user.id, seed: seedPhrase});  // an abstract example how to update user info
-    });
+```ts
+import {seedUtils} from '@waves/waves-transactions'
+
+const users = UsersCollection.get({}) // an abstract example how to get all users from the database
+
+users.forEach((user) => {
+  const seedPhrase = seedUtils.generateNewSeed(15)
+  UsersCollection.update({id: user.id, seed: seedPhrase})  // an abstract example how to update user info
+})
+```
 
 The example above allows to make a one-to-one correspondence between a player and its account in the blockchain:
 
@@ -178,39 +195,50 @@ player in the game <=> seed phrase <=> account address in the blockchain
 
 All games have a user interface for players and this UI must show how many items belong to a player and some details about each of them. The very first step to get that data is to get users' address from a seed phrase, to do it we will use `@waves/waves-transactions` library:
 
-    import {address} from '@waves/waves-transactions'
-    
-    const usersAddress = address(seedPhraseHere, 'T') // second parameter is a netwok byte: T for TESTNET and W for MAINNET 
+```ts
+  import {address} from '@waves/waves-transactions'
 
-With users' address, we can get data about all assets on the account using REST API. Waves provides public nodes for TESTNET and MAINNET at [https://testnodes.wavesnodes.com and  https://nodes.wavesplatform.com](https://nodes.wavesplatform.com/) respectively. There is an endpoint [`/assets/balance`](https://testnodes.wavesnodes.com/api-docs/index.html#!/assets/balances_1) which allows to get a list of assets on users' account, [here is](https://testnodes.wavesnodes.com/assets/balance/3N7DEYXnWwAjTG17Gq9FvDVLrTdTw2hCVLo) an example.
+  const usersAddress = address(seedPhraseHere, 'T') // second parameter is a netwok byte: T for TESTNET and W for MAINNET 
+```
 
-    import {address} from '@waves/waves-transactions'
-    
-    const usersSeedPhrase = 'MY_COOL_SEED'
-    const usersAddress = address(usersSeedPhrase, 'T')
-    const balancesUrl = `https://testnodes.wavesnodes.com/assets/balance/${usersAddress}`;
-    fetch(balanceUrl)
-      .then(res => res.json())
-      .then(jsonData => {
-        console.log(jsonData);
-      })
-      .catch(err => {
-        console.log(err);
-      });
+With users' address, we can get data about all assets on the account using REST API. Waves provides public nodes for TESTNET and MAINNET at [https://testnodes.wavesnodes.com and  https://nodes.wavesplatform.com](https://nodes.wavesplatform.com/) respectively. 
+
+
+::: tip
+There is an endpoint [`/assets/balance`](https://testnodes.wavesnodes.com/api-docs/index.html#!/assets/balances_1) which allows to get a list of assets on users' account, [here is](https://testnodes.wavesnodes.com/assets/balance/3N7DEYXnWwAjTG17Gq9FvDVLrTdTw2hCVLo) an example.
+:::
+
+```ts
+import {address} from '@waves/waves-transactions'
+
+const usersSeedPhrase = 'MY_COOL_SEED'
+const usersAddress = address(usersSeedPhrase, 'T')
+const balancesUrl = `https://testnodes.wavesnodes.com/assets/balance/${usersAddress}`;
+fetch(balanceUrl)
+  .then(res => res.json())
+  .then(jsonData => {
+    console.log(jsonData);
+  })
+  .catch(err => {
+    console.log(err);
+  });
+```
 
 The code above will allow to get data about users' portfolio, but not about items, so finalise the solution let's get get item details for each asset in users' portfolio:
 
-    const { Items, ChainId } = require('@waves/waves-games');
-    
-    const items = Items(ChainId.Testnet)
-    
-    jsonData.balances.forEach((asset) => {
-      const item = await items.getItem(asset.assetId, false)
-      console.log(item)
-    });
+```js
+const { Items, ChainId } = require('@waves/waves-games');
+
+const items = Items(ChainId.Testnet)
+
+jsonData.balances.forEach((asset) => {
+  const item = await items.getItem(asset.assetId, false)
+  console.log(item)
+})
+```
 
 Now we have all the data about users' portfolio and item details and we can show it to the users in a UI.
 
-If you still have questions about tools or the best ways of blockchain integration - feel free to ask (где???)
+If you still have questions about tools or the best ways of blockchain integration - feel free to ask (somewhere)
 
 In the next tutorial we will explain how to use Non-Fungible Tokens with Games SDK.
