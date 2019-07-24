@@ -1,5 +1,6 @@
 import React, { ChangeEvent, PropsWithChildren } from 'react'
 import {
+  IconWrapper,
   InputUnit,
   StyledFlatTextInput,
   StyledInputWrapper,
@@ -11,6 +12,8 @@ import {
   StyledRadioLabelProps,
   StyledTextInput,
 } from './style'
+import { Icon } from '../icon'
+import { Box } from 'rebass'
 
 interface TextInputProps extends StyledLabelProps {
   defaultValue?: string,
@@ -103,19 +106,35 @@ interface FlatTextInputProps {
   autoFocus?: boolean,
   disabled?: boolean,
   id?: string,
+  glyph?: string,
 }
 
 export const FlatTextInput = (props: FlatTextInputProps) => {
   return (
-    <StyledFlatTextInput
-      id={props.id}
-      defaultValue={props.defaultValue}
-      value={props.value}
-      placeholder={props.placeholder}
-      onChange={props.onChange}
-      autoFocus={props.autoFocus}
+    <StyledInputWrapper
       disabled={props.disabled}
-    />
+      bg={'bg.card'}
+      borderColor={'transparent'}
+      flexDirection={'row-reverse'}
+    >
+      <StyledFlatTextInput
+        id={props.id}
+        defaultValue={props.defaultValue}
+        value={props.value}
+        placeholder={props.placeholder}
+        onChange={props.onChange}
+        autoFocus={props.autoFocus}
+        disabled={props.disabled}
+        bg={'transparent'}
+        borderWidth={0}
+        borderRadius={0}
+        mt={0}
+        flex={'1'}
+      />
+      {props.glyph && <IconWrapper>
+        <Icon glyph={props.glyph}/>
+      </IconWrapper>}
+    </StyledInputWrapper>
   )
 }
 

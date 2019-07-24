@@ -71,6 +71,10 @@ export const Paragraph = styled(Text)`
 `
 Paragraph.defaultProps = { as: 'p', color: 'grays.2' }
 
+export const Color = styled(Text)`
+`
+Color.defaultProps = { as: 'span' }
+
 export const Code = styled(Text)<TextProps & BordersProps>`
   display: inline-block;
   

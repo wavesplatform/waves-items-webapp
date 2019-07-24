@@ -25,6 +25,15 @@ class Browse extends Component<TProps> {
     searchString: '',
   }
 
+  constructor(props: TProps) {
+    super(props)
+
+    const { location } = this.props
+    if (location.state !== undefined) {
+      this.state.searchString = location.state.searchString
+    }
+  }
+
   render(): ReactNode {
     const { match } = this.props
     const { address } = match.params
@@ -41,7 +50,7 @@ class Browse extends Component<TProps> {
           <ViewContent>
             {address ? <Box mb={'lg'}><GameOverview address={address}/></Box> : <H1>Feed</H1>}
             <FiltersContainer mb={'lg'}>
-              <Search onSearch={(searchString: string) => {
+              <Search defaultValue={this.state.searchString} onSearch={(searchString: string) => {
                 this.setState({
                   searchString,
                 })
