@@ -4,6 +4,10 @@
 <title>close</title>
 <path d="M25.313 8.563l-7.438 7.438 7.438 7.438-1.875 1.875-7.438-7.438-7.438 7.438-1.875-1.875 7.438-7.438-7.438-7.438 1.875-1.875 7.438 7.438 7.438-7.438z"></path>
 </symbol>
+<symbol id="compare_arrows" viewBox="0 0 32 32">
+<title>compare_arrows</title>
+<path d="M20.573 17.5l-6.073-6.073 6.073-6.073v4.573h10.646v3.001h-10.646v4.573zM11.427 19.072v-4.573l6.073 6.073-6.073 6.073v-4.573h-10.646v-3.001h10.646z"></path>
+</symbol>
 <symbol id="expand_less" viewBox="0 0 32 32">
 <title>expand_less</title>
 <path d="M16 10.688l8 8-1.875 1.875-6.125-6.125-6.125 6.125-1.875-1.875z"></path>
@@ -11,6 +15,14 @@
 <symbol id="expand_more" viewBox="0 0 32 32">
 <title>expand_more</title>
 <path d="M22.125 11.438l1.875 1.875-8 8-8-8 1.875-1.875 6.125 6.125z"></path>
+</symbol>
+<symbol id="filter" viewBox="0 0 32 32">
+<title>filter</title>
+<path d="M28 22.688v-18.688h-18.688v18.688h18.688zM28 1.313c1.438 0 2.688 1.25 2.688 2.688v18.688c0 1.438-1.25 2.625-2.688 2.625h-18.688c-1.438 0-2.625-1.188-2.625-2.625v-18.688c0-1.438 1.188-2.688 2.625-2.688h18.688zM4 6.688v21.313h21.313v2.688h-21.313c-1.438 0-2.688-1.25-2.688-2.688v-21.313h2.688zM21.25 13.75l4.75 6.25h-14.688l3.688-4.688 2.625 3.125z"></path>
+</symbol>
+<symbol id="games" viewBox="0 0 32 32">
+<title>games</title>
+<path d="M22 12h7.313v8h-7.313l-4-4zM12 22l4-4 4 4v7.313h-8v-7.313zM10 12l4 4-4 4h-7.313v-8h7.313zM20 10l-4 4-4-4v-7.313h8v7.313z"></path>
 </symbol>
 <symbol id="search" viewBox="0 0 32 32">
 <title>search</title>

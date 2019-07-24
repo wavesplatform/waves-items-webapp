@@ -3,13 +3,22 @@ import { Container, Section, ViewContainer, ViewWrapper } from '../../components
 import { Color, H1, H2 } from '../../components/globals'
 import { RouteComponentProps } from 'react-router'
 import GamesSlider from '../gamesSlider'
-import { HomeContainer, ItemsSection, ItemsWrapper, ItemsWrapperInner, SearchContainer, SearchSection } from './style'
+import {
+  HomeContainer,
+  ItemsSection,
+  ItemsWrapper,
+  ItemsWrapperInner,
+  SearchWrapper,
+  SearchSection,
+  Title
+} from './style'
 import Search from './components/search'
 import Items from './components/items'
 import { Subscription, timer } from 'rxjs'
 import { Box, Flex } from 'rebass'
 import { Button } from '../../components/buttons'
 import { Link } from 'react-router-dom'
+import Stats from './components/stats'
 
 interface IProps extends RouteComponentProps {
 }
@@ -18,33 +27,20 @@ class HomeView extends Component<IProps> {
   _searchSub: Subscription
 
   render(): ReactNode {
-    const { history } = this.props
-
     return (
       <ViewWrapper>
         <HomeContainer>
           <SearchSection>
             <Container>
-              <H1 mb={6} textAlign={'center'}>Lorem ipsum is <Color color={'grays.5'}>placeholder</Color> text commonly
-                used.</H1>
-              <SearchContainer>
-                <Search onSearch={(searchString: string) => {
-                  if (this._searchSub) {
-                    this._searchSub.unsubscribe()
-                  }
-
-                  if (searchString.length < 3) {
-                    return
-                  }
-
-                  this._searchSub = timer(1000)
-                    .subscribe(() => {
-                      history.push('/items', {
-                        searchString,
-                      })
-                    })
-                }}/>
-              </SearchContainer>
+              <Title mb={6}>
+                Lorem ipsum is <Color color={'#587CD9'}>placeholder</Color> text commonly used.
+              </Title>
+              <SearchWrapper>
+                <Search onSearch={this._onSearch}/>
+              </SearchWrapper>
+              <Box mt={6}>
+                <Stats/>
+              </Box>
             </Container>
           </SearchSection>
           <ItemsSection>
@@ -58,7 +54,7 @@ class HomeView extends Component<IProps> {
               </Box>
               <Flex mt={'xl'} justifyContent={'center'}>
                 <Link to={'/items'}>
-                  <Button size={'lg'}>Show All</Button>
+                  <Button size={'lg'} width={'128px'}>Show All</Button>
                 </Link>
               </Flex>
             </ViewContainer>
@@ -72,6 +68,25 @@ class HomeView extends Component<IProps> {
         </HomeContainer>
       </ViewWrapper>
     )
+  }
+
+  _onSearch = (searchString: string) => {
+    const { history } = this.props
+
+    if (this._searchSub) {
+      this._searchSub.unsubscribe()
+    }
+
+    if (searchString.length < 3) {
+      return
+    }
+
+    this._searchSub = timer(200)
+      .subscribe(() => {
+        history.push('/items', {
+          searchString,
+        })
+      })
   }
 }
 

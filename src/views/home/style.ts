@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { Container, Section } from '../../components/layout'
 import { Box } from 'rebass'
-import { H2 } from '../../components/globals'
+import { H1, H2 } from '../../components/globals'
 import { themeGet } from 'styled-system'
 
 export const HomeContainer = styled(Box)`
@@ -21,6 +21,11 @@ SearchSection.defaultProps = {
   py: 'xxl',
 }
 
+export const Title = styled(H1)`
+  //text-transform: uppercase;
+  text-align: center;
+`
+
 export const ItemsSection = styled(Section)`
   background: linear-gradient(
       15deg, rgba(255,255,255, .03) 0%, 
@@ -34,7 +39,7 @@ ItemsSection.defaultProps = {
   pb: 6,
 }
 
-export const SearchContainer = styled(Box)`
+export const SearchWrapper = styled(Box)`
   max-width: 840px;
   width: 100%;
   margin: 0 auto;

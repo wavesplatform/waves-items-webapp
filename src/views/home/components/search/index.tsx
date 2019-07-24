@@ -20,6 +20,7 @@ interface SearchInputProps {
 const SearchInput = (props: SearchInputProps) => {
   return (
     <StyledInputWrapper
+      mt={0}
       bg={'bg.card'}
       borderColor={'transparent'}
       flexDirection={'row-reverse'}
