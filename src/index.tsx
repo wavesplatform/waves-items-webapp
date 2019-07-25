@@ -14,7 +14,7 @@ import Routes from './routes'
 import { GlobalStyle } from './styles/reset'
 import { ApolloLink, from } from 'apollo-link'
 import { config } from './config/config'
-import Sentry from '@sentry/browser'
+import * as Sentry from '@sentry/browser'
 
 // Error tracking
 Sentry.init({ dsn: 'https://399be5e20c924d8d942a60629865d0aa@sentry.io/1513601' })
