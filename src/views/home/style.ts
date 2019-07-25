@@ -28,7 +28,8 @@ export const Title = styled(H1)`
 
 export const ItemsSection = styled(Section)`
   background: linear-gradient(
-      15deg, rgba(255,255,255, .03) 0%, 
+      15deg,
+      #0d1424 0%, 
       ${themeGet('bg.default')} 70%,
       ${themeGet('bg.default')} 100%
     );
