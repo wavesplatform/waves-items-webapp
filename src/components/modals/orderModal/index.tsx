@@ -54,11 +54,11 @@ class OrderModal extends Component<IProps> {
   render(): ReactNode {
     const { show, setShow, type, item, keeperContext } = this.props
     const { publicState } = keeperContext
-    const account = publicState.account!
+    const account = publicState.account
     const styles = modalStyles(420)
 
-    const haveBalanceGtZero = (new BigNumber(account.balance.available)).gt(0)
-    const exchangeLink = generateExchangeLink(account.address, '10')
+    const haveBalanceGtZero = account && (new BigNumber(account.balance.available)).gt(0)
+    const exchangeLink = account && generateExchangeLink(account.address, '10')
 
     return (
       <Modal
