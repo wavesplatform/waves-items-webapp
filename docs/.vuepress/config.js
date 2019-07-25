@@ -5,6 +5,7 @@ module.exports = {
     nav: [
       //      { text: 'Home', link: '/' },
     ],
+    sidebarDepth: 2,
     sidebar: [
       {
         title: 'Guides',
@@ -22,6 +23,11 @@ module.exports = {
         ]
       },
     ],
+    docsRepo: 'https://github.com/wavesplatform/waves-items-webapp',
+    docsDir: 'docs',
+    docsBranch: 'master',
+    editLinks: true,
+    editLinkText: 'Help us improve this page!'
   },
   configureWebpack: {
     resolve: {
