@@ -5,7 +5,6 @@ module.exports = {
     nav: [
       //      { text: 'Home', link: '/' },
     ],
-    sidebarDepth: 2,
     sidebar: [
       {
         title: 'Guides',
