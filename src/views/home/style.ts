@@ -30,7 +30,7 @@ export const ItemsSection = styled(Section)`
   background: linear-gradient(
       15deg,
       #0d1424 0%, 
-      ${themeGet('bg.default')} 70%,
+      ${themeGet('bg.default')} 40%,
       ${themeGet('bg.default')} 100%
     );
 `
