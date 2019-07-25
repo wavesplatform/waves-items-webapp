@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components'
-import { Box, BoxProps, Heading, Text, TextProps } from 'rebass'
+import { Box, BoxProps, Text, TextProps } from 'rebass'
 import { borders, BordersProps, color, height, HeightProps, space, SpaceProps, themeGet, width } from 'styled-system'
 import { Link } from 'react-router-dom'
 
@@ -70,6 +70,10 @@ H6.defaultProps = { as: 'h6' }
 export const Paragraph = styled(Text)`
 `
 Paragraph.defaultProps = { as: 'p', color: 'grays.2' }
+
+export const Color = styled(Text)`
+`
+Color.defaultProps = { as: 'span' }
 
 export const Code = styled(Text)<TextProps & BordersProps>`
   display: inline-block;

@@ -2,6 +2,7 @@ import React, { ChangeEvent, Component, ReactNode } from 'react'
 import { FlatTextInput } from '../../../components/inputs'
 
 type TProps = {
+  defaultValue?: string
   onSearch?: (searchString: string) => void
 }
 
@@ -14,7 +15,13 @@ class Search extends Component<TProps> {
 
   render(): ReactNode {
     return (
-      <FlatTextInput placeholder={'Search all items...'} onChange={this._onChangeSearchString}/>
+      <FlatTextInput
+        glyph={'search'}
+        placeholder={'Search all items...'}
+        defaultValue={this.props.defaultValue}
+        autoFocus={!!this.props.defaultValue}
+        onChange={this._onChangeSearchString}
+      />
     )
   }
 

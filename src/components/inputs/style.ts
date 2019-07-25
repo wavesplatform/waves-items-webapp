@@ -7,9 +7,8 @@ import {
   borderColor,
   borderRadius, BorderRadiusProps,
   borders, BordersProps,
-  boxShadow, opacity, themeGet
+  boxShadow, flex, flexDirection, opacity, themeGet
 } from 'styled-system'
-
 
 export interface StyledLabelProps extends FlexProps {
 }
@@ -66,8 +65,8 @@ export const StyledInput = styled(Box)<StyledInputProps>`
 StyledInput.defaultProps = {
   color: 'default',
   borderRadius: 'base',
-  px: 3,
-  py: 2,
+  px: 'md',
+  py: 'sm',
   bg: 'bg.input',
   borderStyle: 'solid',
   borderWidth: '2px',
@@ -90,8 +89,12 @@ export const StyledNumberInput = styled(StyledTextInput).attrs({
 })`
 `
 
-export const StyledInputWrapper = styled(StyledInput)`
+export const StyledInputWrapper = styled(StyledInput)<StyledInputProps & FlexProps>`
   display: flex;
+  align-items: center;
+  
+  ${flex};
+  ${flexDirection}
 `
 StyledInputWrapper.defaultProps = {
   ...StyledInputWrapper.defaultProps,
@@ -99,6 +102,16 @@ StyledInputWrapper.defaultProps = {
   px: 0,
   py: 0,
   mt: 'sm',
+}
+
+export const IconWrapper = styled(Box)`
+  line-height: 1;
+`
+IconWrapper.defaultProps = {
+  ...IconWrapper.defaultProps,
+  pl: 3,
+  fontSize: 'lg',
+  color: 'placeholder',
 }
 
 export const InputUnit = styled(Flex)`
@@ -115,9 +128,13 @@ InputUnit.defaultProps = {
 export const StyledFlatTextInput = styled(StyledInput).attrs({
   type: 'text',
 })`
-  &:focus {
-    background-color: ${themeGet('colors.bg.input')};
-    border-color: ${themeGet('colors.border.inputHover')};
+  // &:focus {
+  //   background-color: ${themeGet('colors.bg.input')};
+  //   border-color: ${themeGet('colors.border.inputHover')};
+  // }
+  
+  &:focus + ${IconWrapper} {
+    color: ${themeGet('colors.default')};
   }
 `
 StyledFlatTextInput.defaultProps = {

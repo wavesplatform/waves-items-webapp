@@ -21,7 +21,9 @@ type TState = {
   email?: string
 }
 
-type TProps = RouteComponentProps & {}
+type TProps = RouteComponentProps & {
+  redirectUrl: string
+}
 
 class SigninForm extends Component<WithApolloClient<TProps> & IKeeperContext> {
 
@@ -153,7 +155,7 @@ class SigninForm extends Component<WithApolloClient<TProps> & IKeeperContext> {
   }
 
   _handleCompleted = async (data: Signin) => {
-    this.props.history.push('/')
+    this.props.history.push(this.props.redirectUrl)
   }
 }
 

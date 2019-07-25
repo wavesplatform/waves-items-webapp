@@ -15,6 +15,7 @@ export enum UserRole {
 export interface ItemFilter {
   gameAddress?: string | null;
   searchString?: string | null;
+  creatorRole?: string | null;
 }
 
 export interface SigninUser {

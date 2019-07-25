@@ -21,15 +21,18 @@ import { Table, TableBody, TableCell, TableHeader, TableRow, WavesCy } from '../
 import { BigNumber } from '@waves/bignumber'
 import OrderModal from '../modals/orderModal'
 import defaultImage from '../globals/image.svg'
+import withCurrentUser, { WithCurrentUserProps } from '../withCurrentUser'
+import { compose } from 'react-apollo'
+import { RouteComponentProps, withRouter } from 'react-router'
 
-interface IProps {
+type TProps = {
   item: WithOrders<IItem>
   isPage?: boolean
 }
 
-interface IState {
-  buyModalShow?: boolean,
-  sellModalShow?: boolean,
+type TState = {
+  buyModalShow?: boolean
+  sellModalShow?: boolean
 }
 
 enum ProfitPriceType {
@@ -37,7 +40,7 @@ enum ProfitPriceType {
   Max,
 }
 
-class ItemDetail extends Component<IProps> {
+class ItemDetail extends Component<WithCurrentUserProps<TProps> & RouteComponentProps> {
   static contextType = KeeperContext
 
   state = {
@@ -46,7 +49,7 @@ class ItemDetail extends Component<IProps> {
   }
 
   render(): ReactNode {
-    const { item, isPage } = this.props
+    const { item, isPage, me, history, location } = this.props
     const asks = item.asks || []
     const bids = item.bids || []
 
@@ -76,6 +79,11 @@ class ItemDetail extends Component<IProps> {
           <Flex justifyContent={'space-between'} flexDirection={'column'}>
             {buyPriceStr && <Button
               onClick={() => {
+                // Redirect if not auth
+                if (!me) {
+                  history.push('/signin', { from: location.pathname })
+                }
+
                 this._setShowBuyModal(true)
               }}
               variant='primary'
@@ -85,6 +93,11 @@ class ItemDetail extends Component<IProps> {
             </Button>}
             <Button
               onClick={() => {
+                // Redirect if not auth
+                if (!me) {
+                  history.push('/signin', { from: location.pathname })
+                }
+
                 this._setShowSellModal(true)
               }}
             >
@@ -187,4 +200,4 @@ class ItemDetail extends Component<IProps> {
   }
 }
 
-export default ItemDetail
+export default compose(withRouter, withCurrentUser)(ItemDetail)
