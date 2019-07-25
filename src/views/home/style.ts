@@ -60,5 +60,5 @@ export const ItemsWrapper = styled(Box)`
 export const ItemsWrapperInner = styled(Container)`
   margin: 0 auto;
   width: 1280px;
-  
+  min-height: 240px;
 `
