@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@sentry/browser": "^5.5.0",
     "@types/graphql": "^14.0.3",
     "@types/jest": "23.3.10",
     "@types/node": "10.12.15",
