@@ -42,6 +42,11 @@ export const Param = styled(Flex)`
   border-bottom: 1px solid ${themeGet('colors.grays.7')};
   display: flex;
   align-items: center;
+  margin-top: -1px;
+  
+  &:first-child {
+    margin-top: 0;
+  }
 `
 Param.defaultProps = {
   as: 'li',

@@ -24,6 +24,7 @@ import defaultImage from '../globals/image.svg'
 import withCurrentUser, { WithCurrentUserProps } from '../withCurrentUser'
 import { compose } from 'react-apollo'
 import { RouteComponentProps, withRouter } from 'react-router'
+import { miscRecordToArray } from '../../helpers/item'
 
 type TProps = {
   item: WithOrders<IItem>
@@ -75,6 +76,7 @@ class ItemDetail extends Component<WithCurrentUserProps<TProps> & RouteComponent
               <ParamTitle>Quantity</ParamTitle>
               <ParamValue>{item.quantity}</ParamValue>
             </Param>
+            {this._miscParams(item.misc)}
           </Params>
           <Flex justifyContent={'space-between'} flexDirection={'column'}>
             {buyPriceStr && <Button
@@ -136,6 +138,19 @@ class ItemDetail extends Component<WithCurrentUserProps<TProps> & RouteComponent
         </RightSide>
       </ItemDetailContainer>
     )
+  }
+
+  _miscParams = (miscRecord: Record<string, any>) => {
+    const misc = miscRecordToArray(miscRecord)
+
+    const list = misc.map((miscItem, index) => (
+      <Param key={index}>
+        <ParamTitle>{miscItem.key}</ParamTitle>
+        <ParamValue>{miscItem.value}</ParamValue>
+      </Param>
+    ))
+
+    return list
   }
 
   _ordersTable = (orders: AmountPrice[]) => {
