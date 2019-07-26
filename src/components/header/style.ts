@@ -81,7 +81,6 @@ export const LogoTitle = styled(Heading)`
 `
 LogoTitle.defaultProps = {
   fontSize: 'base',
-  ml: 'sm',
 }
 
 export const NavProfile = styled(NavItem)`

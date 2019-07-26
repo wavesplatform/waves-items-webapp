@@ -1,6 +1,7 @@
 {
   "version": 2,
   "name": "waves-items-docs",
+  "alias": "docs.item.market",
   "builds": [
     {
       "src": "package.json",

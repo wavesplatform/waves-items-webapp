@@ -22,6 +22,7 @@ import logo from '../globals/logo.svg'
 import withCurrentUser, { WithCurrentUserProps } from '../withCurrentUser'
 import { Route, RouteComponentProps } from 'react-router'
 import { config } from '../../config/config'
+import { Color } from '../globals'
 
 type TProps = RouteComponentProps
 
@@ -46,8 +47,8 @@ class Header extends Component<WithCurrentUserProps<TProps>> {
             {/*Logo*/}
             <Logo to={'/'}>
               <LogoImage src={logo}/>
-              <LogoTitle>
-                Item Vault <Text as={'span'} color={'placeholder'} fontSize={'xs'}>Beta</Text>
+              <LogoTitle ml={'sm'}>
+                Item Market <Color color={'placeholder'} fontSize={'xs'}>Beta</Color>
               </LogoTitle>
             </Logo>
             {/*Menu*/}
