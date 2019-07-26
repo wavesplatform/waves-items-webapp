@@ -176,6 +176,7 @@ class OrderModal extends Component<IProps> {
     const order = await keeperHelper.keeper.signAndPublishOrder({
       type: 1002,
       data: {
+        version: 2,
         matcherPublicKey: chain.matcher,
         orderType: type,
         amount: {
