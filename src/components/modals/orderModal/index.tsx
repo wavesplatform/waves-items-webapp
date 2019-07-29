@@ -15,6 +15,7 @@ import { ImageWrapper, Overview } from './style'
 import { BigNumber } from '@waves/bignumber'
 import { Toast } from '../../toasts'
 import { generateExchangeLink } from '../../../helpers/order'
+import { Icon } from '../../icon'
 
 const Modal = require('react-modal')
 Modal.setAppElement('#root')
@@ -88,7 +89,10 @@ class OrderModal extends Component<IProps> {
                 variant='primary'
                 size={'lg'}
                 width={1}
-              >Get Waves</Button>
+              >
+                Get Waves
+                <Icon glyph={'open_in_new'} ml={'sm'} color={'fades.white.4'}/>
+              </Button>
             </>
           ) : (
             <>

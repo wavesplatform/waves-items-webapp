@@ -15,6 +15,11 @@ export type UserImage = {
   promo?: string
 }
 
+export type GameMeta = {
+  description?: string
+  url?: string
+}
+
 // export type UserRole = 'USER' | 'TEST' | 'GAME'
 
 export type WithImage<P = {}> = P & {
@@ -31,6 +36,7 @@ export interface IUser extends WithImage {
 }
 
 export interface IGame extends IUser {
+  meta?: GameMeta
   totalItems?: number | null
 }
 

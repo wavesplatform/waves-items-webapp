@@ -12,5 +12,6 @@ export interface gameInfo {
   address: string;
   name: string | null;
   image: any | null;
+  meta: any | null;
   totalItems: number | null;
 }

@@ -9,7 +9,7 @@ import {
   BannerImageWrapper,
   GameOverviewContainer, Info,
 } from './style'
-import { Text } from 'rebass'
+import { Link, Text } from 'rebass'
 import { Button } from '../../components/buttons'
 import { Redirect } from 'react-router'
 import { Loading } from '../../components/loading'
@@ -49,7 +49,12 @@ export class GameOverview extends Component<TChildProps> {
         </Banner>
         <Info>
           <Text mb={'base'}>{game.totalItems} items</Text>
-          <Button width={'110px'}>
+          <Button
+            as={Link}
+            href={(game.meta && game.meta.url) ? game.meta.url : '#'}
+            target={'_blank'}
+            width={'110px'}
+          >
             Play
             <Icon glyph={'open_in_new'} ml={'sm'} color={'fades.white.4'}/>
           </Button>

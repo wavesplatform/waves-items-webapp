@@ -6,6 +6,7 @@ export default gql`
     address
     name
     image
+    meta
     totalItems
   }
 `

@@ -6,6 +6,7 @@ import { Loading } from '../../../components/loading'
 import { IItem } from '../../../types'
 import { graphql } from 'react-apollo'
 import { getItemByAssetIdQuery } from '../../../graphql/queries/getItem'
+import { Redirect } from 'react-router'
 
 type TProps = {
   assetId: string
@@ -21,6 +22,10 @@ class Item extends Component<TChildProps> {
 
     if (loading) {
       return <Loading/>
+    }
+
+    if (!item) {
+      return <Redirect to={'/items'}/>
     }
 
     return <ItemDetail
