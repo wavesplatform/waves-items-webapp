@@ -7,7 +7,7 @@ import theme from '../../../styles/theme'
 import { getMoreItemsQuery } from '../../../graphql/queries/getItems'
 import { MoreItemsQuery, MoreItemsQueryVariables } from '../../../graphql/queries/__generated__/MoreItemsQuery'
 import { Loading } from '../../../components/loading'
-import { ItemsContainer, ItemSide, ItemsSide, LoadMoreButton } from '../style'
+import { HideButton, ItemsContainer, ItemSide, ItemsSide, LoadMoreButton } from '../style'
 import Item from './item'
 import { UserRole } from '../../../__generated__/globalTypes'
 
@@ -28,9 +28,16 @@ class Items extends Component<TChildProps> {
   }
 
   componentDidUpdate(prevProps: Readonly<TChildProps>, prevState: Readonly<{}>, snapshot?: any): void {
-    if (this.props.address !== prevProps.address) {
-      this.selectAssetId('')
+    if (
+      this.props.address !== prevProps.address ||
+      this.props.searchString !== prevProps.searchString
+    ) {
+      this.hideItem()
     }
+  }
+
+  hideItem = (): void => {
+    this.selectAssetId('')
   }
 
   selectAssetId = (assetId: string): void => {
@@ -80,7 +87,7 @@ class Items extends Component<TChildProps> {
                     left: 'auto',
                     bottom: 0,
                   }) || {}}>
-                    <Item assetId={assetId}/>
+                    <Item assetId={assetId} onClose={this.hideItem}/>
                   </Box>
                 )
               }}

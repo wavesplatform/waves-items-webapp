@@ -9,6 +9,7 @@ import { getItemByAssetIdQuery } from '../../../graphql/queries/getItem'
 
 type TProps = {
   assetId: string
+  onClose: () => void
 }
 
 type TData = ItemQuery
@@ -17,6 +18,7 @@ type TChildProps = ChildProps<TProps, TData, TVariables>
 
 class Item extends Component<TChildProps> {
   render(): ReactNode {
+    const { onClose } = this.props
     const { loading, error, item } = this.props.data!
 
     if (loading) {
@@ -26,6 +28,7 @@ class Item extends Component<TChildProps> {
     return item && <ItemDetail
       item={item as IItem}
       isPage={false}
+      onClose={onClose}
     />
   }
 }

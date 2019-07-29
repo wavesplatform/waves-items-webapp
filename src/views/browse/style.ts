@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components'
 import { Box, BoxProps } from 'rebass'
 import { themeGet } from 'styled-system'
-import { Button } from '../../components/buttons'
+import { Button, IconButton } from '../../components/buttons'
 
 export const FiltersContainer = styled(Box)`
 `
@@ -41,4 +41,13 @@ export const ItemSide = styled(Box)<ItemSideProps>`
 export const LoadMoreButton = styled(Button).attrs({ size: 'lg' })`
   width: 100%;
   display: block;
+`
+
+export const HideButton = styled(IconButton).attrs({
+  glyph: 'close',
+})`
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 1;
 `

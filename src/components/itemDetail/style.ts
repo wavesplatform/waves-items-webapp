@@ -1,7 +1,8 @@
 import styled, { css } from 'styled-components'
-import { Box, BoxProps, Flex, FlexProps, Text } from 'rebass'
+import { Box, BoxProps, Flex, FlexProps, Text, TextProps } from 'rebass'
 import { H1, H3, truncate } from '../globals'
 import { themeGet } from 'styled-system'
+import { IconButton } from '../buttons'
 
 export type WithIsPage<P> = P & {
   isPage?: boolean
@@ -26,7 +27,12 @@ export const RightSide = styled(Box)<WithIsPage<BoxProps>>`
   `};
 `
 
-export const Title = styled(H1)`
+export const Title = styled(H1)<WithIsPage<TextProps>>`
+  flex: 1;
+  
+  ${props => !props.isPage ? css`
+    font-size: 1.25rem;
+  ` : css``};
 `
 
 export const Params = styled(Box)`
@@ -83,3 +89,14 @@ export const ImageWrapper = styled(Box)`
     display: block;
   }
 `
+
+export const DisplayButton = styled(IconButton)`
+  width: 24px;
+  height: 24px;
+  opacity: .4;
+`
+DisplayButton.defaultProps = {
+  ...DisplayButton.defaultProps,
+  bg: 'transparent',
+  fontSize: 3,
+}

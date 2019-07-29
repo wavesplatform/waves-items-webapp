@@ -2,6 +2,7 @@ import React, { Component, ReactNode } from 'react'
 import { AmountPrice, IItem, WithOrders } from '../../types'
 import { UserHeading } from '../user/userHeading'
 import {
+  DisplayButton,
   ImageWrapper,
   ItemDetailContainer,
   LeftSide,
@@ -13,7 +14,7 @@ import {
   RightSide,
   Title,
 } from './style'
-import { Box, Flex, Heading, Image } from 'rebass'
+import { Box, Flex, Image, Link } from 'rebass'
 import { KeeperContext } from '../../contexts/keeper'
 import { Button } from '../buttons'
 import { toWaves } from '../../helpers/order'
@@ -28,6 +29,7 @@ import { miscRecordToArray } from '../../helpers/item'
 
 type TProps = {
   item: WithOrders<IItem>
+  onClose?: () => void
   isPage?: boolean
 }
 
@@ -50,7 +52,7 @@ class ItemDetail extends Component<WithCurrentUserProps<TProps> & RouteComponent
   }
 
   render(): ReactNode {
-    const { item, isPage, me, history, location } = this.props
+    const { item, isPage, me, history, location, onClose } = this.props
     const asks = item.asks || []
     const bids = item.bids || []
 
@@ -62,12 +64,19 @@ class ItemDetail extends Component<WithCurrentUserProps<TProps> & RouteComponent
     return (
       <ItemDetailContainer isPage={isPage}>
         <LeftSide>
-          <Title
-            mb={'lg'}
-            as={isPage ? 'h1' : 'h2'}
-          >
-            {item.name}
-          </Title>
+          <Flex alignItems={'start'} mb={'lg'} justifyContent={'space-between'}>
+            <Title
+              mb={0}
+              isPage={isPage}
+              as={isPage ? 'h1' : 'h2'}
+            >
+              {item.name}
+            </Title>
+            {!isPage && <Flex ml={'base'} mt={'2px'}>
+              <Link href={`/item/${item.assetId}`} target='_blank'><DisplayButton glyph={'tab_unselected'}/></Link>
+              {onClose && <DisplayButton glyph={'call_received'} ml={'xs'} onClick={onClose}/>}
+            </Flex>}
+          </Flex>
           <Box mb={'lg'}>
             <UserHeading user={item.game} size={'sm'}/>
           </Box>
