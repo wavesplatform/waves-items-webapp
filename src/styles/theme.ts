@@ -1,3 +1,5 @@
+import { hexa } from '../components/globals'
+
 const fontSizes: any = [
   12, 14, 16, 20, 24, 32,
 ]
@@ -17,7 +19,7 @@ fontWeights.normal = fontWeights[1]
 fontWeights.bold = fontWeights[2]
 
 const colors: any = {
-  white: '#fff',
+  white: '#ffffff',
   grays: [
     '#e6e7e8',
     '#d5d6d9',
@@ -42,6 +44,11 @@ colors.element = colors.grays[7]
 colors.primary = colors.blue
 colors.link = colors.grays[3]
 colors.linkHover = colors.grays[1]
+
+colors.fades = {
+  white: [10, 20, 30, 40, 50, 60, 70, 80, 90].map(value => hexa(colors.white, 1 - value / 100)),
+  black: [10, 20, 30, 40, 50, 60, 70, 80, 90].map(value => hexa(colors.black, 1 - value / 100)),
+}
 
 const bg = {
   default: colors.black,

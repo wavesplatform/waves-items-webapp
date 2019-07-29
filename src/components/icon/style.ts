@@ -1,15 +1,27 @@
 import styled from 'styled-components'
-import { fontSize, FontSizeProps, variant } from 'styled-system'
+import {
+  color,
+  ColorProps,
+  fontSize,
+  FontSizeProps,
+  space,
+  SpaceProps,
+  variant,
+  width,
+  WidthProps
+} from 'styled-system'
 
 const iconStyle = variant({
   key: 'icons',
 })
 
-export interface StyledIconProps extends FontSizeProps {
+export interface StyledIconProps extends ColorProps, SpaceProps, WidthProps, FontSizeProps {
   variant?: string
 }
 
 export const StyledIcon = styled.svg<StyledIconProps>`
+  ${color};
+
   display: inline-block;
   width: 1em;
   height: 1em;
@@ -17,8 +29,10 @@ export const StyledIcon = styled.svg<StyledIconProps>`
   stroke: currentColor;
   fill: currentColor;
   
-  ${fontSize}
-  ${iconStyle}
+  ${space};
+  ${width};
+  ${fontSize};
+  ${iconStyle};
 `
 StyledIcon.defaultProps = {
   fontSize: 'inherit',

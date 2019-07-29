@@ -14,6 +14,7 @@ import { Button } from '../../components/buttons'
 import { Redirect } from 'react-router'
 import { Loading } from '../../components/loading'
 import { GameHeading } from '../../components/game/gameHeading'
+import { Icon } from '../../components/icon'
 
 interface IProps {
   address: string
@@ -48,7 +49,10 @@ export class GameOverview extends Component<TChildProps> {
         </Banner>
         <Info>
           <Text mb={'base'}>{game.totalItems} items</Text>
-          <Button>Start Play</Button>
+          <Button width={'110px'}>
+            Play
+            <Icon glyph={'open_in_new'} ml={'sm'} color={'fades.white.4'}/>
+          </Button>
         </Info>
       </GameOverviewContainer>
     )
