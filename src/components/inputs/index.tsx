@@ -1,19 +1,23 @@
 import React, { ChangeEvent, PropsWithChildren } from 'react'
 import {
-  IconWrapper,
+  AvatarInputLabel,
+  CoverInputLabel,
+  IconWrapper, InputOverlay,
   InputUnit,
   StyledFlatTextInput,
+  StyledHiddenInput,
   StyledInputWrapper,
   StyledLabel,
   StyledLabelProps,
   StyledNumberInput,
   StyledRadioInput,
   StyledRadioLabel,
-  StyledRadioLabelProps,
+  StyledRadioLabelProps, StyledTextArea,
   StyledTextInput,
 } from './style'
 import { Icon } from '../icon'
-import { Box } from 'rebass'
+import { CoverImage } from '../image/cover'
+import AvatarImage from '../image/avatar'
 
 interface TextInputProps extends StyledLabelProps {
   defaultValue?: string,
@@ -163,5 +167,85 @@ export const RadioInput = (props: PropsWithChildren<RadioInputProps>) => {
       />
       {props.children && <>{props.children}</>}
     </StyledRadioLabel>
+  )
+}
+
+interface TextAreaProps extends TextInputProps {
+  cols?: number;
+  rows?: number;
+}
+
+export const TextArea = (props: PropsWithChildren<TextAreaProps>) => {
+  // TODO: need fix ref
+  return (
+    // @ts-ignore
+    <StyledLabel {...props}>
+      {props.children && <>{props.children}</>}
+      <StyledTextArea
+        id={props.id}
+        defaultValue={props.defaultValue}
+        value={props.value}
+        placeholder={props.placeholder}
+        onChange={props.onChange}
+        autoFocus={props.autoFocus}
+        disabled={props.disabled}
+        cols={props.cols}
+        rows={props.rows}
+        mt={props.children ? 'sm' : 0}
+      />
+    </StyledLabel>
+  )
+}
+
+interface CoverInputProps {
+  defaultValue?: string,
+  onChange?: (ev: ChangeEvent<HTMLInputElement>) => void,
+}
+
+export const CoverInput = (props: CoverInputProps) => {
+  const { defaultValue, onChange } = props
+  return (
+    <CoverInputLabel>
+      <InputOverlay
+        visible={!defaultValue || defaultValue.length === 1}
+      >
+        <>Set Cover Image</>
+      </InputOverlay>
+      <CoverImage src={defaultValue ? `${defaultValue}` : ''} editable={true}/>
+      <StyledHiddenInput
+        type='file'
+        id='file'
+        name='file'
+        accept={
+          '.png, .jpg, .jpeg'
+        }
+        multiple={false}
+        onChange={onChange}
+      />
+    </CoverInputLabel>
+  )
+}
+
+interface AvatarInputProps {
+  defaultValue?: string,
+  onChange?: (ev: ChangeEvent<HTMLInputElement>) => void,
+}
+
+export const AvatarInput = (props: AvatarInputProps) => {
+  const { defaultValue, onChange } = props
+  return (
+    <AvatarInputLabel>
+      <AvatarImage src={defaultValue ? `${defaultValue}` : ''} size={'lg'}/>
+      <StyledHiddenInput
+        type='file'
+        id='file'
+        name='file'
+        accept={
+          '.png, .jpg, .jpeg'
+        }
+        multiple={false}
+        onChange={onChange}
+      />
+    </AvatarInputLabel>
   )
 }

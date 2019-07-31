@@ -1,4 +1,4 @@
 import UserAvatar from './userAvatar'
-import Avatar from './avatar'
+import AvatarImage from './avatar'
 
-export { UserAvatar, Avatar }
+export { UserAvatar, AvatarImage }

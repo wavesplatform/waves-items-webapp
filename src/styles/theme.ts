@@ -46,8 +46,8 @@ colors.link = colors.grays[3]
 colors.linkHover = colors.grays[1]
 
 colors.fades = {
-  white: [10, 20, 30, 40, 50, 60, 70, 80, 90].map(value => hexa(colors.white, 1 - value / 100)),
-  black: [10, 20, 30, 40, 50, 60, 70, 80, 90].map(value => hexa(colors.black, 1 - value / 100)),
+  white: [5, 20, 30, 40, 50, 60, 70, 80, 95].map(value => hexa(colors.white, 1 - value / 100)),
+  black: [5, 20, 30, 40, 50, 60, 70, 80, 95].map(value => hexa(colors.black, 1 - value / 100)),
 }
 
 const bg = {
@@ -94,6 +94,10 @@ const avatars: any = {
     height: 32,
   },
   lg: {
+    width: 48,
+    height: 48,
+  },
+  xl: {
     width: 64,
     height: 64,
   },
@@ -101,7 +105,12 @@ const avatars: any = {
 
 avatars.base = avatars.sm
 
-const icons: any = {}
+const icons: any = {
+  baseline: {
+    top: '-.05em',
+    position: 'relative',
+  },
+}
 
 const toasts = {
   base: {},

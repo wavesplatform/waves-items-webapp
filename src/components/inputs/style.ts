@@ -9,6 +9,7 @@ import {
   borders, BordersProps,
   boxShadow, flex, flexDirection, opacity, themeGet
 } from 'styled-system'
+import { bool } from 'prop-types'
 
 export interface StyledLabelProps extends FlexProps {
 }
@@ -81,6 +82,14 @@ export const StyledTextInput = styled(StyledInput).attrs({
 StyledTextInput.defaultProps = {
   ...StyledTextInput.defaultProps,
   as: 'input',
+  mt: 'sm',
+}
+
+export const StyledTextArea = styled(StyledInput)`
+`
+StyledTextArea.defaultProps = {
+  ...StyledTextArea.defaultProps,
+  as: 'textarea',
   mt: 'sm',
 }
 
@@ -194,3 +203,37 @@ StyledRadioInput.defaultProps = {
   bg: 'bg.input',
   mr: 'sm',
 }
+
+export const StyledHiddenInput = styled.input`
+  visibility: hidden;
+  width: 0;
+  height: 0;
+`
+
+export const CoverInputLabel = styled.label`
+  position: relative;
+  display: block;
+  height: 100%;
+  width: 100%;
+`
+
+export const AvatarInputLabel = styled.label`
+  position: relative;
+  display: block;
+  width: ${themeGet('avatars.lg.width')}px;
+  height: ${themeGet('avatars.lg.height')}px;
+`
+
+export const InputOverlay = styled(Flex)<FlexProps & { visible?: boolean }>`
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+  opacity: ${props => (props.visible ? '1' : '0')};
+`

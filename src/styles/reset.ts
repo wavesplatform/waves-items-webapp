@@ -99,6 +99,10 @@ export const GlobalStyle = createGlobalStyle`
     line-height: inherit;
   }
   
+  textarea {
+    resize: none;
+  }
+  
   button,
   input {
     overflow: visible;

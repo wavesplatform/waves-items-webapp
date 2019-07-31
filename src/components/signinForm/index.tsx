@@ -7,7 +7,7 @@ import { Signin, SigninVariables } from '../../graphql/mutations/__generated__/S
 import { config } from '../../config/config'
 import { Button } from '../buttons'
 import { TextInput } from '../inputs'
-import { Form, Small } from '../globals'
+import { Actions, Form, Small } from '../globals'
 import { Toast } from '../toasts'
 import { isFirefox } from '../../helpers/browser'
 import { RouteComponentProps, withRouter } from 'react-router'
@@ -93,7 +93,9 @@ class SigninForm extends Component<WithApolloClient<TProps> & IKeeperContext> {
                          placeholder={'Your email'}
                          onChange={this._changeEmail}
               >Email <Small color={'placeholder'}>(optional)</Small></TextInput>
-              <Button type='submit' variant='primary' size={'lg'} width={1} mt={'lg'}>Sign In</Button>
+              <Actions>
+                <Button type='submit' variant='primary' size={'lg'} width={1}>Sign In</Button>
+              </Actions>
             </Form>
           )
         }}

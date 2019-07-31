@@ -22,7 +22,7 @@ export const GameCard = (props: IGameCardProps) => {
       </Overview>
       <Inner>
         <Flex>
-          <UserAvatar user={game} size={'lg'}/>
+          <UserAvatar user={game} size={'xl'}/>
         </Flex>
         <Flex flexDirection={'column'}>
           <Title

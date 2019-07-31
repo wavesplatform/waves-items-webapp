@@ -10,10 +10,6 @@ export const Title = styled(Heading)`
   ${truncate}
 `
 
-export const Icon = styled(Box)`
-`
-Icon.defaultProps = { mr: 'lg' }
-
 export const Description = styled(Text)`
   opacity: .7;
 `

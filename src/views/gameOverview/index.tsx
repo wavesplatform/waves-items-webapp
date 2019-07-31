@@ -2,19 +2,15 @@ import React, { Component, ReactNode } from 'react'
 import { ChildProps, graphql } from 'react-apollo'
 import { getGameQuery } from '../../graphql/queries/getGame'
 import { GameQuery, GameQueryVariables } from '../../graphql/queries/__generated__/GameQuery'
-import {
-  Banner,
-  BannerContent,
-  BannerImage,
-  BannerImageWrapper,
-  GameOverviewContainer, Info,
-} from './style'
+import { Cover, CoverContent, CoverImageUnderlay, EditButton, GameOverviewContainer, Info, } from './style'
 import { Link, Text } from 'rebass'
 import { Button } from '../../components/buttons'
 import { Redirect } from 'react-router'
 import { Loading } from '../../components/loading'
 import { GameHeading } from '../../components/game/gameHeading'
 import { Icon } from '../../components/icon'
+import EditGameModal from '../../components/modals/editGameModal'
+import { CoverImage } from '../../components/image/cover'
 
 interface IProps {
   address: string
@@ -26,6 +22,10 @@ type TVariables = GameQueryVariables
 type TChildProps = ChildProps<IProps, TData, TVariables>
 
 export class GameOverview extends Component<TChildProps> {
+  state = {
+    editModalShow: false,
+  }
+
   render(): ReactNode {
     const { user: game, loading, error } = this.props.data!
 
@@ -41,12 +41,17 @@ export class GameOverview extends Component<TChildProps> {
 
     return (
       <GameOverviewContainer>
-        <Banner>
-          {imagePageUri && <BannerImageWrapper><BannerImage src={imagePageUri}/></BannerImageWrapper>}
-          <BannerContent>
+        <Cover>
+          <CoverImageUnderlay>
+            <CoverImage src={imagePageUri}/>
+          </CoverImageUnderlay>
+          <CoverContent>
             <GameHeading game={game}/>
-          </BannerContent>
-        </Banner>
+          </CoverContent>
+          <EditButton onClick={() => {
+            this._setShowEditModal(true)
+          }}/>
+        </Cover>
         <Info>
           <Text mb={'base'}>{game.totalItems} items</Text>
           <Button
@@ -56,11 +61,22 @@ export class GameOverview extends Component<TChildProps> {
             width={'110px'}
           >
             Play
-            <Icon glyph={'open_in_new'} ml={'sm'} color={'fades.white.4'}/>
+            <Icon variant={'baseline'} glyph={'open_in_new'} ml={'xs'} color={'fades.white.4'}/>
           </Button>
         </Info>
+        <EditGameModal
+          game={game}
+          show={this.state.editModalShow}
+          setShow={this._setShowEditModal}
+        />
       </GameOverviewContainer>
     )
+  }
+
+  _setShowEditModal = (value: boolean) => {
+    this.setState({
+      editModalShow: value,
+    })
   }
 }
 

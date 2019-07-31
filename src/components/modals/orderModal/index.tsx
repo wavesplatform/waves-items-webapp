@@ -91,7 +91,7 @@ class OrderModal extends Component<IProps> {
                 width={1}
               >
                 Get Waves
-                <Icon glyph={'open_in_new'} ml={'sm'} color={'fades.white.4'}/>
+                <Icon variant={'baseline'} glyph={'open_in_new'} ml={'xs'} color={'fades.white.4'}/>
               </Button>
             </>
           ) : (

@@ -3,7 +3,7 @@ import { Box } from 'rebass'
 import { UserAvatar } from '../image'
 import React from 'react'
 import { H1 } from '../globals'
-import { Description, Icon, Wrapper } from './style'
+import { Description, Wrapper } from './style'
 
 interface GameHeadingProps {
   game: IGame
@@ -15,9 +15,9 @@ export const GameHeading = (props: GameHeadingProps) => {
   const meta = game.meta
   return (
     <Wrapper>
-      <Icon>
-        <UserAvatar user={game} size={'lg'}/>
-      </Icon>
+      <Box mr={'lg'}>
+        <UserAvatar user={game} size={'xl'}/>
+      </Box>
       <Box>
         <H1 mb={'sm'}>{game.name || game.address}</H1>
         <Description>{(meta && meta.description) ? meta.description : 'Decentralized application'}</Description>

@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components'
-import { Box, BoxProps, Text, TextProps } from 'rebass'
+import { Box, BoxProps, Flex, Text, TextProps } from 'rebass'
 import { borders, BordersProps, color, height, HeightProps, space, SpaceProps, themeGet, width } from 'styled-system'
 import { Link } from 'react-router-dom'
 
@@ -103,6 +103,17 @@ CodeBlock.defaultProps = {
 
 export const Form = styled.form`
 `
+
+export const Actions = styled(Flex)`
+  width: 100%;
+  border-top: 1px solid ${themeGet('colors.grays.7')};
+`
+Actions.defaultProps = {
+  ...Actions.defaultProps,
+  pt: 'lg',
+  mt: 'lg',
+  justifyContent: 'flex-end',
+}
 
 export const Small = styled(Text)`
   font-size: ${themeGet('fontSizes.sm')}px;
