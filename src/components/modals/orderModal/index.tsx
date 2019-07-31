@@ -3,7 +3,7 @@ import { ModalContainer } from '../container'
 import { modalStyles } from '../style'
 import { Button } from '../../buttons'
 import { Box, Flex, Image, Link } from 'rebass'
-import { Form } from '../../globals'
+import { Actions, Form, H2 } from '../../globals'
 import { NumberInput, TextInput, TextInputWithUnit } from '../../inputs'
 import keeperHelper, { IWavesNetworkCode } from '../../../helpers/keeper'
 import { config } from '../../../config/config'
@@ -56,7 +56,7 @@ class OrderModal extends Component<IProps> {
     const { show, setShow, type, item, keeperContext } = this.props
     const { publicState } = keeperContext
     const account = publicState.account
-    const styles = modalStyles(420)
+    const styles = modalStyles(380)
 
     const haveBalanceGtZero = account && (new BigNumber(account.balance.available)).gt(0)
     const exchangeLink = account && generateExchangeLink(account.address, '10')
@@ -76,59 +76,56 @@ class OrderModal extends Component<IProps> {
             setShow(false)
           }}
         >
-          {!haveBalanceGtZero ? (
-            <>
-              <Toast mb={'lg'}>
-                Incorrect balance.<br/>
-                You can get Waves via external service.
-              </Toast>
-              <Button
-                as={Link}
-                href={exchangeLink}
-                target={'_blank'}
-                variant='primary'
-                size={'lg'}
-                width={1}
-              >
-                Get Waves
-                <Icon variant={'baseline'} glyph={'open_in_new'} ml={'xs'} color={'fades.white.4'}/>
-              </Button>
-            </>
-          ) : (
-            <>
-              <Overview>
-                <ImageWrapper>
-                  <Image
-                    src={item.imageUrl ? item.imageUrl : defaultImage}
-                    alt={`Item #${item.id}`}/>
-                </ImageWrapper>
-              </Overview>
-              <Form onSubmit={ev => this._handleSubmit(ev)}>
-                <Flex>
-                  <Box width={1 / 3}>
-                    <TextInput value={this.state.amount}
-                               onChange={this._changeAmount}
-                    >Amount</TextInput>
-                  </Box>
-                  <Box width={2 / 3} ml={'base'}>
-                    <TextInputWithUnit value={this.state.price}
-                                       onChange={this._changePrice}
-                    >Price</TextInputWithUnit>
-                  </Box>
-                </Flex>
-                <Flex justifyContent={'space-between'} alignItems={'flex-end'}>
-                  <Box width={1 / 2}>
+          <Flex>
+            <Box width={1}>
+              {!haveBalanceGtZero ? (
+                <>
+                  <Toast mb={'lg'}>
+                    Incorrect balance.<br/>
+                    You can get Waves via external service.
+                  </Toast>
+                  <Button
+                    as={Link}
+                    href={exchangeLink}
+                    target={'_blank'}
+                    variant='primary'
+                    size={'lg'}
+                    width={1}
+                  >
+                    Get Waves
+                    <Icon variant={'baseline'} glyph={'open_in_new'} ml={'xs'} color={'fades.white.4'}/>
+                  </Button>
+                </>
+              ) : (
+                <>
+                  <H2 mb={0}>
+                    {item.name}
+                  </H2>
+                  <Form onSubmit={ev => this._handleSubmit(ev)}>
+                    <Flex>
+                      <Box width={1 / 3}>
+                        <TextInput value={this.state.amount}
+                                   onChange={this._changeAmount}
+                        >Amount</TextInput>
+                      </Box>
+                      <Box width={2 / 3} ml={'base'}>
+                        <TextInputWithUnit value={this.state.price}
+                                           onChange={this._changePrice}
+                        >Price</TextInputWithUnit>
+                      </Box>
+                    </Flex>
                     <NumberInput value={this.state.period}
                                  onChange={this._changePeriod}
                     >Period (in seconds)</NumberInput>
-                  </Box>
-                  <Flex width={1 / 2} ml={'base'} justifyContent={'flex-end'}>
-                    <Button type='submit' variant={'primary'} width={1}>{type === 'buy' ? 'Buy' : 'Sell'}</Button>
-                  </Flex>
-                </Flex>
-              </Form>
-            </>
-          )}
+                    <Actions>
+                      <Button type='submit' variant={'primary'} size={'lg'}
+                              width={1}>{type === 'buy' ? 'Buy' : 'Sell'}</Button>
+                    </Actions>
+                  </Form>
+                </>
+              )}
+            </Box>
+          </Flex>
         </ModalContainer>
       </Modal>
     )

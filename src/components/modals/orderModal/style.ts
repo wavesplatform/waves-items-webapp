@@ -4,8 +4,6 @@ import { themeGet } from 'styled-system'
 
 export const Overview = styled(Box)`
   position: relative;
-  padding: ${themeGet('space.base')}px 0;
-  margin-top: -100px;
 `
 
 export const ImageWrapper = styled(Box)`
