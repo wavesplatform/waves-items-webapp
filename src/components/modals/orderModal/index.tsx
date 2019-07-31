@@ -56,7 +56,7 @@ class OrderModal extends Component<IProps> {
     const { show, setShow, type, item, keeperContext } = this.props
     const { publicState } = keeperContext
     const account = publicState.account
-    const styles = modalStyles(380)
+    const styles = modalStyles(420)
 
     const haveBalanceGtZero = account && (new BigNumber(account.balance.available)).gt(0)
     const exchangeLink = account && generateExchangeLink(account.address, '10')
