@@ -11,15 +11,15 @@
       {
         "kind": "OBJECT",
         "name": "Query",
-        "description": "",
+        "description": null,
         "fields": [
           {
             "name": "items",
-            "description": "",
+            "description": null,
             "args": [
               {
                 "name": "filter",
-                "description": "",
+                "description": null,
                 "type": {
                   "kind": "INPUT_OBJECT",
                   "name": "ItemFilter",
@@ -29,7 +29,7 @@
               },
               {
                 "name": "orderBy",
-                "description": "",
+                "description": null,
                 "type": {
                   "kind": "ENUM",
                   "name": "ItemOrderByInput",
@@ -39,7 +39,7 @@
               },
               {
                 "name": "after",
-                "description": "",
+                "description": null,
                 "type": {
                   "kind": "SCALAR",
                   "name": "String",
@@ -49,7 +49,7 @@
               },
               {
                 "name": "first",
-                "description": "",
+                "description": null,
                 "type": {
                   "kind": "SCALAR",
                   "name": "Int",
@@ -68,11 +68,11 @@
           },
           {
             "name": "item",
-            "description": "",
+            "description": null,
             "args": [
               {
                 "name": "assetId",
-                "description": "",
+                "description": null,
                 "type": {
                   "kind": "NON_NULL",
                   "name": null,
@@ -95,7 +95,7 @@
           },
           {
             "name": "games",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -119,11 +119,11 @@
           },
           {
             "name": "user",
-            "description": "",
+            "description": null,
             "args": [
               {
                 "name": "address",
-                "description": "",
+                "description": null,
                 "type": {
                   "kind": "NON_NULL",
                   "name": null,
@@ -146,11 +146,11 @@
           },
           {
             "name": "userItems",
-            "description": "",
+            "description": null,
             "args": [
               {
                 "name": "address",
-                "description": "",
+                "description": null,
                 "type": {
                   "kind": "NON_NULL",
                   "name": null,
@@ -164,7 +164,7 @@
               },
               {
                 "name": "orderBy",
-                "description": "",
+                "description": null,
                 "type": {
                   "kind": "ENUM",
                   "name": "ItemOrderByInput",
@@ -195,7 +195,7 @@
           },
           {
             "name": "me",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -207,7 +207,7 @@
           },
           {
             "name": "storeStats",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -230,12 +230,12 @@
       {
         "kind": "INPUT_OBJECT",
         "name": "ItemFilter",
-        "description": "",
+        "description": null,
         "fields": null,
         "inputFields": [
           {
             "name": "gameAddress",
-            "description": "",
+            "description": null,
             "type": {
               "kind": "SCALAR",
               "name": "String",
@@ -245,7 +245,7 @@
           },
           {
             "name": "searchString",
-            "description": "",
+            "description": null,
             "type": {
               "kind": "SCALAR",
               "name": "String",
@@ -255,7 +255,7 @@
           },
           {
             "name": "creatorRole",
-            "description": "",
+            "description": null,
             "type": {
               "kind": "SCALAR",
               "name": "String",
@@ -281,20 +281,20 @@
       {
         "kind": "ENUM",
         "name": "ItemOrderByInput",
-        "description": "",
+        "description": null,
         "fields": null,
         "inputFields": null,
         "interfaces": null,
         "enumValues": [
           {
             "name": "timestamp_ASC",
-            "description": "",
+            "description": null,
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
             "name": "timestamp_DESC",
-            "description": "",
+            "description": null,
             "isDeprecated": false,
             "deprecationReason": null
           }
@@ -314,11 +314,11 @@
       {
         "kind": "OBJECT",
         "name": "ItemConnection",
-        "description": "",
+        "description": null,
         "fields": [
           {
             "name": "pageInfo",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -334,7 +334,7 @@
           },
           {
             "name": "edges",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "LIST",
@@ -361,11 +361,11 @@
       {
         "kind": "OBJECT",
         "name": "PageInfo",
-        "description": "",
+        "description": null,
         "fields": [
           {
             "name": "hasNextPage",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -381,7 +381,7 @@
           },
           {
             "name": "hasPreviousPage",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -397,7 +397,7 @@
           },
           {
             "name": "startCursor",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -409,7 +409,7 @@
           },
           {
             "name": "endCursor",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -438,11 +438,11 @@
       {
         "kind": "OBJECT",
         "name": "ItemEdge",
-        "description": "",
+        "description": null,
         "fields": [
           {
             "name": "node",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -458,7 +458,7 @@
           },
           {
             "name": "cursor",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -481,11 +481,11 @@
       {
         "kind": "OBJECT",
         "name": "Item",
-        "description": "",
+        "description": null,
         "fields": [
           {
             "name": "id",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -501,7 +501,7 @@
           },
           {
             "name": "assetId",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -517,7 +517,7 @@
           },
           {
             "name": "name",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -533,7 +533,7 @@
           },
           {
             "name": "quantity",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -549,7 +549,7 @@
           },
           {
             "name": "game",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -565,7 +565,7 @@
           },
           {
             "name": "imageUrl",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -581,7 +581,7 @@
           },
           {
             "name": "reissuable",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -597,7 +597,7 @@
           },
           {
             "name": "timestamp",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -613,7 +613,7 @@
           },
           {
             "name": "misc",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -625,7 +625,7 @@
           },
           {
             "name": "rawParams",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -641,7 +641,7 @@
           },
           {
             "name": "createdAt",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -657,7 +657,7 @@
           },
           {
             "name": "updatedAt",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -673,7 +673,7 @@
           },
           {
             "name": "pair",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -685,7 +685,7 @@
           },
           {
             "name": "bids",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "LIST",
@@ -705,7 +705,7 @@
           },
           {
             "name": "asks",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "LIST",
@@ -725,7 +725,7 @@
           },
           {
             "name": "balance",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -754,11 +754,11 @@
       {
         "kind": "OBJECT",
         "name": "User",
-        "description": "",
+        "description": null,
         "fields": [
           {
             "name": "id",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -774,7 +774,7 @@
           },
           {
             "name": "address",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -790,7 +790,7 @@
           },
           {
             "name": "name",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -802,7 +802,7 @@
           },
           {
             "name": "role",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -818,7 +818,7 @@
           },
           {
             "name": "permissions",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -842,7 +842,7 @@
           },
           {
             "name": "items",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "LIST",
@@ -862,7 +862,7 @@
           },
           {
             "name": "totalItems",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -874,7 +874,7 @@
           },
           {
             "name": "image",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -886,7 +886,7 @@
           },
           {
             "name": "meta",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -905,26 +905,26 @@
       {
         "kind": "ENUM",
         "name": "UserRole",
-        "description": "",
+        "description": null,
         "fields": null,
         "inputFields": null,
         "interfaces": null,
         "enumValues": [
           {
             "name": "USER",
-            "description": "",
+            "description": null,
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
             "name": "TEST",
-            "description": "",
+            "description": null,
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
             "name": "GAME",
-            "description": "",
+            "description": null,
             "isDeprecated": false,
             "deprecationReason": null
           }
@@ -934,20 +934,20 @@
       {
         "kind": "ENUM",
         "name": "UserPermission",
-        "description": "",
+        "description": null,
         "fields": null,
         "inputFields": null,
         "interfaces": null,
         "enumValues": [
           {
             "name": "USER",
-            "description": "",
+            "description": null,
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
             "name": "GAME",
-            "description": "",
+            "description": null,
             "isDeprecated": false,
             "deprecationReason": null
           }
@@ -957,7 +957,7 @@
       {
         "kind": "SCALAR",
         "name": "Json",
-        "description": "",
+        "description": null,
         "fields": null,
         "inputFields": null,
         "interfaces": null,
@@ -967,7 +967,7 @@
       {
         "kind": "SCALAR",
         "name": "DateTime",
-        "description": "",
+        "description": null,
         "fields": null,
         "inputFields": null,
         "interfaces": null,
@@ -977,11 +977,11 @@
       {
         "kind": "OBJECT",
         "name": "AmountPricePair",
-        "description": "",
+        "description": null,
         "fields": [
           {
             "name": "amountAsset",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -997,7 +997,7 @@
           },
           {
             "name": "priceAsset",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -1020,11 +1020,11 @@
       {
         "kind": "OBJECT",
         "name": "AmountPrice",
-        "description": "",
+        "description": null,
         "fields": [
           {
             "name": "amount",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -1040,7 +1040,7 @@
           },
           {
             "name": "price",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -1063,11 +1063,11 @@
       {
         "kind": "OBJECT",
         "name": "StoreStats",
-        "description": "",
+        "description": null,
         "fields": [
           {
             "name": "games",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -1083,7 +1083,7 @@
           },
           {
             "name": "items",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -1099,7 +1099,7 @@
           },
           {
             "name": "transactions",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -1122,15 +1122,15 @@
       {
         "kind": "OBJECT",
         "name": "Mutation",
-        "description": "",
+        "description": null,
         "fields": [
           {
             "name": "signin",
-            "description": "",
+            "description": null,
             "args": [
               {
                 "name": "input",
-                "description": "",
+                "description": null,
                 "type": {
                   "kind": "NON_NULL",
                   "name": null,
@@ -1157,17 +1157,48 @@
           },
           {
             "name": "updateTestRole",
-            "description": "",
+            "description": null,
             "args": [
               {
                 "name": "enable",
-                "description": "",
+                "description": null,
                 "type": {
                   "kind": "NON_NULL",
                   "name": null,
                   "ofType": {
                     "kind": "SCALAR",
                     "name": "Boolean",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null
+              }
+            ],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "User",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "updateGameInfo",
+            "description": null,
+            "args": [
+              {
+                "name": "input",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "GameInfo",
                     "ofType": null
                   }
                 },
@@ -1195,12 +1226,12 @@
       {
         "kind": "INPUT_OBJECT",
         "name": "SigninUser",
-        "description": "",
+        "description": null,
         "fields": null,
         "inputFields": [
           {
             "name": "address",
-            "description": "",
+            "description": null,
             "type": {
               "kind": "NON_NULL",
               "name": null,
@@ -1214,7 +1245,7 @@
           },
           {
             "name": "publicKey",
-            "description": "",
+            "description": null,
             "type": {
               "kind": "NON_NULL",
               "name": null,
@@ -1228,7 +1259,7 @@
           },
           {
             "name": "sign",
-            "description": "",
+            "description": null,
             "type": {
               "kind": "NON_NULL",
               "name": null,
@@ -1242,7 +1273,7 @@
           },
           {
             "name": "name",
-            "description": "",
+            "description": null,
             "type": {
               "kind": "SCALAR",
               "name": "String",
@@ -1252,7 +1283,7 @@
           },
           {
             "name": "email",
-            "description": "",
+            "description": null,
             "type": {
               "kind": "SCALAR",
               "name": "String",
@@ -1268,11 +1299,11 @@
       {
         "kind": "OBJECT",
         "name": "AuthPayload",
-        "description": "",
+        "description": null,
         "fields": [
           {
             "name": "token",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -1288,7 +1319,7 @@
           },
           {
             "name": "user",
-            "description": "",
+            "description": null,
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -1305,6 +1336,77 @@
         ],
         "inputFields": null,
         "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "GameInfo",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "name",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "url",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "description",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "iconFile",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Upload",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "pageFile",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Upload",
+              "ofType": null
+            },
+            "defaultValue": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "SCALAR",
+        "name": "Upload",
+        "description": null,
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
         "enumValues": null,
         "possibleTypes": null
       },
@@ -2103,45 +2205,12 @@
           }
         ],
         "possibleTypes": null
-      },
-      {
-        "kind": "ENUM",
-        "name": "CacheControlScope",
-        "description": "",
-        "fields": null,
-        "inputFields": null,
-        "interfaces": null,
-        "enumValues": [
-          {
-            "name": "PUBLIC",
-            "description": "",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "PRIVATE",
-            "description": "",
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "possibleTypes": null
-      },
-      {
-        "kind": "SCALAR",
-        "name": "Upload",
-        "description": "The `Upload` scalar type represents a file upload.",
-        "fields": null,
-        "inputFields": null,
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
       }
     ],
     "directives": [
       {
         "name": "auth",
-        "description": "",
+        "description": null,
         "locations": [
           "QUERY",
           "MUTATION",
@@ -2151,41 +2220,10 @@
         "args": [
           {
             "name": "requires",
-            "description": "",
+            "description": null,
             "type": {
               "kind": "ENUM",
               "name": "UserPermission",
-              "ofType": null
-            },
-            "defaultValue": null
-          }
-        ]
-      },
-      {
-        "name": "cacheControl",
-        "description": "",
-        "locations": [
-          "FIELD_DEFINITION",
-          "OBJECT",
-          "INTERFACE"
-        ],
-        "args": [
-          {
-            "name": "maxAge",
-            "description": "",
-            "type": {
-              "kind": "SCALAR",
-              "name": "Int",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "scope",
-            "description": "",
-            "type": {
-              "kind": "ENUM",
-              "name": "CacheControlScope",
               "ofType": null
             },
             "defaultValue": null

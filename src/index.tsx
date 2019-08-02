@@ -1,10 +1,9 @@
-import React, { Component, ReactNode, Fragment } from 'react'
+import React, { Component, Fragment, ReactNode } from 'react'
 import ReactDOM from 'react-dom'
 import * as serviceWorker from './serviceWorker'
 import { ApolloProvider } from 'react-apollo'
 import { BrowserRouter as Router } from 'react-router-dom'
 import { ApolloClient } from 'apollo-client'
-import { HttpLink } from 'apollo-link-http'
 import { InMemoryCache } from 'apollo-cache-inmemory'
 import { ThemeProvider } from 'styled-components'
 import theme from './styles/theme'
@@ -15,6 +14,7 @@ import { GlobalStyle } from './styles/reset'
 import { ApolloLink, from } from 'apollo-link'
 import { config } from './config/config'
 import * as Sentry from '@sentry/browser'
+import { createUploadLink } from 'apollo-upload-client'
 
 // Error tracking
 Sentry.init({ dsn: 'https://399be5e20c924d8d942a60629865d0aa@sentry.io/1513601' })
@@ -36,7 +36,7 @@ const authMiddleware = new ApolloLink((operation, forward) => {
   return forward(operation)
 })
 
-const httpLink = new HttpLink({
+const httpLink = createUploadLink({
   uri: config.graphqlEndpoint,
 })
 

@@ -8,25 +8,40 @@ import { IModalProps } from '../index'
 import { GameMeta, IGame, UserImage } from '../../../types'
 import { Cover, CoverContent, CoverImageUnderlay } from './style'
 import { generateAvatar } from '../../../helpers/user'
+import { config } from '../../../config/config'
+import { Mutation, MutationFn } from 'react-apollo'
+import { UpdateGameInfo, UpdateGameInfoVariables } from '../../../graphql/mutations/__generated__/UpdateGameInfo'
+import { updateGameInfoMutation } from '../../../graphql/mutations/updateGameInfo'
 
 const Modal = require('react-modal')
 Modal.setAppElement('#root')
+
+class UpdateGameInfoMutation extends Mutation<UpdateGameInfo, UpdateGameInfoVariables> {
+}
 
 interface IProps extends IModalProps {
   game: IGame
 }
 
 interface IState extends UserImage, GameMeta {
+  isLoading: boolean
   name: string
+  // Files
+  iconFile: any
+  pageFile: any
 }
 
 class EditGameModal extends Component<IProps> {
   state: IState = {
+    isLoading: false,
     name: '',
     description: '',
     url: '',
     icon: '',
     page: '',
+    // Files
+    iconFile: null,
+    pageFile: null,
   }
 
   constructor(props: IProps) {
@@ -69,32 +84,50 @@ class EditGameModal extends Component<IProps> {
             setShow(false)
           }}
         >
-          <Form onSubmit={ev => this._handleSubmit(ev)}>
-            <Cover>
-              <CoverImageUnderlay>
-                <CoverInput defaultValue={this.state.page} onChange={this._changeCover}/>
-              </CoverImageUnderlay>
-              <CoverContent>
-                <AvatarInput defaultValue={this.state.icon} onChange={this._changeAvatar}/>
-              </CoverContent>
-            </Cover>
-            <TextInput value={this.state.name}
-                       onChange={this._changeName}
-                       placeholder={'The game name'}
-            >Name</TextInput>
-            <TextInput value={this.state.url}
-                       onChange={this._changeUrl}
-                       placeholder={'External URL of your game'}
-            >Game URL</TextInput>
-            <TextArea value={this.state.description}
-                      onChange={this._changeDescription}
-                      placeholder={'The description of your game'}
-                      rows={3}
-            >Description</TextArea>
-            <Actions>
-              <Button type='submit' variant={'primary'} width={1} size={'lg'}>Save</Button>
-            </Actions>
-          </Form>
+          <UpdateGameInfoMutation
+            mutation={updateGameInfoMutation}
+            onCompleted={this._handleCompleted}
+            onError={err => {
+              console.log(err)
+
+              this.setState({
+                isLoading: false,
+              })
+            }}
+          >
+            {(updateGameinfo, { loading, error }) => {
+              return (
+                <Form onSubmit={ev => this._handleSubmit(ev, updateGameinfo)}>
+                  <Cover>
+                    <CoverImageUnderlay>
+                      <CoverInput defaultValue={this.state.page} onChange={this._changeCover}/>
+                    </CoverImageUnderlay>
+                    <CoverContent>
+                      <AvatarInput defaultValue={this.state.icon} onChange={this._changeAvatar}/>
+                    </CoverContent>
+                  </Cover>
+                  <TextInput value={this.state.name}
+                             onChange={this._changeName}
+                             placeholder={'The game name'}
+                  >Name</TextInput>
+                  <TextInput value={this.state.url}
+                             onChange={this._changeUrl}
+                             placeholder={'External URL of your game'}
+                  >Game URL</TextInput>
+                  <TextArea value={this.state.description}
+                            onChange={this._changeDescription}
+                            placeholder={'The description of your game'}
+                            rows={3}
+                  >Description</TextArea>
+                  <Actions>
+                    <Button type='submit' variant={'primary'} width={1} size={'lg'} disabled={this.state.isLoading}>
+                      {this.state.isLoading ? 'Loading...' : 'Save'}
+                    </Button>
+                  </Actions>
+                </Form>
+              )
+            }}
+          </UpdateGameInfoMutation>
         </ModalContainer>
       </Modal>
     )
@@ -125,26 +158,94 @@ class EditGameModal extends Component<IProps> {
   }
 
   _changeCover = (ev: ChangeEvent<HTMLInputElement>) => {
-    const cover = ev.target.value
-    console.log(cover)
+    const reader = new FileReader()
+    const file = ev.target.files && ev.target.files[0]
+
+    if (!file) {
+      return
+    }
+
+    if (file.size > config.images.pageMaxImageSizeByte) {
+      // TODO: show error
+      return
+    }
+
+    reader.onloadend = () => {
+      this.setState({
+        pageFile: file,
+        page: reader.result,
+      })
+    }
+
+    if (file) {
+      reader.readAsDataURL(file)
+    }
   }
 
   _changeAvatar = (ev: ChangeEvent<HTMLInputElement>) => {
-    const avatar = ev.target.value
-    console.log(avatar)
+    const reader = new FileReader()
+    const file = ev.target.files && ev.target.files[0]
+
+    if (!file) {
+      return
+    }
+
+    if (file.size > config.images.iconMaxImageSizeByte) {
+      // TODO: show error
+      return
+    }
+
+    reader.onloadend = () => {
+      this.setState({
+        iconFile: file,
+        icon: reader.result,
+      })
+    }
+
+    if (file) {
+      reader.readAsDataURL(file)
+    }
   }
 
-  _handleSubmit = async (ev: FormEvent) => {
+  _handleSubmit = async (ev: FormEvent, updateGameInfo: MutationFn<UpdateGameInfo, UpdateGameInfoVariables>) => {
     ev.preventDefault()
     const { show, setShow } = this.props
+    const { name, url, description, iconFile, pageFile } = this.state
 
-    await this._confirm()
+    this.setState({
+      isLoading: true,
+    })
 
-    setShow(false)
+    try {
+      await updateGameInfo({
+        variables: {
+          input: {
+            name,
+            url,
+            description,
+            pageFile,
+            iconFile,
+          },
+        },
+      })
+
+      // User on store will be updated
+
+      this.setState({
+        pageFile: null,
+        iconFile: null,
+      })
+    } catch (err) {
+      throw err
+    }
+
+    // setShow(false)
   }
 
-  _confirm = async () => {
-    console.log(this.state)
+  _handleCompleted = () => {
+    this.setState({
+      isLoading: false,
+    })
   }
 }
 

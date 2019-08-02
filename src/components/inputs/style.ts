@@ -9,7 +9,6 @@ import {
   borders, BordersProps,
   boxShadow, flex, flexDirection, opacity, themeGet
 } from 'styled-system'
-import { bool } from 'prop-types'
 
 export interface StyledLabelProps extends FlexProps {
 }
@@ -215,6 +214,7 @@ export const CoverInputLabel = styled.label`
   display: block;
   height: 100%;
   width: 100%;
+  cursor: pointer;
 `
 
 export const AvatarInputLabel = styled.label`
@@ -222,6 +222,7 @@ export const AvatarInputLabel = styled.label`
   display: block;
   width: ${themeGet('avatars.lg.width')}px;
   height: ${themeGet('avatars.lg.height')}px;
+  cursor: pointer;
 `
 
 export const InputOverlay = styled(Flex)<FlexProps & { visible?: boolean }>`

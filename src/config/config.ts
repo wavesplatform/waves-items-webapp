@@ -19,5 +19,9 @@ export const config = {
   },
   docsUrl: process.env.REACT_APP_DOCS_URL || 'http://localhost:8080/',
   exchangeUrl: 'https://coinomat.com/api/v2/indacoin/buy.php',
+  images: {
+    pageMaxImageSizeByte: 25000000,
+    iconMaxImageSizeByte: 5000000,
+  },
 }
 

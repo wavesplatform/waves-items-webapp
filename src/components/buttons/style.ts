@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { Button, ButtonProps } from 'rebass'
 import { variant } from 'styled-system'
 import { LinkProps } from 'react-router-dom'
@@ -13,12 +13,15 @@ export interface StyledButtonProps extends Pick<ButtonProps, Exclude<keyof Butto
 }
 
 export const StyledButton = styled(Button)<StyledButtonProps & Partial<LinkProps>>`
-  cursor: pointer;
+  cursor: ${props => (props.disabled ? 'default' : 'pointer')};
+  opacity: ${props => (props.disabled ? .5 : 1)};
   
-  &:hover,
-  &:focus {
-    opacity: .9;
-  }
+  ${props => !props.disabled && css`
+    &:hover,
+    &:focus {
+      opacity: .9;
+    }
+  `}
   
   ${buttonSizeStyle}
 `

@@ -9,25 +9,15 @@ interface IProps {
 }
 
 class UserAvatar extends Component<IProps> {
-  imageUri?: string
-
-  componentWillMount(): void {
-    const { user } = this.props
-
-    if (user.image && user.image.icon) {
-      this.imageUri = user.image.icon
-    } else {
-      this.imageUri = generateAvatar(user.address)
-    }
-  }
-
   render(): ReactNode {
-    const { size } = this.props
+    const { size, user } = this.props
+
+    const imageUri = (user.image && user.image.icon) ? user.image.icon : generateAvatar(user.address)
 
     return (
       <AvatarImage
         size={size || 'sm'}
-        src={this.imageUri}
+        src={imageUri}
       />
     )
   }

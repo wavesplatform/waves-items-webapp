@@ -12,6 +12,14 @@ export enum UserRole {
   USER = "USER",
 }
 
+export interface GameInfo {
+  name?: string | null;
+  url?: string | null;
+  description?: string | null;
+  iconFile?: any | null;
+  pageFile?: any | null;
+}
+
 export interface ItemFilter {
   gameAddress?: string | null;
   searchString?: string | null;

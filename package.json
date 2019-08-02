@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@sentry/browser": "^5.5.0",
+    "@types/apollo-upload-client": "^8.1.2",
     "@types/graphql": "^14.0.3",
     "@types/jest": "23.3.10",
     "@types/node": "10.12.15",
@@ -18,7 +19,6 @@
     "@waves/bignumber": "0.0.1-a6",
     "@waves/types": "0.0.2",
     "@waves/waves-games": "^1.0.32",
-    "add": "^2.0.6",
     "apollo-cache-inmemory": "^1.5.1",
     "apollo-client": "^2.6.3",
     "apollo-link": "^1.2.11",
@@ -26,6 +26,7 @@
     "apollo-link-error": "^1.1.10",
     "apollo-link-http": "^1.5.14",
     "apollo-link-state": "^0.4.2",
+    "apollo-upload-client": "^11.0.0",
     "graphql": "^14.0.2",
     "graphql-tag": "^2.10.1",
     "identity-img": "^1.0.0",
@@ -43,8 +44,7 @@
     "tslint": "^5.12.0",
     "tslint-config-prettier": "^1.17.0",
     "tslint-react": "^3.6.0",
-    "typescript": "3.2.2",
-    "yarn": "^1.17.3"
+    "typescript": "3.2.2"
   },
   "scripts": {
     "start": "react-scripts start",
