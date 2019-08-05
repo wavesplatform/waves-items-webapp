@@ -47,7 +47,7 @@ export const Param = styled(Flex)`
   border-top: 1px solid ${themeGet('colors.grays.7')};
   border-bottom: 1px solid ${themeGet('colors.grays.7')};
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   margin-top: -1px;
   
   &:first-child {
@@ -65,11 +65,13 @@ export const ParamTitle = styled(H3)`
   font-size: ${themeGet('fontSizes.base')}px;
   font-weight: ${themeGet('fontWeights.normal')};
   color: ${themeGet('colors.grays.4')};
+  min-width: 30%;
 `
 
 export const ParamValue = styled(Text)`
   flex: 1;
   text-align: right;
+  word-break: break-all;
 `
 
 export const Overview = styled(Box)`

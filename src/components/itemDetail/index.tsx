@@ -161,7 +161,7 @@ class ItemDetail extends Component<WithCurrentUserProps<TProps> & RouteComponent
     const list = misc.map((miscItem, index) => (
       <Param key={index}>
         <ParamTitle>{miscItem.key}</ParamTitle>
-        <ParamValue>{miscItem.value}</ParamValue>
+        <ParamValue>{JSON.stringify(miscItem.value)}</ParamValue>
       </Param>
     ))
 
