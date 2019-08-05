@@ -94,7 +94,7 @@ class ItemDetail extends Component<WithCurrentUserProps<TProps> & RouteComponent
             {this._miscParams(item.misc)}
           </Params>
           <Flex justifyContent={'space-between'} flexDirection={'column'}>
-            {buyPriceStr && <Button
+            <Button
               onClick={() => {
                 // Redirect if not auth
                 if (!me) {
@@ -106,8 +106,8 @@ class ItemDetail extends Component<WithCurrentUserProps<TProps> & RouteComponent
               variant='primary'
               mb={'base'}
             >
-              Buy for {buyPriceStr}
-            </Button>}
+              {buyPriceStr ? `Buy for ${buyPriceStr}` : 'Buy'}
+            </Button>
             <Button
               onClick={() => {
                 // Redirect if not auth

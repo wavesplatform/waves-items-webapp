@@ -53,8 +53,10 @@ class OrderModal extends Component<IProps> {
   }
 
   render(): ReactNode {
-    const { show, setShow, type, item, keeperContext } = this.props
+    const { show, setShow, type, item, keeperContext, defaultPrice } = this.props
     const { publicState } = keeperContext
+
+    const isBuy = type === 'buy'
     const account = publicState.account
     const styles = modalStyles(420)
 
@@ -70,7 +72,7 @@ class OrderModal extends Component<IProps> {
         style={styles}
       >
         <ModalContainer
-          title={type === 'buy' ? 'Buy Item' : 'Sell Item'}
+          title={isBuy ? 'Buy Item' : 'Sell Item'}
           ignoreHeader={true}
           onClose={() => {
             setShow(false)
@@ -98,6 +100,9 @@ class OrderModal extends Component<IProps> {
                 </>
               ) : (
                 <>
+                  {isBuy && !defaultPrice && <Toast mb={'lg'}>
+                    There are currently no sell orders, but you can place a buy order.
+                  </Toast>}
                   <H2 mb={0}>
                     {item.name}
                   </H2>
@@ -119,7 +124,7 @@ class OrderModal extends Component<IProps> {
                     >Period (in seconds)</NumberInput>
                     <Actions>
                       <Button type='submit' variant={'primary'} size={'lg'}
-                              width={1}>{type === 'buy' ? 'Buy' : 'Sell'}</Button>
+                              width={1}>{isBuy ? 'Buy' : 'Sell'}</Button>
                     </Actions>
                   </Form>
                 </>
