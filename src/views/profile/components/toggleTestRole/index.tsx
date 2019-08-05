@@ -35,7 +35,7 @@ class ToggleTestRole extends Component<WithCurrentUserProps<TProps>> {
         {(updateTestRole, { loading, error }) => {
           return (
             <RoleSelector>
-              <RoleOption active={isUser} onClick={async () => {
+              <RoleOption width={3 / 7} active={isUser} onClick={async () => {
                 await this._toggle(UserRole.USER, updateTestRole)
               }}>
                 <RadioInput
@@ -45,11 +45,11 @@ class ToggleTestRole extends Component<WithCurrentUserProps<TProps>> {
                   readOnly={true}
                   checked={isUser}
                 >
-                  <RoleOptionTitle>User</RoleOptionTitle>
+                  <RoleOptionTitle>Player</RoleOptionTitle>
                 </RadioInput>
-                <Paragraph mb={0}>Lorem ipsum is placeholder text commonly used in the graphic, print.</Paragraph>
+                <Paragraph mb={0}>Default behaviour. Allows you to use item market as player.</Paragraph>
               </RoleOption>
-              <RoleOption active={isTest} onClick={async () => {
+              <RoleOption width={4 / 7} active={isTest} onClick={async () => {
                 await this._toggle(UserRole.TEST, updateTestRole)
               }}>
                 <RadioInput
@@ -59,9 +59,13 @@ class ToggleTestRole extends Component<WithCurrentUserProps<TProps>> {
                   readOnly={true}
                   checked={isTest}
                 >
-                  <RoleOptionTitle>Test</RoleOptionTitle>
+                  <RoleOptionTitle>Game Sandbox</RoleOptionTitle>
                 </RadioInput>
-                <Paragraph mb={0}>Lorem ipsum is placeholder text commonly used in the graphic, print.</Paragraph>
+                <Paragraph mb={0}>
+                  This account type allows you to treat your current address as a game id for testing purposes.
+                  As long as you're using this account type the sandboxed game will appear in the games list but it wont
+                  be public.
+                </Paragraph>
               </RoleOption>
             </RoleSelector>
           )

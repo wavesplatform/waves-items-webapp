@@ -6,7 +6,7 @@ import { H3 } from '../../../../components/globals'
 export const RoleSelector = styled(Card)`
   display: flex;
   width: 100%;
-  max-width: 720px;
+  max-width: 820px;
 `
 RoleSelector.defaultProps = {}
 
