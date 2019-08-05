@@ -1,5 +1,5 @@
 import React, { Component, ReactNode } from 'react'
-import { ChildProps, graphql } from 'react-apollo'
+import { ChildProps, compose, graphql } from 'react-apollo'
 import { getGameQuery } from '../../graphql/queries/getGame'
 import { GameQuery, GameQueryVariables } from '../../graphql/queries/__generated__/GameQuery'
 import { Cover, CoverContent, CoverImageUnderlay, EditButton, GameOverviewContainer, Info, } from './style'
@@ -11,6 +11,7 @@ import { GameHeading } from '../../components/game/gameHeading'
 import { Icon } from '../../components/icon'
 import EditGameModal from '../../components/modals/editGameModal'
 import { CoverImage } from '../../components/image/cover'
+import withCurrentUser, { WithCurrentUserProps } from '../../components/withCurrentUser'
 
 interface IProps {
   address: string
@@ -21,12 +22,13 @@ type TVariables = GameQueryVariables
 
 type TChildProps = ChildProps<IProps, TData, TVariables>
 
-export class GameOverview extends Component<TChildProps> {
+export class GameOverview extends Component<WithCurrentUserProps<TChildProps>> {
   state = {
     editModalShow: false,
   }
 
   render(): ReactNode {
+    const { me } = this.props
     const { user: game, loading, error } = this.props.data!
 
     if (loading) {
@@ -38,6 +40,7 @@ export class GameOverview extends Component<TChildProps> {
     }
 
     const imagePageUri = game.image && game.image.page
+    const editable = me && game.address === me.address
 
     return (
       <GameOverviewContainer>
@@ -48,9 +51,9 @@ export class GameOverview extends Component<TChildProps> {
           <CoverContent>
             <GameHeading game={game}/>
           </CoverContent>
-          <EditButton onClick={() => {
+          {editable && <EditButton onClick={() => {
             this._setShowEditModal(true)
-          }}/>
+          }}/>}
         </Cover>
         <Info>
           <Text mb={'base'}>{game.totalItems} items</Text>
@@ -64,11 +67,11 @@ export class GameOverview extends Component<TChildProps> {
             <Icon variant={'baseline'} glyph={'open_in_new'} ml={'xs'} color={'fades.white.4'}/>
           </Button>
         </Info>
-        <EditGameModal
+        {editable && <EditGameModal
           game={game}
           show={this.state.editModalShow}
           setShow={this._setShowEditModal}
-        />
+        />}
       </GameOverviewContainer>
     )
   }
@@ -89,4 +92,4 @@ const withGame = graphql<IProps, TData, TVariables>(getGameQuery, {
   }),
 })
 
-export default withGame(GameOverview)
+export default compose(withGame, withCurrentUser)(GameOverview)
