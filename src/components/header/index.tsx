@@ -46,8 +46,8 @@ class Header extends Component<WithCurrentUserProps<TProps>> {
           <NavbarContainer>
             {/*Logo*/}
             <Logo to={'/'}>
-              <LogoImage src={logo}/>
-              <LogoTitle ml={'sm'}>
+              {/*<LogoImage src={logo}/>*/}
+              <LogoTitle>
                 Item Market <Color color={'placeholder'} fontSize={'xs'}>Beta</Color>
               </LogoTitle>
             </Logo>

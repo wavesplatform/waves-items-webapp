@@ -1,6 +1,7 @@
 import React, { Component, ReactNode } from 'react'
 import { FooterContainer, Logo, LogoImage } from './style'
-import logo from '../globals/logo.svg'
+
+// import logo from '../globals/logo.svg'
 
 interface IProps {
 }
@@ -10,7 +11,7 @@ class Footer extends Component<IProps> {
     return (
       <FooterContainer>
         <Logo to={'/'}>
-          <LogoImage src={logo}/>
+          {/*<LogoImage src={logo}/>*/}
         </Logo>
       </FooterContainer>
     )
