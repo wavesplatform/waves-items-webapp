@@ -61,10 +61,12 @@ class ItemDetail extends Component<WithCurrentUserProps<TProps> & RouteComponent
     const buyPriceStr = minAskPrice && toWaves(minAskPrice).toFixed()
     const sellPriceStr = maxBidPrice && toWaves(maxBidPrice).toFixed()
 
+    // Copy of misc
+    const misc = { ...item.misc }
     // Description
-    const description = item.misc['description'] || item.misc['Description']
-    delete item.misc['description']
-    delete item.misc['Description']
+    const description = misc['description'] || misc['Description']
+    delete misc['description']
+    delete misc['Description']
 
     return (
       <ItemDetailContainer isPage={isPage}>
@@ -91,7 +93,7 @@ class ItemDetail extends Component<WithCurrentUserProps<TProps> & RouteComponent
               <ParamTitle>Quantity</ParamTitle>
               <ParamValue>{item.quantity}</ParamValue>
             </Param>
-            {this._miscParams(item.misc)}
+            {this._miscParams(misc)}
           </Params>
           <Flex justifyContent={'space-between'} flexDirection={'column'}>
             <Button
