@@ -14,7 +14,7 @@ import {
   RightSide,
   Title,
 } from './style'
-import { Box, Flex, Image, Link } from 'rebass'
+import { Box, Flex, Image, Link, Text } from 'rebass'
 import { KeeperContext } from '../../contexts/keeper'
 import { Button } from '../buttons'
 import { toWaves } from '../../helpers/order'
@@ -61,6 +61,11 @@ class ItemDetail extends Component<WithCurrentUserProps<TProps> & RouteComponent
     const buyPriceStr = minAskPrice && toWaves(minAskPrice).toFixed()
     const sellPriceStr = maxBidPrice && toWaves(maxBidPrice).toFixed()
 
+    // Description
+    const description = item.misc['description'] || item.misc['Description']
+    delete item.misc['description']
+    delete item.misc['Description']
+
     return (
       <ItemDetailContainer isPage={isPage}>
         <LeftSide>
@@ -80,6 +85,7 @@ class ItemDetail extends Component<WithCurrentUserProps<TProps> & RouteComponent
           <Box mb={'lg'}>
             <UserHeading user={item.game} size={'sm'}/>
           </Box>
+          {description && <Text color={'grays.2'} mb={'lg'}>{description}</Text>}
           <Params mb={'lg'}>
             <Param>
               <ParamTitle>Quantity</ParamTitle>
