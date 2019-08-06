@@ -11,11 +11,8 @@ class Profile extends Component<WithCurrentUserProps> {
     return (
       <ViewWrapper>
         <Container>
-          <H1>Profile</H1>
-          <Section>
-            <H2>Inventory</H2>
-            {me && <Inventory address={me.address}/>}
-          </Section>
+          <H1>Inventory</H1>
+          <Inventory address={me.address}/>
         </Container>
       </ViewWrapper>
     )

@@ -8,7 +8,7 @@ type TProps = {}
 type TData = MeQuery
 
 export type TCurrentUser = {
-  me?: IUser
+  me: IUser
   meIsLoading?: boolean
 }
 

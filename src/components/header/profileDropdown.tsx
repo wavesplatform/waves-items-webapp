@@ -93,10 +93,10 @@ class ProfileDropdown extends Component<WithApolloClient<TProps> & IKeeperContex
             <Balance>{toWavesFromKeeper(account.balance.available).toFixed(3)} <WavesCy/></Balance>
           </DropdownItem>}
           <DropdownItem>
-            <DropdownLink as={Link} to={'/dashboard'}>Dashboard</DropdownLink>
+            <DropdownLink as={Link} to={'/profile'}>Inventory</DropdownLink>
           </DropdownItem>
           <DropdownItem>
-            <DropdownLink as={Link} to={'/profile'}>Profile</DropdownLink>
+            <DropdownLink as={Link} to={'/dashboard'}>Dashboard</DropdownLink>
           </DropdownItem>
           <DropdownItem>
             <DropdownLink onClick={async () => {

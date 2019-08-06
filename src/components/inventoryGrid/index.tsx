@@ -1,7 +1,8 @@
 import React from 'react'
 import { IItem, WithBalance } from '../../types'
 import { ItemCard } from '../itemCard'
-import { InventoryGridContainer, InventoryGridLink } from './style'
+import { EmptyCard, InventoryGridContainer, InventoryGridLink } from './style'
+import { Icon } from '../icon'
 
 interface IInventoryGridProps {
   items: WithBalance<IItem>[]
@@ -30,6 +31,11 @@ export const InventoryGrid = (props: IInventoryGridProps) => {
   return (
     <InventoryGridContainer>
       {items}
+      <InventoryGridLink
+        to={'/items'}
+      >
+        <EmptyCard><Icon glyph={'add'} fontSize={'2.4rem'}/></EmptyCard>
+      </InventoryGridLink>
     </InventoryGridContainer>
   )
 }
