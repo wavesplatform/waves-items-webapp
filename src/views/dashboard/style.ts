@@ -11,6 +11,9 @@ export const ItemContainer = styled(Container)`
   max-width: 512px;
 `
 
+export const SettingsContainer = styled(Box)`
+`
+
 export const GameOverview = styled(Box)`
   display: flex;
   min-height: 128px;

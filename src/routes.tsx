@@ -27,35 +27,35 @@ const ProfileFallback = authFallback(Profile, () => (
 
 const DashboardFallback = authFallback(Dashboard, () => (
   <Redirect to={'/signin'}/>
-), true)
+))
 
 class Routes extends Component {
   render(): ReactNode {
     return (
       <Body>
-      <Route component={Header}/>
-      <Switch>
-        <Route exact={true} key='route-home' path='/' component={HomeView}/>
+        <Route component={Header}/>
+        <Switch>
+          <Route exact={true} key='route-home' path='/' component={HomeView}/>
 
-        {/*Pages*/}
-        <Route key='route-about' path='/about' component={PagesView}/>
+          {/*Pages*/}
+          <Route key='route-about' path='/about' component={PagesView}/>
 
-        {/*Items*/}
-        <Route key='route-items' path='/items/:address([0-9a-fA-f]{35})' component={Browse}/>
-        <Route key='route-items' path='/items' component={Browse}/>
-        <Route key='route-item' path='/item/:assetId([0-9a-fA-f]{42,44})' component={ItemView}/>
+          {/*Items*/}
+          <Route key='route-items' path='/items/:address([0-9a-fA-f]{35})' component={Browse}/>
+          <Route key='route-items' path='/items' component={Browse}/>
+          <Route key='route-item' path='/item/:assetId([0-9a-fA-f]{42,44})' component={ItemView}/>
 
-        {/*User*/}
-        <Route key='route-signin' path='/signin' component={SigninView}/>
-        <Route key='route-profile' path='/profile' component={ProfileFallback}/>
+          {/*User*/}
+          <Route key='route-signin' path='/signin' component={SigninView}/>
+          <Route key='route-profile' path='/profile' component={ProfileFallback}/>
 
-        {/*Game*/}
-        <Route key='route-dashboard' path='/dashboard' component={DashboardFallback}/>
+          {/*Game*/}
+          <Route key='route-dashboard' path='/dashboard' component={DashboardFallback}/>
 
-        {/*Not found*/}
-        <Redirect from='*' to='/'/>
-      </Switch>
-      <Route component={Footer}/>
+          {/*Not found*/}
+          <Redirect from='*' to='/'/>
+        </Switch>
+        <Route component={Footer}/>
       </Body>
     )
   }

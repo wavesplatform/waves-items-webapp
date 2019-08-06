@@ -92,9 +92,9 @@ class ProfileDropdown extends Component<WithApolloClient<TProps> & IKeeperContex
           {account && <DropdownItem borderBottom={'1px solid'}>
             <Balance>{toWavesFromKeeper(account.balance.available).toFixed(3)} <WavesCy/></Balance>
           </DropdownItem>}
-          {(me && me.role && [UserRole.GAME, UserRole.TEST].includes(me.role)) && <DropdownItem>
+          <DropdownItem>
             <DropdownLink as={Link} to={'/dashboard'}>Dashboard</DropdownLink>
-          </DropdownItem>}
+          </DropdownItem>
           <DropdownItem>
             <DropdownLink as={Link} to={'/profile'}>Profile</DropdownLink>
           </DropdownItem>

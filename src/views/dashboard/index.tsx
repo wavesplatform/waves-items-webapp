@@ -5,46 +5,66 @@ import { Redirect, Route, RouteComponentProps, Switch } from 'react-router'
 import { Box, Flex } from 'rebass'
 import ItemListView from './itemList'
 import ItemView from './item'
+import SettingsView from './settings'
 import { GameHeading } from '../../components/game/gameHeading'
 import { GameOverview } from './style'
 import withCurrentUser, { WithCurrentUserProps } from '../../components/withCurrentUser'
-import { NavItem } from '../../components/header/style'
+import authFallback from '../../components/route/authFallback'
+import { UserRole } from '../../__generated__/globalTypes'
 
 interface DashboardParams {
 }
 
 type TProps = RouteComponentProps<DashboardParams> & {}
 
+const ItemsFallback = authFallback(ItemListView, () => (
+  <Redirect to={'/dashboard/settings'}/>
+), true)
+
+const ItemFallback = authFallback(ItemView, () => (
+  <Redirect to={'/dashboard/settings'}/>
+), true)
+
 class Dashboard extends Component<WithCurrentUserProps<TProps>> {
 
   render(): ReactNode {
-    const game = this.props.me
+    const { me } = this.props
+    const isGameOrTest = me && me.role && [UserRole.GAME, UserRole.TEST].includes(me.role)
 
     return (
       <ViewWrapper pt={0}>
         <GameOverview>
           <ViewContainer>
-            {game && <GameHeading game={game}/>}
+            {me && <GameHeading game={me}/>}
           </ViewContainer>
         </GameOverview>
         <Tabs>
           <ViewContainer>
             <Flex justifyContent={'space-between'}>
               <TabsList height={'52px'}>
-                <Route path={'/dashboard/items'}>
+                <Route path={'/dashboard/settings'}>
                   {({ match }) => (
                     <TabItem isActive={!!match}>
-                      <TabLink px={'xl'} to={'/dashboard/items'}>Items</TabLink>
+                      <TabLink px={'xl'} to={'/dashboard/settings'}>Settings</TabLink>
                     </TabItem>
                   )}
                 </Route>
-                <Route path={'/dashboard/item'}>
-                  {({ match }) => (
-                    <TabItem isActive={!!match}>
-                      <TabLink px={'xl'} to={'/dashboard/item'}>Create Item</TabLink>
-                    </TabItem>
-                  )}
-                </Route>
+                {isGameOrTest && <>
+                  <Route path={'/dashboard/items'}>
+                    {({ match }) => (
+                      <TabItem isActive={!!match}>
+                        <TabLink px={'xl'} to={'/dashboard/items'}>Items</TabLink>
+                      </TabItem>
+                    )}
+                  </Route>
+                  <Route path={'/dashboard/item'}>
+                    {({ match }) => (
+                      <TabItem isActive={!!match}>
+                        <TabLink px={'xl'} to={'/dashboard/item'}>Create Item</TabLink>
+                      </TabItem>
+                    )}
+                  </Route></>
+                }
               </TabsList>
             </Flex>
           </ViewContainer>
@@ -52,11 +72,12 @@ class Dashboard extends Component<WithCurrentUserProps<TProps>> {
         <ViewContainer>
           <Box py={'lg'}>
             <Switch>
-              <Route key='route-dashboard-items' path='/dashboard/items' component={ItemListView}/>
+              <Route key='route-dashboard-items' path='/dashboard/items' component={ItemsFallback}/>
               <Route key='route-dashboard-edit' path='/dashboard/item/:assetId([0-9a-fA-f]{42,44})'
-                     component={ItemView}/>
-              <Route key='route-dashboard-create' path='/dashboard/item' component={ItemView}/>
-              <Redirect from='*' to='/dashboard/items'/>
+                     component={ItemFallback}/>
+              <Route key='route-dashboard-create' path='/dashboard/item' component={ItemFallback}/>
+              <Route key='route-dashboard-settings' path='/dashboard/settings' component={SettingsView}/>
+              <Redirect from='*' to='/dashboard/settings'/>
             </Switch>
           </Box>
         </ViewContainer>

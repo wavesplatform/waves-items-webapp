@@ -2,9 +2,6 @@ import React, { Component, ReactNode } from 'react'
 import { RouteComponentProps } from 'react-router'
 import Items from './components/items'
 import withCurrentUser, { WithCurrentUserProps } from '../../components/withCurrentUser'
-import { Link } from 'react-router-dom'
-import { Button } from '../../components/buttons'
-import { Box } from 'rebass'
 
 type TProps = RouteComponentProps
 
