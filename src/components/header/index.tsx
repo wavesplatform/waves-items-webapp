@@ -56,12 +56,15 @@ class Header extends Component<WithCurrentUserProps<TProps>> {
               <Route path={'/items'}>
                 {({ match }) => (
                   <NavItem isActive={!!match}>
-                    <NavLink to={'/items'}>Items</NavLink>
+                    <NavLink to={'/items'}>Browse</NavLink>
                   </NavItem>
                 )}
               </Route>
               <NavItem>
-                <NavLink as={Link} href={config.docsUrl} target='_blank'>Docs</NavLink>
+                <NavLink as={Link} href='#'>How To</NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink as={Link} href={config.docsUrl} target='_blank'>For Developers</NavLink>
               </NavItem>
             </Nav>
             {/*Profile*/}
