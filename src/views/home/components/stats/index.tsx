@@ -39,14 +39,14 @@ export class Stats extends Component<TChildProps> {
             <b>{items}</b> Items
           </H3>
         </Column>
-        <Column>
+        {/* <Column>
           <IconWrapper color={'orange'}>
             <Icon glyph={'compare_arrows'}/>
           </IconWrapper>
           <H3>
             <b>{transactions}</b> Transactions
           </H3>
-        </Column>
+        </Column> */}
       </Row>
     )
   }
