@@ -50,7 +50,7 @@ class Search extends Component<TProps> {
 
   render(): ReactNode {
     return (
-      <SearchInput placeholder={'Search all items...'} onChange={this._onChangeSearchString}/>
+      <SearchInput placeholder={'Search items ...'} onChange={this._onChangeSearchString}/>
     )
   }
 
