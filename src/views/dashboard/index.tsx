@@ -7,10 +7,11 @@ import ItemListView from './itemList'
 import ItemView from './item'
 import SettingsView from './settings'
 import { GameHeading } from '../../components/game/gameHeading'
-import { GameOverview } from './style'
+import { EditButton, GameOverview, GameOverviewContainer } from './style'
 import withCurrentUser, { WithCurrentUserProps } from '../../components/withCurrentUser'
 import authFallback from '../../components/route/authFallback'
 import { UserRole } from '../../__generated__/globalTypes'
+import EditGameModal from '../../components/modals/editGameModal'
 
 interface DashboardParams {
 }
@@ -26,6 +27,9 @@ const ItemFallback = authFallback(ItemView, () => (
 ), true)
 
 class Dashboard extends Component<WithCurrentUserProps<TProps>> {
+  state = {
+    editModalShow: false,
+  }
 
   render(): ReactNode {
     const { me } = this.props
@@ -34,9 +38,17 @@ class Dashboard extends Component<WithCurrentUserProps<TProps>> {
     return (
       <ViewWrapper pt={0}>
         <GameOverview>
-          <ViewContainer>
+          <GameOverviewContainer>
             {me && <GameHeading game={me}/>}
-          </ViewContainer>
+            {isGameOrTest && <EditButton onClick={() => {
+              this._setShowEditModal(true)
+            }}/>}
+          </GameOverviewContainer>
+          {isGameOrTest && <EditGameModal
+            game={me}
+            show={this.state.editModalShow}
+            setShow={this._setShowEditModal}
+          />}
         </GameOverview>
         <Tabs>
           <ViewContainer>
@@ -57,10 +69,10 @@ class Dashboard extends Component<WithCurrentUserProps<TProps>> {
                       </TabItem>
                     )}
                   </Route>
-                  <Route path={'/dashboard/item'}>
+                  <Route path={'/dashboard/create-item'}>
                     {({ match }) => (
                       <TabItem isActive={!!match}>
-                        <TabLink px={'xl'} to={'/dashboard/item'}>Create Item</TabLink>
+                        <TabLink px={'xl'} to={'/dashboard/create-item'}>Create Item</TabLink>
                       </TabItem>
                     )}
                   </Route></>
@@ -75,7 +87,7 @@ class Dashboard extends Component<WithCurrentUserProps<TProps>> {
               <Route key='route-dashboard-items' path='/dashboard/items' component={ItemsFallback}/>
               <Route key='route-dashboard-edit' path='/dashboard/item/:assetId([0-9a-fA-f]{42,44})'
                      component={ItemFallback}/>
-              <Route key='route-dashboard-create' path='/dashboard/item' component={ItemFallback}/>
+              <Route key='route-dashboard-create' path='/dashboard/create-item' component={ItemFallback}/>
               <Route key='route-dashboard-settings' path='/dashboard/settings' component={SettingsView}/>
               <Redirect from='*' to='/dashboard/settings'/>
             </Switch>
@@ -83,6 +95,12 @@ class Dashboard extends Component<WithCurrentUserProps<TProps>> {
         </ViewContainer>
       </ViewWrapper>
     )
+  }
+
+  _setShowEditModal = (value: boolean) => {
+    this.setState({
+      editModalShow: value,
+    })
   }
 }
 

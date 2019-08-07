@@ -19,8 +19,8 @@ export const GameHeading = (props: GameHeadingProps) => {
         <UserAvatar user={game} size={'xl'}/>
       </Box>
       <Box>
-        <H1 mb={'sm'}>{game.name || game.address}</H1>
-        <Description>{(meta && meta.description) ? meta.description : 'Decentralized application'}</Description>
+        <H1 mb={0}>{game.name || game.address}</H1>
+        {meta && meta.description && <Description mt={'sm'}>{meta.description}</Description>}
       </Box>
     </Wrapper>
   )

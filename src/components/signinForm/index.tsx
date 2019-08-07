@@ -1,4 +1,4 @@
-import React, { ChangeEvent, Component, FormEvent, ReactNode } from 'react'
+import React, { Component, FormEvent, ReactNode } from 'react'
 import { compose, Mutation, MutationFn, withApollo, WithApolloClient } from 'react-apollo'
 import keeperHelper from '../../helpers/keeper'
 import { IKeeperContext, withKeeperContext } from '../../contexts/keeper'
@@ -7,7 +7,7 @@ import { Signin, SigninVariables } from '../../graphql/mutations/__generated__/S
 import { config } from '../../config/config'
 import { Button } from '../buttons'
 import { TextInput } from '../inputs'
-import { Actions, Form, Small } from '../globals'
+import { Form } from '../globals'
 import { Toast } from '../toasts'
 import { isFirefox } from '../../helpers/browser'
 import { RouteComponentProps, withRouter } from 'react-router'
@@ -16,19 +16,11 @@ import authHelper from '../../helpers/auth'
 class SigninMutation extends Mutation<Signin, SigninVariables> {
 }
 
-type TState = {
-  name?: string
-  email?: string
-}
-
 type TProps = RouteComponentProps & {
   redirectUrl: string
 }
 
 class SigninForm extends Component<WithApolloClient<TProps> & IKeeperContext> {
-
-  state: TState = {}
-
   render(): ReactNode {
     const { installed, hasAccounts, publicState, checkPublicState } = this.props
     checkPublicState()
@@ -85,38 +77,12 @@ class SigninForm extends Component<WithApolloClient<TProps> & IKeeperContext> {
               onSubmit={ev => this._handleSubmit(ev, signin)}
             >
               {account && <TextInput value={account.address} disabled={true}>Account Address</TextInput>}
-              <TextInput value={this.state.name}
-                         placeholder={'Your username'}
-                         onChange={this._changeName}
-              >Name <Small color={'placeholder'}>(optional)</Small></TextInput>
-              <TextInput value={this.state.email}
-                         placeholder={'Your email'}
-                         onChange={this._changeEmail}
-              >Email <Small color={'placeholder'}>(optional)</Small></TextInput>
-              <Actions>
-                <Button type='submit' variant='primary' size={'lg'} width={1}>Sign In</Button>
-              </Actions>
+              <Button type='submit' variant='primary' size={'lg'} width={1} mt={'lg'}>Sign In via Keeper</Button>
             </Form>
           )
         }}
       </SigninMutation>
     )
-  }
-
-  _changeName = (ev: ChangeEvent<HTMLInputElement>) => {
-    const name = ev.target.value
-
-    this.setState({
-      name,
-    })
-  }
-
-  _changeEmail = (ev: ChangeEvent<HTMLInputElement>) => {
-    const email = ev.target.value
-
-    this.setState({
-      email,
-    })
   }
 
   _handleSubmit = async (ev: FormEvent, signin: MutationFn<Signin, SigninVariables>) => {
@@ -132,7 +98,6 @@ class SigninForm extends Component<WithApolloClient<TProps> & IKeeperContext> {
       data: config.authData,
     })
     const { address, publicKey, signature } = auth
-    const { name, email } = this.state
 
     await signin({
       variables: {
@@ -140,8 +105,6 @@ class SigninForm extends Component<WithApolloClient<TProps> & IKeeperContext> {
           address,
           publicKey,
           sign: signature,
-          name,
-          email,
         },
       },
       update: (store, { data }) => {
