@@ -7,16 +7,17 @@ module.exports = {
     ],
     sidebar: [
       {
-        title: 'Guides',
+        title: 'For users',
         collapsable: false,
         children: [
-          '/guides/tokenizing-a-game',
+          '/guides/how-to-use',
         ]
       },
       {
-        title: 'SDK',
-        collapsable: false,
+        title: 'For developers',
+        collapsable: true,
         children: [
+          '/guides/tokenizing-a-game',
           '/sdk/items-protocol',
           '/sdk/lib',
         ]
