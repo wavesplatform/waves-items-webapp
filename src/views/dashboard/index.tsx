@@ -69,10 +69,10 @@ class Dashboard extends Component<WithCurrentUserProps<TProps>> {
                       </TabItem>
                     )}
                   </Route>
-                  <Route path={'/dashboard/item'}>
+                  <Route path={'/dashboard/create-item'}>
                     {({ match }) => (
                       <TabItem isActive={!!match}>
-                        <TabLink px={'xl'} to={'/dashboard/item'}>Create Item</TabLink>
+                        <TabLink px={'xl'} to={'/dashboard/create-item'}>Create Item</TabLink>
                       </TabItem>
                     )}
                   </Route></>
@@ -87,7 +87,7 @@ class Dashboard extends Component<WithCurrentUserProps<TProps>> {
               <Route key='route-dashboard-items' path='/dashboard/items' component={ItemsFallback}/>
               <Route key='route-dashboard-edit' path='/dashboard/item/:assetId([0-9a-fA-f]{42,44})'
                      component={ItemFallback}/>
-              <Route key='route-dashboard-create' path='/dashboard/item' component={ItemFallback}/>
+              <Route key='route-dashboard-create' path='/dashboard/create-item' component={ItemFallback}/>
               <Route key='route-dashboard-settings' path='/dashboard/settings' component={SettingsView}/>
               <Redirect from='*' to='/dashboard/settings'/>
             </Switch>
