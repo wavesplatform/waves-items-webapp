@@ -30,6 +30,9 @@ export interface SigninUser {
   address: string;
   publicKey: string;
   sign: string;
+}
+
+export interface UserInfo {
   name?: string | null;
   email?: string | null;
 }

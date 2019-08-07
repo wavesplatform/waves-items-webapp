@@ -1,11 +1,12 @@
 import React, { Component, ReactNode } from 'react'
 import { RouteComponentProps } from 'react-router'
-import { SettingsContainer } from './style'
+import { SettingsContainer, SettingsFormWrapper } from './style'
 import { Section } from '../../components/layout'
 import { H2 } from '../../components/globals'
 import ToggleTestRole from './components/toggleTestRole'
 import { UserRole } from '../../__generated__/globalTypes'
 import withCurrentUser, { WithCurrentUserProps } from '../../components/withCurrentUser'
+import SettingsForm from './components/settingsForm'
 
 interface ItemParams {
   assetId?: string
@@ -21,6 +22,12 @@ class SettingsView extends Component<WithCurrentUserProps<TProps>> {
 
     return (
       <SettingsContainer>
+        <Section>
+          <SettingsFormWrapper>
+            <H2>User Info</H2>
+            <SettingsForm/>
+          </SettingsFormWrapper>
+        </Section>
         {!isGame && <Section>
           <H2>Account Type</H2>
           <ToggleTestRole/>
