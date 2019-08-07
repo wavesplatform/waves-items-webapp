@@ -20,6 +20,7 @@ export const SettingsFormWrapper = styled(Box)`
 
 export const GameOverview = styled(Box)`
   display: flex;
+  position: relative;
   min-height: 128px;
   align-items: center;
   border-bottom: 1px solid ${themeGet('colors.grays.7')};
@@ -27,6 +28,10 @@ export const GameOverview = styled(Box)`
 GameOverview.defaultProps = {
   py: 'lg',
 }
+
+export const GameOverviewContainer = styled(ViewContainer)`
+  position: relative;
+`
 
 export const LoadMoreButton = styled(Button).attrs({ size: 'lg' })`
   width: 100%;
@@ -46,3 +51,16 @@ export const RemoveButton = styled(IconButton).attrs({
 export const Actions = styled(Flex)`
   align-items: center;
 `
+
+export const EditButton = styled(IconButton).attrs({
+  glyph: 'mode_edit',
+})`
+  position: absolute;
+  z-index: 1;
+  top: ${themeGet('space.base')}px;
+  right: ${themeGet('space.base')}px;
+  opacity: .8;
+`
+EditButton.defaultProps = {
+  ...EditButton.defaultProps,
+}
