@@ -6,6 +6,7 @@ import { MoreItemsQuery, MoreItemsQueryVariables } from '../../../graphql/querie
 import { Loading } from '../../../components/loading'
 import { ItemsContainer } from '../style'
 import { UserRole } from '../../../__generated__/globalTypes'
+import { NullState } from '../../../components/nullState'
 
 type TProps = {}
 
@@ -20,12 +21,23 @@ class Items extends Component<TChildProps> {
 
   render(): ReactNode {
     const { loading, error, items: connection } = this.props.data!
-    if (!connection) {
+    if (loading) {
       return <Loading/>
     }
 
-    const { edges } = connection
-    const items = (edges || []).map(edge => edge.node)
+    const items =
+      connection &&
+      connection.edges &&
+      connection.edges.length
+        ? connection.edges.map(edge => edge.node)
+        : []
+
+    if (!items || !items.length) {
+      return <NullState
+        heading={'No items here yet...'}
+        message={'Maybe it hasn\'t been added yet or something\'s broken'}
+      />
+    }
 
     return (
       <ItemsContainer>

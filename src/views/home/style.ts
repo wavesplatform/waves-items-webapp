@@ -5,10 +5,11 @@ import { H1, H2 } from '../../components/globals'
 import { themeGet } from 'styled-system'
 
 export const HomeContainer = styled(Box)`
-  ${H2} {
-    font-size: 1.5rem;
-    margin-bottom: ${themeGet('space.lg')}px;
-  }
+`
+
+export const SectionTitle = styled(H2)`
+  font-size: 1.5rem;
+  margin-bottom: ${themeGet('space.lg')}px;
 `
 
 export const SearchSection = styled(Section)`

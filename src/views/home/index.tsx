@@ -10,7 +10,7 @@ import {
   ItemsWrapperInner,
   SearchWrapper,
   SearchSection,
-  Title
+  Title, SectionTitle
 } from './style'
 import Search from './components/search'
 import Items from './components/items'
@@ -61,7 +61,7 @@ class HomeView extends Component<IProps> {
           </ItemsSection>
           <Section mb={0} py={6}>
             <ViewContainer>
-              <H2>Popular Games</H2>
+              <SectionTitle>Popular Games</SectionTitle>
               <GamesSlider/>
             </ViewContainer>
           </Section>

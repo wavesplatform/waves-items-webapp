@@ -5,6 +5,7 @@ import { MoreItemsQuery, MoreItemsQueryVariables } from '../../../graphql/querie
 import { Loading } from '../../../components/loading'
 import ItemTable from '../../../components/itemTable'
 import { LoadMoreButton } from '../style'
+import { NullState } from '../../../components/nullState'
 
 type TProps = {
   address?: string
@@ -22,17 +23,33 @@ class Items extends Component<TChildProps> {
   render(): ReactNode {
     const { loading, error, items: connection } = this.props.data!
 
-    if (!connection) {
+    if (loading) {
       return <Loading/>
     }
 
-    const { pageInfo, edges } = connection
-    const items = (edges || []).map(edge => edge.node)
+    const items =
+      connection &&
+      connection.edges &&
+      connection.edges.length
+        ? connection.edges.map(edge => edge.node)
+        : []
+
+    const hasNextPage =
+      connection &&
+      connection.pageInfo &&
+      connection.pageInfo.hasNextPage
+
+    if (!items || !items.length) {
+      return <NullState
+        heading={'No items here yet...'}
+        message={'Maybe it hasn\'t been added yet or something\'s broken :('}
+      />
+    }
 
     return (
       <>
         <ItemTable items={items}/>
-        {pageInfo.hasNextPage && <LoadMoreButton mt={'lg'} onClick={this._loadMore} disabled={loading}>
+        {hasNextPage && <LoadMoreButton mt={'lg'} onClick={this._loadMore} disabled={loading}>
           {loading ? 'Loading...' : 'Load more'}
         </LoadMoreButton>}
       </>

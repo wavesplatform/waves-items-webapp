@@ -5,6 +5,7 @@ import { getGamesQuery } from '../../graphql/queries/getGames'
 import { GameLink, GamesSliderContainer } from './style'
 import { GameCard } from '../../components/gameCard'
 import { Loading } from '../../components/loading'
+import { NullState } from '../../components/nullState'
 
 interface IProps {
 }
@@ -22,7 +23,14 @@ class GamesSlider extends Component<TChildProps> {
       return <Loading/>
     }
 
-    const renderGames = (games || []).map(game => (
+    if (!games || !games.length) {
+      return <NullState
+        heading={'No games here yet...'}
+        message={'Maybe it hasn\'t been added yet or something\'s broken :('}
+      />
+    }
+
+    const renderGames = games.map(game => (
       <GameLink
         to={`/items/${game.address}`}
         key={game.id}

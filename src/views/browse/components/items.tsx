@@ -10,6 +10,7 @@ import { Loading } from '../../../components/loading'
 import { HideButton, ItemsContainer, ItemSide, ItemsSide, LoadMoreButton } from '../style'
 import Item from './item'
 import { UserRole } from '../../../__generated__/globalTypes'
+import { NullState } from '../../../components/nullState'
 
 type TProps = {
   address?: string
@@ -49,15 +50,30 @@ class Items extends Component<TChildProps> {
   render(): ReactNode {
     const { loading, error, items: connection } = this.props.data!
     const assetId = this.state.selectedAssetId
+    const stickyOffset = theme.header.height + theme.space.lg
 
-    if (!connection) {
+    if (loading) {
       return <Loading/>
     }
 
-    const { pageInfo, edges } = connection
-    const items = (edges || []).map(edge => edge.node)
+    const items =
+      connection &&
+      connection.edges &&
+      connection.edges.length
+        ? connection.edges.map(edge => edge.node)
+        : []
 
-    const stickyOffset = theme.header.height + theme.space.lg
+    const hasNextPage =
+      connection &&
+      connection.pageInfo &&
+      connection.pageInfo.hasNextPage
+
+    if (!items || !items.length) {
+      return <NullState
+        heading={'No items here yet...'}
+        message={'Maybe it hasn\'t been added yet or something\'s broken :('}
+      />
+    }
 
     if (assetId) {
       // TODO: hook to force update sticky
@@ -68,7 +84,7 @@ class Items extends Component<TChildProps> {
       <ItemsContainer>
         <ItemsSide constrain={!!assetId}>
           <ItemGrid items={items} selectItem={this.selectAssetId}/>
-          {pageInfo.hasNextPage && <LoadMoreButton mt={'lg'} onClick={this._loadMore} disabled={loading}>
+          {hasNextPage && <LoadMoreButton mt={'lg'} onClick={this._loadMore} disabled={loading}>
             {loading ? 'Loading...' : 'Load more'}
           </LoadMoreButton>}
         </ItemsSide>

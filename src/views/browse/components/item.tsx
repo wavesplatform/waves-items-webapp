@@ -6,6 +6,7 @@ import { Loading } from '../../../components/loading'
 import { IItem } from '../../../types'
 import { graphql } from 'react-apollo'
 import { getItemByAssetIdQuery } from '../../../graphql/queries/getItem'
+import { NullState } from '../../../components/nullState'
 
 type TProps = {
   assetId: string
@@ -25,7 +26,14 @@ class Item extends Component<TChildProps> {
       return <Loading/>
     }
 
-    return item && <ItemDetail
+    if (!item) {
+      return <NullState
+        heading={'Item not found...'}
+        message={'Maybe something broken :('}
+      />
+    }
+
+    return <ItemDetail
       item={item as IItem}
       isPage={false}
       onClose={onClose}
