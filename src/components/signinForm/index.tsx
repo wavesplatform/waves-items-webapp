@@ -31,8 +31,9 @@ class SigninForm extends Component<WithApolloClient<TProps> & IKeeperContext> {
       return (
         <>
           <Toast mb={'base'}>
-            You must install Keeper to access the vault.<br/>
-            This will also act as your login to the game (no extra password needed).
+            Interaction with Items Market requires a free browser extention Waves Keeper.
+            <br /><br />You can also create a new account there.
+              
           </Toast>
           <Button
             as={'a'}
