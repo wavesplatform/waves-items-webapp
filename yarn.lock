@@ -1592,13 +1592,13 @@
   dependencies:
     crypto-js "^3.1.9-1"
 
-"@waves/waves-games@^1.0.32":
-  version "1.0.35"
-  resolved "https://registry.yarnpkg.com/@waves/waves-games/-/waves-games-1.0.35.tgz#5e5c2f61dfa470117ab90d75765e28b72643c69b"
-  integrity sha512-bILPskSB5Oq/Avp1YTEX+d4RZrnaDtOxI/gcHcC5arCDsMDdcAPqxcJW2tmMfV+w0gRxSpD3150RYkMWCp6SSw==
+"@waves/waves-games@^1.0.41":
+  version "1.0.41"
+  resolved "https://registry.yarnpkg.com/@waves/waves-games/-/waves-games-1.0.41.tgz#cf90045abc0df24d785cf583b317d8d0ca376bdd"
+  integrity sha512-TKwyEMlU8QvW9P7qWk5H83YuDU2lcdnGjrxrN/WehVVOKJlVxyPKzjTJHH96e7SpnWlOKRUpg2x/18uxAfw+Lg==
   dependencies:
     "@waves/waves-crypto" "^3.0.14"
-    "@waves/waves-rest" "0.0.21"
+    "@waves/waves-rest" "0.0.29"
     "@waves/waves-transactions" "^3.10.1"
     axios "^0.19.0"
     cli-spinner "^0.2.10"
@@ -1606,10 +1606,10 @@
     promise-memoize "^1.2.1"
     prompts "^2.1.0"
 
-"@waves/waves-rest@0.0.21":
-  version "0.0.21"
-  resolved "https://registry.yarnpkg.com/@waves/waves-rest/-/waves-rest-0.0.21.tgz#dbebc3eb6fff88175e82e7c424422b57de980ce7"
-  integrity sha512-25Z3vjG7K313hkdXYTiMASdAnIsxcBynWL8xT1nQpQlTl8iR3Y0pZiV58p/FHGihw5JNi4SWJgNGK/KVW+XaBA==
+"@waves/waves-rest@0.0.29":
+  version "0.0.29"
+  resolved "https://registry.yarnpkg.com/@waves/waves-rest/-/waves-rest-0.0.29.tgz#8a1d2b462abb1158edb3cb12cf8a73aa4ce31032"
+  integrity sha512-taI8fPsrn5+jBRhkfKI+46vMej4ZqCI3EaHHHSXyiX3F1EvEAyUJta3L2lQ/KgDysLm9aEnOjUmu32gM/psJhQ==
   dependencies:
     "@waves/waves-transactions" "^3.10.1"
 

@@ -26,6 +26,7 @@ import withCurrentUser, { WithCurrentUserProps } from '../withCurrentUser'
 import { compose } from 'react-apollo'
 import { RouteComponentProps, withRouter } from 'react-router'
 import { miscRecordToArray } from '../../helpers/item'
+import Quantity from '../quantity'
 
 type TProps = {
   item: WithOrders<IItem>
@@ -91,7 +92,9 @@ class ItemDetail extends Component<WithCurrentUserProps<TProps> & RouteComponent
           <Params mb={'lg'}>
             <Param>
               <ParamTitle>Quantity</ParamTitle>
-              <ParamValue>{item.quantity}</ParamValue>
+              <ParamValue>
+                <Quantity value={item.quantity}/>
+              </ParamValue>
             </Param>
             {this._miscParams(misc)}
           </Params>

@@ -4,6 +4,8 @@ import { UserHeading } from '../user/userHeading'
 import { Balance, ImageWrapper, ItemCardContainer, Overview, Title } from './style'
 import { Box, Flex, Image } from 'rebass'
 import defaultImage from '../globals/image.svg'
+import { BigNumber } from '@waves/bignumber'
+import Quantity from '../quantity'
 
 export type ItemCardStyle = 'base' | 'short'
 
@@ -32,7 +34,7 @@ export const ItemCard = (props: IItemCardProps) => {
               {item.balance}
             </Balance> / {item.quantity}
           </> : <>
-            {item.quantity}
+            <Quantity value={item.quantity}/>
           </>
           }
         </Box>

@@ -6,6 +6,7 @@ import ItemImage from './itemImage'
 import { Link } from 'react-router-dom'
 import defaultImage from '../../globals/image.svg'
 import { config } from '../../../config/config'
+import Quantity from '../../quantity'
 
 type TProps = {
   item: IItem
@@ -28,7 +29,7 @@ export const ItemRow = (props: TProps) => {
           </Flex>
         </Link>
       </ItemTableCell>
-      <ItemTableCell>{item.quantity}</ItemTableCell>
+      <ItemTableCell><Quantity value={item.quantity}/></ItemTableCell>
       <ItemTableCell>
         <ItemMisc>{JSON.stringify(item.misc)}</ItemMisc>
       </ItemTableCell>

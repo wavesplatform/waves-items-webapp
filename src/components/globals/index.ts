@@ -75,6 +75,22 @@ export const Color = styled(Text)`
 `
 Color.defaultProps = { as: 'span' }
 
+export const Badge = styled(Text)<TextProps & BordersProps>`
+  display: inline-block;
+  
+  ${borders}
+`
+Badge.defaultProps = {
+  ...Badge.defaultProps,
+  as: 'span',
+  p: 'xs',
+  bg: 'default',
+  fontSize: 'sm',
+  color: 'black',
+  borderRadius: 'sm',
+  lineHeight: 0,
+}
+
 export const Code = styled(Text)<TextProps & BordersProps>`
   display: inline-block;
   
