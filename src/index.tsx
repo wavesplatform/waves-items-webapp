@@ -16,6 +16,7 @@ import { config } from './config/config'
 import * as Sentry from '@sentry/browser'
 import { createUploadLink } from 'apollo-upload-client'
 
+// Now test
 // Error tracking
 Sentry.init({ dsn: 'https://399be5e20c924d8d942a60629865d0aa@sentry.io/1513601' })
 
