@@ -33,7 +33,7 @@ class HomeView extends Component<IProps> {
           <SearchSection>
             <Container>
               <Title mb={6}>
-                Lorem ipsum is <Color color={'#587CD9'}>placeholder</Color> text commonly used.
+              A safe place to trade your digital posessions.
               </Title>
               <SearchWrapper>
                 <Search onSearch={this._onSearch}/>

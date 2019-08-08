@@ -19,7 +19,7 @@ class ToggleTestRole extends Component<WithCurrentUserProps<TProps>> {
     const { me } = this.props
 
     if (!me) {
-      return <Loading/>
+      return <Loading />
     }
 
     const isUser = me.role === UserRole.USER
@@ -62,9 +62,9 @@ class ToggleTestRole extends Component<WithCurrentUserProps<TProps>> {
                   <RoleOptionTitle>Game Sandbox</RoleOptionTitle>
                 </RadioInput>
                 <Paragraph mb={0}>
-                  This account type allows you to treat your current address as a game id for testing purposes.
-                  As long as you're using this account type the sandboxed game will appear in the games list but it wont
-                  be public.
+                  This mode allows you to use this account as a game test environment.
+                  As long as you're using this account type the sandboxed game would
+                  be displayed as one of your games but won't be public.
                 </Paragraph>
               </RoleOption>
             </RoleSelector>

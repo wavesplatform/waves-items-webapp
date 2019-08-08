@@ -83,7 +83,7 @@ class OrderModal extends Component<IProps> {
               {!haveBalanceGtZero ? (
                 <>
                   <Toast mb={'lg'}>
-                    Incorrect balance.<br/>
+                    Incorrect balance.<br />
                     You can get Waves via external service.
                   </Toast>
                   <Button
@@ -95,40 +95,40 @@ class OrderModal extends Component<IProps> {
                     width={1}
                   >
                     Get Waves
-                    <Icon variant={'baseline'} glyph={'open_in_new'} ml={'xs'} color={'fades.white.4'}/>
+                    <Icon variant={'baseline'} glyph={'open_in_new'} ml={'xs'} color={'fades.white.4'} />
                   </Button>
                 </>
               ) : (
-                <>
-                  {isBuy && !defaultPrice && <Toast mb={'lg'}>
-                    There are currently no sell orders, but you can place a buy order.
+                  <>
+                    {isBuy && !defaultPrice && <Toast mb={'lg'}>
+                      No one is selling this item yet, but you can be the first one to make a bet.
                   </Toast>}
-                  <H2 mb={0}>
-                    {item.name}
-                  </H2>
-                  <Form onSubmit={ev => this._handleSubmit(ev)}>
-                    <Flex>
-                      <Box width={1 / 3}>
-                        <TextInput value={this.state.amount}
-                                   onChange={this._changeAmount}
-                        >Amount</TextInput>
-                      </Box>
-                      <Box width={2 / 3} ml={'base'}>
-                        <TextInputWithUnit value={this.state.price}
-                                           onChange={this._changePrice}
-                        >Price</TextInputWithUnit>
-                      </Box>
-                    </Flex>
-                    <NumberInput value={this.state.period}
-                                 onChange={this._changePeriod}
-                    >Period (in seconds)</NumberInput>
-                    <Actions>
-                      <Button type='submit' variant={'primary'} size={'lg'}
-                              width={1}>{isBuy ? 'Buy' : 'Sell'}</Button>
-                    </Actions>
-                  </Form>
-                </>
-              )}
+                    <H2 mb={0}>
+                      {item.name}
+                    </H2>
+                    <Form onSubmit={ev => this._handleSubmit(ev)}>
+                      <Flex>
+                        <Box width={1 / 3}>
+                          <TextInput value={this.state.amount}
+                            onChange={this._changeAmount}
+                          >Amount</TextInput>
+                        </Box>
+                        <Box width={2 / 3} ml={'base'}>
+                          <TextInputWithUnit value={this.state.price}
+                            onChange={this._changePrice}
+                          >Price</TextInputWithUnit>
+                        </Box>
+                      </Flex>
+                      <NumberInput value={this.state.period}
+                        onChange={this._changePeriod}
+                      >Period (in seconds)</NumberInput>
+                      <Actions>
+                        <Button type='submit' variant={'primary'} size={'lg'}
+                          width={1}>{isBuy ? 'Buy' : 'Sell'}</Button>
+                      </Actions>
+                    </Form>
+                  </>
+                )}
             </Box>
           </Flex>
         </ModalContainer>
