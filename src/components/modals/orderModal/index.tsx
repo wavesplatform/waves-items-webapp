@@ -2,7 +2,7 @@ import React, { ChangeEvent, Component, FormEvent, ReactNode } from 'react'
 import { ModalContainer } from '../container'
 import { modalStyles } from '../style'
 import { Button } from '../../buttons'
-import { Box, Flex, Image, Link } from 'rebass'
+import { Box, Flex, Link } from 'rebass'
 import { Actions, Form, H2 } from '../../globals'
 import { NumberInput, TextInput, TextInputWithUnit } from '../../inputs'
 import keeperHelper, { IWavesNetworkCode } from '../../../helpers/keeper'
@@ -10,8 +10,6 @@ import { config } from '../../../config/config'
 import { IModalProps } from '../index'
 import { IItem } from '../../../types'
 import { IKeeperContext } from '../../../contexts/keeper'
-import defaultImage from '../../globals/image.svg'
-import { ImageWrapper, Overview } from './style'
 import { BigNumber } from '@waves/bignumber'
 import { Toast } from '../../toasts'
 import { generateExchangeLink } from '../../../helpers/order'
@@ -62,6 +60,7 @@ class OrderModal extends Component<IProps> {
 
     const haveBalanceGtZero = account && (new BigNumber(account.balance.available)).gt(0)
     const exchangeLink = account && generateExchangeLink(account.address, '10')
+    const isNft = !!item.quantity && (new BigNumber(item.quantity)).eq(1)
 
     return (
       <Modal
@@ -83,7 +82,7 @@ class OrderModal extends Component<IProps> {
               {!haveBalanceGtZero ? (
                 <>
                   <Toast mb={'lg'}>
-                    Incorrect balance.<br />
+                    Incorrect balance.<br/>
                     You can get Waves via external service.
                   </Toast>
                   <Button
@@ -95,40 +94,41 @@ class OrderModal extends Component<IProps> {
                     width={1}
                   >
                     Get Waves
-                    <Icon variant={'baseline'} glyph={'open_in_new'} ml={'xs'} color={'fades.white.4'} />
+                    <Icon variant={'baseline'} glyph={'open_in_new'} ml={'xs'} color={'fades.white.4'}/>
                   </Button>
                 </>
               ) : (
-                  <>
-                    {isBuy && !defaultPrice && <Toast mb={'lg'}>
-                      No one is selling this item yet, but you can be the first one to make a bet.
+                <>
+                  {isBuy && !defaultPrice && <Toast mb={'lg'}>
+                    No one is selling this item yet, but you can be the first one to make a bet.
                   </Toast>}
-                    <H2 mb={0}>
-                      {item.name}
-                    </H2>
-                    <Form onSubmit={ev => this._handleSubmit(ev)}>
-                      <Flex>
-                        <Box width={1 / 3}>
-                          <TextInput value={this.state.amount}
-                            onChange={this._changeAmount}
-                          >Amount</TextInput>
-                        </Box>
-                        <Box width={2 / 3} ml={'base'}>
-                          <TextInputWithUnit value={this.state.price}
-                            onChange={this._changePrice}
-                          >Price</TextInputWithUnit>
-                        </Box>
-                      </Flex>
-                      <NumberInput value={this.state.period}
-                        onChange={this._changePeriod}
-                      >Period (in seconds)</NumberInput>
-                      <Actions>
-                        <Button type='submit' variant={'primary'} size={'lg'}
-                          width={1}>{isBuy ? 'Buy' : 'Sell'}</Button>
-                      </Actions>
-                    </Form>
-                  </>
-                )}
+                  <H2 mb={0}>
+                    {item.name}
+                  </H2>
+                  <Form onSubmit={ev => this._handleSubmit(ev)}>
+                    <Flex>
+                      <Box width={1 / 3}>
+                        <TextInput value={this.state.amount}
+                                   onChange={this._changeAmount}
+                                   disabled={isNft}
+                        >Amount</TextInput>
+                      </Box>
+                      <Box width={2 / 3} ml={'base'}>
+                        <TextInputWithUnit value={this.state.price}
+                                           onChange={this._changePrice}
+                        >Price</TextInputWithUnit>
+                      </Box>
+                    </Flex>
+                    <NumberInput value={this.state.period}
+                                 onChange={this._changePeriod}
+                    >Period (in seconds)</NumberInput>
+                    <Actions>
+                      <Button type='submit' variant={'primary'} size={'lg'}
+                              width={1}>{isBuy ? 'Buy' : 'Sell'}</Button>
+                    </Actions>
+                  </Form>
+                </>
+              )}
             </Box>
           </Flex>
         </ModalContainer>
