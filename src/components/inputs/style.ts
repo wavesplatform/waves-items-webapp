@@ -18,13 +18,20 @@ export const StyledLabel = styled(Flex)<StyledLabelProps>`
   width: 100%;
   position: relative;
   
-  ${props => !props.disabled && css`
+  ${props => !props.disabled ? css`
     &:hover > ${StyledTextInput},
     &:hover > textarea,
     &:hover > ${StyledInputWrapper} {
       border-color: ${themeGet('colors.border.inputHover')};
     }
-  `}
+  ` : css`
+    ${StyledToggleButton} {
+      opacity: .5;
+    }
+    ${StyledToggleWrapper} {
+      cursor: default;
+    }
+  `};
 `
 StyledLabel.defaultProps = {
   as: 'label',
