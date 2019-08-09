@@ -2,11 +2,12 @@ import React, { ChangeEvent, Component, FormEvent, ReactNode } from 'react'
 import { IItem, MiscItem } from '../../../types'
 import { Form } from '../../../components/globals'
 import { Box, Flex } from 'rebass'
-import { TextInput } from '../../../components/inputs'
+import { TextInput, ToggleInput } from '../../../components/inputs'
 import { Button } from '../../../components/buttons'
 import MiscEditor from './miscEditor'
 import { createItem, editItem, miscArrayToRecord, miscRecordToArray } from '../../../helpers/item'
 import { RouteComponentProps, withRouter } from 'react-router'
+import { BigNumber } from '@waves/bignumber'
 
 type TProps = RouteComponentProps & {
   item?: IItem
@@ -17,6 +18,7 @@ type TState = {
   quantity: string
   imageUrl: string
   misc?: MiscItem[]
+  quantityIsDisabled?: boolean
 }
 
 class ItemForm extends Component<TProps> {
@@ -24,6 +26,7 @@ class ItemForm extends Component<TProps> {
     name: '',
     quantity: '',
     imageUrl: '',
+    quantityIsDisabled: false,
   }
 
   constructor(props: TProps) {
@@ -43,6 +46,7 @@ class ItemForm extends Component<TProps> {
 
   render(): ReactNode {
     const { item } = this.props
+    const quantityBn = new BigNumber(this.state.quantity)
 
     return (
       <Form
@@ -59,10 +63,15 @@ class ItemForm extends Component<TProps> {
             <TextInput value={this.state.quantity}
                        onChange={this._changeQuantity}
                        placeholder={'100'}
-                       disabled={!!item}
+                       disabled={this.state.quantityIsDisabled || !!item}
             >Quantity</TextInput>
           </Box>
         </Flex>
+        <ToggleInput checked={quantityBn.eq(1)}
+                     onChange={this._changeUnique}
+        >
+          Unique item (Non-fungible token)
+        </ToggleInput>
         <Box>
           <TextInput value={this.state.imageUrl}
                      onChange={this._changeImageUrl}
@@ -90,6 +99,15 @@ class ItemForm extends Component<TProps> {
 
     this.setState({
       quantity,
+    })
+  }
+
+  _changeUnique = (ev: ChangeEvent<HTMLInputElement>) => {
+    const checked = ev.target.checked
+
+    this.setState({
+      quantity: checked ? 1 : 10,
+      quantityIsDisabled: checked,
     })
   }
 

@@ -153,19 +153,11 @@ StyledFlatTextInput.defaultProps = {
   borderColor: 'transparent',
 }
 
-export interface StyledRadioLabelProps extends FlexProps {
-}
-
-export const StyledRadioLabel = styled(Flex)<StyledRadioLabelProps>`
+export const StyledRadioWrapper = styled(Flex)`
   position: relative;
   align-items: center;
   cursor: pointer;
 `
-StyledRadioLabel.defaultProps = {
-  as: 'label',
-  mt: 'base',
-  color: 'default',
-}
 
 interface StyledRadioInputProps extends BoxProps, BorderRadiusProps, BordersProps {
 }
@@ -201,6 +193,40 @@ StyledRadioInput.defaultProps = {
   borderRadius: '24px',
   bg: 'bg.input',
   mr: 'sm',
+}
+
+export const StyledToggleWrapper = styled(Flex)`
+  position: relative;
+  align-items: center;
+  cursor: pointer;
+  justify-content: space-between;
+`
+
+export const StyledToggleButton = styled(Flex)<{ checked?: boolean } & FlexProps & BorderRadiusProps>`
+  width: 3.2rem;
+  height: 1.6rem;
+  position: relative;
+  background: ${props => (props.checked ? themeGet('colors.primary') : themeGet('colors.element'))};
+  transition: background-color .2s ease-in;
+  
+  &:before {
+    content: '';
+    width: 50%;
+    height: 100%;
+    border-radius: 50%;
+    background: ${themeGet('colors.default')};
+    position: absolute;
+    transform: scale(.8);
+    top: 0;
+    left: ${props => (props.checked ? '50%' : 0)};
+    transition: left .1s ease;
+  }
+
+  ${borderRadius};
+`
+StyledToggleButton.defaultProps = {
+  ...StyledToggleButton.defaultProps,
+  borderRadius: '1.6rem',
 }
 
 export const StyledHiddenInput = styled.input`

@@ -2,7 +2,8 @@ import React, { ChangeEvent, PropsWithChildren } from 'react'
 import {
   AvatarInputLabel,
   CoverInputLabel,
-  IconWrapper, InputOverlay,
+  IconWrapper,
+  InputOverlay,
   InputUnit,
   StyledFlatTextInput,
   StyledHiddenInput,
@@ -11,22 +12,23 @@ import {
   StyledLabelProps,
   StyledNumberInput,
   StyledRadioInput,
-  StyledRadioLabel,
-  StyledRadioLabelProps, StyledTextArea,
-  StyledTextInput,
+  StyledRadioWrapper,
+  StyledToggleWrapper,
+  StyledTextArea,
+  StyledTextInput, StyledToggleButton,
 } from './style'
 import { Icon } from '../icon'
 import { CoverImage } from '../image/cover'
 import AvatarImage from '../image/avatar'
 
 interface TextInputProps extends StyledLabelProps {
-  defaultValue?: string,
-  value?: any,
-  placeholder?: string,
-  onChange?: (ev: ChangeEvent<HTMLInputElement>) => void,
-  autoFocus?: boolean,
-  disabled?: boolean,
-  id?: string,
+  defaultValue?: string
+  value?: any
+  placeholder?: string
+  onChange?: (ev: ChangeEvent<HTMLInputElement>) => void
+  autoFocus?: boolean
+  disabled?: boolean
+  id?: string
 }
 
 export const TextInput = (props: PropsWithChildren<TextInputProps>) => {
@@ -103,14 +105,14 @@ export const NumberInput = (props: PropsWithChildren<NumberInputProps>) => {
 }
 
 interface FlatTextInputProps {
-  defaultValue?: string,
-  value?: any,
-  placeholder?: string,
-  onChange?: (ev: ChangeEvent<HTMLInputElement>) => void,
-  autoFocus?: boolean,
-  disabled?: boolean,
-  id?: string,
-  glyph?: string,
+  defaultValue?: string
+  value?: any
+  placeholder?: string
+  onChange?: (ev: ChangeEvent<HTMLInputElement>) => void
+  autoFocus?: boolean
+  disabled?: boolean
+  id?: string
+  glyph?: string
 }
 
 export const FlatTextInput = (props: FlatTextInputProps) => {
@@ -142,37 +144,65 @@ export const FlatTextInput = (props: FlatTextInputProps) => {
   )
 }
 
-interface RadioInputProps extends StyledRadioLabelProps {
-  checked?: boolean,
-  value?: any,
+interface RadioInputProps {
+  checked?: boolean
+  value?: any
   onChange?: (ev: ChangeEvent<HTMLInputElement>) => void,
-  autoFocus?: boolean,
-  disabled?: boolean,
-  readOnly?: boolean,
-  id?: string,
+  autoFocus?: boolean
+  disabled?: boolean
+  readOnly?: boolean
+  id?: string
 }
 
 export const RadioInput = (props: PropsWithChildren<RadioInputProps>) => {
   return (
     // @ts-ignore
-    <StyledRadioLabel {...props}>
-      <StyledRadioInput
+    <StyledLabel {...props}>
+      <StyledRadioWrapper>
+        <StyledRadioInput
+          id={props.id}
+          readOnly={props.readOnly}
+          checked={props.checked}
+          value={props.value}
+          onChange={props.onChange}
+          autoFocus={props.autoFocus}
+          disabled={props.disabled}
+        />
+        {props.children && <>{props.children}</>}
+      </StyledRadioWrapper>
+    </StyledLabel>
+  )
+}
+
+interface ToggleInputProps {
+  checked?: boolean
+  onChange?: (ev: ChangeEvent<HTMLInputElement>) => void,
+  disabled?: boolean
+  id?: string
+}
+
+export const ToggleInput = (props: PropsWithChildren<ToggleInputProps>) => {
+  return (
+    // @ts-ignore
+    <StyledLabel {...props}>
+      <StyledToggleWrapper>
+        {props.children && <>{props.children}</>}
+        <StyledToggleButton checked={props.checked} ml={'sm'}/>
+      </StyledToggleWrapper>
+      <StyledHiddenInput
+        type='checkbox'
         id={props.id}
-        readOnly={props.readOnly}
         checked={props.checked}
-        value={props.value}
         onChange={props.onChange}
-        autoFocus={props.autoFocus}
         disabled={props.disabled}
       />
-      {props.children && <>{props.children}</>}
-    </StyledRadioLabel>
+    </StyledLabel>
   )
 }
 
 interface TextAreaProps extends TextInputProps {
-  cols?: number;
-  rows?: number;
+  cols?: number
+  rows?: number
 }
 
 export const TextArea = (props: PropsWithChildren<TextAreaProps>) => {
@@ -198,8 +228,8 @@ export const TextArea = (props: PropsWithChildren<TextAreaProps>) => {
 }
 
 interface CoverInputProps {
-  defaultValue?: string,
-  onChange?: (ev: ChangeEvent<HTMLInputElement>) => void,
+  defaultValue?: string
+  onChange?: (ev: ChangeEvent<HTMLInputElement>) => void
 }
 
 export const CoverInput = (props: CoverInputProps) => {
@@ -227,8 +257,8 @@ export const CoverInput = (props: CoverInputProps) => {
 }
 
 interface AvatarInputProps {
-  defaultValue?: string,
-  onChange?: (ev: ChangeEvent<HTMLInputElement>) => void,
+  defaultValue?: string
+  onChange?: (ev: ChangeEvent<HTMLInputElement>) => void
 }
 
 export const AvatarInput = (props: AvatarInputProps) => {
