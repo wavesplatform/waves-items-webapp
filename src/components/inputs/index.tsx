@@ -144,7 +144,7 @@ export const FlatTextInput = (props: FlatTextInputProps) => {
   )
 }
 
-interface RadioInputProps {
+interface RadioInputProps extends StyledLabelProps {
   checked?: boolean
   value?: any
   onChange?: (ev: ChangeEvent<HTMLInputElement>) => void,
@@ -174,7 +174,7 @@ export const RadioInput = (props: PropsWithChildren<RadioInputProps>) => {
   )
 }
 
-interface ToggleInputProps {
+interface ToggleInputProps extends StyledLabelProps {
   checked?: boolean
   onChange?: (ev: ChangeEvent<HTMLInputElement>) => void,
   disabled?: boolean

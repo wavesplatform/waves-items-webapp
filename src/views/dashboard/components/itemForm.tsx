@@ -1,7 +1,7 @@
 import React, { ChangeEvent, Component, FormEvent, ReactNode } from 'react'
 import { IItem, MiscItem } from '../../../types'
-import { Form } from '../../../components/globals'
-import { Box, Flex } from 'rebass'
+import { Form, Paragraph } from '../../../components/globals'
+import { Box, Card, Flex } from 'rebass'
 import { TextInput, ToggleInput } from '../../../components/inputs'
 import { Button } from '../../../components/buttons'
 import MiscEditor from './miscEditor'
@@ -67,11 +67,22 @@ class ItemForm extends Component<TProps> {
             >Quantity</TextInput>
           </Box>
         </Flex>
-        <ToggleInput checked={quantityBn.eq(1)}
-                     onChange={this._changeUnique}
+        <Card p={'lg'}
+              mt={'base'}
+              bg={'bg.card'}
+              borderRadius={'lg'}
         >
-          Unique item (Non-fungible token)
-        </ToggleInput>
+          <ToggleInput checked={quantityBn.eq(1)}
+                       onChange={this._changeUnique}
+                       mt={0}
+          >
+            Unique item (Non-fungible token)
+          </ToggleInput>
+          <Paragraph mb={0} mt={'base'}>
+            Lorem ipsum is placeholder text commonly used in the graphic, print, and
+            publishing industries.
+          </Paragraph>
+        </Card>
         <Box>
           <TextInput value={this.state.imageUrl}
                      onChange={this._changeImageUrl}
