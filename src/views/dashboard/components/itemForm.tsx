@@ -67,10 +67,10 @@ class ItemForm extends Component<TProps> {
             >Quantity</TextInput>
           </Box>
         </Flex>
-        <Card p={'lg'}
-              mt={'base'}
-              bg={'bg.card'}
-              borderRadius={'lg'}
+        {!item && <Card p={'lg'}
+                        mt={'base'}
+                        bg={'bg.card'}
+                        borderRadius={'lg'}
         >
           <ToggleInput checked={quantityBn.eq(1)}
                        onChange={this._changeUnique}
@@ -82,7 +82,7 @@ class ItemForm extends Component<TProps> {
             Lorem ipsum is placeholder text commonly used in the graphic, print, and
             publishing industries.
           </Paragraph>
-        </Card>
+        </Card>}
         <Box>
           <TextInput value={this.state.imageUrl}
                      onChange={this._changeImageUrl}
