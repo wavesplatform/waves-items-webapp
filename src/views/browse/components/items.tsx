@@ -53,7 +53,7 @@ class Items extends Component<TChildProps> {
     const stickyOffset = theme.header.height + theme.space.lg
 
     if (loading) {
-      return <Loading/>
+      return <Loading>Loading items...</Loading>
     }
 
     const items =
@@ -79,8 +79,6 @@ class Items extends Component<TChildProps> {
       // TODO: hook to force update sticky
       window.dispatchEvent(new Event('scroll'))
     }
-
-    return <Loading>Loading items...</Loading>
 
     return (
       <ItemsContainer>
