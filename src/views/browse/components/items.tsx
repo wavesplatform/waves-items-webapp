@@ -52,7 +52,7 @@ class Items extends Component<TChildProps> {
     const assetId = this.state.selectedAssetId
     const stickyOffset = theme.header.height + theme.space.lg
 
-    if (loading) {
+    if (!connection && loading) {
       return <Loading>Loading items...</Loading>
     }
 
