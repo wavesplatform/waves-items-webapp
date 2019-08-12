@@ -80,6 +80,8 @@ class Items extends Component<TChildProps> {
       window.dispatchEvent(new Event('scroll'))
     }
 
+    return <Loading>Loading items...</Loading>
+
     return (
       <ItemsContainer>
         <ItemsSide constrain={!!assetId}>
