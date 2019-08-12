@@ -21,7 +21,7 @@ class Items extends Component<TChildProps> {
 
   render(): ReactNode {
     const { loading, error, items: connection } = this.props.data!
-    if (loading) {
+    if (!connection && loading) {
       return <Loading/>
     }
 
