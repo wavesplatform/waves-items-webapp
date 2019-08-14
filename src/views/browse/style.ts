@@ -6,6 +6,9 @@ import { Button, IconButton } from '../../components/buttons'
 export const FiltersContainer = styled(Box)`
 `
 
+export const SearchContainer = styled(Box)`
+`
+
 export const ItemsContainer = styled(Box)`
   display: block;
   position: relative;

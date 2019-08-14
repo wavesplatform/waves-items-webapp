@@ -2,7 +2,7 @@
 /* eslint-disable */
 // This file was automatically generated and should not be edited.
 
-import { ItemFilter } from "./../../../__generated__/globalTypes";
+import { ItemFilter, UserRole } from "./../../../__generated__/globalTypes";
 
 // ====================================================
 // GraphQL query operation: MoreItemsQuery
@@ -18,6 +18,25 @@ export interface MoreItemsQuery_items_edges_node_game {
   totalItems: number | null;
 }
 
+export interface MoreItemsQuery_items_edges_node_lots_seller {
+  __typename: "User";
+  id: string;
+  address: string;
+  name: string | null;
+  image: any | null;
+  role: UserRole;
+}
+
+export interface MoreItemsQuery_items_edges_node_lots {
+  __typename: "Lot";
+  id: string;
+  lotId: string;
+  priceAsset: string;
+  price: number;
+  stock: number;
+  seller: MoreItemsQuery_items_edges_node_lots_seller | null;
+}
+
 export interface MoreItemsQuery_items_edges_node {
   __typename: "Item";
   id: string;
@@ -29,6 +48,7 @@ export interface MoreItemsQuery_items_edges_node {
   imageUrl: string;
   misc: any | null;
   game: MoreItemsQuery_items_edges_node_game;
+  lots: MoreItemsQuery_items_edges_node_lots[] | null;
 }
 
 export interface MoreItemsQuery_items_edges {

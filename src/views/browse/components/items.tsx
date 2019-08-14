@@ -7,14 +7,16 @@ import theme from '../../../styles/theme'
 import { getMoreItemsQuery } from '../../../graphql/queries/getItems'
 import { MoreItemsQuery, MoreItemsQueryVariables } from '../../../graphql/queries/__generated__/MoreItemsQuery'
 import { Loading } from '../../../components/loading'
-import { HideButton, ItemsContainer, ItemSide, ItemsSide, LoadMoreButton } from '../style'
+import { ItemsContainer, ItemSide, ItemsSide, LoadMoreButton } from '../style'
 import Item from './item'
 import { UserRole } from '../../../__generated__/globalTypes'
 import { NullState } from '../../../components/nullState'
+import { ItemInclusion } from './inclusions'
 
 type TProps = {
   address?: string
   searchString?: string
+  inclusions?: ItemInclusion[]
   creatorRole?: UserRole
 }
 
@@ -70,8 +72,8 @@ class Items extends Component<TChildProps> {
 
     if (!items || !items.length) {
       return <NullState
-        heading={'No items here yet...'}
-        message={'Maybe it hasn\'t been added yet or something\'s broken :('}
+        heading={'Not items here ...'}
+        message={'Try to search somewhere else'}
       />
     }
 
@@ -158,6 +160,7 @@ const withItems = graphql<TProps, TData, TVariables>(getMoreItemsQuery, {
       filter: {
         gameAddress: props.address,
         searchString: props.searchString,
+        inclusions: props.inclusions,
         creatorRole: props.creatorRole,
       },
       first: 20,

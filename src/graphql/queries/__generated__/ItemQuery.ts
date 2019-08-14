@@ -2,6 +2,8 @@
 /* eslint-disable */
 // This file was automatically generated and should not be edited.
 
+import { UserRole } from "./../../../__generated__/globalTypes";
+
 // ====================================================
 // GraphQL query operation: ItemQuery
 // ====================================================
@@ -16,22 +18,23 @@ export interface ItemQuery_item_game {
   totalItems: number | null;
 }
 
-export interface ItemQuery_item_pair {
-  __typename: "AmountPricePair";
-  amountAsset: string;
+export interface ItemQuery_item_lots_seller {
+  __typename: "User";
+  id: string;
+  address: string;
+  name: string | null;
+  image: any | null;
+  role: UserRole;
+}
+
+export interface ItemQuery_item_lots {
+  __typename: "Lot";
+  id: string;
+  lotId: string;
   priceAsset: string;
-}
-
-export interface ItemQuery_item_bids {
-  __typename: "AmountPrice";
-  amount: string;
-  price: string;
-}
-
-export interface ItemQuery_item_asks {
-  __typename: "AmountPrice";
-  amount: string;
-  price: string;
+  price: number;
+  stock: number;
+  seller: ItemQuery_item_lots_seller | null;
 }
 
 export interface ItemQuery_item {
@@ -45,9 +48,7 @@ export interface ItemQuery_item {
   imageUrl: string;
   misc: any | null;
   game: ItemQuery_item_game;
-  pair: ItemQuery_item_pair | null;
-  bids: ItemQuery_item_bids[] | null;
-  asks: ItemQuery_item_asks[] | null;
+  lots: ItemQuery_item_lots[] | null;
 }
 
 export interface ItemQuery {

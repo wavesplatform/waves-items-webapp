@@ -23,6 +23,7 @@ export interface GameInfo {
 export interface ItemFilter {
   gameAddress?: string | null;
   searchString?: string | null;
+  inclusions?: string[] | null;
   creatorRole?: string | null;
 }
 

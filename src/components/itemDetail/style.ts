@@ -49,6 +49,7 @@ export const Param = styled(Flex)`
   display: flex;
   align-items: flex-start;
   margin-top: -1px;
+  justify-content: space-between;
   
   &:first-child {
     margin-top: 0;
@@ -69,7 +70,6 @@ export const ParamTitle = styled(H3)`
 `
 
 export const ParamValue = styled(Text)`
-  flex: 1;
   text-align: right;
   word-break: break-all;
 `

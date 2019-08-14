@@ -5,7 +5,7 @@ export const config = {
   // Auth data for Keeper
   authData: 'waves-items',
   // Order waves id
-  wavesId: null,
+  wavesId: 'WAVES',
   // Waves networks config
   chains: {
     // Mainnet
@@ -23,5 +23,6 @@ export const config = {
     pageMaxImageSizeByte: 25000000,
     iconMaxImageSizeByte: 5000000,
   },
+  contractAddress: process.env.REACT_APP_CONTRACT_ADDRESS || '3N7Lmd1xVWGgdsUJRhRB2z8sRVmL8PowDMi',
 }
 

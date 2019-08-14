@@ -1,6 +1,5 @@
 import React, { Component, ReactNode } from 'react'
 import { Container, Section, ViewContainer, ViewWrapper } from '../../components/layout'
-import { Color, H1, H2 } from '../../components/globals'
 import { RouteComponentProps } from 'react-router'
 import GamesSlider from '../gamesSlider'
 import {
@@ -19,6 +18,7 @@ import { Box, Flex } from 'rebass'
 import { Button } from '../../components/buttons'
 import { Link } from 'react-router-dom'
 import Stats from './components/stats'
+import { Color } from '../../components/globals'
 
 interface IProps extends RouteComponentProps {
 }
@@ -33,7 +33,7 @@ class HomeView extends Component<IProps> {
           <SearchSection>
             <Container>
               <Title mb={6}>
-              A safe place to trade your digital posessions.
+                A safe place to trade <Color color={'accent'}>your</Color> digital posessions.
               </Title>
               <SearchWrapper>
                 <Search onSearch={this._onSearch}/>

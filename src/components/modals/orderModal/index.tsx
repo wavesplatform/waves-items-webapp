@@ -12,8 +12,9 @@ import { IItem } from '../../../types'
 import { IKeeperContext } from '../../../contexts/keeper'
 import { BigNumber } from '@waves/bignumber'
 import { Toast } from '../../toasts'
-import { generateExchangeLink } from '../../../helpers/order'
+import { generateExchangeLink, toSatoshi } from '../../../helpers/order'
 import { Icon } from '../../icon'
+import { buyItem, sellItem } from '../../../helpers/item'
 
 const Modal = require('react-modal')
 Modal.setAppElement('#root')
@@ -23,8 +24,9 @@ export type OrderType = 'buy' | 'sell'
 interface IProps extends IModalProps {
   item: IItem
   keeperContext: IKeeperContext
-  type: OrderType,
-  defaultPrice?: string,
+  type: OrderType
+  defaultPrice?: string
+  lotId?: string
 }
 
 interface IState {
@@ -116,12 +118,10 @@ class OrderModal extends Component<IProps> {
                       <Box width={2 / 3} ml={'base'}>
                         <TextInputWithUnit value={this.state.price}
                                            onChange={this._changePrice}
-                        >Price</TextInputWithUnit>
+                                           disabled={isBuy}
+                        >Price per item</TextInputWithUnit>
                       </Box>
                     </Flex>
-                    <NumberInput value={this.state.period}
-                                 onChange={this._changePeriod}
-                    >Period (in seconds)</NumberInput>
                     <Actions>
                       <Button type='submit' variant={'primary'} size={'lg'}
                               width={1}>{isBuy ? 'Buy' : 'Sell'}</Button>
@@ -170,36 +170,26 @@ class OrderModal extends Component<IProps> {
   }
 
   _confirm = async () => {
-    const { item, keeperContext, type } = this.props
+    const { item, keeperContext, type, lotId } = this.props
     const { publicState: { network } } = keeperContext
 
     if (!keeperHelper.keeper || !network) {
       return
     }
-    const chain = network && config.chains[network.code as IWavesNetworkCode]
 
-    const orderDurationMs = parseInt(this.state.period || defaultPeriod, 10) * 1000
-    const order = await keeperHelper.keeper.signAndPublishOrder({
-      type: 1002,
-      data: {
-        version: 2,
-        matcherPublicKey: chain.matcher,
-        orderType: type,
-        amount: {
-          tokens: this.state.amount,
-          assetId: item.assetId,
-        },
-        price: {
-          tokens: this.state.price,
-          assetId: config.wavesId,
-        },
-        matcherFee: {
-          tokens: '0.003',
-          assetId: config.wavesId,
-        },
-        expiration: Date.now() + orderDurationMs,
-      },
-    })
+    if (type === 'buy') {
+      // Buying
+      const amount = new BigNumber(this.state.amount).toNumber()
+      const price = toSatoshi(this.state.price).toNumber()
+
+      lotId && await buyItem(lotId, amount)
+    } else {
+      // Selling
+      const amount = new BigNumber(this.state.amount).toNumber()
+      const price = toSatoshi(this.state.price).toNumber()
+
+      await sellItem(item.assetId, amount, config.wavesId, price)
+    }
   }
 }
 

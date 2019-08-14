@@ -227,18 +227,3 @@ export const TabLink = styled(Link)<SpaceProps>`
   ${space}
 `
 TabLink.defaultProps = { px: 'lg' }
-
-export const WavesCy = styled(Text)<TextProps & BordersProps>`
-  text-transform: uppercase;
-  
-  &:before {
-    content: 'Waves';
-  }
-  
-  ${borders}
-`
-WavesCy.defaultProps = {
-  as: 'span',
-  fontSize: 'xs',
-  color: 'placeholder',
-}

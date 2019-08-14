@@ -1,5 +1,5 @@
 import React, { Component, ReactNode } from 'react'
-import { AmountPrice, IItem, WithOrders } from '../../types'
+import { IItem, ItemLot } from '../../types'
 import { UserHeading } from '../user/userHeading'
 import {
   DisplayButton,
@@ -17,9 +17,8 @@ import {
 import { Box, Flex, Image, Link, Text } from 'rebass'
 import { KeeperContext } from '../../contexts/keeper'
 import { Button } from '../buttons'
-import { toWaves } from '../../helpers/order'
-import { Table, TableBody, TableCell, TableHeader, TableRow, WavesCy } from '../globals'
-import { BigNumber } from '@waves/bignumber'
+import { getProfitLot, ProfitPriceType, toWaves } from '../../helpers/order'
+import { Table, TableBody, TableCell, TableHeader, TableRow } from '../globals'
 import OrderModal from '../modals/orderModal'
 import defaultImage from '../globals/image.svg'
 import withCurrentUser, { WithCurrentUserProps } from '../withCurrentUser'
@@ -27,9 +26,11 @@ import { compose } from 'react-apollo'
 import { RouteComponentProps, withRouter } from 'react-router'
 import { miscRecordToArray } from '../../helpers/item'
 import Quantity from '../quantity'
+import { WavesCy } from '../globals/currencies'
+import Price from '../price'
 
 type TProps = {
-  item: WithOrders<IItem>
+  item: IItem
   onClose?: () => void
   isPage?: boolean
 }
@@ -37,11 +38,6 @@ type TProps = {
 type TState = {
   buyModalShow?: boolean
   sellModalShow?: boolean
-}
-
-enum ProfitPriceType {
-  Min,
-  Max,
 }
 
 class ItemDetail extends Component<WithCurrentUserProps<TProps> & RouteComponentProps> {
@@ -54,13 +50,10 @@ class ItemDetail extends Component<WithCurrentUserProps<TProps> & RouteComponent
 
   render(): ReactNode {
     const { item, isPage, me, history, location, onClose } = this.props
-    const asks = item.asks || []
-    const bids = item.bids || []
+    const lots = item.lots || []
 
-    const minAskPrice = this._getProfitPrice(asks, ProfitPriceType.Min)
-    const maxBidPrice = this._getProfitPrice(bids, ProfitPriceType.Max)
-    const buyPriceStr = minAskPrice && toWaves(minAskPrice).toFixed()
-    const sellPriceStr = maxBidPrice && toWaves(maxBidPrice).toFixed()
+    const bestLot = getProfitLot(lots, ProfitPriceType.Min)
+    const bestPrice = bestLot && toWaves(bestLot.price)
 
     // Copy of misc
     const misc = { ...item.misc }
@@ -99,7 +92,7 @@ class ItemDetail extends Component<WithCurrentUserProps<TProps> & RouteComponent
             {this._miscParams(misc)}
           </Params>
           <Flex justifyContent={'space-between'} flexDirection={'column'}>
-            <Button
+            {bestLot && <Button
               onClick={() => {
                 // Redirect if not auth
                 if (!me) {
@@ -111,8 +104,12 @@ class ItemDetail extends Component<WithCurrentUserProps<TProps> & RouteComponent
               variant='primary'
               mb={'base'}
             >
-              {buyPriceStr ? `Buy for ${buyPriceStr}` : 'Buy'}
-            </Button>
+              {bestPrice ? (
+                <>Buy for <Price value={bestPrice}/></>
+              ) : (
+                <>Buy</>
+              )}
+            </Button>}
             <Button
               onClick={() => {
                 // Redirect if not auth
@@ -128,7 +125,8 @@ class ItemDetail extends Component<WithCurrentUserProps<TProps> & RouteComponent
             <OrderModal
               item={item}
               type={'buy'}
-              defaultPrice={buyPriceStr}
+              defaultPrice={bestPrice && bestPrice.toFixed()}
+              lotId={bestLot && bestLot.lotId}
               keeperContext={this.context}
               show={this.state.buyModalShow}
               setShow={this._setShowBuyModal}
@@ -136,15 +134,13 @@ class ItemDetail extends Component<WithCurrentUserProps<TProps> & RouteComponent
             <OrderModal
               item={item}
               type={'sell'}
-              defaultPrice={sellPriceStr}
               keeperContext={this.context}
               show={this.state.sellModalShow}
               setShow={this._setShowSellModal}
             />
           </Flex>
           <Box mt={'base'}>
-            {asks.length > 0 && this._ordersTable(asks)}
-            {bids.length > 0 && this._ordersTable(bids)}
+            {lots.length > 0 && this._lotsTable(lots)}
           </Box>
         </LeftSide>
         <RightSide isPage={isPage}>
@@ -173,8 +169,8 @@ class ItemDetail extends Component<WithCurrentUserProps<TProps> & RouteComponent
     return list
   }
 
-  _ordersTable = (orders: AmountPrice[]) => {
-    const list = orders.map(this._priceRow)
+  _lotsTable = (lots: ItemLot[]) => {
+    const list = lots.map(this._priceRow)
     return (
       <Table width={1}>
         <TableHeader>
@@ -188,38 +184,13 @@ class ItemDetail extends Component<WithCurrentUserProps<TProps> & RouteComponent
     )
   }
 
-  _priceRow = ({ amount, price }: AmountPrice, index: number) => {
+  _priceRow = ({ stock, price, priceAsset }: ItemLot, index: number) => {
     return (
       <TableRow key={index}>
-        <TableCell>{amount}</TableCell>
+        <TableCell>{stock}</TableCell>
         <TableCell>{toWaves(price).toFixed()} <WavesCy/></TableCell>
       </TableRow>
     )
-  }
-
-  _getProfitPrice = (orders: AmountPrice[], type: ProfitPriceType): BigNumber | undefined => {
-    if (!orders.length) {
-      return
-    }
-
-    try {
-      const initPrice = new BigNumber(orders[0].price)
-
-      return orders.reduce((previousPrice: BigNumber | undefined, currentValue: AmountPrice) => {
-        const currentPrice = new BigNumber(currentValue.price)
-        if (!previousPrice) {
-          return currentPrice
-        }
-
-        if (type === ProfitPriceType.Min) {
-          return currentPrice.lt(previousPrice) ? currentPrice : previousPrice
-        } else if (type === ProfitPriceType.Max) {
-          return currentPrice.gt(previousPrice) ? currentPrice : previousPrice
-        }
-      }, initPrice)
-    } catch (err) {
-      return
-    }
   }
 
   _setShowBuyModal = (value: boolean) => {

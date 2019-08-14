@@ -3,6 +3,7 @@ import { BigNumber } from '@waves/bignumber'
 import { Icon } from '../icon'
 import { Nft } from './style'
 import { Color } from '../globals'
+import { Flex } from 'rebass'
 
 type TProps = {
   value?: number | string | BigNumber
@@ -19,12 +20,12 @@ const Quantity = (props: TProps) => {
 
   if (value.gt(1)) {
     return (
-      <Color>
-        {value.toFixed()} <Icon glyph={'fiber_smart_record'}
-                                variant={'baseline'}
-                                color={'fades.white.2'}
-                                fontSize={'sm'}/>
-      </Color>
+      <Flex alignItems={'center'}>
+        <Color mr={'xs'}>{value.toFixed()}</Color>
+        <Icon glyph={'fiber_smart_record'}
+              color={'fades.white.2'}
+              fontSize={'sm'}/>
+      </Flex>
     )
   }
 

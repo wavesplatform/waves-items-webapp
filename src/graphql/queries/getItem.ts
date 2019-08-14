@@ -1,14 +1,16 @@
 import gql from 'graphql-tag'
 import itemInfoFragment from '../fragments/itemInfo'
-import ordersInfoFragment from '../fragments/ordersInfo'
+import lotInfoFragment from '../fragments/lotInfo'
 
 export const getItemByAssetIdQuery = gql`
   query ItemQuery($assetId: String!) {
     item(assetId: $assetId) {
       ...itemInfo
-      ...ordersInfo
+      lots {
+        ...lotInfo
+      }
     }
   }
   ${itemInfoFragment}
-  ${ordersInfoFragment}
+  ${lotInfoFragment}
 `

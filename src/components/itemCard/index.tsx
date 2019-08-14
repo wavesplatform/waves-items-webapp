@@ -4,8 +4,12 @@ import { UserHeading } from '../user/userHeading'
 import { Balance, ImageWrapper, ItemCardContainer, Overview, Title } from './style'
 import { Box, Flex, Image } from 'rebass'
 import defaultImage from '../globals/image.svg'
-import { BigNumber } from '@waves/bignumber'
 import Quantity from '../quantity'
+import { getProfitLot, ProfitPriceType, toWaves } from '../../helpers/order'
+import { WavesCyIcon } from '../globals/currencies'
+import { Color } from '../globals'
+import { Icon } from '../icon'
+import Price from '../price'
 
 export type ItemCardStyle = 'base' | 'short'
 
@@ -17,6 +21,10 @@ interface IItemCardProps {
 export const ItemCard = (props: IItemCardProps) => {
   const { item, style } = props
   const isShort = style === 'short'
+
+  const lots = item.lots || []
+  const bestLot = getProfitLot(lots, ProfitPriceType.Min)
+  const bestPrice = bestLot && toWaves(bestLot.price)
 
   return (
     <ItemCardContainer>
@@ -49,8 +57,9 @@ export const ItemCard = (props: IItemCardProps) => {
         </Overview>
       </Box>
       <Box px={'lg'} pb={'lg'}>
-        {!isShort && <Flex>
+        {!isShort && <Flex justifyContent={'space-between'}>
           <UserHeading user={item.game} size={'sm'}/>
+          {bestPrice && <Price value={bestPrice}/>}
         </Flex>}
         {isShort && item.balance && <Box>
           <Balance color={'grays.4'}>{item.balance}</Balance> / {item.quantity}

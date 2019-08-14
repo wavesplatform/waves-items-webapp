@@ -1,7 +1,6 @@
 import { LONG } from '@waves/types'
 import { ApolloError } from 'apollo-client'
 import { ICreateParamsMap, IEditParamsMap } from '@waves/waves-games'
-import { userInfo } from './graphql/fragments/__generated__/userInfo'
 import { UserRole } from './__generated__/globalTypes'
 
 export interface IDefaultResult {
@@ -40,20 +39,13 @@ export interface IGame extends IUser {
   totalItems?: number | null
 }
 
-export type AmountPricePair = {
-  amountAsset: string
+export type ItemLot = {
+  id: string
+  lotId: string
   priceAsset: string
-}
-
-export type AmountPrice = {
-  amount: string
-  price: string
-}
-
-export type WithOrders<P> = P & {
-  pair?: AmountPricePair;
-  bids?: AmountPrice[];
-  asks?: AmountPrice[];
+  price: LONG
+  stock: LONG
+  seller?: IUser | null
 }
 
 export interface IWavesAsset {
@@ -71,6 +63,7 @@ export interface IItem extends IWavesAsset {
   imageUrl: string
   createdAt?: string
   game: IGame
+  lots?: ItemLot[] | null
 }
 
 export type WithBalance<P> = P & {

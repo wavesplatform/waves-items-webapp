@@ -6,6 +6,9 @@ import { Loading } from '../../../components/loading'
 import ItemTable from '../../../components/itemTable'
 import { LoadMoreButton } from '../style'
 import { NullState } from '../../../components/nullState'
+import { Text } from 'rebass'
+import { Link } from 'react-router-dom'
+import { Color } from '../../../components/globals'
 
 type TProps = {
   address?: string
@@ -41,9 +44,12 @@ class Items extends Component<TChildProps> {
 
     if (!items || !items.length) {
       return <NullState
-        heading={'No items here yet...'}
-        message={'Maybe it hasn\'t been added yet or something\'s broken :('}
-      />
+        heading={'Items not found'}
+      >
+        <Text color={'placeholder'} width={1} textAlign={'center'}>
+          You can <Color color={'link'}><Link to={'/dashboard/create-item'}>create</Link></Color> one via dashboard
+        </Text>
+      </NullState>
     }
 
     return (

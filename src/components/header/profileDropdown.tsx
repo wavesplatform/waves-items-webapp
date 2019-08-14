@@ -3,13 +3,13 @@ import styled from 'styled-components'
 import { Box, BoxProps, Flex } from 'rebass'
 import { Link, RouteComponentProps, withRouter } from 'react-router-dom'
 import { borders, BordersProps, space, themeGet } from 'styled-system'
-import { hexa, shadow, WavesCy } from '../globals'
+import { hexa, shadow } from '../globals'
 import { IKeeperContext, withKeeperContext } from '../../contexts/keeper'
-import { toWavesFromKeeper } from '../../helpers/order'
+import { toWaves } from '../../helpers/order'
 import { compose, withApollo, WithApolloClient } from 'react-apollo'
 import authHelper from '../../helpers/auth'
 import withCurrentUser, { WithCurrentUserProps } from '../withCurrentUser'
-import { UserRole } from '../../__generated__/globalTypes'
+import { WavesCy } from '../globals/currencies'
 
 interface DropdownContainerProps extends BoxProps {
   isShown?: boolean
@@ -90,7 +90,7 @@ class ProfileDropdown extends Component<WithApolloClient<TProps> & IKeeperContex
       <DropdownContainer isShown={isShown}>
         <DropdownList>
           {account && <DropdownItem borderBottom={'1px solid'}>
-            <Balance>{toWavesFromKeeper(account.balance.available).toFixed(3)} <WavesCy/></Balance>
+            <Balance>{toWaves(account.balance.available).toFixed(3)} <WavesCy/></Balance>
           </DropdownItem>}
           <DropdownItem>
             <DropdownLink as={Link} to={'/profile'}>Inventory</DropdownLink>

@@ -5,10 +5,11 @@ import { H1 } from '../../components/globals'
 import { RouteComponentProps } from 'react-router'
 import GameOverview from '../gameOverview'
 import { Box } from 'rebass'
-import { FiltersContainer } from './style'
+import { FiltersContainer, SearchContainer } from './style'
 import Search from './components/search'
 import Items from './components/items'
 import { UserRole } from '../../__generated__/globalTypes'
+import Inclusions, { ItemInclusion } from './components/inclusions'
 
 interface BrowseParams {
   address?: string
@@ -16,6 +17,7 @@ interface BrowseParams {
 
 type TState = {
   searchString?: string
+  inclusions?: ItemInclusion[]
 }
 
 type TProps = RouteComponentProps<BrowseParams>
@@ -23,6 +25,7 @@ type TProps = RouteComponentProps<BrowseParams>
 class Browse extends Component<TProps> {
   state: TState = {
     searchString: '',
+    inclusions: ['sale'],
   }
 
   constructor(props: TProps) {
@@ -49,15 +52,26 @@ class Browse extends Component<TProps> {
           </ViewSide>
           <ViewContent>
             {address ? <Box mb={'lg'}><GameOverview address={address}/></Box> : <H1>Feed</H1>}
-            <FiltersContainer mb={'lg'}>
+            <SearchContainer mb={'lg'}>
               <Search defaultValue={this.state.searchString} onSearch={(searchString: string) => {
                 this.setState({
                   searchString,
                 })
               }}/>
+            </SearchContainer>
+            <FiltersContainer mb={'lg'}>
+              <Inclusions inclusions={this.state.inclusions} onChange={(inclusions: ItemInclusion[]) => {
+                this.setState({
+                  inclusions,
+                })
+              }}/>
             </FiltersContainer>
             <Box mb={'lg'}>
-              <Items address={address} searchString={this.state.searchString} creatorRole={creatorRole}/>
+              <Items
+                address={address}
+                searchString={this.state.searchString}
+                inclusions={this.state.inclusions}
+                creatorRole={creatorRole}/>
             </Box>
           </ViewContent>
         </ViewGrid>
