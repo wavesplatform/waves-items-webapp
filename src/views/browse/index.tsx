@@ -34,6 +34,8 @@ class Browse extends Component<TProps> {
     const { location } = this.props
     if (location.state !== undefined) {
       this.state.searchString = location.state.searchString
+      // If any search from home page then reset to all
+      this.state.inclusions = []
     }
   }
 
