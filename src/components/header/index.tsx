@@ -63,7 +63,7 @@ class Header extends Component<WithCurrentUserProps<TProps>> {
                 )}
               </Route>
               <NavItem>
-                <NavLink as={Link} href={`${config.docsUrl}/guides/how-to-use.html`}>How
+                <NavLink as={Link} href={`${config.docsUrl}/guides/how-to-use.html`} target='_blank'>How
                   To</NavLink>
               </NavItem>
               <NavItem>
