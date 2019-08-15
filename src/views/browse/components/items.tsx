@@ -72,7 +72,7 @@ class Items extends Component<TChildProps> {
 
     if (!items || !items.length) {
       return <NullState
-        heading={'Not items here ...'}
+        heading={'Not items here...'}
         message={'Try to search somewhere else'}
       />
     }
