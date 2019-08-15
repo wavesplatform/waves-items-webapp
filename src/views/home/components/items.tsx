@@ -53,6 +53,7 @@ const withItems = graphql<TProps, TData, TVariables>(getMoreItemsQuery, {
     variables: {
       filter: {
         creatorRole: UserRole.GAME,
+        inclusions: ['sale'],
       },
       first: 6,
     },
