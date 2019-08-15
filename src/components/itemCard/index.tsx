@@ -6,10 +6,8 @@ import { Box, Flex, Image } from 'rebass'
 import defaultImage from '../globals/image.svg'
 import Quantity from '../quantity'
 import { getProfitLot, ProfitPriceType, toWaves } from '../../helpers/order'
-import { WavesCyIcon } from '../globals/currencies'
-import { Color } from '../globals'
-import { Icon } from '../icon'
 import Price from '../price'
+import { BigNumber } from '@waves/bignumber'
 
 export type ItemCardStyle = 'base' | 'short'
 
@@ -25,6 +23,7 @@ export const ItemCard = (props: IItemCardProps) => {
   const lots = item.lots || []
   const bestLot = getProfitLot(lots, ProfitPriceType.Min)
   const bestPrice = bestLot && toWaves(bestLot.price)
+  const quantityBn = item.quantity && new BigNumber(item.quantity)
 
   return (
     <ItemCardContainer>
@@ -40,7 +39,7 @@ export const ItemCard = (props: IItemCardProps) => {
               color={'grays.4'}
             >
               {item.balance}
-            </Balance> / {item.quantity}
+            </Balance> / <Quantity value={item.quantity}/>
           </> : <>
             <Quantity value={item.quantity}/>
           </>
@@ -61,8 +60,14 @@ export const ItemCard = (props: IItemCardProps) => {
           <UserHeading user={item.game} size={'sm'}/>
           {bestPrice && <Price value={bestPrice}/>}
         </Flex>}
-        {isShort && item.balance && <Box>
-          <Balance color={'grays.4'}>{item.balance}</Balance> / {item.quantity}
+        {isShort && quantityBn && item.balance && <Box fontSize={'sm'}>
+          {quantityBn.gt(1) ? (
+            // Non Nft
+            <><Balance color={'grays.4'}>{item.balance}</Balance> / <Quantity value={item.quantity}/></>
+          ) : (
+            // Nft
+            <Quantity value={item.quantity}/>
+          )}
         </Box>}
       </Box>
     </ItemCardContainer>

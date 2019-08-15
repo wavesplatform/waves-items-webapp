@@ -9,7 +9,7 @@ type TProps = {
   value: number | string | BigNumber
 }
 
-const PriceWrapper = styled(Flex)`
+const Wrapper = styled(Flex)`
   display: inline-flex;
 `
 
@@ -17,10 +17,10 @@ const Price = (props: TProps) => {
   const value = new BigNumber(props.value)
 
   return (
-    <PriceWrapper alignItems={'center'}>
+    <Wrapper alignItems={'center'}>
       <Color mr={'xs'}>{value.toFixed()}</Color>
       <WavesCyIcon fontSize={'sm'}/>
-    </PriceWrapper>
+    </Wrapper>
   )
 }
 

@@ -4,10 +4,15 @@ import { Icon } from '../icon'
 import { Nft } from './style'
 import { Color } from '../globals'
 import { Flex } from 'rebass'
+import styled from 'styled-components'
 
 type TProps = {
   value?: number | string | BigNumber
 }
+
+const Wrapper = styled(Flex)`
+  display: inline-flex;
+`
 
 const Quantity = (props: TProps) => {
   const value = props.value && new BigNumber(props.value)
@@ -20,12 +25,12 @@ const Quantity = (props: TProps) => {
 
   if (value.gt(1)) {
     return (
-      <Flex alignItems={'center'}>
+      <Wrapper alignItems={'center'}>
         <Color mr={'xs'}>{value.toFixed()}</Color>
         <Icon glyph={'fiber_smart_record'}
               color={'fades.white.2'}
               fontSize={'sm'}/>
-      </Flex>
+      </Wrapper>
     )
   }
 
