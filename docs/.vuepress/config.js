@@ -1,7 +1,8 @@
 module.exports = {
-  title: 'Items Vault Docs',
-  description: '',
+  title: 'Item Market Docs',
+  description: 'Learn how to use item.market',
   themeConfig: {
+    logo: '/logo.svg',
     nav: [
       //      { text: 'Home', link: '/' },
     ],
