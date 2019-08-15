@@ -23,6 +23,7 @@ import withCurrentUser, { WithCurrentUserProps } from '../withCurrentUser'
 import { Route, RouteComponentProps } from 'react-router'
 import { config } from '../../config/config'
 import { Color } from '../globals'
+import { Icon } from '../icon'
 
 type TProps = RouteComponentProps
 
@@ -47,6 +48,7 @@ class Header extends Component<WithCurrentUserProps<TProps>> {
             {/*Logo*/}
             <Logo to={'/'}>
               {/*<LogoImage src={logo}/>*/}
+              <Icon glyph={'layers'} mr={'xs'} color={'primary'} fontSize={'lg'}/>
               <LogoTitle>
                 Item Market <Color color={'placeholder'} fontSize={'xs'}>Beta</Color>
               </LogoTitle>

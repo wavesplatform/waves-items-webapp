@@ -35,7 +35,7 @@ class Items extends Component<TChildProps> {
     if (!items || !items.length) {
       return <NullState
         heading={'Items not found'}
-        message={'Maybe it hasn\'t been added yet or something\'s broken'}
+        message={'Maybe it hasn\'t been added yet or something\'s broken ;('}
       />
     }
 

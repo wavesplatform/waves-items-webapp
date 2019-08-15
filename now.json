@@ -6,7 +6,8 @@
     "env": {
       "REACT_APP_NETWORK_CODE": "W",
       "REACT_APP_GRAPHQL_ENDPOINT": "https://api.item.market/graphql",
-      "REACT_APP_DOCS_URL": "https://docs.item.market"
+      "REACT_APP_DOCS_URL": "https://docs.item.market",
+      "REACT_APP_CONTRACT_ADDRESS": "3PJYvHqNcUsfQyPkvVCYMqYsi1xZKLmKT6k"
     }
   },
   "builds": [

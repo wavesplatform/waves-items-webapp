@@ -21,6 +21,11 @@ export const Logo = styled(Link)`
   align-items: center;
   height: 100%;
   margin-left: ${themeGet('space.lg')}px;
+  opacity: .5;
+  
+  &:hover {
+    opacity: 1;
+  }
 `
 
 export const LogoImage = styled(Image)`

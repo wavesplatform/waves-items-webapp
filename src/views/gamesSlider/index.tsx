@@ -26,7 +26,7 @@ class GamesSlider extends Component<TChildProps> {
     if (!games || !games.length) {
       return <NullState
         heading={'No games here yet...'}
-        message={'Maybe it hasn\'t been added yet or something\'s broken :('}
+        message={'Maybe it hasn\'t been added yet or something\'s broken ;('}
       />
     }
 
