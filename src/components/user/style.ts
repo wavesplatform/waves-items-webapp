@@ -8,5 +8,5 @@ export const Wrapper = styled(Flex)`
 `
 
 export const Title = styled(Heading)`
-  ${truncate}
+  ${truncate};
 `

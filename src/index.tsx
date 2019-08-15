@@ -15,6 +15,8 @@ import { ApolloLink, from } from 'apollo-link'
 import { config } from './config/config'
 import * as Sentry from '@sentry/browser'
 import { createUploadLink } from 'apollo-upload-client'
+import { DiscordWidget } from './components/socialWidgets/discord'
+import socials from './config/socials'
 
 // Now test
 // Error tracking
@@ -66,6 +68,10 @@ class App extends Component {
               </Router>
             </KeeperProvider>
           </ApolloProvider>
+          <DiscordWidget url={socials.discordUrl}>
+            Talk to us on<br/>
+            Discord
+          </DiscordWidget>
         </Fragment>
       </ThemeProvider>
     )

@@ -63,10 +63,12 @@ class Header extends Component<WithCurrentUserProps<TProps>> {
                 )}
               </Route>
               <NavItem>
-                <NavLink as={Link} href='#'>How To</NavLink>
+                <NavLink as={Link} href={`${config.docsUrl}/guides/how-to-use.html`}>How
+                  To</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink as={Link} href={config.docsUrl} target='_blank'>For Developers</NavLink>
+                <NavLink as={Link} href={`${config.docsUrl}/guides/tokenizing-a-game.html`} target='_blank'>For
+                  Developers</NavLink>
               </NavItem>
             </Nav>
             {/*Profile*/}
