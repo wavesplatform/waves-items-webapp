@@ -1,7 +1,8 @@
-import React, { ChangeEvent, Component, ReactNode } from 'react'
+import React, { Component, ReactNode } from 'react'
 import { Button } from '../../../components/buttons'
 
-export type ItemInclusion = 'sale'
+export const inclusionsMap = { sale: '' }
+export type ItemInclusion = keyof typeof inclusionsMap
 
 type TProps = {
   inclusions?: ItemInclusion[]

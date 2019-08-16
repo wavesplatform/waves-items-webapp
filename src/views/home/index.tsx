@@ -19,6 +19,7 @@ import { Button } from '../../components/buttons'
 import { Link } from 'react-router-dom'
 import Stats from './components/stats'
 import { Color } from '../../components/globals'
+import queryString from 'query-string'
 
 interface IProps extends RouteComponentProps {
 }
@@ -83,8 +84,9 @@ class HomeView extends Component<IProps> {
 
     this._searchSub = timer(200)
       .subscribe(() => {
-        history.push('/items', {
-          searchString,
+        history.push({
+          pathname: '/items',
+          search: queryString.stringify({ search: searchString }),
         })
       })
   }
