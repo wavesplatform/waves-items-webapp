@@ -27,6 +27,12 @@ interface IProps extends RouteComponentProps {
 class HomeView extends Component<IProps> {
   _searchSub: Subscription
 
+  componentWillUnmount(): void {
+    if (this._searchSub) {
+      this._searchSub.unsubscribe()
+    }
+  }
+
   render(): ReactNode {
     return (
       <ViewWrapper>

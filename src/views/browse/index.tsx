@@ -11,7 +11,8 @@ import Items from './components/items'
 import { UserRole } from '../../__generated__/globalTypes'
 import Inclusions, { inclusionsMap, ItemInclusion } from './components/inclusions'
 import queryString from 'query-string'
-import { Subscription, timer } from 'rxjs'
+import { Subject, Subscription, timer } from 'rxjs'
+import { debounce } from 'rxjs/operators'
 
 type MatchParams = {
   address?: string
@@ -30,8 +31,8 @@ type TState = {
 type TProps = RouteComponentProps<MatchParams>
 
 class Browse extends Component<TProps> {
-  _nextUrlParams: UrlParams = {}
-  _setUrlParamsSub: Subscription
+  searchParam$ = new Subject<string>()
+  searchParamSub: Subscription
 
   state: TState = {
     searchString: '',
@@ -62,6 +63,26 @@ class Browse extends Component<TProps> {
       if (includesStr !== undefined) {
         this.state.inclusions = validIncludes
       }
+
+      this.searchParam$.next(search)
+    }
+  }
+
+  componentDidMount(): void {
+    this.searchParamSub = this.searchParam$
+      .pipe(
+        debounce(() => timer(400))
+      )
+      .subscribe(search => {
+        // Update state & url
+        this.setState({ searchString: search })
+        this._setUrlParams({ search })
+      })
+  }
+
+  componentWillUnmount(): void {
+    if (this.searchParamSub) {
+      this.searchParamSub.unsubscribe()
     }
   }
 
@@ -100,11 +121,8 @@ class Browse extends Component<TProps> {
   }
 
   _onSearch = (searchString: string) => {
-    // Instant update state
-    this.setState({ searchString })
-
-    // Update url with delay
-    this._lazySetUrlParams({ search: searchString })
+    // Update search param with delay
+    this.searchParam$.next(searchString)
   }
 
   _onInclude = (inclusions: ItemInclusion[]) => {
@@ -113,19 +131,6 @@ class Browse extends Component<TProps> {
 
     // Instant update url
     this._setUrlParams({ includes: inclusions ? inclusions.join(',') : undefined })
-  }
-
-  _lazySetUrlParams = (params: UrlParams, delay: number = 500) => {
-    this._nextUrlParams = { ...this._nextUrlParams, ...params }
-
-    if (this._setUrlParamsSub) {
-      this._setUrlParamsSub.unsubscribe()
-    }
-
-    this._setUrlParamsSub = timer(delay)
-      .subscribe(() => {
-        this._setUrlParams(this._nextUrlParams)
-      })
   }
 
   _setUrlParams = (params: UrlParams) => {
