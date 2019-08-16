@@ -1,4 +1,5 @@
 export const config = {
+  production: process.env.REACT_APP_NODE_ENV === 'production',
   // GraphQL API endpoint
   graphqlEndpoint: process.env.REACT_APP_GRAPHQL_ENDPOINT,
   networkCode: process.env.REACT_APP_NETWORK_CODE || 'T',
@@ -6,17 +7,6 @@ export const config = {
   authData: 'waves-items',
   // Order waves id
   wavesId: 'WAVES',
-  // Waves networks config
-  chains: {
-    // Mainnet
-    'W': {
-      matcher: '7kPFrHDiGw1rCm7LPszuECwWYL3dMf6iMifLRDJQZMzy',
-    },
-    // Testnet
-    'T': {
-      matcher: '8QUAqtTckM5B8gvcuP7mMswat9SjKUuafJMusEoSn1Gy',
-    },
-  },
   docsUrl: process.env.REACT_APP_DOCS_URL || 'http://localhost:8080',
   exchangeUrl: 'https://coinomat.com/api/v2/indacoin/buy.php',
   images: {

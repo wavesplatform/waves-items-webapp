@@ -17,10 +17,17 @@ import * as Sentry from '@sentry/browser'
 import { createUploadLink } from 'apollo-upload-client'
 import { DiscordWidget } from './components/socialWidgets/discord'
 import socials from './config/socials'
+import TagManager from 'react-gtm-module'
 
-// Now test
-// Error tracking
-Sentry.init({ dsn: 'https://399be5e20c924d8d942a60629865d0aa@sentry.io/1513601' })
+// GTM (only production)
+config.production && TagManager.initialize({
+  gtmId: 'GTM-5ZGLQJV',
+})
+
+// Error tracking (only production)
+config.production && Sentry.init({
+  dsn: 'https://399be5e20c924d8d942a60629865d0aa@sentry.io/1513601',
+})
 
 const authMiddleware = new ApolloLink((operation, forward) => {
   operation.setContext(({ headers = {} }) => {

@@ -4,6 +4,7 @@
   "alias": "item.market",
   "build": {
     "env": {
+      "REACT_APP_NODE_ENV": "production",
       "REACT_APP_NETWORK_CODE": "W",
       "REACT_APP_GRAPHQL_ENDPOINT": "https://api.item.market/graphql",
       "REACT_APP_DOCS_URL": "https://docs.item.market",
