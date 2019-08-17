@@ -9,8 +9,7 @@ import Quantity from '../../quantity'
 import { Button } from '../../buttons'
 import Price from '../../price'
 import { toWaves } from '../../../helpers/order'
-import { cancelLot, sellItem } from '../../../helpers/item'
-import { config } from '../../../config/config'
+import { cancelLot } from '../../../helpers/item'
 
 type TProps = {
   lot: ItemLot
