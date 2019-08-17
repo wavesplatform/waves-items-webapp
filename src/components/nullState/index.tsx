@@ -14,7 +14,7 @@ export const NullState = (props: PropsWithChildren<TNullStateProps>) => (
   <StyledNullState {...props}>
     {props.icon && <Icon glyph={props.icon} fontSize={'2.4rem'} color={'grays.1'} mb={'sm'}/>}
     {props.heading && <Title color={'grays.1'} mb={'sm'}>{props.heading}</Title>}
-    {props.message && <Text color={'placeholder'} mb={'base'} width={1} textAlign={'center'}>{props.message}</Text>}
+    {props.message && <Text color={'placeholder'} width={1} textAlign={'center'}>{props.message}</Text>}
     {props.children}
   </StyledNullState>
 )

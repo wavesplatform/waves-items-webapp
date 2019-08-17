@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom'
 import defaultImage from '../../globals/image.svg'
 import { config } from '../../../config/config'
 import Quantity from '../../quantity'
+import { Button } from '../../buttons'
 
 type TProps = {
   item: IItem
@@ -43,11 +44,9 @@ export const ItemRow = (props: TProps) => {
       </ItemTableCell>
       <ItemTableCell>{item.timestamp}</ItemTableCell>
       <ItemTableCell>
-        <EditLink
-          to={`/dashboard/item/${item.assetId}`}
-        >
-          Edit
-        </EditLink>
+        <Link to={`/dashboard/item/${item.assetId}`}>
+          <Button size={'sm'}>Edit</Button>
+        </Link>
       </ItemTableCell>
     </ItemTableRow>
   )

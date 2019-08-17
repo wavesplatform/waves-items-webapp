@@ -35,3 +35,9 @@ export const buyItem = async (lotId: string, amount: number) => {
 
   return await request.broadcast()
 }
+
+export const cancelLot = async (lotId: string) => {
+  const request = itemsApi.cancel(lotId)
+
+  return await request.broadcast()
+}

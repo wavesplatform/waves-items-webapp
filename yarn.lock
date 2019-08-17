@@ -1604,10 +1604,10 @@
   resolved "https://registry.yarnpkg.com/@waves/types/-/types-0.0.2.tgz#d371e620c443fb8f2a24eea629e2f43969d15d16"
   integrity sha512-6XqiTc6RnDjknXqi8gkoL5kmCV5cdUVddpX6O9JYRD62MoAAKrnQ/NSn6iXI1dOCJCTYVX1C8sOequo5nCeNmQ==
 
-"@waves/waves-games@^1.0.56":
-  version "1.0.56"
-  resolved "https://registry.yarnpkg.com/@waves/waves-games/-/waves-games-1.0.56.tgz#1c6075087ae6b4b6f9fc5ec2f6ea3604d84943a1"
-  integrity sha512-VnNIwyaNUs4pujt+QNeCh8hbuk3dKG1wKjN7buksdC7TpF4VSF2dnKJr/3nzf34E0TC2FPzDLWUsA4AcgekMfw==
+"@waves/waves-games@^1.0.58":
+  version "1.0.58"
+  resolved "https://registry.yarnpkg.com/@waves/waves-games/-/waves-games-1.0.58.tgz#98de050de83319e8a77b4d89d68db5d95624ba4e"
+  integrity sha512-NroiRw6sHuH4V/TF79RsIAlN0jNhcUTfdPIKKIDQaNjoe59iVBnHU2HrRvJU3XmvwK7Q+bIHTCZAgTA2u81MpQ==
   dependencies:
     "@waves/bignumber" "0.0.1-a6"
     "@waves/ride-js" "^1.0.0"

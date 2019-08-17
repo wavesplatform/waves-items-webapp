@@ -45,6 +45,7 @@ export type ItemLot = {
   priceAsset: string
   price: LONG
   stock: LONG
+  item?: IItem | null
   seller?: IUser | null
 }
 
