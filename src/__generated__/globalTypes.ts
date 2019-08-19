@@ -31,6 +31,7 @@ export interface SigninUser {
   address: string;
   publicKey: string;
   sign: string;
+  webappHost: string;
 }
 
 export interface UserInfo {

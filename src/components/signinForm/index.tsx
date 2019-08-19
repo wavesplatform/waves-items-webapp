@@ -32,8 +32,8 @@ class SigninForm extends Component<WithApolloClient<TProps> & IKeeperContext> {
         <>
           <Toast mb={'base'}>
             Interaction with Items Market requires a free browser extention Waves Keeper.
-            <br /><br />You can also create a new account there.
-              
+            <br/><br/>You can also create a new account there.
+
           </Toast>
           <Button
             as={'a'}
@@ -98,7 +98,7 @@ class SigninForm extends Component<WithApolloClient<TProps> & IKeeperContext> {
     const auth = await keeper.auth({
       data: config.authData,
     })
-    const { address, publicKey, signature } = auth
+    const { address, publicKey, signature, host } = auth
 
     await signin({
       variables: {
@@ -106,6 +106,7 @@ class SigninForm extends Component<WithApolloClient<TProps> & IKeeperContext> {
           address,
           publicKey,
           sign: signature,
+          webappHost: host,
         },
       },
       update: (store, { data }) => {
