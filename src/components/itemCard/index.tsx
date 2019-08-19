@@ -25,6 +25,8 @@ export const ItemCard = (props: IItemCardProps) => {
   const bestPrice = bestLot && toWaves(bestLot.price)
   const quantityBn = item.quantity && new BigNumber(item.quantity)
 
+  const imageUrl = item.storageImageUrl || defaultImage
+
   return (
     <ItemCardContainer>
       {!isShort && <Flex px={'lg'} pt={'lg'}>
@@ -50,7 +52,7 @@ export const ItemCard = (props: IItemCardProps) => {
         <Overview>
           <ImageWrapper>
             <Image
-              src={item.imageUrl ? item.imageUrl : defaultImage}
+              src={imageUrl}
               alt={`Item #${item.id}`}/>
           </ImageWrapper>
         </Overview>

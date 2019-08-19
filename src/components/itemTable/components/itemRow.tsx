@@ -17,6 +17,7 @@ const imageSize = 24
 
 export const ItemRow = (props: TProps) => {
   const { item } = props
+  const imageUrl = item.storageImageUrl || defaultImage
 
   return (
     <ItemTableRow>
@@ -24,7 +25,7 @@ export const ItemRow = (props: TProps) => {
         <Link to={`/item/${item.assetId}`}>
           <Flex alignItems={'center'}>
             <Box width={imageSize} mr={'base'}>
-              <ItemImage src={item.imageUrl ? item.imageUrl : defaultImage} size={imageSize}/>
+              <ItemImage src={imageUrl} size={imageSize}/>
             </Box>
             <Text>{item.name}</Text>
           </Flex>

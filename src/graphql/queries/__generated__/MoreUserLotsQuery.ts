@@ -35,7 +35,8 @@ export interface MoreUserLotsQuery_userLots_edges_node_item {
   quantity: number;
   reissuable: boolean;
   timestamp: any;
-  imageUrl: string;
+  imageUrl: string | null;
+  storageImageUrl: string | null;
   misc: any | null;
   game: MoreUserLotsQuery_userLots_edges_node_item_game;
 }

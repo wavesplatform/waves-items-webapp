@@ -10,6 +10,7 @@ export default gql`
     reissuable
     timestamp
     imageUrl
+    storageImageUrl
     misc
     game {
       ...gameInfo

@@ -45,7 +45,8 @@ export interface MoreItemsQuery_items_edges_node {
   quantity: number;
   reissuable: boolean;
   timestamp: any;
-  imageUrl: string;
+  imageUrl: string | null;
+  storageImageUrl: string | null;
   misc: any | null;
   game: MoreItemsQuery_items_edges_node_game;
   lots: MoreItemsQuery_items_edges_node_lots[] | null;

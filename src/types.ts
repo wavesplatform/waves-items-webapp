@@ -62,6 +62,7 @@ export interface IItem extends IWavesAsset {
   id: string
   name: string
   imageUrl: string
+  storageImageUrl: string
   createdAt?: string
   game: IGame
   lots?: ItemLot[] | null

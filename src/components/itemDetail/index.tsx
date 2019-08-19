@@ -62,6 +62,8 @@ class ItemDetail extends Component<WithCurrentUserProps<TProps> & RouteComponent
     delete misc['description']
     delete misc['Description']
 
+    const imageUrl = item.storageImageUrl || defaultImage
+
     return (
       <ItemDetailContainer isPage={isPage}>
         <LeftSide>
@@ -147,7 +149,7 @@ class ItemDetail extends Component<WithCurrentUserProps<TProps> & RouteComponent
           <Overview>
             <ImageWrapper>
               <Image
-                src={item.imageUrl ? item.imageUrl : defaultImage}
+                src={imageUrl}
                 alt={`Item #${item.id}`}/>
             </ImageWrapper>
           </Overview>

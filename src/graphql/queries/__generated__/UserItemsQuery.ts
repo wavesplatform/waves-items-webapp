@@ -45,7 +45,8 @@ export interface UserItemsQuery_userItems {
   quantity: number;
   reissuable: boolean;
   timestamp: any;
-  imageUrl: string;
+  imageUrl: string | null;
+  storageImageUrl: string | null;
   misc: any | null;
   game: UserItemsQuery_userItems_game;
   lots: UserItemsQuery_userItems_lots[] | null;

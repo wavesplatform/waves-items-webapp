@@ -24,7 +24,8 @@ export interface itemInfo {
   quantity: number;
   reissuable: boolean;
   timestamp: any;
-  imageUrl: string;
+  imageUrl: string | null;
+  storageImageUrl: string | null;
   misc: any | null;
   game: itemInfo_game;
 }
