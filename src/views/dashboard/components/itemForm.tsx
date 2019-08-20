@@ -37,7 +37,7 @@ class ItemForm extends Component<TProps> {
     if (item) {
       this.state.name = item.name
       this.state.quantity = item.quantity ? item.quantity.toString() : ''
-      this.state.imageUrl = item.imageUrl
+      this.state.imageUrl = item.imageUrl || ''
       if (item.misc) {
         this.state.misc = miscRecordToArray(item.misc)
       }
