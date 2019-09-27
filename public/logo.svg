@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink"
+     fill="#2254F5"
+     fill-opacity="1"
+     viewBox="0 0 32 32" version="1.1"
+     width="192px" height="192px">
+  <g>
+    <title>layers</title>
+    <path
+      d="M16 21.313c-4.001-3.103-7.988-6.22-12-9.313l12-9.313 12 9.313c-4.012 3.092-7.999 6.209-12 9.313zM16 24.75l9.813-7.688 2.188 1.688-12 9.313-12-9.313 2.188-1.688z"></path>
+  </g>
+</svg>
