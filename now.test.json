@@ -1,0 +1,71 @@
+{
+  "version": 2,
+  "name": "waves-items-webapp-test",
+  "alias": "test.item.market",
+  "build": {
+    "env": {
+      "REACT_APP_NODE_ENV": "production",
+      "REACT_APP_NETWORK_CODE": "T",
+      "REACT_APP_GRAPHQL_ENDPOINT": "https://api-test.item.market/graphql",
+      "REACT_APP_DOCS_URL": "https://docs.item.market",
+      "REACT_APP_CONTRACT_ADDRESS": "3MrDcz4LFFjPhXdtu7YCqFSnHc3pD1tcWLa",
+      "REACT_APP_DISCORD_URL": "https://discord.gg/fP5pNpS"
+    }
+  },
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@now/static-build",
+      "config": {
+        "distDir": "build"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/static/(.*)",
+      "headers": {
+        "cache-control": "s-maxage=31536000,immutable"
+      },
+      "dest": "/static/$1"
+    },
+    {
+      "src": "/favicon.ico",
+      "dest": "/favicon.ico"
+    },
+    {
+      "src": "/icons/(.*)",
+      "dest": "/icons/$1"
+    },
+    {
+      "src": "/icons.svg",
+      "dest": "/icons.svg"
+    },
+    {
+      "src": "/asset-manifest.json",
+      "dest": "/asset-manifest.json"
+    },
+    {
+      "src": "/manifest.json",
+      "dest": "/manifest.json"
+    },
+    {
+      "src": "/precache-manifest.(.*)",
+      "dest": "/precache-manifest.$1"
+    },
+    {
+      "src": "/service-worker.js",
+      "headers": {
+        "cache-control": "s-maxage=0"
+      },
+      "dest": "/service-worker.js"
+    },
+    {
+      "src": "/(.*)",
+      "headers": {
+        "cache-control": "s-maxage=0"
+      },
+      "dest": "/index.html"
+    }
+  ]
+}

@@ -56,7 +56,6 @@ const client = new ApolloClient({
   cache,
 })
 
-
 cache.writeData({
   data: {},
 })

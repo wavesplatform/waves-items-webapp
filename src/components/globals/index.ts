@@ -77,6 +77,7 @@ Color.defaultProps = { as: 'span' }
 
 export const Badge = styled(Text)<TextProps & BordersProps>`
   display: inline-block;
+  vertical-align: middle;
   
   ${borders}
 `

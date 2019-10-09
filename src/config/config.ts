@@ -13,6 +13,6 @@ export const config = {
     pageMaxImageSizeByte: 25000000,
     iconMaxImageSizeByte: 5000000,
   },
-  contractAddress: process.env.REACT_APP_CONTRACT_ADDRESS || '3N7Lmd1xVWGgdsUJRhRB2z8sRVmL8PowDMi',
+  contractAddress: process.env.REACT_APP_CONTRACT_ADDRESS || '3MrDcz4LFFjPhXdtu7YCqFSnHc3pD1tcWLa',
 }
 

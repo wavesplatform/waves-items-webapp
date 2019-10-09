@@ -36,6 +36,7 @@ const colors: any = {
   green: '#28a745',
   red: '#dc3545',
   orange: '#fd7e14',
+  yellow: '#efc62d',
   accent: '#587CD9',
 }
 
