@@ -1,7 +1,6 @@
 import React, { Component, createRef, ReactNode } from 'react'
 import {
   Logo,
-  LogoImage,
   LogoTitle,
   Nav,
   Navbar,
@@ -16,13 +15,12 @@ import {
   UserName
 } from './style'
 import { UserAvatar } from '../image'
-import { Box, Link, Text } from 'rebass'
+import { Box, Link } from 'rebass'
 import ProfileDropdown from './profileDropdown'
-import logo from '../globals/logo.svg'
 import withCurrentUser, { WithCurrentUserProps } from '../withCurrentUser'
 import { Route, RouteComponentProps } from 'react-router'
 import { config } from '../../config/config'
-import { Badge, Color } from '../globals'
+import { Color } from '../globals'
 import { Icon } from '../icon'
 
 type TProps = RouteComponentProps
@@ -67,11 +65,7 @@ class Header extends Component<WithCurrentUserProps<TProps>> {
               </Route>
               <NavItem>
                 <NavLink as={Link} href={`${config.docsUrl}/guides/how-to-use.html`} target='_blank'>How
-                  To</NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink as={Link} href={`${config.docsUrl}/guides/tokenizing-a-game.html`} target='_blank'>For
-                  Developers</NavLink>
+                  to Use</NavLink>
               </NavItem>
             </Nav>
             {/*Profile*/}

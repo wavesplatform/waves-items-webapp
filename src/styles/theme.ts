@@ -32,7 +32,7 @@ const colors: any = {
     '#111725',
   ],
   black: '#050c19',
-  blue: '#2254F5',
+  blue: '#204AC6',
   green: '#28a745',
   red: '#dc3545',
   orange: '#fd7e14',

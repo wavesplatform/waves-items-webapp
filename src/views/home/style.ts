@@ -1,8 +1,9 @@
 import styled from 'styled-components'
 import { Container, Section } from '../../components/layout'
-import { Box } from 'rebass'
+import { Box, Card, Image, Link } from 'rebass'
 import { H1, H2 } from '../../components/globals'
 import { themeGet } from 'styled-system'
+import { Button } from '../../components/buttons'
 
 export const HomeContainer = styled(Box)`
 `
@@ -62,4 +63,30 @@ export const ItemsWrapperInner = styled(Container)`
   margin: 0 auto;
   width: 1280px;
   min-height: 240px;
+`
+
+export const DocsLink = styled(Link)`
+  max-width: 256px;
+`
+
+export const DocsCard = styled(Card)`
+  background: ${themeGet('bg.card')};
+  position: relative;
+  min-height: 100px;
+  height: 100%;
+
+  ${DocsLink}:hover & {
+    background: ${themeGet('colors.primary')};
+  }
+`
+
+export const DocsImage = styled(Image)`
+  position: absolute;
+  bottom: ${themeGet('space.xl')}px;
+  right: ${themeGet('space.xl')}px;
+  opacity: .3;
+`
+
+export const AskButton = styled(Button)`
+  max-width: 256px;
 `
