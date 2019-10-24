@@ -27,7 +27,6 @@ import queryString from 'query-string'
 import docsImage from './docs.svg'
 import manualImage from './manual.svg'
 import { config } from '../../config/config'
-import socials from '../../config/socials'
 
 const DocsItem = (props: PropsWithChildren<LinkProps>) => (
   // @ts-ignore
@@ -111,12 +110,12 @@ class HomeView extends Component<IProps> {
                       <DocsImage src={manualImage}/>
                     </DocsItem>
                     <DocsItem width={1/2} href={`${config.docsUrl}/guides/tokenizing-a-game.html`} target='_blank'>
-                      Read the docs
+                      Read the documentation
                       <DocsImage src={docsImage}/>
                     </DocsItem>
                   </Flex>
                   <Flex>
-                    <DocsLink width={1/2} href={socials.discordUrl} target='_blank'>
+                    <DocsLink width={1/2} href='https://t.me/waves_ride_dapps_dev' target='_blank'>
                       <Button size={'lg'} width={1}>Ask in developer chat</Button>
                     </DocsLink>
                   </Flex>
