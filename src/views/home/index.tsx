@@ -96,7 +96,7 @@ class HomeView extends Component<IProps> {
               <GamesSlider/>
             </ViewContainer>
           </Section>
-          <Section>
+          <Section mb={0} py={6}>
             <ViewContainer>
               <Flex>
                 <Box width={1/2} mr={'xl'}>
