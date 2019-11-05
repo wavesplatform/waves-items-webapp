@@ -3,9 +3,11 @@ import { IDefaultResult, IItem } from '../../types'
 import { ChildProps, graphql } from 'react-apollo'
 import { InventoryContainer } from './style'
 import { getUserItemsQuery } from '../../graphql/queries/getUserItems'
-import InventoryGrid from '../../components/inventoryGrid'
 import { UserItemsQuery } from '../../graphql/queries/__generated__/UserItemsQuery'
 import { Loading } from '../../components/loading'
+import ItemTable from '../../components/itemTable'
+import { Button } from '../../components/buttons'
+import OrderModal from '../../components/modals/orderModal'
 
 interface IProps {
   address: string
@@ -20,7 +22,14 @@ interface IVariables {
 
 type TChildProps = ChildProps<IProps, IData, IVariables>
 
+type TState = {
+  itemForSale?: IItem
+}
+
 class Inventory extends Component<TChildProps> {
+  state: TState = {
+  }
+
   render(): ReactNode {
     const {} = this.props
     const data = this.props.data as IData
@@ -32,9 +41,23 @@ class Inventory extends Component<TChildProps> {
 
     const items = (data.userItems || []) as IItem[]
 
+    const itemActions = (item: IItem) => (
+        <Button size={'sm'} onClick={() => {
+          this.setState({
+            itemForSale: item as IItem,
+          })
+        }}>Sell</Button>
+    )
+
     return (
       <InventoryContainer>
-        <InventoryGrid items={items.map(item => (item as IItem)) || []}/>
+        <ItemTable items={items} itemActions={itemActions}/>
+        {this.state.itemForSale && <OrderModal
+          item={this.state.itemForSale}
+          type={'sell'}
+          show={!!this.state.itemForSale}
+          setShow={() => { this.setState({ itemForSale: null }) }}
+        />}
       </InventoryContainer>
     )
   }

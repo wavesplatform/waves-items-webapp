@@ -4,26 +4,26 @@ import { modalStyles } from '../style'
 import { Button } from '../../buttons'
 import { Box, Flex, Link } from 'rebass'
 import { Actions, Form, H2 } from '../../globals'
-import { NumberInput, TextInput, TextInputWithUnit } from '../../inputs'
-import keeperHelper, { IWavesNetworkCode } from '../../../helpers/keeper'
+import { TextInput, TextInputWithUnit } from '../../inputs'
+import keeperHelper from '../../../helpers/keeper'
 import { config } from '../../../config/config'
 import { IModalProps } from '../index'
 import { IItem } from '../../../types'
-import { IKeeperContext } from '../../../contexts/keeper'
+import { IKeeperContext, withKeeperContext } from '../../../contexts/keeper'
 import { BigNumber } from '@waves/bignumber'
 import { Toast } from '../../toasts'
 import { generateExchangeLink, toSatoshi } from '../../../helpers/order'
 import { Icon } from '../../icon'
 import { buyItem, sellItem } from '../../../helpers/item'
+import { compose } from 'react-apollo'
 
 const Modal = require('react-modal')
 Modal.setAppElement('#root')
 
 export type OrderType = 'buy' | 'sell'
 
-interface IProps extends IModalProps {
+interface IProps extends IModalProps, IKeeperContext {
   item: IItem
-  keeperContext: IKeeperContext
   type: OrderType
   defaultPrice?: string
   lotId?: string
@@ -53,8 +53,7 @@ class OrderModal extends Component<IProps> {
   }
 
   render(): ReactNode {
-    const { show, setShow, type, item, keeperContext, defaultPrice } = this.props
-    const { publicState } = keeperContext
+    const { show, setShow, type, item, publicState, defaultPrice } = this.props
 
     const isBuy = type === 'buy'
     const account = publicState.account
@@ -170,8 +169,8 @@ class OrderModal extends Component<IProps> {
   }
 
   _confirm = async () => {
-    const { item, keeperContext, type, lotId } = this.props
-    const { publicState: { network } } = keeperContext
+    const { item, publicState, type, lotId } = this.props
+    const { network } = publicState
 
     if (!keeperHelper.keeper || !network) {
       return
@@ -193,4 +192,4 @@ class OrderModal extends Component<IProps> {
   }
 }
 
-export default OrderModal
+export default compose(withKeeperContext)(OrderModal)

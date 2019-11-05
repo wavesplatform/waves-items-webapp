@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { ReactNode } from 'react'
 import { IItem } from '../../../types'
 import { AssetIdLink, EditLink, ItemMisc, ItemTableCell, ItemTableRow } from '../style'
 import { Box, Flex, Text } from 'rebass'
@@ -11,6 +11,7 @@ import { Button } from '../../buttons'
 
 type TProps = {
   item: IItem
+  itemActions: (item: IItem) => ReactNode
 }
 
 const imageSize = 24
@@ -45,9 +46,7 @@ export const ItemRow = (props: TProps) => {
       </ItemTableCell>
       <ItemTableCell>{item.timestamp}</ItemTableCell>
       <ItemTableCell>
-        <Link to={`/dashboard/item/${item.assetId}`}>
-          <Button size={'sm'}>Edit</Button>
-        </Link>
+        {props.itemActions(item)}
       </ItemTableCell>
     </ItemTableRow>
   )

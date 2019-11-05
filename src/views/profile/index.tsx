@@ -18,7 +18,7 @@ class Profile extends Component<WithCurrentUserProps> {
       <ViewWrapper>
         <Container>
           <Section>
-            <H1>Lots</H1>
+            <H1>Sells</H1>
             <Lots address={me.address}/>
           </Section>
           <Section>

@@ -45,7 +45,6 @@ class ItemDetail extends Component<WithCurrentUserProps<TProps> & RouteComponent
 
   state = {
     buyModalShow: false,
-    sellModalShow: false,
   }
 
   render(): ReactNode {
@@ -112,33 +111,13 @@ class ItemDetail extends Component<WithCurrentUserProps<TProps> & RouteComponent
                 <>Buy</>
               )}
             </Button>}
-            <Button
-              onClick={() => {
-                // Redirect if not auth
-                if (!me) {
-                  history.push('/signin', { from: location.pathname })
-                }
-
-                this._setShowSellModal(true)
-              }}
-            >
-              Sell
-            </Button>
             <OrderModal
               item={item}
               type={'buy'}
               defaultPrice={bestPrice && bestPrice.toFixed()}
               lotId={bestLot && bestLot.lotId}
-              keeperContext={this.context}
               show={this.state.buyModalShow}
               setShow={this._setShowBuyModal}
-            />
-            <OrderModal
-              item={item}
-              type={'sell'}
-              keeperContext={this.context}
-              show={this.state.sellModalShow}
-              setShow={this._setShowSellModal}
             />
           </Flex>
           <Box mt={'base'}>
@@ -198,12 +177,6 @@ class ItemDetail extends Component<WithCurrentUserProps<TProps> & RouteComponent
   _setShowBuyModal = (value: boolean) => {
     this.setState({
       buyModalShow: value,
-    })
-  }
-
-  _setShowSellModal = (value: boolean) => {
-    this.setState({
-      sellModalShow: value,
     })
   }
 }

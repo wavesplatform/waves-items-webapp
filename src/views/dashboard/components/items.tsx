@@ -9,6 +9,8 @@ import { NullState } from '../../../components/nullState'
 import { Text } from 'rebass'
 import { Link } from 'react-router-dom'
 import { Color } from '../../../components/globals'
+import { Button } from '../../../components/buttons'
+import { IItem } from '../../../types'
 
 type TProps = {
   address?: string
@@ -52,9 +54,15 @@ class Items extends Component<TChildProps> {
       </NullState>
     }
 
+    const itemActions = (item: IItem) => (
+      <Link to={`/dashboard/item/${item.assetId}`}>
+        <Button size={'sm'}>Edit</Button>
+      </Link>
+    )
+
     return (
       <>
-        <ItemTable items={items}/>
+        <ItemTable items={items} itemActions={itemActions}/>
         {hasNextPage && <LoadMoreButton mt={'lg'} onClick={this._loadMore} disabled={loading}>
           {loading ? 'Loading...' : 'Load more'}
         </LoadMoreButton>}

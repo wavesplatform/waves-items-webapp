@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { TableCell, TableRow, truncate } from '../globals'
+import { Badge, TableCell, TableRow, truncate } from '../globals'
 import { Text } from 'rebass'
 
 export const LotId = styled(Text)`
@@ -24,3 +24,7 @@ LotTableCell.defaultProps = {
   px: 'md',
   py: 'md',
 }
+
+export const Status = styled(Badge)`
+  text-transform: uppercase;
+`

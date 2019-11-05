@@ -22,6 +22,7 @@ export const LotTable = (props: TProps) => {
           <LotTableCell>Stock</LotTableCell>
           <LotTableCell>Price</LotTableCell>
           <LotTableCell>PriceAsset</LotTableCell>
+          <LotTableCell>Status</LotTableCell>
           <LotTableCell/>
         </TableRow>
       </TableHeader>
