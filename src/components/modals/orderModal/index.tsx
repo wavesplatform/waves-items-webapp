@@ -16,6 +16,7 @@ import { generateExchangeLink, toSatoshi } from '../../../helpers/order'
 import { Icon } from '../../icon'
 import { buyItem, sellItem } from '../../../helpers/item'
 import { compose } from 'react-apollo'
+import TagManager from 'react-gtm-module'
 
 const Modal = require('react-modal')
 Modal.setAppElement('#root')
@@ -181,11 +182,15 @@ class OrderModal extends Component<IProps> {
       const amount = new BigNumber(this.state.amount).toNumber()
       const price = toSatoshi(this.state.price).toNumber()
 
+      TagManager.dataLayer({ dataLayer: { event: 'purchaseattempt' } })
+
       lotId && await buyItem(lotId, amount)
     } else {
       // Selling
       const amount = new BigNumber(this.state.amount).toNumber()
       const price = toSatoshi(this.state.price).toNumber()
+
+      TagManager.dataLayer({ dataLayer: { event: 'sellattempt' } })
 
       await sellItem(item.assetId, amount, config.wavesId, price)
     }

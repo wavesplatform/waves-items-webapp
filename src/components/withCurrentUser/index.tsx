@@ -3,6 +3,7 @@ import { IUser } from '../../types'
 import { graphql } from 'react-apollo'
 import { MeQuery } from '../../graphql/queries/__generated__/MeQuery'
 import { getMeQuery } from '../../graphql/queries/getMe'
+import TagManager from 'react-gtm-module'
 
 type TProps = {}
 type TData = MeQuery

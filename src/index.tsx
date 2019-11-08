@@ -17,12 +17,20 @@ import * as Sentry from '@sentry/browser'
 import { createUploadLink } from 'apollo-upload-client'
 import { DiscordWidget } from './components/socialWidgets/discord'
 import socials from './config/socials'
-import TagManager from 'react-gtm-module'
+import TagManager, { TagManagerArgs } from 'react-gtm-module'
+import { getMeQuery } from './graphql/queries/getMe'
+import { MeQuery } from './graphql/queries/__generated__/MeQuery'
 
-// GTM (only production)
-config.production && TagManager.initialize({
+const tagManagerArgs: TagManagerArgs = {
   gtmId: 'GTM-5ZGLQJV',
-})
+}
+
+// GTM
+TagManager.initialize(
+  config.production
+    ? tagManagerArgs
+    : { ...tagManagerArgs, auth: 'B3FF98OgCQKlGbCdAJu17Q' }
+)
 
 // Error tracking (only production)
 config.production && Sentry.init({
@@ -31,7 +39,6 @@ config.production && Sentry.init({
 
 const authMiddleware = new ApolloLink((operation, forward) => {
   operation.setContext(({ headers = {} }) => {
-    // const user = authHelper.getUser()
     const token = authHelper.getToken()
 
     return {
@@ -59,6 +66,17 @@ const client = new ApolloClient({
 cache.writeData({
   data: {},
 })
+
+client
+  .watchQuery({
+    query: getMeQuery,
+  })
+  .subscribe(({ data }: { data: MeQuery }) => {
+    const { me } = data
+    if (me) {
+      TagManager.dataLayer({ dataLayer: { userId: me.address } })
+    }
+  })
 
 class App extends Component {
   render(): ReactNode {

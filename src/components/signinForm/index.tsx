@@ -12,6 +12,7 @@ import { Toast } from '../toasts'
 import { isFirefox } from '../../helpers/browser'
 import { RouteComponentProps, withRouter } from 'react-router'
 import authHelper from '../../helpers/auth'
+import TagManager from 'react-gtm-module'
 
 class SigninMutation extends Mutation<Signin, SigninVariables> {
 }
@@ -100,6 +101,8 @@ class SigninForm extends Component<WithApolloClient<TProps> & IKeeperContext> {
     })
     const { address, publicKey, signature, host } = auth
 
+    TagManager.dataLayer({ dataLayer: { event: 'signinattempt' } })
+
     await signin({
       variables: {
         input: {
@@ -116,6 +119,13 @@ class SigninForm extends Component<WithApolloClient<TProps> & IKeeperContext> {
 
         const { token, user } = data.signin
         authHelper.setToken(token)
+        // GTM
+        TagManager.dataLayer({
+          dataLayer: {
+            userId: user.address,
+            event: 'signinsuccess',
+          },
+        })
       },
       refetchQueries: () => ['MeQuery'],
     })

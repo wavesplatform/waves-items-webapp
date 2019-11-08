@@ -10,6 +10,7 @@ import { compose, withApollo, WithApolloClient } from 'react-apollo'
 import authHelper from '../../helpers/auth'
 import withCurrentUser, { WithCurrentUserProps } from '../withCurrentUser'
 import { WavesCy } from '../globals/currencies'
+import TagManager from 'react-gtm-module'
 
 interface DropdownContainerProps extends BoxProps {
   isShown?: boolean
@@ -101,6 +102,7 @@ class ProfileDropdown extends Component<WithApolloClient<TProps> & IKeeperContex
           <DropdownItem>
             <DropdownLink onClick={async () => {
               authHelper.removeToken()
+              TagManager.dataLayer({ dataLayer: { userId: null, event: 'signoutsuccess' } })
               client.resetStore()
               client.cache.reset()
             }}>Logout</DropdownLink>

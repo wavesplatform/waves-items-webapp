@@ -11,6 +11,7 @@ import Price from '../../price'
 import { toWaves } from '../../../helpers/order'
 import { cancelLot } from '../../../helpers/item'
 import { BigNumber } from '@waves/bignumber'
+import TagManager from 'react-gtm-module'
 
 type TProps = {
   lot: ItemLot
@@ -48,6 +49,7 @@ export const LotRow = (props: TProps) => {
       )}</LotTableCell>
       <LotTableCell>
         <Button size={'sm'} onClick={() => {
+          TagManager.dataLayer({ dataLayer: { event: 'sellcancelledattempt' } })
           // TODO: need a more informative process
           cancelLot(lot.lotId)
         }}>
