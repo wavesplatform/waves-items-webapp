@@ -31,7 +31,7 @@
     "graphql": "^14.0.2",
     "graphql-tag": "^2.10.1",
     "identity-img": "^1.0.0",
-    "node-sass": "^4.12.0",
+    "node-sass": "^4.13.1",
     "query-string": "^6.8.2",
     "react": "^16.8.6",
     "react-apollo": "^2.5.6",
